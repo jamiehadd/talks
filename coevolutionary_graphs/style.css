@@ -1,0 +1,134 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,400i);
+
+body {
+  font-family: Raleway, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
+  font-weight: 400;
+  color: #363636;
+  font-size: 30px;
+}
+
+.alert{
+	font-weight:700;
+	color: #000000;
+}
+
+p { 
+	font-size: 1.5em;
+}
+
+bold {
+	font-weight:700;
+}
+
+
+.alert{
+	color: #783000;
+}
+.bigger { 
+	font-size: 1.5em;
+}
+
+.smaller { 
+	font-size: .9em;
+}
+
+.tiny { 
+	font-size: .7em;
+}
+
+.centered {
+	text-align: center;}
+
+li {
+  font-size: 1.5em;
+  padding:.2em
+}
+
+ul {
+  font-size: 1em;
+  padding:.2em
+}
+
+li > ul {
+  font-size: .7em;
+}
+
+ul > li {
+  font-size: 1.3em;
+}
+
+li {
+	font-size: 1.5em;
+}
+
+
+h1 {
+	font-size: 3em;
+}
+
+h2 {
+	font-size: 2.5em;
+}
+ 
+h3 {
+	font-size: 2em;
+}
+
+.inverse {
+  background-image: url("img/network_sample.png");
+  color: #000000;
+  text-shadow: 0 0 0px #333;
+  text-align: left;
+  background-size: 100% 100%;
+}
+.inverse h1, .inverse h2, .inverse h3 {
+  color: #272822;
+}
+
+.white {
+  color: #ffffff;
+  text-shadow: 0 0 50px #272822;
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: 2.5em;
+}
+
+.whitebig {
+  color: #ffffff;
+  text-shadow: 0 0 50px #272822;
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: 3.5em;
+}
+
+
+
+.topaligned {
+  vertical-align: text-bottom;
+}
+
+
+.left-column {
+  color: #777;
+  width: 15%;
+  height: 92%;
+  float: left;
+  background-color: #f0f5ff;
+  padding-left: 1em;
+}
+.left-column h2:last-of-type, .left-column h3:last-child {
+  color: #000;
+}
+
+.large-left-column {
+  width: 25%;
+  height: 92%;
+  float: left;
+  background-color: #f0f5ff;
+  padding-left: 1em;
+}
+
+
+.right-column {
+  width: 80%;
+  float: right;
+  padding-top: 0em;
+}

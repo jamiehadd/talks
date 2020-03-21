@@ -1,0 +1,135 @@
+---
+title: "Moments of Uniformly Random Multigraphs with Fixed Degree Sequences\n"
+subtitle: ""
+author: "Phil Chodrow (MIT)"
+date: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["style/css/DJN_xaringan_theme.css", "style/css/DJN_style.css",  "style/css/pc_custom_style.css"]
+    seal: true
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "style/js/macros.js"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r child = "style/rmd/DJN_setup.Rmd"}
+```
+
+---
+
+# Random Graph Null Models
+
+.pull-left[
+This got pulled left.
+]
+
+.pull-right[
+This got pulled right. 
+]
+
+---
+
+# Model Selection Matters
+
+
+---
+
+# Expected Adjacency Matrix
+
+Sometimes we don't need to sample from a random graph. 
+
+Sometimes we just need $\mathbb{E}[\mathbf{W}]$, the *expected adjacency matrix* of the graph. 
+
+How to do this?....
+
+
+---
+class: middle
+
+# An Erroneous Folk Theorem
+
+.alert[
+*The expected number of edges $w_{ij}$ between two nodes in a random graph with fixed degree sequence is *
+
+$$ w_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
+]
+
+---
+class: middle
+
+# An Erroneous Folk Theorem
+
+.alert[
+$$ w_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
+]
+This is **true-ish** in **certain, highly specific models**.
+
+- Chung-Lu 
+- Stub-matching configuration model
+
+This is **not true** for an entropy-maximizing random graph with specified degree sequence. 
+
+
+---
+
+# High School Contact Data
+
+Collected by the SocioPatterns project. 
+
+.centered-image[![](img/sociopatterns.jpg)]
+
+.footnote[Mastrandrea et al. (2015), Benson et al. (2018)]
+
+---
+
+background-image: url(img/eval_figs.png)
+background-size: contain
+
+---
+
+background-image: url(img/error_matrices.png)
+background-size: contain
+
+---
+
+background-image: url(img/modularity_high_school.png)
+background-size: contain
+
+---
+
+
+
+# Thanks!
+
+.pull-left-narrow[.thanks[
+.centered-image[![:scale 100%](img/bio-photo.jpg)]
+Phil <br> Chodrow
+.small[
+  
+  MIT $\rightarrow$ UCLA
+  
+  [philchodrow.com](https://www.philchodrow.com)
+
+  [@philchodrow](https://twitter.com/PhilChodrow)
+]
+
+
+]]
+.pull-right-wide[.centered-image[.alert[
+![](img/arxiv.png)
+`arxiv:1909.09037`
+]
+.funding[
+![:scale 120px](img/nsf_logo.png)
+![:scale 200px](img/mit_logo.png)]
+]]
+
+

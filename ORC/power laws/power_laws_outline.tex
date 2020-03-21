@@ -1,0 +1,66 @@
+%!TEX program = xelatex
+
+% -----------------------------------------------------------------------
+% --------------------------------- PREAMBLE ----------------------------
+% -----------------------------------------------------------------------
+
+\documentclass[english]{scrartcl}
+
+\title{TITLE}
+\author{\emph{Phil Chodrow}}
+\date{\today}
+
+\usepackage{pc_writeup}
+\usepackage{pc_math}
+\usepackage[comma,authoryear]{natbib} 
+
+% -----------------------------------------------------------------------
+% --------------------------------- BODY --------------------------------
+% -----------------------------------------------------------------------
+
+\begin{document}
+\setkomafont{disposition}{\mdseries\rmfamily}
+
+\section{Lecture Outline}
+\begin{enumerate}
+	\item Tie up any loose ends from Thursday. 
+	\item Review of power laws. 
+	\begin{itemize}
+		\item Definition
+		\item ``Paradoxes'' -- your friends have more friends than you do; most people live in larger-than-average cities; etc. etc. Get show of hands on last one. 
+		\item Mathematical view: heavy tails, variance is not finite, no WLLN / concentration around the mean. 
+	\end{itemize}
+	\item Where have power laws been claimed? 
+		\begin{itemize}
+			\item Original data sets from \cite{Barabasi1999}: actor collaboration, WWW, power grid. 
+			\item Others (collected in \cite{Albert2002}): citations, protein-protein interaction, academic coauthorships. 
+			\item \textbf{Note:} The Barabasi-Albert collaboration (1999-2002) has accumulated over 70,000 citations -- roughly 10 per day for 20 years. 
+		\end{itemize}
+	\item Why is this so interesting? 
+	\begin{itemize}
+		\item \textbf{A theory of everything for networks?} ``Yet, probably the most surprising discovery of modern network theory is the \emph{universality of the network topology}: Many real networks, from the cell to the Internet, independent of their age, function, and scope, converge to similar architectures. \emph{It is this universality that allowed researchers from different disciplines to embrace network theory as a common paradigm}.'' \cite{Barabasi2009}
+		\item \textbf{Interesting theoretical properties} (some of this foreshadows later lectures)
+		\begin{enumerate}
+			\item No epidemic threshold: A conspiracy theory has a nonzero probability to spread to a large portion of a scale-free network, no matter how silly! 
+			\item VERY small world: scale free networks have even smaller diameter scaling than classical small-world models. \cite{Cohen2003a}
+			\item Robustness to random failures. 
+		\end{enumerate}
+	\end{itemize}
+	\item But wait -- how do we know all these networks are scale-free? In other words, how do we connect \textbf{models} to \textbf{data}? 
+	\begin{enumerate}
+		\item Many papers plot the degree-histogram on log-log axes and observe a linear fit. But... (show Fig. 4.1 of \cite{Clauset2009}, make students guess which one is the power law.).
+		\item Introduce two fundamental tasks here: \emph{inference} and \emph{model selection.} 
+		\item Overview of methods from \cite{Clauset2009} for inference and model selection (with math, but relatively light). 
+		\item Findings from \cite{Clauset2009}: in many claimed power laws (not just networks), other degree distributions are at least as plausible. 
+	\end{enumerate}
+	\item Contemporary discussion (subject to squeezing under time pressure)
+	\begin{enumerate}
+		\item Review of methods and findings from \cite{Broido2017}: only about $~10\%$ of a large, 1,000 network data set favored the scale-free hypothesis over some simple alternative hypotheses. \emph{``Taken together, these results indicate that genuinely scale-free networks are remarkably rare, and scale-free structure is not a universal pattern.''}
+		\item Lively twitter \href{https://twitter.com/manlius84/timelines/952248309720211458}{discussion}; coverage in \href{https://www.theatlantic.com/science/archive/2018/02/power-laws-networks/553562/}{The Atlantic}, \href{https://www.quantamagazine.org/scant-evidence-of-power-laws-found-in-real-world-networks-20180215/}{Quanta}.
+	\end{enumerate}
+\end{enumerate}
+
+\bibliography{/Users/phil/bibs/library.bib}{}
+\bibliographystyle{apalike}
+
+\end{document}

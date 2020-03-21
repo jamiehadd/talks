@@ -1,0 +1,65 @@
+\documentclass[11pt]{article}
+\usepackage[colorlinks]{hyperref}
+
+\parskip=5pt
+
+\bibliographystyle{alpha}
+%\bibliographystyle{plain}
+%\bibliographystyle{annotation}
+
+%HOW DO WE GET ALPHA, INCLUDE LOCAL URL AND ANNOTATION?
+
+%EXAMPLES:
+%\url{MATERIALS/KEARNS/Kearns-paper-econ+CS.pdf}
+%EXAMPLE: \htmladdnormallink{TEXT}{http://hdl.handle.net/1721.1/3719}
+%\url{../../READINGS-NEW/Newman-networks-survey-SIAM-2003.pdf}
+
+
+\def\P{\mathbb{P}}
+\begin{document}
+
+
+\centerline{\bf MASSACHUSETTS INSTITUTE OF TECHNOLOGY}
+\par\vskip 4 pt \noindent {6.268} \hfill Spring 2018
+\par\noindent Lecture 8: Scale-Free Networks \hfill{3/6/2018}
+\par\vskip 5 pt \hrule \par\vskip 10 pt
+
+\vspace{10pt}
+
+\noindent
+
+The lecture will discuss research and controversy around power laws and scale-free networks over the last 20 years. Reading the primary sources beforehand is optional but encouraged. 
+
+\vspace{10pt}
+\noindent
+{\bf Models of Scale-Free Networks}
+\begin{enumerate}
+	\item Newman \cite{Newman2010} provides a nice analysis of the models of Price and Barabasi-Albert in Chapter 14. 
+	\item An extensive review is provided by Part XI of \cite{Dorogovtsev2002}. 
+\end{enumerate}
+
+\vspace{10pt}
+\noindent
+{\bf The Classic Paper}
+
+\begin{enumerate}
+	\item The most famous paper in this area claimed that the World Wide Web, an actor collaboration network, and a power grid network all displayed power-law degree distributions.  Now cited 30,000 times: \cite{Barabasi1999}. 
+	\item \cite{barabasi2009} provides a nice illustration of preferential attachment, and a helpful review of developments since the original paper. 
+\end{enumerate}
+
+\vspace{10pt}
+\noindent
+{\bf Measuring Power Laws}
+\begin{enumerate}
+	\item Many empirical papers plot the degree distribution on log-log axes and find that it appears approximately linear, concluding that it must be a power law. How reliable is this method? Read \cite{Clauset2009} to find out. 
+	\item Applying the methodology above, Broido and Clauset published a paper \cite{Broido2017} in January with a startling claim -- ``Scale Free Networks are Rare''! 
+\end{enumerate}
+
+
+
+
+\fontsize{10}{10}
+\bibliography{/Users/phil/bibs/library.bib}{}
+
+\end{document}
+

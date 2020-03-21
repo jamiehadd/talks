@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,300&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&display=swap');
+
+body {
+	font-family: Lato, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
+	font-weight: 300;
+	color: #000000;
+}
+
+.thanks, .alert, .funding {
+  padding: 10px 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+
+.alert {
+  border-left: solid 5px var(--peach-quartz);
+  border-right: solid 0px var(--peach-quartz);
+  background-color: var(--peach-quartz-30);
+}
+
+.funding {
+  border-left: solid 5px var(--cornhusk);
+  border-right: solid 0px var(--cornhusk);
+  background-color: var(--cornhusk-30);
+}
+
+
+
+.thanks{
+  border-left: solid 5px var(--baby-blue-30);
+  background-color: var(--baby-blue-30);
+}
+
+.centered-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.remark-slide-content h1 {
+	font-size: 50px;
+}
+
+.title-slide h3 {
+  text-align: right;
+  color: var(--peach-quartz);
+}
+
+.middle{
+  vertical-align: middle
+}

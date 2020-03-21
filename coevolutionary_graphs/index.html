@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Coevolutionary Graphs</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Phil Chodrow, MIT (and Peter Mucha, UNC Chapel Hill)" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: left, middle, inverse
+
+
+
+
+# Coevolutionary Graphs
+## Models, Dynamics, and Approximations
+
+
+.pull-left[
+###  Phil Chodrow, MIT 
+### *Peter Mucha, UNC*
+March 22nd, 2020
+]
+
+.pull-right[
+.centered[
+&lt;br&gt;
+&lt;br&gt;
+	![:scale 40%](img/nsf_logo.png) 
+]
+]
+
+---
+
+class: left, top
+
+# Agenda
+
+1). Quick review of some evolutionary graph theory models (for contrast).
+
+2). **Co**evolutionary models and competing timescales. 
+
+3). Extended example: approximations for the adaptive voter model.
+
+--
+
+4). *(The hidden agenda): I want you to work on coevolutionary models.*
+
+---
+
+class: left, top
+
+## Review: **Evolutionary Dynamics on Graphs**
+
+.pull-left[.smaller[1. Choose an individual `\(i\)` proportional to their current fitness `\(\phi_i\)`. 
+1. Sample `\(j \in \mathcal{N}(i)\)` proportional to `\(w_{ij}\)`. Then, `\(\phi_j\gets \phi_i\)`.
+1. .alert[**Isothermal Theorem**]: This process has the same long-term selection dynamics as the complete graph `\(K_n\)` iff `\(T_i = \sum_j{w_{ji}}\)` is constant on `\(V\)`. 
+]
+]
+
+.pull-right[
+  ![](img/ev_graph_example.png)
+]
+
+.footnote[
+Leiberman et al., *Nature* (2005)
+]
+
+---
+
+
+## Review: **Evolutionary Games on Graphs**
+
+.pull-left[
+.smaller[	
+1. Agents play a chosen strategy  in a two-player game along each weighted edge.
+1. An agent is selected for death, replaced proportional to fitness of neighbors. 
+1. .alert[**Result**]: It is possible to classify whether selection favors the emergence of cooperative behavior based purely on graph topology. 
+]
+]
+
+
+.pull-right[
+  ![](img/game_on_graph.png)
+]
+
+.footnote[
+Allen et al., *Science* (2017)
+]
+
+---
+
+class: center, middle, inverse
+
+# 
+
+.bigger[**Dynamics unfolding *on* networks are often tractable.**]
+
+---
+
+class: left, top
+background-image: url("img/adaptive_networks.png")
+background-size: contain
+
+# Coevolutionary Graphs
+
+.footnote[
+Image from Malik and Shi, ["Adaptive Networks in Action"](https://dsweb.siam.org/The-Magazine/Article/adaptive-networks-in-action-opinion-formation-epidemics-and-the-evolution-of-cooperation), *SIAM DS Web*
+]
+
+---
+
+class: left, top
+
+# Some Examples (or Life Advice)
+
+"If your friends make you sick, make new friends."
+
+- .smaller[Social clustering in epidemic spread on coevolving networks (Malik et al., *PRE*, 2019).]
+
+--
+
+"If your friends are jerks, make new friends."
+
+- .smaller[Evolutionary prisoner’s dilemma games coevolving on adaptive networks (Lee et al., *Journal of Complex Networks*, 2017).] 
+
+--
+
+"If your friends have wrong opinions, make new friends."
+- .smaller[Generic absorbing transition in coevolution dynamics (Vazquez et al.,  *PRL*, 2008)] 
+	
+---
+
+class: center, middle, inverse
+
+# From a math perspective...
+
+--
+
+# ...everything is borked.
+
+---
+
+class: top, left
+
+# Everything is Borked
+
+1) Whole process is usually Markovian, but neither node- nor edge-upates are in isolation `\(\rightarrow\)` no closed form anything. 
+
+--
+
+2) Edge updates tend to create long-range correlations between node states. `\(\rightarrow\)` mean-field theories will usually perform poorly. 
+
+--
+
+3) What questions should we even be asking of these models?? 
+
+--
+
+---
+
+class: left, top
+
+# Example: Adaptive Voter Model (AVM)
+
+Nodes have binary states `\(\in \{0,1\}\)`. 
+At each time step `\(t\)`: 
+
+Pick an edge `\(e = (u,v)\)` where `\(u\)` and `\(v\)` disagree. 
+
+- With probability `\(\alpha\)`, .alert[**rewire**]: delete `\((u,v)\)` and form `\((u,w)\)`, where `\(w\)` agrees with `\(u\)` ("rewire-to-same") or `\(w\)` is uniformly random ("rewire-to-random"). 
+- With probability `\(1-\alpha\)`, .alert[**vote**]: `\(v\)` adopts `\(u\)`'s opinion. 
+	
+Repeat until no disagreement is left. 
+
+--
+
+Let's do an experiment! 
+From Malik and Shi, ["Adaptive Networks in Action"](https://dsweb.siam.org/The-Magazine/Article/adaptive-networks-in-action-opinion-formation-epidemics-and-the-evolution-of-cooperation), *SIAM DS Web*
+
+---
+
+class: left, top
+background-image: url("img/AVM_animation.gif")
+background-size: contain
+
+---
+
+# Model Timescales
+
+In a world with only rewiring ( `\(\alpha = 1\)` ), .alert[**coupon-collector**] dynamics would resolve all disagreement in time `\(\sim O(n \log n)\)` on sparse graphs, `\(\rightarrow\)` .alert[**segregated consensus**].  
+
+In a world with only voting ( `\(\alpha = 0\)` ), .alert[**voting dynamics**] would resolve all disagreement in time `\(\sim O(n^2)\)`, `\(\rightarrow\)` .alert[**hegemonic consensus**]. 
+
+---
+
+class: left, middle, inverse
+
+.bigger[Disparate .alert[**timescales**] between node and edge dynamics drive phase transitions in long-term behavior.]
+
+---
+
+class: left, top
+
+# The Arch
+
+.pull-left[
+	![](img/arch_illustration.png)
+]
+.pull-right[
+
+.alert[**Quasistable manifold**] governing relationship between fraction of ones `\(q_1\)` and fraction of discordant edges `\(\rho\)`. In rewire-to-random,
+
+- For `\(\alpha \geq 0.73\)`, no arch appears `\(\rightarrow\)` rapid segregated consensus. 
+- For `\(\alpha \leq 0.73\)`, nonegalitarian (nearly hegemonic) segregated consensus. 
+]
+
+---
+
+# The Arch: Analysis Questions
+
+.pull-left[
+	![](img/arch_illustration.png)
+]
+
+.pull-right[
+- .alert[**Phase Transition**]: Can we estimate the value of `\(\alpha\)` at which the arch emerges?
+- .alert[**Quasistable Density**]: Can we estimate the complete shape of the arch? 
+]
+
+---
+
+# Methods
+
+---
+
+# Methods: Pair Approximation
+
+.left-column[
+
+### .tiny[PA]
+
+]
+
+.right-column[
+.smaller[
+A continuous-time mean field theory directly relating the fraction of ones `\(q_1\)` to edge densities `\(x_{00}\)`, `\(x_{01}\)`, and `\(x_{11}\)`. Approximates triplets of nodes as sets of pairs (moment closure):
+The approximate update in the fraction of disagreeing edges `\(x_{01}\)` is 
+]
+
+.tiny[
+`$$\frac{dx_{01}}{dt} = \underbrace{x_{01}}_{\text{removed}} -  \overbrace{(1-\alpha) x_{01}}^\text{created by rewiring} + \underbrace{(1-\alpha)\left[\frac{x_{10}x_{00}}{q_0} + \frac{x_{11}x_{10}}{q_1} - \frac{x_{10}x_{01}}{q_0} - \frac{x_{01}x_{10}}{q_1} \right]}_{\text{created/destroyed by voting}}$$`
+]
+
+.smaller[
+Solve to obtain an approximation for the arch....that doesn't match the data very well. =(
+]
+]
+
+---
+
+# Methods: Pair Approximation
+
+.left-column[
+
+### .tiny[PA]
+
+]
+
+.right-column[
+![:scale 70%](img/PA_approx.png)
+]
+
+
+---
+
+# Methods: Approximate Master Equations
+
+.left-column[
+
+### .tiny[PA]
+
+### .tiny[AMEs]
+]
+
+.right-column[
+A continuous-time .alert[**compartmental**] approach: track node densities with `\(j\)` agreeing neighbors and `\(k\)` disagreeing neighbors, for each combination of `\(k\)` and `\(j\)`.
+
+![:scale 60%](img/AME.png)
+
+
+.footnote[.tiny[Durrett et al.,*PNAS*, 2012]]
+]
+
+---
+
+# Methods: Bespoke
+
+.left-column[
+
+### .tiny[PA]
+
+### .tiny[AMEs]
+
+### .tiny[.smaller[Bespoke]]
+]
+
+
+.right-column[
+
+Literally anything else. 
+
+1). PDE approximations -- Silk et al., *New Journal of Physics* (2014)
+
+
+
+2). Linearization near the emergence of the arch -- Bohme + Gross, *PRE* (2011)
+
+
+
+
+3). .alert[**Discrete-time Markovian approximations**] -- Chodrow + Mucha, *SIAM J. Applied Math* (2020)
+]
+
+---
+background-image: url('img/siam_journal.png')
+background-size: contain
+
+---
+
+# Discrete-Time Markovian Approximations
+
+
+`$$\underbrace{\mathbf{m}(t+1) - \mathbf{m}
+(t)}_{\text{change in edge counts}} = \underbrace{\alpha\mathbb{E}[\mathbf{R}(\mathbf{x})]}_{\text{rewiring}} +\underbrace{(1-\alpha)\mathbb{E}[\mathbf{V}(\mathcal{G}(t))]}_{\text{voting}}$$`
+
+.pull-left[
+Second term is non-Markovian `\(\rightarrow\)` no closed form. 
+
+We can approximate it by tracking each discordant edge (under some modeling assumptions). 
+
+Ugly bookkeeping, but easy solutions.
+]
+.pull-right[
+![](img/pjm.jpg)
+
+Joint work with Peter Mucha, UNC
+]
+
+---
+background-image: url('img/table.png')
+background-size: contain
+
+.footnote[(Impacts and rates for different kinds of voting events)]
+
+---
+background-image: url('img/arch_approx.png')
+background-size: contain
+
+---
+
+# Takeaways
+
+Competing timescales of node and edge dynamics drive rich behavior even in simple systems. 
+
+--
+
+It seems like it helps to treat these systems as truly discrete, rather than resort to continuous-time approximations. 
+
+--
+
+This is a .alert[**great area**] for applied mathematicians, with potential applications in evolutionary dynamics and theoretical ecology. 
+
+--
+
+**The best work here is yet to come!**
+
+---
+
+class: left, top, inverse
+
+# Thanks! 
+
+.large-left-column[
+
+.smaller[
+![:scale 90%](img/bio-photo.jpg)
+
+[philchodrow.com](https://www.philchodrow.com) 
+
+@philchodrow
+
+MIT `\(\rightarrow\)` UCLA]
+]
+
+![:scale 73%](img/siam_journal.png)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="./js/macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  /* Replace <script> tags in slides area to make them executable
+   *
+   * Runs after post-processing of markdown source into slides and replaces only
+   * <script>s on the last slide of continued slides using the .has-continuation
+   * class added by xaringan. Finally, any <script>s in the slides area that
+   * aren't executed are commented out.
+   */
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container:not(.has-continuation) script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+  var scriptsNotExecuted = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container.has-continuation script'
+  );
+  if (!scriptsNotExecuted.length) return;
+  for (var i = 0; i < scriptsNotExecuted.length; i++) {
+    var comment = document.createComment(scriptsNotExecuted[i].outerHTML)
+    scriptsNotExecuted[i].parentElement.replaceChild(comment, scriptsNotExecuted[i])
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
