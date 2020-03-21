@@ -102,6 +102,24 @@ class: center, middle, inverse
 
 ---
 
+background-color: #000000
+background-image: url(img/jerks.jpg)
+background-size: contain
+
+---
+
+background-color: #000000
+background-image: url(img/neighbors.jpg)
+background-size: contain
+
+---
+
+background-color: #000000
+background-image: url(img/sick.jpg)
+background-size: contain
+
+---
+
 class: left, top
 background-image: url("img/adaptive_networks.png")
 background-size: contain
@@ -116,32 +134,35 @@ Image from Malik and Shi, ["Adaptive Networks in Action"](https://dsweb.siam.org
 
 class: left, top
 
-# Some Examples (or Life Advice)
-
-"If your friends make you sick, make new friends."
-
-- .smaller[Social clustering in epidemic spread on coevolving networks (Malik et al., *PRE*, 2019).]
-
---
+# Some Life Advice
 
 "If your friends are jerks, make new friends."
 
-- .smaller[Evolutionary prisoner’s dilemma games coevolving on adaptive networks (Lee et al., *Journal of Complex Networks*, 2017).] 
+.smaller[.smaller[.smaller[Generic absorbing transition in coevolution dynamics (Vazquez et al.,  *PRL*, 2008)]]] 
 
---
 
-"If your friends have wrong opinions, make new friends."
-- .smaller[Generic absorbing transition in coevolution dynamics (Vazquez et al.,  *PRL*, 2008)] 
-	
+
+"If your friends outcompete you, make new friends."
+
+.smaller[.smaller[.smaller[Evolutionary prisoner’s dilemma games coevolving on adaptive networks (Lee et al., *Journal of Complex Networks*, 2017).]]]
+
+
+
+"If your friends make you sick, make new friends."
+
+.smaller[.smaller[.smaller[Social clustering in epidemic spread on coevolving networks (Malik et al., *PRE*, 2019).]]]
+
 ---
 
 class: center, middle, inverse
 
-# From a math perspective...
+# Mathematically...
 
---
+---
 
-# ...everything is borked.
+background-color: #000000
+background-image: url(img/borked.jpg)
+background-size: contain
 
 ---
 
@@ -159,13 +180,11 @@ class: top, left
 
 3) What questions should we even be asking of these models?? 
 
---
-
 ---
 
 class: left, top
 
-# Example: Adaptive Voter Model (AVM)
+# Example: Voter Model (AVM)
 
 Nodes have binary states `\(\in \{0,1\}\)`. 
 At each time step `\(t\)`: 
@@ -174,12 +193,17 @@ Pick an edge `\(e = (u,v)\)` where `\(u\)` and `\(v\)` disagree.
 
 - With probability `\(\alpha\)`, .alert[**rewire**]: delete `\((u,v)\)` and form `\((u,w)\)`, where `\(w\)` agrees with `\(u\)` ("rewire-to-same") or `\(w\)` is uniformly random ("rewire-to-random"). 
 - With probability `\(1-\alpha\)`, .alert[**vote**]: `\(v\)` adopts `\(u\)`'s opinion. 
-	
-Repeat until no disagreement is left. 
 
---
 
-Let's do an experiment! 
+**Alternative View**: Neutral drift in a population where wild-types prefer to avoid mutants. 
+
+**Alternative Alternative View**: SI model with reactive social distancing. 
+
+---
+
+class: left, middle
+
+# Let's do an experiment! 
 From Malik and Shi, ["Adaptive Networks in Action"](https://dsweb.siam.org/The-Magazine/Article/adaptive-networks-in-action-opinion-formation-epidemics-and-the-evolution-of-cooperation), *SIAM DS Web*
 
 ---
@@ -188,13 +212,30 @@ class: left, top
 background-image: url("img/AVM_animation.gif")
 background-size: contain
 
+.footnote[]
+
 ---
 
 # Model Timescales
 
-In a world with only rewiring ( `\(\alpha = 1\)` ), .alert[**coupon-collector**] dynamics would resolve all disagreement in time `\(\sim O(n \log n)\)` on sparse graphs, `\(\rightarrow\)` .alert[**segregated consensus**].  
+With only rewiring ( `\(\alpha = 1\)` ), disagreement resolved in time `\(\sim O(n \log n)\)` on sparse graphs. .alert[**Fast dynamics, segregated consensus**].  
 
-In a world with only voting ( `\(\alpha = 0\)` ), .alert[**voting dynamics**] would resolve all disagreement in time `\(\sim O(n^2)\)`, `\(\rightarrow\)` .alert[**hegemonic consensus**]. 
+With only voting ( `\(\alpha = 0\)` ), disagreement resolved in time `\(\sim O(n^2)\)`.  .alert[**Slow dynamics, hegemonic consensus**]. 
+
+These two regimes are separated by a .alert[phase transition] in `\(\alpha\)`. 
+If mean degree is 4, then `\(\alpha \approx 0.73\)` (rewire-to-random). 
+
+---
+
+background-image: url(img/phase_transition_basic.png)
+background-size: contain
+
+---
+
+background-image: url(img/network_sample_detailed.png)
+background-size: contain
+
+# Near the Phase Transition
 
 ---
 
@@ -213,10 +254,7 @@ class: left, top
 ]
 .pull-right[
 
-.alert[**Quasistable manifold**] governing relationship between fraction of ones `\(q_1\)` and fraction of discordant edges `\(\rho\)`. In rewire-to-random,
-
-- For `\(\alpha \geq 0.73\)`, no arch appears `\(\rightarrow\)` rapid segregated consensus. 
-- For `\(\alpha \leq 0.73\)`, nonegalitarian (nearly hegemonic) segregated consensus. 
+.alert[**Quasistable manifold**] governing relationship between fraction of ones `\(q_1\)` and fraction of discordant edges `\(\rho\)`. 
 ]
 
 ---
@@ -238,9 +276,43 @@ class: left, top
 
 ---
 
+# Methods: Exact Solutions
+
+.left-column[
+
+### .tiny[Exact]
+
+]
+
+.right-column[
+
+
+]
+
+---
+
+# Methods: Exact Solutions
+
+.left-column[
+
+### .tiny[Exact]
+
+]
+
+.right-column[
+**LOL no.** 
+
+![:scale 75%](img/borked.jpg)
+
+]
+
+---
+
 # Methods: Pair Approximation
 
 .left-column[
+
+### .tiny[Exact]
 
 ### .tiny[PA]
 
@@ -267,6 +339,8 @@ Solve to obtain an approximation for the arch....that doesn't match the data ver
 
 .left-column[
 
+### .tiny[Exact]
+
 ### .tiny[PA]
 
 ]
@@ -281,6 +355,8 @@ Solve to obtain an approximation for the arch....that doesn't match the data ver
 # Methods: Approximate Master Equations
 
 .left-column[
+
+### .tiny[Exact]
 
 ### .tiny[PA]
 
@@ -298,9 +374,34 @@ A continuous-time .alert[**compartmental**] approach: track node densities with 
 
 ---
 
+# Methods: Approximate Master Equations
+
+.left-column[
+
+### .tiny[Exact]
+
+### .tiny[PA]
+
+### .tiny[AMEs]
+]
+
+.right-column[
+This works ok, but is not interpretable and scales poorly with mean degree. 
+For mean degree 4, there are ~200 equations like the below. 
+
+![:scale 60%](img/AME.png)
+
+
+.footnote[.tiny[Durrett et al.,*PNAS*, 2012]]
+]
+
+---
+
 # Methods: Bespoke
 
 .left-column[
+
+### .tiny[Exact]
 
 ### .tiny[PA]
 
@@ -334,7 +435,6 @@ background-size: contain
 
 # Discrete-Time Markovian Approximations
 
-
 `$$\underbrace{\mathbf{m}(t+1) - \mathbf{m}
 (t)}_{\text{change in edge counts}} = \underbrace{\alpha\mathbb{E}[\mathbf{R}(\mathbf{x})]}_{\text{rewiring}} +\underbrace{(1-\alpha)\mathbb{E}[\mathbf{V}(\mathcal{G}(t))]}_{\text{voting}}$$`
 
@@ -343,7 +443,7 @@ Second term is non-Markovian `\(\rightarrow\)` no closed form.
 
 We can approximate it by tracking each discordant edge (under some modeling assumptions). 
 
-Ugly bookkeeping, but easy solutions.
+Ugly bookkeeping, but easy computation.
 ]
 .pull-right[
 ![](img/pjm.jpg)
@@ -369,15 +469,21 @@ Competing timescales of node and edge dynamics drive rich behavior even in simpl
 
 --
 
-It seems like it helps to treat these systems as truly discrete, rather than resort to continuous-time approximations. 
+It helps to treat these systems as truly discrete, rather than resort to continuous-time approximations. 
 
 --
 
-This is a .alert[**great area**] for applied mathematicians, with potential applications in evolutionary dynamics and theoretical ecology. 
+This is a .alert[**great area**] for applied mathematicians, with lots of potential in evolutionary dynamics and theoretical ecology. 
 
 --
 
 **The best work here is yet to come!**
+
+---
+
+background-color: #000000
+background-image: url(img/boldly.jpg)
+background-size: contain
 
 ---
 
