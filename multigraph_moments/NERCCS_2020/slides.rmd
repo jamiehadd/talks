@@ -25,58 +25,214 @@ output:
 
 ---
 
-# Random Graph Null Models
-
-.pull-left[
-This got pulled left.
-]
-
-.pull-right[
-This got pulled right. 
-]
-
----
-
-# Model Selection Matters
-
-
----
-
-# Expected Adjacency Matrix
-
-Sometimes we don't need to sample from a random graph. 
-
-Sometimes we just need $\mathbb{E}[\mathbf{W}]$, the *expected adjacency matrix* of the graph. 
-
-How to do this?....
-
-
----
 class: middle
 
-# An Erroneous Folk Theorem
+# .large[Two Classics]
+
+---
+
+class: top
+
+# Modularity
+
+<br>
+
+$$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#C49377}{\frac{d_id_j}{2m}}\right]\delta(g_i, g_j)$$
+
+Maximize this to find communities in networks (sometimes).
+
+**Question:** where does the .orange[second term] come from?
+
+.footnote[Newman + Girvan, "Finding and Evaluating Community Structure in Networks." *PRE*, (2003)]
+
+---
+
+class: top
+
+# Spreading in Scale-Free Networks
+
+<br>
+
+*"The probability that a link points to a node with $s$ links is proportional to * $\color{#C49377}{sP(s)}$."
+
+$\color{#C49377}{P(s)}$ is the proportion of nodes of degree $s$. 
+
+**Question:** how do we derive this probability $\color{#C49377}{P(s)}$?
+
+.footnote[Pastor-Satorras + Vespignani, "Epidemic Spreading in Scale-Free Networks." *PRL*, (2001)]
+
+---
+
+class: middle
+
+.large[.orange[Standard argument]: "These claims are approximately true in a **random graph** with specified degree sequence **d**."] 
+
+---
+--- 
+
+# A Folk Theorem
 
 .alert[
-*The expected number of edges $w_{ij}$ between two nodes in a random graph with fixed degree sequence is *
+*The expected number of edges $w_{ij}$ between two nodes in **"random"** graph **"with degree sequence $\mathbf{d}$"** is *
 
 $$ w_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
 ]
 
+--
+
+This is right if you choose your random graph model .orange[conveniently].
+
+- Chung-Lu model (**d** fixed in expectation)
+- Stub-matching (biased)
+
+---
+
+class: top
+
+# Which random graph?... 
+
+<br>
+
+We .orange[say]: "(entropy-maximizing) random graph." 
+
+We .orange[mean]: "random graph that makes calculations convenient."
+
+--
+
+**These are not the same.** 
+
+
+.footnote[Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+--
+
+What if we *actually* used the entropy-maximizing random graph for calculations?
+
 ---
 class: middle
 
-# An Erroneous Folk Theorem
+What if we *actually* used the entropy-maximizing random graph for calculations?
 
 .alert[
 $$ w_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
 ]
-This is **true-ish** in **certain, highly specific models**.
 
-- Chung-Lu 
-- Stub-matching configuration model
+**This formula wouldn't be true.** 
 
-This is **not true** for an entropy-maximizing random graph with specified degree sequence. 
+If we want to estimate graph properties under entropy-maximizing random graphs, we need to roll up our sleeves...
 
+---
+class: middle
+
+# .large[The Uniform Model]
+
+---
+
+# Which Random Graph?
+
+<br>
+
+Let $\mathcal{G}_\mathbf{d}$ be the set of all **multigraphs** with fixed degree sequence $\mathbf{d}$. 
+
+The **uniform random graph model** $\eta_\mathbf{d}$ is a probability distribution that assigns equal weight to each element of $\mathcal{G}_\mathbf{d}$. 
+
+$\eta_\mathbf{d}$ is the entropy-maximizing random graph with fixed degree sequence $\mathbf{d}$. 
+
+---
+
+# Edge-Swap Monte Carlo
+
+<br>
+
+![](img/swaps.png)
+
+We can sample from $\eta_\mathbf{d}$ by crawling through $\mathcal{G}_\mathbf{d}$
+
+
+.footnote[Image from Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+---
+
+# Edge-Swap Monte Carlo
+
+![](img/swaps.png)
+
+1. **Sample edges** $(i,j)$ and $(k,\ell)$ with random orientations. 
+2. **Propose swap** $(i,j), (k,\ell) \mapsto (i,\ell), (k,j)$.  
+3. **Accept swap** with probability $w_{ij}^{-1}w_{k\ell}^{-1}$. 
+
+
+**Theorem:** This works.<sup>1</sup> 
+
+
+.footnote[<sup>1</sup>Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+---
+
+class: top
+
+# Analysis Approach
+
+<br>
+
+Edge-Swap Monte Carlo is a stochastic process with known equilibrium distribution $\eta_\mathbf{d}$. 
+
+At equilibrium, all **expectations** are fixed. 
+
+$$\mathbb{E}_\eta[f(G_{t+1}) - f(G_t)] = 0\;.$$ 
+
+If we choose $f$ carefully, we can get analytical formulae for expressions we care about. 
+
+
+.footnote[PSC, "Moments of Uniformly Random Multigraphs with Fixed Degree Sequences, `arxiv:1909.09037` (2020)]
+---
+
+# Expected Number of Neighbors
+
+<br>
+
+Let $\beta_i = \mathbb{E}_\eta[\text{# of distinct neighbors of } i]$.
+
+.alert[
+**Theorem**: $$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} > 0)] = \frac{\beta_i\beta_j}{\sum_\ell \beta_\ell} + \text{small terms}$$
+]
+
+.footnote[PSC,  `arxiv:1909.09037` (2020)]
+
+
+---
+
+# Expected Edge Densities
+
+<br>
+
+.alert[
+**Theorem**: $$\omega_{ij}\triangleq \mathbb{E}_\eta[W_{ij}] = \frac{\chi_{ij}}{1 - \chi_{ij}} + \text{small terms}$$ 
+]
+
+Can also get higher-order moments: variances, etc. 
+
+.footnote[PSC,  `arxiv:1909.09037` (2020)]
+
+---
+
+# Determining $\beta$
+
+The vector $\beta$ approximately solves
+
+$$\sum_{j}\frac{\beta_i\beta_j}{\sum_\ell\beta_\ell - \beta_i\beta_j} = d_i \quad \forall i\;.$$
+
+.alert[
+**Theorem**: Unique solution on the set 
+$$\mathcal{B} = \left\{\beta: \beta \geq \mathbf{0},\; \beta_i^2 < \sum_\ell \beta_\ell \quad \forall i\right\}\;.$$
+] 
+
+.footnote[PSC,  `arxiv:1909.09037` (2020)]
+---
+
+class: middle
+
+# .large[Experiments]
 
 ---
 
@@ -93,17 +249,46 @@ Collected by the SocioPatterns project.
 background-image: url(img/eval_figs.png)
 background-size: contain
 
+## Evaluating Approximations
+
+.footnote[PSC, `arxiv:1909.09037` (2020)]
+
 ---
+
+
 
 background-image: url(img/error_matrices.png)
 background-size: contain
+
+## Estimating $\mathbb{E}[W]$
+
+
 
 ---
 
 background-image: url(img/modularity_high_school.png)
 background-size: contain
 
+## Downstream Consequences: Modularity Maximization
+
+.footnote[PSC, `arxiv:1909.09037` (2020)]
+
 ---
+
+# Summing Up
+
+<br>
+
+**Rigor** means 
+- Carefully articulating our models 
+- Checking that our heuristics work. 
+
+Entropy-maximizing random graphs with fixed degree sequences break our standard heuristics. 
+
+Using a dynamical approach, we can get **rigorous approximations** with **excellent performance** on real data. 
+
+---
+
 
 
 
@@ -129,7 +314,7 @@ Phil <br> Chodrow
 ]
 .funding[
 ![:scale 120px](img/nsf_logo.png)
-![:scale 200px](img/mit_logo.png)]
+![:scale 220px](img/mit_logo.png)]
 ]]
 
 

@@ -12,6 +12,10 @@ body {
 	color: #000000;
 }
 
+h2 {
+  font-weight: normal;
+}
+
 .thanks, .alert, .funding {
   padding: 10px 10px;
   margin-top: 5px;
@@ -56,3 +60,11 @@ body {
 .middle{
   vertical-align: middle
 }
+
+.orange {
+  color: #C49377;
+  font-weight: bold;
+}
+
+
+
