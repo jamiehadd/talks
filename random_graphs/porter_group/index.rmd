@@ -274,6 +274,13 @@ background-size: contain
 
 ---
 
+# Let's do intersection profiles here (something old and something new...)
+
+
+---
+
+
+
 
 
 class: section, middle
