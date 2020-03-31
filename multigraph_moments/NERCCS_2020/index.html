@@ -52,7 +52,7 @@ class: top
 
 `$$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#C49377}{\frac{d_id_j}{2m}}\right]\delta(g_i, g_j)$$`
 
-Maximize this to find communities in networks (sometimes).
+Maximize this to find communities in networks (terms and conditions apply).
 
 **Question:** where does the .orange[second term] come from?
 
@@ -86,7 +86,7 @@ class: middle
 # A Folk Theorem
 
 .alert[
-*The expected number of edges `\(w_{ij}\)` between two nodes in **"random"** graph **"with degree sequence `\(\mathbf{d}\)`"** is *
+The expected number of edges `\(w_{ij}\)` between two nodes in **"random"** graph **"with degree sequence `\(\mathbf{d}\)`"** is 
 
 $$ w_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
 ]
@@ -187,11 +187,6 @@ class: middle
 Edge-Swap Monte Carlo is expensive. 
 
 How can we estimate expectations under `\(\eta\)` **without** explicitly doing billions of Monte Carlo iterations? 
-
----
-
-background-image: url(img/arxiv.png)
-background-size: contain
 
 ---
 
@@ -303,7 +298,6 @@ background-size: contain
 
 # Summing Up
 
-&lt;br&gt;
 
 **Rigor** means 
 - Carefully articulating our models 
@@ -311,7 +305,9 @@ background-size: contain
 
 Entropy-maximizing random graphs with fixed degree sequences break our standard heuristics. 
 
-Using a dynamical approach, we can get **rigorous approximations** with **excellent performance** on real data. 
+Using a dynamical approach, we get **rigorous approximations** with **excellent performance** on real data. 
+
+**Methodological differences matter** for downstream analysis. 
 
 ---
 
