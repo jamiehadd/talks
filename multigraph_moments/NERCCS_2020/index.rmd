@@ -72,7 +72,7 @@ class: middle
 
 # A Folk Theorem
 
-.alert[
+.funding[
 The expected number of edges $w_{ij}$ between two nodes in **"random"** graph **"with degree sequence $\mathbf{d}$"** is 
 
 $$ w_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
@@ -108,18 +108,6 @@ We .orange[mean]: "random graph that makes calculations convenient."
 
 What if we *actually* used the entropy-maximizing random graph for calculations?
 
----
-class: middle
-
-What if we *actually* used the entropy-maximizing random graph for calculations?
-
-.alert[
-$$ w_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
-]
-
-**This formula wouldn't be true.** 
-
-If we want to estimate graph properties under entropy-maximizing random graphs, we need to roll up our sleeves...
 
 ---
 class: middle
@@ -146,7 +134,7 @@ $\eta_\mathbf{d}$ is the entropy-maximizing random graph with fixed degree seque
 
 ![](img/swaps.png)
 
-We can sample from $\eta_\mathbf{d}$ by crawling through $\mathcal{G}_\mathbf{d}$
+**Idea**: sample from $\eta_\mathbf{d}$ by crawling through $\mathcal{G}_\mathbf{d}$
 
 
 .footnote[Image from Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
@@ -167,13 +155,6 @@ We can sample from $\eta_\mathbf{d}$ by crawling through $\mathcal{G}_\mathbf{d}
 
 .footnote[<sup>1</sup>Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
 
----
-
-class: middle
-
-Edge-Swap Monte Carlo is expensive. 
-
-How can we estimate expectations under $\eta$ **without** explicitly doing billions of Monte Carlo iterations? 
 
 ---
 
@@ -195,7 +176,7 @@ If we choose $f$ carefully, we can get analytical formulae for expressions we ca
 .footnote[PSC, "Moments of Uniformly Random Multigraphs with Fixed Degree Sequences, `arxiv:1909.09037` (2020)]
 ---
 
-# Expected Number of Neighbors
+# Expected Edge Indicators
 
 <br>
 
@@ -206,6 +187,21 @@ Let $\beta_i = \mathbb{E}_\eta[\text{# of distinct neighbors of } i]$.
 ]
 
 .footnote[PSC,  `arxiv:1909.09037` (2020)]
+
+---
+
+# A Familiar Structure
+
+.funding[
+**Folk Theorem**: $$\omega_{ij}\triangleq \mathbb{E}_\eta[W_{ij}] = \frac{d_id_j}{\sum_\ell d_\ell} + \text{small terms}$$
+]
+
+
+.alert[
+**Theorem**: $$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} > 0)] = \frac{\beta_i\beta_j}{\sum_\ell \beta_\ell} + \text{small terms}$$
+]
+
+
 
 
 ---
@@ -231,7 +227,7 @@ The vector $\beta$ approximately solves
 $$\sum_{j}\frac{\beta_i\beta_j}{\sum_\ell\beta_\ell - \beta_i\beta_j} = d_i \quad \forall i\;.$$
 
 .alert[
-**Theorem**: Unique solution on the set 
+**Theorem**: Solution (if it exists) is unique on the set 
 $$\mathcal{B} = \left\{\beta: \beta \geq \mathbf{0},\; \beta_i^2 < \sum_\ell \beta_\ell \quad \forall i\right\}\;.$$
 ] 
 
@@ -294,7 +290,7 @@ Entropy-maximizing random graphs with fixed degree sequences break our standard 
 
 Using a dynamical approach, we get **rigorous approximations** with **excellent performance** on real data. 
 
-**Methodological differences matter** for downstream analysis. 
+**#MethodsMatter** for downstream analysis. 
 
 ---
 
