@@ -27,14 +27,19 @@ output:
 
 # The 30-Second Talk
 
-1. Interpreting measurements in network science often requires **null random graph modeling.**
+
+
+1. Interpreting measurements in network science often requires .embolden[null random graph modeling].
 2. Null modeling is a bit of a science and a bit of an art. 
 3. Doing it .embolden[rigorously] raises some interesting math problems. 
-4. Careful solutions to these problems can alter our perspectives on existing questions, and pose new ones. 
+4. Careful solutions to these problems can alter our perspectives on existing questions and pose interesting new ones. Two extended examples: 
+  - Random hypergraphs.
+  - Moments of uniform random graphs.
+  
 
 ---
 
-# A Generalized Workflow for Network Science
+# A Universal Workflow for Complex Networks
 
 1) Obtain some network data. 
 
@@ -47,7 +52,7 @@ output:
 
 --
 
-3) **Explain** the measurement. 
+3) .embolden[Explain] the measurement. 
 
 --
 
@@ -69,12 +74,11 @@ class: middle, standout
 
 .pull-left[.midi[
 <br>
-**Expectation**: networks can be small-world XOR locally clustered.<sup>*</sup> 
+.embolden[Expectation]: networks can be small-world XOR locally clustered.<sup>*</sup> 
 
-**Measurement**: many networks are small-world AND locally clustered.
+.embolden[Measurement]: many networks are small-world AND locally clustered.
 
-**Explanation**: Watts-Strogatz random graph model. 
-
+.embolden[Explanation]: Watts-Strogatz random graph model. 
 ]
 ]
 
@@ -90,7 +94,7 @@ class: middle, standout
 
 .pull-left[.midi[
 
-**Modularity Maximization**
+.embolden[Modularity Maximization]
 
 $Q_{\text{max}} \approx 0.25$ in an ER random graph. 
 
@@ -100,6 +104,10 @@ $\rightarrow$ High modularity isn't always even *prima facie* evidence of commun
 .centered-image[
 ![:scale 100%](img/ER_modularity.png)
 ]]
+
+--
+
+How to tell if a modularity score is "real" or "interseting"? 
 
 
 
@@ -120,6 +128,7 @@ This probability distribution should be "boring" but not "too boring."
 
 - ER: "too boring." 
 - Configuration models: often "just boring enough."
+- Lots of other options. 
 - Choice should be guided by domain knowledge. 
 
 ---
@@ -128,9 +137,9 @@ class: middle, standout
 
 .large[
 
-1). How do we **choose** "good" random graph benchmarks for a given data set?
+How do we **choose** "good" random graph benchmarks for a given data set?
 
-2). How can we practically do **data science** with these models?]
+How can we practically do **data science** with these models?]
 
 ---
 
@@ -150,8 +159,11 @@ We often need to balance these against each other.
 
 <br> 
 
-1. .embolden["Configuration Models of Random Hypergraphs."] Mostly about **relevance** in the context of polyadic data. 
-2. .embolden["Moments of Uniformly Random Multigraphs with Fixed Degree Sequences."] Mostly about .highlight[tractability] in the context of dyadic data. 
+.embolden["Configuration Models of Random Hypergraphs."] 
+- Mostly about **relevance** in the context of polyadic data. 
+
+.embolden["Moments of Uniformly Random Multigraphs with Fixed Degree Sequences."] 
+- Mostly about .highlight[tractability] in the context of dyadic data. 
 
 ---
 
@@ -163,7 +175,7 @@ class: section, middle
 
 # Polyadic Networks
 
-Lots of systems we care about contain interactions between .highlight[groups] of agents: 
+Lots of systems we care about contain interactions between embolden[groups] of agents: 
 
 - **Collaboration / coauthorship**: Congressional cosponsorship, the network of scholars studying the network of...
 - **Co-presence**: drug combinations, patent classifications,
@@ -187,6 +199,8 @@ Observe a graph with degree sequence $\mathbf{d} \in \mathbb{Z}^n$.
 
 The (vertex-labeled<sup>1</sup>) *configuration model* is the uniform probability distribution $\eta_\mathbf{d}$ over the space 
 $$\mathcal{G}_\mathbf{d} = \{G:\mathrm{deg}(G) = \mathbf{d}\}\;.$$
+
+.embolden[Common pattern]: project, use $\mathbf{d}$ from projected graph, randomize with configuration model. 
 
 .footnote[<sup>1</sup>Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
 
@@ -241,27 +255,6 @@ Observe a hypergraph with degree sequence $\mathbf{d} \in \mathbb{Z}^n$ and **di
 
 The (vertex-labeled) *configuration model* is the uniform probability distribution $\eta_{\mathbf{d}, \mathbf{k}}$ over the space 
 $$\mathcal{H}_{\mathbf{d}, \mathbf{k}} = \{H:\mathrm{deg}(H) = \mathbf{d}\;,\;\color{#0F4C81}{\mathrm{dim}(H) = \mathbf{k}}\}\;.$$
-
----
-
-# A Note on Stub-Matching
-
-.pull-left[.midi[
-
-Sometimes, "the configuration model" is defined via a stub-matching process. 
-
-This is related to the uniform model for .embolden[simple] graphs and hypergraphs.
-
-**Very few data sets are natively simple.**
-
-]] 
-
-.pull-right[
-
-![](img/stub-matching.png)
-]
-
-.footnote[<sup>1</sup>Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
 
 ---
 
@@ -411,23 +404,15 @@ class: section, middle
 
 ---
 
-class: middle, standout
-
-# .large[Two Classics]
-
----
-
 class: top
 
-# Modularity
-
-<br>
+# .midi[Our Good Friend, Modularity...]
 
 $$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#C49377}{\frac{d_id_j}{2m}}\right]\delta(g_i, g_j)$$
 
-Maximize this to find communities in networks (terms and conditions apply).
-
 .highlight[Second term]: expected number of edges between nodes $i$ and $j$, fixing the degree sequence $d$. 
+
+Maximize $Q(\mathbf{G})$ to find communities in networks (terms and conditions apply).
 
 .footnote[Newman + Girvan, "Finding and Evaluating Community Structure in Networks." *PRE*, (2003)]
 
@@ -438,7 +423,7 @@ Maximize this to find communities in networks (terms and conditions apply).
 .alert[
 *The expected number of edges $w_{ij}$ between two nodes in **"random"** graph **"with degree sequence $\mathbf{d}$"** is *
 
-$$ w_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
+$$ \omega_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
 ]
 
 --
@@ -454,7 +439,6 @@ class: top
 
 # Which random graph?... 
 
-
 We .highlight[say]: "(entropy-maximizing) random graph." 
 
 We .highlight[mean]: "random graph that makes calculations convenient."
@@ -462,8 +446,6 @@ We .highlight[mean]: "random graph that makes calculations convenient."
 --
 
 .footnote[Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
-
---
 
 What if we *actually* used the entropy-maximizing random graph for calculations?
 
@@ -478,7 +460,7 @@ class: middle
 
 
 
-Let $\mathcal{G}_\mathbf{d}$ be the set of all **multigraphs** with fixed degree sequence $\mathbf{d}$. 
+Let $\mathcal{G}_\mathbf{d}$ be the set of all .embolden[multigraphs] with fixed degree sequence $\mathbf{d}$. 
 
 The **uniform random graph model** $\eta_\mathbf{d}$ is a probability distribution that assigns equal weight to each element of $\mathcal{G}_\mathbf{d}$. 
 
@@ -505,9 +487,9 @@ We can sample from $\eta_\mathbf{d}$ by crawling through $\mathcal{G}_\mathbf{d}
 
 ![](img/swaps.png)
 
-1. **Sample edges** $(i,j)$ and $(k,\ell)$ with random orientations. 
-2. **Propose swap** $(i,j), (k,\ell) \mapsto (i,\ell), (k,j)$.  
-3. **Accept swap** with probability $w_{ij}^{-1}w_{k\ell}^{-1}$. 
+1. .embolden[Sample edges] $(i,j)$ and $(k,\ell)$ with random orientations. 
+2. .embolden[Propose swap] $(i,j), (k,\ell) \mapsto (i,\ell), (k,j)$.  
+3. .embolden[Accept swap] with probability $w_{ij}^{-1}w_{k\ell}^{-1}$. 
 
 
 **Theorem:** This works.<sup>1</sup> 
@@ -517,9 +499,9 @@ We can sample from $\eta_\mathbf{d}$ by crawling through $\mathcal{G}_\mathbf{d}
 
 ---
 
-class: middle
+class: middle, standout
 
-Estimating $\omega_{ij} = \mathbb{E}[W_{ij}]$ via Edge-Swap Monte Carlo is expensive (~3 days on my laptop). 
+Estimating $\omega_{ij} = \mathbb{E}[W_{ij}]$ via Edge-Swap Monte Carlo is **expensive** (~3 days on my laptop). 
 
 How can we estimate efficiently expectations under $\eta$? 
 
@@ -608,16 +590,16 @@ $$\mathcal{B} = \left\{\beta: \beta \geq \mathbf{0},\; \beta_i^2 < \sum_\ell \be
 Let $h(\beta)_i = \sum_{j}\frac{\beta_i\beta_j}{\sum_\ell\beta_\ell - \beta_i\beta_j}$. We want to solve $\mathbf{h}(\beta) = \mathbf{d}$. 
 Equivalently, $$\mathcal{L}(\beta) \triangleq \lVert \mathbf{h}(\beta) - \mathbf{d} \rVert^2 = \mathbf{0}$$
 
-1. The Jacobian $\mathbf{J}$ of $\mathbf{h}$ has strictly positive eigenvalues on $\mathcal{B}$ (linear algebra tricks)
+1. The Jacobian $\mathbf{J}$ of $\mathbf{h}$ has strictly positive eigenvalues on $\mathcal{B}$ (linear algebra tricks).
 2. The Hessian $\mathcal{H}$ of $\mathcal{L}$ is positive-definite at all critical points of $\mathcal{L}$ $\implies$ all critical points are isolated local minima (more linear algebra tricks). 
 3. .embolden[Mountain Pass Theorem]:<sup>1</sup> If two or more, $\exists$ a third which is not a local minimum. 
-4. So, $\exists$ at most one local minimizer of $\mathcal{L}$. 
+4. So, $\exists$ at most one local minimizer of $\mathcal{L}$ on $\mathcal{B}$. 
 ]
 
 .footnote[<sup>1</sup>For a review, see Bisgard, "Mountain Passes and Saddle Points," *SIREV* (2015)]
 ---
 
-class: middle
+class: middle, standout
 
 # .large[Experiments]
 
@@ -675,13 +657,15 @@ Using a dynamical approach, we can get **rigorous approximations** with **excell
 
 ---
 
-
 # The 30-Second Talk
 
-1. Interpreting measurements in network science often requires **null random graph modeling.**
+1. Interpreting measurements in network science often requires .embolden[null random graph modeling].
 2. Null modeling is a bit of a science and a bit of an art. 
 3. Doing it .embolden[rigorously] raises some interesting math problems. 
-4. Careful solutions to these problems can alter our perspectives on existing questions, and pose new ones. 
+4. Careful solutions to these problems can alter our perspectives on existing questions and pose interesting new ones. Two extended examples: 
+  - Random hypergraphs.
+  - Moments of uniform random graphs.
+  
 
 ---
 
@@ -709,5 +693,37 @@ Moments of Multigraphs `arxiv:1909.09037`
 ![:scale 120px](img/nsf_logo.png)
 ![:scale 220px](img/mit_logo.png)
 ]]
+
+
+---
+
+
+class: standout, middle
+
+# Supplementary Slides
+
+
+---
+
+
+# A Note on Stub-Matching
+
+.pull-left[.midi[
+
+Sometimes, "the configuration model" is defined via a stub-matching process. 
+
+This is related to the uniform model for .embolden[simple] graphs and hypergraphs.
+
+**Very few data sets are natively simple.**
+
+]] 
+
+.pull-right[
+
+![](img/stub-matching.png)
+]
+
+.footnote[<sup>1</sup>Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
 
 
