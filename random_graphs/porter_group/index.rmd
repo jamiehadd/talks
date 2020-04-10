@@ -274,7 +274,7 @@ $$\mathcal{H}_{\mathbf{d}, \mathbf{k}} = \{H:\mathrm{deg}(H) = \mathbf{d}\;,\;\c
 
 class: standout, middle
 
-.large[**Let's do some data science.**]
+.large[**Let's look at some data.**]
 
 ---
 
@@ -364,7 +364,7 @@ Measures repeated interactions:  productive **teams** of researchers, chatty **g
 Computing null intersection profiles can be very difficult for large data sets. 
 Fortunately, we can approximate: 
 
-**Theorem:**<sup>*</sup> With high probability, 
+**Theorem:**<sup>*</sup> With high probability as $n$ grows large, 
 
 .midi[$$r_\eta(j) = (1 + O(n^{-1}))j!\left \langle
 \binom{\vert \Delta\vert}{j}\right\rangle^2 \left(\frac{1}{n} \frac{\mathbb{E}[D^2] - \mathbb{E}[D]}{\mathbb{E}[D]^2}\right)^j$$]
