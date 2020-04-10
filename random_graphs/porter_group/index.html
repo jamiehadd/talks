@@ -120,7 +120,7 @@ class: middle, standout
 
 --
 
-How to tell if a modularity score is "real" or "interseting"? 
+How to tell if a modularity score is "real" or "interesting"? 
 
 
 
@@ -172,10 +172,10 @@ We often need to balance these against each other.
 
 &lt;br&gt; 
 
-.embolden["Configuration Models of Random Hypergraphs."] 
+.embolden[Configuration Models of Random Hypergraphs.] 
 - Mostly about **relevance** in the context of polyadic data. 
 
-.embolden["Moments of Uniformly Random Multigraphs with Fixed Degree Sequences."] 
+.embolden[Moments of Uniformly Random Multigraphs with Fixed Degree Sequences] 
 - Mostly about .highlight[tractability] in the context of dyadic data. 
 
 ---
@@ -281,7 +281,7 @@ The (vertex-labeled) *configuration model* is the uniform probability distributi
 
 **Theorem**: This Markov chain is ergodic and its invariant measure is the configuration model `\(\eta_{\mathbf{d}, \mathbf{k}}\)`.  To sample, run this chain a "for long time." 
 
-.footnote[PSC, "Configuration Models of Random Hypergraphs", `arXiv:1902.09302` (2020)]
+.footnote[PSC, `arXiv:1902.09302` (2020)]
 
 ---
 
@@ -357,11 +357,11 @@ Intersection profile:
 
 `$$r(j) = \langle \mathbb{I}(\Delta \cap \Gamma) = j\rangle$$`
 
-"Among all pairs of edges of sizes `\(k\)` and `\(\ell\)`, what proportion have intersection of size `\(j\)`?"
+"Among all pairs of edges, what proportion have intersection of size `\(j\)`?"
 
 Measures repeated interactions:  productive **teams** of researchers, chatty **groups** on email, etc.   
 
-.footnote[PSC, "Configuration Models of Random Hypergraphs", `arXiv:1902.09302` (2020)]
+.footnote[PSC,  `arXiv:1902.09302` (2020)]
 
 ---
 
@@ -382,7 +382,10 @@ Fortunately, we can approximate:
 .midi[$$r_\eta(j) = (1 + O(n^{-1}))j!\left \langle
 \binom{\vert \Delta\vert}{j}\right\rangle^2 \left(\frac{1}{n} \frac{\mathbb{E}[D^2] - \mathbb{E}[D]}{\mathbb{E}[D]^2}\right)^j$$]
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt;Terms and conditions apply.]
+*Terms and conditions apply. 
+
+.footnote[PSC,  `arXiv:1902.09302` (2020)]
+
 ---
 
 background-image: url(img/large_intersections.png)
@@ -390,7 +393,7 @@ background-size: contain
 
 # Profiles for Big Data™
 
-.footnote[PSC, "Configuration Models of Random Hypergraphs", `arXiv:1902.09302` (2020)]
+.footnote[PSC,  `arXiv:1902.09302` (2020)]
 
 ---
 
@@ -407,7 +410,7 @@ Using these models, we can
 
 
 
-.footnote[PSC, "Configuration Models of Random Hypergraphs", `arXiv:1902.09302` (2020)]
+.footnote[PSC,`arXiv:1902.09302` (2020)]
 
 ---
 
@@ -520,14 +523,9 @@ How can we estimate efficiently expectations under `\(\eta\)`?
 
 ---
 
-background-image: url(img/arxiv.png)
-background-size: contain
-
----
-
 class: top
 
-# Analysis Approach
+# Approach
 
 
 Edge-Swap Monte Carlo is a stochastic process with known equilibrium distribution `\(\eta_\mathbf{d}\)`. 
@@ -536,7 +534,7 @@ At equilibrium, all **expectations** are fixed.
 
 `$$\mathbb{E}_\eta[f(G_{t+1}) - f(G_t)] = 0\;.$$` 
 
-If we choose `\(f(G) = w_{ij}^p\)` for `\(p = 1,\ldots\)` and handle a lot of algebra, we can get analytical approximations. 
+If we choose `\(f(G) = w_{ij}^p\)` for `\(p = 1,\ldots\)` and handle .embolden[a lot] of algebra, we can get analytical approximations. 
 
 
 .footnote[PSC, "Moments of Uniformly Random Multigraphs with Fixed Degree Sequences, `arxiv:1909.09037` (2020)]
@@ -675,9 +673,7 @@ Using a dynamical approach, we can get **rigorous approximations** with **excell
 1. Interpreting measurements in network science often requires .embolden[null random graph modeling].
 2. Null modeling is a bit of a science and a bit of an art. 
 3. Doing it .embolden[rigorously] raises some interesting math problems. 
-4. Careful solutions to these problems can alter our perspectives on existing questions and pose interesting new ones. Two extended examples: 
-  - Random hypergraphs.
-  - Moments of uniform random graphs.
+4. Careful solutions to these problems can alter our perspectives on existing questions and pose interesting new ones. 
   
 
 ---
