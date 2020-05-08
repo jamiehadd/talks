@@ -21,7 +21,7 @@ bold {
 }
 
 
-.alert{
+.alert, .bluebox{
 	color: #783000;
 }
 .bigger { 
@@ -126,9 +126,20 @@ h3 {
   padding-left: 1em;
 }
 
-
 .right-column {
   width: 80%;
   float: right;
   padding-top: 0em;
 }
+
+.bluebox {
+  padding: 5px 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.bluebox {
+  border-left: solid 5px var(--baby-blue-30);
+  background-color: var(--baby-blue-30);
+}
+

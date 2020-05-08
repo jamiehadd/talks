@@ -6,6 +6,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&display=swap');
 
+:root{
+	--lilac-sachet: #E9ADCA;
+	--lilac-sachet-30: #E9ADCA30;
+	--white: #FFFFFF;
+  --white-90: #FFFFFF90;
+}
+
 body {
 	font-family: Lato, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
 	font-weight: 300;
@@ -16,12 +23,53 @@ h2 {
   font-weight: normal;
 }
 
-.thanks, .alert, .funding {
-  padding: 10px 10px;
+
+.pink-highlight, .blue-highlight, .yellow-highlight, .purple-highlight{
+	padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.pink-highlight {
+  border-left: solid 5px var(--peach-quartz);
+  border-right: solid 0px var(--peach-quartz);
+  background-color: var(--peach-quartz-30);
+}
+
+
+.yellow-highlight{
+	border-left: solid 5px var(--cornhusk);
+  border-right: solid 0px var(--cornhusk);
+  background-color: var(--cornhusk-30);
+}
+
+.blue-highlight{
+	border-left: solid 5px var(--baby-blue);
+  background-color: var(--baby-blue-30);
+}
+
+.purple-highlight{
+	border-left: solid 5px var(--lilac-sachet);
+  background-color: var(--lilac-sachet-30);
+}
+
+.thanks, .alert, .funding, .blue-bg, .yellow-bg, .green-bg, .purple-bg, .pink-bg, .white-bg{
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
+.pink-bg{
+	border-left: solid 5px var(--peach-quartz);
+	border-right: solid 0px var(--peach-quartz);
+  background-color: var(--peach-quartz-30);
+}
 
 .alert {
   border-left: solid 5px var(--peach-quartz);
@@ -34,6 +82,28 @@ h2 {
   border-right: solid 0px var(--cornhusk);
   background-color: var(--cornhusk-30);
 }
+
+.yellow-bg{
+	border-left: solid 5px var(--cornhusk);
+  border-right: solid 0px var(--cornhusk);
+  background-color: var(--cornhusk-30);
+}
+
+.blue-bg{
+	border-left: solid 5px var(--baby-blue);
+  background-color: var(--baby-blue-30);
+}
+
+.white-bg{
+	border-left: solid 5px var(--white);
+  background-color: var(--white-90);
+}
+
+.purple-bg{
+	border-left: solid 5px var(--lilac-sachet);
+  background-color: var(--lilac-sachet-30);
+}
+
 
 
 
