@@ -45,12 +45,12 @@ background-size: contain
 
 ---
 
-# ...and you, and you, and...
+# ...and you, and you, and... 
 
 ### Advisors
 
 - Marta González (UC Berkeley)
-- Patrick Jaillet (MIT)
+- Patrick Jaillet (MIT) 
 
 ### Committee
 
@@ -67,14 +67,16 @@ background-size: contain
 # Research Streams
 
 .large[
-.yellow-highlight[
+.yellow-bg[
   Structure and dynamics of spatial networks
   ]
-  .blue-highlight[
+  
+  .blue-bg[
   Nonlinear and adaptive network models
   ]
-  .pink-highlight[
-  .embolden[Random graphs in data science (today)]
+  
+  .pink-bg[
+  .embolden[Random graphs in data science]
   ]
 ]
 
@@ -115,6 +117,521 @@ background-size: contain
 .embolden[Annotated hypergraphs: Models and applications]. **PSC** and Andy Mellor, (2020). *Applied Network Science*.
 ]]
 
+---
+
+# .midi[Messages for Today (or, what I learned in my PhD)]
+
+.large[
+.yellow-bg[
+\#MethodsMatter in network science.
+]
+.blue-bg[
+Getting our methods right `\(\rightarrow\)` nontrivial mathematical problems. 
+]
+.pink-bg[
+These problems are fun, rich, and impactful. 
+]
+]
+
+
+---
+
+
+class: section, middle
+
+# Configuration Models of Random Hypergraphs
+
+### .right[.pink[PSC, *Forthcoming @ JCN* 2020]]
+
+---
+background-image: url(img/complex.png)
+background-size: contain
+
+.white-bg[
+
+# Null Modeling in Networks
+
+Suppose I measure the clustering coefficient of a social network-- the tendency of my friends to know each other. I find `\(C = 0.3\)`.  
+
+Is that...high? Low? Interesting? Boring?
+
+.pink-highlight[
+How should we .embolden[benchmark] network measurements?
+]
+
+.embolden[Null hypothesis testing]: compare the measurement to its distribution under a **null model.** 
+]
+
+---
+
+background-image: url(img/complex.png)
+background-size: contain
+
+.white-bg[
+# Classical Network Nulls
+
+.embolden[Erdős–Rényi]: place an edge with probability `\(p \in [0,1]\)` between every pair of nodes. 
+
+.embolden[Chung-Lu]: place an edge between nodes `\(i\)` and `\(j\)` w. p. `\(\propto \theta_i\theta_j\)`. Allows flexible specification of expected degrees. 
+
+.embolden[Configuration model]: sample uniformly from the space `\(\mathcal{G}_\mathbf{d}\)` of graphs with fixed degree sequence `\(\mathbf{d}\)`. 
+
+.pink-highlight[
+.embolden[Contribution of this chapter]: extend configuration model to ***hypergraphs***.
+] 
+]
+
+
+---
+
+background-image: url(img/complex.png)
+background-size: contain
+
+# Why Hypergraphs?
+
+.white-bg[
+Lots of systems we care about contain interactions between embolden[groups] of agents: 
+
+- **Collaboration / coauthorship**: Congressional cosponsorship, networks of scholars;
+- **Co-presence**: drug combinations, patent classifications;
+- **Communication**: emails, tweets, etc.
+- ...
+]
+---
+
+background-image: url(img/complex.png)
+background-size: contain
+
+# .midi[Configuration Models (Hypergraphs)]
+
+.white-bg[
+Observe a hypergraph with degree sequence `\(\mathbf{d} \in \mathbb{Z}^n\)` and **dimension sequence** `\(\mathbf{k} \in \mathbb{Z}^m\)`. 
+
+The (vertex-labeled) *configuration model* is the uniform probability distribution `\(\eta_{\mathbf{d}, \mathbf{k}}\)` over the space 
+`$$\mathcal{H}_{\mathbf{d}, \mathbf{k}} = \{H:\mathrm{deg}(H) = \mathbf{d}\;,\;\color{#0F4C81}{\mathrm{dim}(H) = \mathbf{k}}\}\;.$$`
+
+]
+
+.footnote[.white-bg[Distinction between vertex- and stub-labeled models due to Fosdick et al. (2018), "Configuring random graph models with fixed degree sequences," *SIAM Review* ]]
+
+---
+
+background-image: url(img/complex.png)
+background-size: contain
+
+.white-bg[
+# Markov Chain Sampling
+
+**Idea**: sample from `\(\eta_{\mathbf{d}, \mathbf{k}}\)` by crawling through `\(\mathcal{H}_{\mathbf{d}, \mathbf{k}}\)`. 
+
+.pink-bg[
+1. .embolden[Sample]: Pick two edges `\(\Delta\)` and `\(\Gamma\)` u.a.r.
+2. .embolden[Proposal]: Randomly resample nodes between `\(\Delta\)` and `\(\Gamma\)` while avoiding degeneracy
+3. .embolden[Transition]: With probability `\(m_{\Delta}^{-1}m_{\Gamma}^{-1}\)`, accept swap, otherwise start over. 
+]
+]
+
+.white-bg[
+**Theorem** (PSC 2020): This Markov chain is ergodic and its invariant measure is the configuration model `\(\eta_{\mathbf{d}, \mathbf{k}}\)`.
+]
+
+---
+background-image: url(img/complex.png)
+background-size: contain
+
+.white-bg[
+# Experiment 1: Triadic Closure
+
+`$$\bar{C} = \frac{1}{n}\sum_{v \in \mathcal{V}} \frac{T_v}{W_v}$$`
+
+- `\(T_v\)`: number of triangles incident to `\(v\)`. 
+- `\(W_v\)`: number of wedges at `\(v\)`. 
+
+Conventional wisdom since Watts-Strogatz (1998): many empirical networks are more clustered than can be explained by (dyadic) configuration models. 
+ 
+What about hypergraph configuration models?
+]
+
+---
+
+background-image: url(img/complex.png)
+background-size: contain
+
+.white-bg[
+# Triadic Closure 
+
+|                                |   `\(C\)`    | `\(&lt;C&gt;_h\)` | `\(&lt;C&gt;_{2}\)` |
+| ------------------------------ | :------: | :-----: | :-------: |
+| **congress-bills**             |   0.61   |  0.60   |   0.45    | 
+| **coauth-Geology**             |   0.82   |  0.82   |   0.00    | 
+| .highlight[email-Enron]        |   0.66   |  0.84   |   0.64    | 
+| .highlight[email-Eu]           |   0.54   |  0.57   |   0.40    | 
+| .highlight[tags-ask-ubuntu]    |   0.57   |  0.61   |   0.18    | 
+| .highlight[threads-math-sx]    |   0.29   |  0.44   |   0.09    | 
+
+.footnote[Data from Benson et al. "Simplicial Closure and Higher-Order Link Prediction," *PNAS* (2018)]
+]
+---
+background-image: url(img/complex.png)
+background-size: contain
+
+# .midi[Experiment 2: The Intersection Profile]
+
+.white-bg[
+How "similar" are two interactions?
+
+Intersection profile: 
+
+`$$r(j) = \langle \mathbb{I}(\Delta \cap \Gamma) = j\rangle$$`
+
+"Among all pairs of edges, what proportion have intersection of size `\(j\)`?"
+
+Measures repeated interactions:  productive **teams** of researchers, chatty **groups** on email, etc.   
+]
+
+---
+
+
+# Enron Intersection Profile 
+
+![](img/intersection_profile_single.png)
+
+---
+
+background-image: url(img/complex.png)
+background-size: contain
+
+
+# Approximate Intersection Profiles
+
+.white-bg[
+Computing null intersection profiles can be very difficult for large data sets. 
+Fortunately, we can approximate: 
+
+.pink-bg[
+.embolden[Theorem ](PSC 2020):&lt;sup&gt;*&lt;/sup&gt; With high probability as `\(n\)` grows large, 
+
+.midi[$$r_\eta(j) = (1 + O(n^{-1}))j!\left \langle
+\binom{\vert \Delta\vert}{j}\right\rangle^2 \left(\frac{1}{n} \frac{\mathbb{E}[D^2] - \mathbb{E}[D]}{\mathbb{E}[D]^2}\right)^j$$]
+]
+
+*Terms and conditions apply. 
+]
+---
+
+background-image: url(img/large_intersections.png)
+background-size: contain
+
+# Profiles for Big Data™
+
+---
+
+background-image: url(img/complex.png)
+background-size: contain
+
+# Takeaways
+
+.white-bg[
+
+.pink-bg[
+.embolden[Polyadic data should be benchmarked using polyadic nulls.] 
+]
+
+Using polyadic models, we can 
+
+1. Ask old questions in new ways (triadic closure).
+2. As new questions (intersection profiles). 
+
+`https://github.com/PhilChodrow/hypergraph`
+]
+
+
+---
+
+class: section, middle
+
+# Moments of Uniformly Random Multigraphs with Fixed Degree Sequences 
+
+## .right[.pink[PSC, R&amp;R @ *SIMODS*, 2020]]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+
+
+.white-bg[
+# .midi[Modularity]
+An objective function for .embolden[finding communities] in networks (terms and conditions apply). 
+
+Usually .embolden[defined] as: 
+
+`$$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#0F4C81}{\mathbb{E}_\eta[W_{ij}]}\right]\delta(g_i, g_j)$$`
+
+- `\(\mathbf{G}\)`: a partition of nodes into ordinal groups. 
+- `\(\mathbf{W}\)`: a weighted adjacency matrix. 
+- `\(\color{#0F4C81}{\eta}\)`: "a random graph with degree sequence `\(\mathbf{d}\)`." 
+]
+
+.footnote[Newman + Girvan, "Finding and Evaluating Community Structure in Networks." *PRE*, (2003)]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# .midi[Modularity]
+
+An objective function for  .embolden[finding communities] in networks (terms and conditions apply). 
+
+Usually .embolden[computed] as: 
+
+`$$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#0F4C81}{\frac{d_id_j}{2m}}\right]\delta(g_i, g_j)$$`
+
+- `\(\mathbf{G}\)`: a partition of nodes into ordinal groups. 
+- `\(\mathbf{W}\)`: a weighted adjacency matrix. 
+- `\(\color{#0F4C81}{\eta}\)`: "a random graph with degree sequence `\(\mathbf{d}\)`." 
+]
+
+.footnote[Newman + Girvan, "Finding and Evaluating Community Structure in Networks." *PRE*, (2003) (12K citations)]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# A Folk Theorem
+
+.white-bg[
+.pink-highlight[
+The expected number of edges `\(w_{ij}\)` between two nodes in a .embolden["random"] graph .embolden["with degree sequence d]" is 
+
+$$ \omega_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
+]
+
+This is right if you choose your random graph model .embolden[conveniently].
+
+- Chung-Lu model (.embolden[d] fixed in expectation)
+- Stub-matching (biased, not entropy-maximizing)
+]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+class: top
+
+# Which random graph?... 
+
+.white-bg[
+We .embolden[say]: "(entropy-maximizing) random graph." 
+
+We .embolden[mean]: "random graph that makes calculations convenient."
+
+
+.footnote[Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+.pink-bg[
+What if we *actually* used an entropy-maximizing random graph for calculations?]
+]
+
+---
+class: top
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# The Uniform Random Graph
+
+Let `\(\mathcal{G}_\mathbf{d}\)` be the set of all .embolden[multigraphs] with fixed degree sequence `\(\mathbf{d}\)`. 
+
+The .embolden[uniform random graph model] `\(\eta_\mathbf{d}\)` is the probability distribution that assigns equal weight to each element of `\(\mathcal{G}_\mathbf{d}\)`. 
+
+`\(\eta_\mathbf{d}\)` is the entropy-maximizing random graph with fixed degree sequence `\(\mathbf{d}\)`. 
+]
+
+---
+
+# Edge-Swap Monte Carlo
+
+
+
+![](img/swaps.png)
+
+We can sample from `\(\eta_\mathbf{d}\)` by crawling through `\(\mathcal{G}_\mathbf{d}\)`.
+
+(This is just the dyadic version of the Markov chain we saw for hypergraphs)
+
+
+.footnote[Image from Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+---
+
+# Edge-Swap Monte Carlo
+
+![](img/swaps.png)
+
+1. .embolden[Sample edges] `\((i,j)\)` and `\((k,\ell)\)` with random orientations. 
+2. .embolden[Propose swap] `\((i,j), (k,\ell) \mapsto (i,\ell), (k,j)\)`.  
+3. .embolden[Accept swap] with probability `\(w_{ij}^{-1}w_{k\ell}^{-1}\)`. 
+
+.embolden[Theorem]&lt;sup&gt;1&lt;/sup&gt;: This successfully samples from `\(\eta_\mathbf{d}\)`.
+
+.footnote[&lt;sup&gt;1&lt;/sup&gt;Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+---
+
+class: top
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Analytical Approach
+
+.white-bg[
+Edge-Swap Monte Carlo is a stochastic process with known equilibrium distribution `\(\eta_\mathbf{d}\)`. 
+
+At equilibrium, .embolden[all expectations are fixed.] 
+
+`$$\mathbb{E}_\eta[f(G_{t+1}) - f(G_t)] = 0\;.$$` 
+
+If we choose `\(f(G) = w_{ij}^p\)` for `\(p = 1,\ldots\)` and handle .embolden[a lot] of algebra, we can get analytical approximations. 
+]
+---
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Expected Number of Neighbors
+
+.white-bg[
+Let `\(\beta_i = \mathbb{E}_\eta[\text{# of distinct neighbors of } i]\)`.
+
+.alert[
+.embolden[Theorem] (PSC 2020): `$$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} &gt; 0)] = \left(1 + O(\beta^{-1})\right)\frac{\beta_i\beta_j}{\sum_\ell \beta_\ell}$$`
+]
+]
+
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# A Parallel
+
+.white-bg[
+.yellow-bg[.embolden[Folk Theorem]
+`$$\omega_{ij} \triangleq \mathbb{E}_\eta[W_{ij}] \stackrel{?}{=} \frac{d_id_j}{\sum_\ell d_\ell} + \text{small terms}$$`
+]
+
+.pink-bg[
+.embolden[Actual Theorem]: `$$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} &gt; 0)] = \frac{\beta_i\beta_j}{\sum_\ell \beta_\ell} + \text{small terms}$$`
+]
+]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Expected Edge Densities
+
+&lt;br&gt;
+
+.white-bg[
+.pink-bg[
+.embolden[Theorem] (PSC 2020): `$$\omega_{ij}\triangleq \mathbb{E}_\eta[W_{ij}] = \left(1 + O(\beta^{-1/2})\right)\frac{\chi_{ij}}{1 - \chi_{ij}}$$` 
+]
+
+Can also get higher-order moments: variances, etc. 
+]
+
+
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Computing `\(\beta\)` from `\(\mathbf{d}\)`
+
+.white-bg[
+
+The vector `\(\beta\)` approximately solves
+
+`$$\sum_{j\neq i}\frac{\beta_i\beta_j}{\sum_\ell\beta_\ell - \beta_i\beta_j} = d_i \quad \forall i\;.$$`
+
+.alert[
+.embolden[Theorem] (PSC 2020): Solution (if it exists) is unique on the set 
+`$$\mathcal{B} = \left\{\beta: \beta \geq \mathbf{0},\; \beta_i^2 &lt; \sum_\ell \beta_\ell \quad \forall i\right\}\;.$$`
+ 
+]
+]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Proof Sketch
+
+.white-bg[
+.midi[
+Let `\(h(\beta)_i = \sum_{j}\frac{\beta_i\beta_j}{\sum_\ell\beta_\ell - \beta_i\beta_j}\)`. We want to solve `\(\mathbf{h}(\beta) = \mathbf{d}\)`. 
+Equivalently, `$$\mathcal{L}(\beta) \triangleq \lVert \mathbf{h}(\beta) - \mathbf{d} \rVert^2 = \mathbf{0}$$`
+
+1. The Jacobian `\(\mathbf{J}\)` of `\(\mathbf{h}\)` has strictly positive eigenvalues on `\(\mathcal{B}\)` (linear algebra tricks).
+2. The Hessian `\(\mathcal{H}\)` of `\(\mathcal{L}\)` is positive-definite at all critical points of `\(\mathcal{L}\)` `\(\implies\)` all critical points are isolated local minima (more linear algebra tricks). 
+3. .embolden[Mountain Pass Theorem]:&lt;sup&gt;1&lt;/sup&gt; If two or more isolated local minima, `\(\exists\)` a third which is not a local minimum. 
+4. So, `\(\exists\)` at most one local minimizer of `\(\mathcal{L}\)` on `\(\mathcal{B}\)`. 
+]
+]
+
+
+---
+
+# .midi[Experiments: High School Contact Data]
+
+.centered-image[![](img/sociopatterns.jpg)]
+
+.footnote[.embolden[SocioPatterns project]: Mastrandrea et al. (2015), Benson et al. (2018)]
+
+---
+
+background-image: url(img/eval_figs.png)
+background-size: contain
+
+### .midi[Evaluating Approximations]
+
+---
+
+background-image: url(img/error_matrices.png)
+background-size: contain
+
+## Estimating `\(\mathbb{E}[W]\)`
+
+
+
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# Takeaways
+
+Deploying random graph models requires that we 
+
+- Carefully articulate which ones we're using
+- Checking that our heuristics work
+
+Entropy-maximizing random graphs with fixed degree sequences break our standard heuristics, but we can get rigorous approximations. 
+
+.midi[`https://github.com/PhilChodrow/multigraph_moments`]
+]
 
 ---
 
@@ -254,7 +771,7 @@ Extant approximations are often computationally challenging and predictively dis
 
 .centered-image[![:scale 110%](img/arch_top_row.png)]
 
-Performance varies between model variants, but is generally competitive with best extant approaches. 
+Performance depends on model variant, but is generally competitive with best extant approaches. 
 
 ---
 
@@ -270,510 +787,22 @@ It is possible to achieve excellent approximation performance in these models.
 However, universal methods for wide .embolden[classes] of models remain to be found.]
 ]
 
-
 ---
 
+# .midi[Messages for Today (or, what I learned in my PhD)]
 
-class: section, middle
-
-# Configuration Models of Random Hypergraphs
-
-### .right[.pink[PSC, *Forthcoming @ JCN* 2020]]
-
----
-background-image: url(img/complex.png)
-background-size: contain
-
-.white-bg[
-
-# Null Modeling in Networks
-
-Suppose I measure degree-assortativity in some network data - the tendency of nodes with many neighbors to themselves be connected. I find a correlation coefficient of 0.3. Is that...high? Low? Interesting? Boring?
-
-.pink-highlight[
-How should we .embolden[benchmark] network measurements?
+.large[
+.yellow-bg[
+\#MethodsMatter in network science.
 ]
-
-.embolden[Null hypothesis testing]: compare the measurement to its distribution under a **null model.** 
+.blue-bg[
+Getting our methods right `\(\rightarrow\)` nontrivial mathematical problems. 
 ]
-
----
-
-background-image: url(img/complex.png)
-background-size: contain
-
-.white-bg[
-# Classical Network Nulls
-
-.embolden[Erdős–Rényi]: place an edge with probability `\(p \in [0,1]\)` between every pair of nodes. 
-
-.embolden[Chung-Lu]: place an edge between nodes `\(i\)` and `\(j\)` w. p. `\(\propto \theta_i\theta_j\)`. Allows flexible specification of expected degrees. 
-
-.embolden[Configuration model]: sample uniformly from the space `\(\mathcal{G}_\mathbf{d}\)` of graphs with fixed degree sequence `\(\mathbf{d}\)`. 
-
-.pink-highlight[
-.embolden[Contribution of this chapter]: extend configuration model to ***hypergraphs***.
-] 
-]
-
-
----
-
-background-image: url(img/complex.png)
-background-size: contain
-
-# Why Hypergraphs?
-
-.white-bg[
-Lots of systems we care about contain interactions between embolden[groups] of agents: 
-
-- **Collaboration / coauthorship**: Congressional cosponsorship, networks of scholars;
-- **Co-presence**: drug combinations, patent classifications;
-- **Communication**: emails, tweets, etc.
-- ...
-]
----
-
-background-image: url(img/complex.png)
-background-size: contain
-
-# .midi[Configuration Models (Hypergraphs)]
-
-.white-bg[
-Observe a hypergraph with degree sequence `\(\mathbf{d} \in \mathbb{Z}^n\)` and **dimension sequence** `\(\mathbf{k} \in \mathbb{Z}^m\)`. 
-
-The (vertex-labeled) *configuration model* is the uniform probability distribution `\(\eta_{\mathbf{d}, \mathbf{k}}\)` over the space 
-`$$\mathcal{H}_{\mathbf{d}, \mathbf{k}} = \{H:\mathrm{deg}(H) = \mathbf{d}\;,\;\color{#0F4C81}{\mathrm{dim}(H) = \mathbf{k}}\}\;.$$`
-
-]
-
-.footnote[.white-bg[Distinction between vertex- and stub-labeled models due to Fosdick et al. (2018), "Configuring random graph models with fixed degree sequences," *SIAM Review* ]]
-
----
-
-background-image: url(img/complex.png)
-background-size: contain
-
-.white-bg[
-# Markov Chain Sampling
-
-**Idea**: sample from `\(\eta_{\mathbf{d}, \mathbf{k}}\)` by crawling through `\(\mathcal{H}_{\mathbf{d}, \mathbf{k}}\)`. 
-
 .pink-bg[
-1. .embolden[Sample]: Pick two edges `\(\Delta\)` and `\(\Gamma\)` u.a.r.
-2. .embolden[Proposal]: Randomly resample nodes between `\(\Delta\)` and `\(\Gamma\)` while avoiding degeneracy
-3. .embolden[Transition]: With probability `\(m_{\Delta}^{-1}m_{\Gamma}^{-1}\)`, accept swap, otherwise start over. 
-]
-
-**Theorem**: This Markov chain is ergodic and its invariant measure is the configuration model `\(\eta_{\mathbf{d}, \mathbf{k}}\)`.   
-]
-
----
-background-image: url(img/complex.png)
-background-size: contain
-
-.white-bg[
-# Experiment 1: Triadic Closure
-
-`$$\bar{C} = \frac{1}{n}\sum_{v \in \mathcal{V}} \frac{T_v}{W_v}$$`
-
-- `\(T_v\)`: number of triangles incident to `\(v\)`. 
-- `\(W_v\)`: number of wedges at `\(v\)`. 
-
-Conventional wisdom since Watts-Strogatz (1998): many empirical networks are more clustered than can be explained by (dyadic) configuration models. 
- 
-What about hypergraph configuration models?
-]
-
----
-
-background-image: url(img/complex.png)
-background-size: contain
-
-.white-bg[
-# Triadic Closure 
-
-|                                |   `\(C\)`    | `\(&lt;C&gt;_h\)` | `\(&lt;C&gt;_{2}\)` |
-| ------------------------------ | :------: | :-----: | :-------: |
-| **congress-bills**             |   0.61   |  0.60   |   0.45    | 
-| **coauth-Geology**             |   0.82   |  0.82   |   0.00    | 
-| .highlight[email-Enron]        |   0.66   |  0.84   |   0.64    | 
-| .highlight[email-Eu]           |   0.54   |  0.57   |   0.40    | 
-| .highlight[tags-ask-ubuntu]    |   0.57   |  0.61   |   0.18    | 
-| .highlight[threads-math-sx]    |   0.29   |  0.44   |   0.09    | 
-
-.footnote[Data from Benson et al. "Simplicial Closure and Higher-Order Link Prediction," *PNAS* (2018)]
-]
----
-background-image: url(img/complex.png)
-background-size: contain
-
-# .midi[Experiment 2: The Intersection Profile]
-
-.white-bg[
-How "similar" are two interactions?
-
-Intersection profile: 
-
-`$$r(j) = \langle \mathbb{I}(\Delta \cap \Gamma) = j\rangle$$`
-
-"Among all pairs of edges, what proportion have intersection of size `\(j\)`?"
-
-Measures repeated interactions:  productive **teams** of researchers, chatty **groups** on email, etc.   
-]
-
----
-
-
-# Enron Intersection Profile 
-
-![](img/intersection_profile_single.png)
-
----
-
-background-image: url(img/complex.png)
-background-size: contain
-
-
-# Approximate Intersection Profiles
-
-.white-bg[
-Computing null intersection profiles can be very difficult for large data sets. 
-Fortunately, we can approximate: 
-
-**Theorem:**&lt;sup&gt;*&lt;/sup&gt; With high probability as `\(n\)` grows large, 
-
-.midi[$$r_\eta(j) = (1 + O(n^{-1}))j!\left \langle
-\binom{\vert \Delta\vert}{j}\right\rangle^2 \left(\frac{1}{n} \frac{\mathbb{E}[D^2] - \mathbb{E}[D]}{\mathbb{E}[D]^2}\right)^j$$]
-
-*Terms and conditions apply. 
-]
----
-
-background-image: url(img/large_intersections.png)
-background-size: contain
-
-# Profiles for Big Data™
-
----
-
-background-image: url(img/complex.png)
-background-size: contain
-
-# Takeaways
-
-.white-bg[
-
-.pink-bg[
-.embolden[Polyadic data should be benchmarked using polyadic nulls.] 
-]
-
-When the data generating process generates hypergraph-like data, hypergraph configuration models can be a good choice. 
-
-Using these models, we can 
-
-1. Ask old questions in new ways (triadic closure).
-2. As new questions (intersection profiles). 
-]
-
-
----
-
-class: section, middle
-
-# Moments of Uniformly Random Multigraphs with Fixed Degree Sequences 
-
-## .right[.pink[PSC, R&amp;R @ *SIMODS*, 2020]]
-
----
-
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-
-
-.white-bg[
-# .midi[Modularity]
-An objective function for .embolden[finding communities] in networks (terms and conditions apply). 
-
-Usually **defined** as: 
-
-`$$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#C49377}{\mathbb{E}_\eta[W_{ij}]}\right]\delta(g_i, g_j)$$`
-
-- `\(\mathbf{G}\)`: a partition of nodes into ordinal groups. 
-- `\(\mathbf{W}\)`: a weighted adjacency matrix. 
-- `\(\color{#C49377}{\eta}\)`: "a random graph with degree sequence `\(\mathbf{d}\)`." 
-]
-
-.footnote[Newman + Girvan, "Finding and Evaluating Community Structure in Networks." *PRE*, (2003)]
-
----
-
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-.white-bg[
-# .midi[Modularity]
-
-An objective function for  .embolden[finding communities] in networks (terms and conditions apply). 
-
-Usually **computed** as: 
-
-`$$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#C49377}{\frac{d_id_j}{2m}}\right]\delta(g_i, g_j)$$`
-
-- `\(\mathbf{G}\)`: a partition of nodes into ordinal groups. 
-- `\(\mathbf{W}\)`: a weighted adjacency matrix. 
-- `\(\color{#C49377}{\eta}\)`: "a random graph with degree sequence `\(\mathbf{d}\)`." 
-]
-
-.footnote[Newman + Girvan, "Finding and Evaluating Community Structure in Networks." *PRE*, (2003)]
-
----
-
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-# A Folk Theorem
-
-.white-bg[
-.yellow-highlight[
-The expected number of edges `\(w_{ij}\)` between two nodes in a .embolden["random"] graph .embolden["with degree sequence d]" is 
-
-$$ \omega_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
-]
-
-This is right if you choose your random graph model .embolden[conveniently].
-
-- Chung-Lu model (.embolden[d] fixed in expectation)
-- Stub-matching (biased, not entropy-maximizing)
-]
-
----
-
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-class: top
-
-# Which random graph?... 
-
-.white-bg[
-We .embolden[say]: "(entropy-maximizing) random graph." 
-
-We .embolden[mean]: "random graph that makes calculations convenient."
-
-
-.footnote[Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
-
-.pink-bg[
-What if we *actually* used an entropy-maximizing random graph for calculations?]
-]
-
----
-class: top
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-.white-bg[
-# The Uniform Random Graph
-
-Let `\(\mathcal{G}_\mathbf{d}\)` be the set of all .embolden[multigraphs] with fixed degree sequence `\(\mathbf{d}\)`. 
-
-The .embolden[uniform random graph model] `\(\eta_\mathbf{d}\)` is the probability distribution that assigns equal weight to each element of `\(\mathcal{G}_\mathbf{d}\)`. 
-
-`\(\eta_\mathbf{d}\)` is the entropy-maximizing random graph with fixed degree sequence `\(\mathbf{d}\)`. 
-]
-
----
-
-# Edge-Swap Monte Carlo
-
-
-
-![](img/swaps.png)
-
-We can sample from `\(\eta_\mathbf{d}\)` by crawling through `\(\mathcal{G}_\mathbf{d}\)`.
-
-(This is just the dyadic version of the Markov chain we saw for hypergraphs)
-
-
-.footnote[Image from Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
-
----
-
-# Edge-Swap Monte Carlo
-
-![](img/swaps.png)
-
-1. .embolden[Sample edges] `\((i,j)\)` and `\((k,\ell)\)` with random orientations. 
-2. .embolden[Propose swap] `\((i,j), (k,\ell) \mapsto (i,\ell), (k,j)\)`.  
-3. .embolden[Accept swap] with probability `\(w_{ij}^{-1}w_{k\ell}^{-1}\)`. 
-
-.embolden[Theorem]&lt;sup&gt;1&lt;/sup&gt;: This successfully samples from `\(\eta_\mathbf{d}\)`.
-
-.footnote[&lt;sup&gt;1&lt;/sup&gt;Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
-
----
-
-class: middle
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-.white-bg[
-Estimating `\(\omega_{ij} = \mathbb{E}[W_{ij}]\)` via Edge-Swap Monte Carlo is .embolden[expensive] (~3 days on personal equipment). 
-
-How can we estimate efficiently expectations (e.g. for modularity) from `\(\eta\)`? 
-]
----
-
-class: top
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-# Analytical Approach
-
-.white-bg[
-Edge-Swap Monte Carlo is a stochastic process with known equilibrium distribution `\(\eta_\mathbf{d}\)`. 
-
-At equilibrium, .embolden[all expectations are fixed.] 
-
-`$$\mathbb{E}_\eta[f(G_{t+1}) - f(G_t)] = 0\;.$$` 
-
-If we choose `\(f(G) = w_{ij}^p\)` for `\(p = 1,\ldots\)` and handle .embolden[a lot] of algebra, we can get analytical approximations. 
-]
----
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-# Expected Number of Neighbors
-
-.white-bg[
-Let `\(\beta_i = \mathbb{E}_\eta[\text{# of distinct neighbors of } i]\)`.
-
-.alert[
-.embolden[Theorem]: `$$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} &gt; 0)] = \frac{\beta_i\beta_j}{\sum_\ell \beta_\ell} + \text{small terms}$$`
+These problems are fun, rich, and impactful. 
 ]
 ]
 
-
----
-
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-# A Parallel
-
-.white-bg[
-.yellow-bg[.embolden[Folk Theorem]
-`$$\omega_{ij} \triangleq \mathbb{E}_\eta[W_{ij}] \stackrel{?}{=} \frac{d_id_j}{\sum_\ell d_\ell} + \text{small terms}$$`
-]
-
-.pink-bg[
-.embolden[Actual Theorem]: `$$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} &gt; 0)] = \frac{\beta_i\beta_j}{\sum_\ell \beta_\ell} + \text{small terms}$$`
-]
-]
-
----
-
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-# Expected Edge Densities
-
-&lt;br&gt;
-
-.white-bg[
-.pink-bg[
-.embolden[Theorem]: `$$\omega_{ij}\triangleq \mathbb{E}_\eta[W_{ij}] = \frac{\chi_{ij}}{1 - \chi_{ij}} + \text{small terms}$$` 
-]
-
-Can also get higher-order moments: variances, etc. 
-]
-
-
-
----
-
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-# Computing `\(\beta\)` from `\(\mathbf{d}\)`
-
-.white-bg[
-
-The vector `\(\beta\)` approximately solves
-
-`$$\sum_{j\neq i}\frac{\beta_i\beta_j}{\sum_\ell\beta_\ell - \beta_i\beta_j} = d_i \quad \forall i\;.$$`
-
-.alert[
-.embolden[Theorem]: Solution (if it exists) is unique on the set 
-`$$\mathcal{B} = \left\{\beta: \beta \geq \mathbf{0},\; \beta_i^2 &lt; \sum_\ell \beta_\ell \quad \forall i\right\}\;.$$`
- 
-]
-]
-
----
-
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-# Proof Sketch
-
-.white-bg[
-.midi[
-Let `\(h(\beta)_i = \sum_{j}\frac{\beta_i\beta_j}{\sum_\ell\beta_\ell - \beta_i\beta_j}\)`. We want to solve `\(\mathbf{h}(\beta) = \mathbf{d}\)`. 
-Equivalently, `$$\mathcal{L}(\beta) \triangleq \lVert \mathbf{h}(\beta) - \mathbf{d} \rVert^2 = \mathbf{0}$$`
-
-1. The Jacobian `\(\mathbf{J}\)` of `\(\mathbf{h}\)` has strictly positive eigenvalues on `\(\mathcal{B}\)` (linear algebra tricks).
-2. The Hessian `\(\mathcal{H}\)` of `\(\mathcal{L}\)` is positive-definite at all critical points of `\(\mathcal{L}\)` `\(\implies\)` all critical points are isolated local minima (more linear algebra tricks). 
-3. .embolden[Mountain Pass Theorem]:&lt;sup&gt;1&lt;/sup&gt; If two or more isolated local minima, `\(\exists\)` a third which is not a local minimum. 
-4. So, `\(\exists\)` at most one local minimizer of `\(\mathcal{L}\)` on `\(\mathcal{B}\)`. 
-]
-]
-
-
----
-
-# .midi[Experiments: High School Contact Data]
-
-.centered-image[![](img/sociopatterns.jpg)]
-
-.footnote[.embolden[SocioPatterns project]: Mastrandrea et al. (2015), Benson et al. (2018)]
-
----
-
-background-image: url(img/eval_figs.png)
-background-size: contain
-
-### .midi[Evaluating Approximations]
-
----
-
-background-image: url(img/error_matrices.png)
-background-size: contain
-
-## Estimating `\(\mathbb{E}[W]\)`
-
-
-
-
----
-
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-.white-bg[
-# Takeaways
-
-Deploying random graph models requires that we 
-
-- Carefully articulate which ones we're using
-- Checking that our heuristics work
-
-Entropy-maximizing random graphs with fixed degree sequences break our standard heuristics. 
-
-Using a dynamical approach, we can get **rigorous approximations** with **excellent performance** on real data. 
-]
 ---
 
 # Thanks again! 
