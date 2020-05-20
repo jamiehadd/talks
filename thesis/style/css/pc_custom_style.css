@@ -10,8 +10,12 @@
 
 
 :root {
-	--lilac-sachet: #E9ADCA;
-	--lilac-sachet-30: #E9ADCA30;
+	--bayberry: #25595840;
+	--bayberry-30: #25595810;
+	--rhubarb: #77202F40;
+	--rhubarb-30: #77202F10;
+	--lilac-sachet: #C79EB540;
+	--lilac-sachet-30: #C79EB520;
 	--white: #FFFFFF;
   --white-90: #FFFFFF90;
 }
@@ -59,7 +63,7 @@ h2 {
   background-color: var(--lilac-sachet-30);
 }
 
-.thanks, .alert, .funding, .blue-bg, .yellow-bg, .green-bg, .purple-bg, .pink-bg, .white-bg{
+.thanks, .alert, .funding, .blue-bg, .yellow-bg, .green-bg, .purple-bg, .pink-bg, .white-bg, .red-bg, .teal-bg {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 10px;
@@ -67,6 +71,20 @@ h2 {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.teal-bg{
+	border-left: solid 5px var(--bayberry);
+	border-right: solid 0px var(--bayberry);
+  background-color: var(--bayberry-30);
+}
+
+
+.red-bg{
+	border-left: solid 5px var(--rhubarb);
+	border-right: solid 0px var(--rhubarb);
+  background-color: var(--rhubarb-30);
+}
+
 
 .pink-bg{
 	border-left: solid 5px var(--peach-quartz);
