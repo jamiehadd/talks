@@ -212,6 +212,8 @@ Observe a hypergraph with degree sequence $\mathbf{d} \in \mathbb{Z}^n$ and **di
 
 The  *configuration model* is the uniform probability distribution $\eta_{\mathbf{d}, \mathbf{k}}$ over the space 
 $$\mathcal{H}_{\mathbf{d}, \mathbf{k}} = \{H:\mathrm{deg}(H) = \mathbf{d}\;,\;\color{#0F4C81}{\mathrm{dim}(H) = \mathbf{k}}\}\;.$$
+
+Definitions are cheap. How do we .embolden[sample]??
 ]
 
 ---
@@ -635,7 +637,7 @@ Entropy-maximizing random graphs with fixed degree sequences break our standard 
 .midi[`https://github.com/PhilChodrow/multigraph_moments`]
 ]
 
-.large[[.hidden[LINK TOEND]](#52)]
+.large[[.hidden[LINK TO END]](#52)]
 
 
 ---
