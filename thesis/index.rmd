@@ -635,6 +635,9 @@ Entropy-maximizing random graphs with fixed degree sequences break our standard 
 .midi[`https://github.com/PhilChodrow/multigraph_moments`]
 ]
 
+.large[[.hidden[LINK TOEND]](#52)]
+
+
 ---
 
 class: section, middle
@@ -679,7 +682,7 @@ $$\lim_{r\rightarrow 0}I(X,Y|\lvert X - \mathbf{x}_0\rvert \leq r) = \frac{1}{4\
 A *resolution-independent* measurement of micro-scale segregation.
 ]]
 
-![:scale 100%](img/Detroit_joint.png)
+![:scale 100%](img/detroit_joint.png)
 ]
 ---
 
@@ -719,6 +722,8 @@ background-size: cover
 .large[
 .white-bg[
 Spatial segregation costs lives and treasure, but with the right theory it can cause fewer mathematical headaches for scholars and decision-makers. 
+
+.large[[.hidden[LINK TO END]](#52)]
 ]]
 
 ---

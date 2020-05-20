@@ -6,7 +6,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&display=swap');
 
-:root{
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+:root {
 	--lilac-sachet: #E9ADCA;
 	--lilac-sachet-30: #E9ADCA30;
 	--white: #FFFFFF;
@@ -14,7 +17,7 @@
 }
 
 body {
-	font-family: Lato, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Microsoft YaHei', 'Songti SC', serif;
+	font-family: Lato, Roboto, sans-serif;
 	font-weight: 300;
 	color: #000000;
 }
@@ -208,4 +211,8 @@ h2 {
   margin-right: 5px;
   margin-left: 5px;
   color: var(--peach-quartz)
+}
+
+.hidden {
+	color: var(--white);
 }
