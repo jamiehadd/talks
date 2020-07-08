@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;1,300&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,300&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+:root {
+	--bayberry: #25595840;
+	--bayberry-30: #25595810;
+	--rhubarb: #77202F40;
+	--rhubarb-30: #77202F10;
+	--lilac-sachet: #C79EB540;
+	--lilac-sachet-30: #C79EB520;
+	--white: #FFFFFF;
+  --white-90: #FFFFFF90;
+}
+
+body {
+	font-family: Lato, Roboto, sans-serif;
+	font-weight: 300;
+	color: #000000;
+}
+
+h2 {
+  font-weight: normal;
+}
+
+
+.pink-highlight, .blue-highlight, .yellow-highlight, .purple-highlight{
+	padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.pink-highlight {
+  border-left: solid 5px var(--peach-quartz);
+  border-right: solid 0px var(--peach-quartz);
+  background-color: var(--peach-quartz-30);
+}
+
+
+.yellow-highlight{
+	border-left: solid 5px var(--cornhusk);
+  border-right: solid 0px var(--cornhusk);
+  background-color: var(--cornhusk-30);
+}
+
+.blue-highlight{
+	border-left: solid 5px var(--baby-blue);
+  background-color: var(--baby-blue-30);
+}
+
+.purple-highlight{
+	border-left: solid 5px var(--lilac-sachet);
+  background-color: var(--lilac-sachet-30);
+}
+
+.thanks, .alert, .funding, .blue-bg, .yellow-bg, .green-bg, .purple-bg, .pink-bg, .white-bg, .red-bg, .teal-bg {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.teal-bg{
+	border-left: solid 5px var(--bayberry);
+	border-right: solid 0px var(--bayberry);
+  background-color: var(--bayberry-30);
+}
+
+
+.red-bg{
+	border-left: solid 5px var(--rhubarb);
+	border-right: solid 0px var(--rhubarb);
+  background-color: var(--rhubarb-30);
+}
+
+
+.pink-bg{
+	border-left: solid 5px var(--peach-quartz);
+	border-right: solid 0px var(--peach-quartz);
+  background-color: var(--peach-quartz-30);
+}
+
+.alert {
+  border-left: solid 5px var(--peach-quartz);
+  border-right: solid 0px var(--peach-quartz);
+  background-color: var(--peach-quartz-30);
+}
+
+.funding {
+  border-left: solid 5px var(--cornhusk);
+  border-right: solid 0px var(--cornhusk);
+  background-color: var(--cornhusk-30);
+}
+
+.yellow-bg{
+	border-left: solid 5px var(--cornhusk);
+  border-right: solid 0px var(--cornhusk);
+  background-color: var(--cornhusk-30);
+}
+
+.blue-bg{
+	border-left: solid 5px var(--baby-blue);
+  background-color: var(--baby-blue-30);
+}
+
+.white-bg{
+	border-left: solid 5px var(--white);
+  background-color: var(--white-90);
+}
+
+.purple-bg{
+	border-left: solid 5px var(--lilac-sachet);
+  background-color: var(--lilac-sachet-30);
+}
+
+
+
+
+.thanks{
+  border-left: solid 5px var(--baby-blue-30);
+  background-color: var(--baby-blue-30);
+}
+
+.centered-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.remark-slide-content h1 {
+	font-size: 50px;
+}
+
+.title-slide h3 {
+  text-align: right;
+  color: var(--peach-quartz);
+}
+
+.middle{
+  vertical-align: middle
+}
+
+.highlight {
+  color: #C49377;
+  font-weight: bold;
+}
+
+.standout {
+	background-color: var(--cornhusk);
+}
+
+.standout h1, h2, h3{
+	font-weight: bold
+}
+
+.remark-slide h1, h2, h3{
+	color: var(--classic-blue);
+}
+
+.title-slide h1{
+	color: #FFFFFF;
+}
+
+
+.section {
+	background-color: var(--classic-blue);
+	color: #FFFFFF;
+}
+
+.section h1 {
+	color: #FFFFFF;
+}
+
+.remark-slide tr:nth-child(even) { background: #f2f5f7}
+
+th, td {
+	padding: 10px
+}
+
+.remark-slide table{
+	width: 100%;
+	
+}
+
+h1 {
+  margin-top: 10px;
+  margin-bottom: 50px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+h2 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+
+.title-slide h1, h2, h3 {
+  font-weight: normal;
+}
+
+.embolden{
+	color: #4a4a4a;
+}
+
+.fade{
+	color: #6e6e6e;
+}
+
+.section h3 {
+  text-align: right;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  margin-right: 5px;
+  margin-left: 5px;
+  color: var(--peach-quartz)
+}
+
+.hidden {
+	color: var(--white);
+}

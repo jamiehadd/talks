@@ -1,0 +1,380 @@
+---
+title: "Moments of Uniformly Random Multigraphs with Fixed Degree Sequences\n"
+subtitle: ""
+author: "Phil Chodrow (UCLA)"
+date: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["style/css/DJN_xaringan_theme.css", "style/css/DJN_style.css",  "style/css/pc_custom_style.css"]
+    seal: true
+    nature:
+      ratio: '3:2'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: ["style/js/macros.js"]
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r child = "style/rmd/DJN_setup.Rmd"}
+```
+
+---
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# .midi[Modularity]
+An objective function for .embolden[finding communities] in networks (terms and conditions apply). 
+
+Usually .embolden[defined] as: 
+
+$$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#0F4C81}{\mathbb{E}_\eta[W_{ij}]}\right]\delta(g_i, g_j)$$
+
+- $\mathbf{G}$: a partition of nodes into groups. 
+- $\mathbf{W}$: a weighted adjacency matrix of a graph. 
+- $\color{#0F4C81}{\eta}$: "a random graph with degree sequence $\mathbf{d}$." 
+]
+
+.footnote[Newman + Girvan, "Finding and Evaluating Community Structure in Networks." *PRE*, (2003) (12K citations)]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# .midi[Modularity]
+
+An objective function for  .embolden[finding communities] in networks (terms and conditions apply). 
+
+Usually .embolden[computed] as: 
+
+$$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#0F4C81}{\frac{d_id_j}{2m}}\right]\delta(g_i, g_j)$$
+
+- $\mathbf{G}$: a partition of nodes into groups. 
+- $\mathbf{W}$: a weighted adjacency matrix of a graph. 
+- $\color{#0F4C81}{\eta}$: "a random graph with degree sequence $\mathbf{d}$." 
+]
+
+.footnote[Newman + Girvan, "Finding and Evaluating Community Structure in Networks." *PRE*, (2003) (12K citations)]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# A Folk Theorem
+
+.white-bg[
+.pink-highlight[
+The expected number of edges $\omega_{ij}$ between two nodes in a .embolden["random"] graph .embolden["with degree sequence d]" is 
+
+$$ \omega_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
+]
+
+This is right if you choose your random graph model .embolden[conveniently].
+
+- Chung-Lu model (.embolden[d] fixed in expectation)
+- Stub-matching (biased, not entropy-maximizing)
+]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+class: top
+
+# Which random graph?... 
+
+.white-bg[
+We .embolden[say]: "(entropy-maximizing) random graph." 
+
+We .embolden[mean]: "random graph that makes calculations convenient."
+
+
+.footnote[Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+.pink-bg[
+What if we *actually* used an entropy-maximizing random graph for calculations?]
+]
+
+---
+class: top
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# The Uniform Random Graph
+
+<br>
+
+Let $\mathcal{G}_\mathbf{d}$ be the set of all .embolden[multigraphs] with fixed degree sequence $\mathbf{d}$. 
+
+The .embolden[uniform random graph model] $\eta_\mathbf{d}$ is the probability distribution that assigns equal weight to each  $G \in \mathcal{G}_\mathbf{d}$. 
+
+$\eta_\mathbf{d}$ is the entropy-maximizing random graph with fixed degree sequence $\mathbf{d}$. 
+]
+
+---
+
+# Edge-Swap Monte Carlo
+
+Exact sampling from $\eta_\mathbf{d}$ is Very Hard. 
+
+![](img/swaps.png)
+
+We can approximately sample from $\eta_\mathbf{d}$ by crawling through $\mathcal{G}_\mathbf{d}$.
+
+
+
+.footnote[Image from Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+---
+
+# Edge-Swap Monte Carlo
+
+![](img/swaps.png)
+
+1. .embolden[Sample edges] $(i,j)$ and $(k,\ell)$ with random orientations. 
+2. .embolden[Propose swap] $(i,j), (k,\ell) \mapsto (i,\ell), (k,j)$.  
+3. .embolden[Accept swap] with probability $w_{ij}^{-1}w_{k\ell}^{-1}$. 
+
+.embolden[Theorem]<sup>1</sup>: This successfully samples from $\eta_\mathbf{d}$.
+
+.footnote[<sup>1</sup>Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+---
+
+class: top
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Are We Stuck?
+
+<br>
+
+**Wanted** to estimate $\omega_{ij} = \mathbb{E}[W_{ij}]$, the expected number of edges between $i$ and $j$. 
+
+Monte Carlo lets us do this...numerically, and Very Slowly.  
+
+Can we learn anything **analytically?**
+
+---
+
+class: top
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Analytical Approach
+
+.white-bg[
+Edge-Swap Monte Carlo is a stochastic process with known equilibrium distribution $\eta_\mathbf{d}$. 
+
+At equilibrium, .embolden[all expectations are fixed.] 
+
+$$\mathbb{E}_\eta[f(G_{t+1}) - f(G_t)] = 0\;.$$ 
+
+If we choose $f(G) = w_{ij}^p$ for $p = 1,\ldots$ and handle .embolden[a lot] of algebra, we can get analytical approximations. 
+]
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# A Lot of Algebra
+
+.centered-image[![](img/algebra.png)]
+
+---
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Existence of an Edge
+
+.white-bg[
+Let $\beta_i = \mathbb{E}_\eta[\text{# of distinct neighbors of } i]$.
+
+.alert[
+.embolden[Theorem] (PSC 2020): $$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} > 0)] = \left(1 + O(\beta^{-1})\right)\frac{\beta_i\beta_j}{\sum_\ell \beta_\ell}$$
+]
+]
+
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# A Parallel
+
+.white-bg[
+.yellow-bg[.embolden[Folk Theorem]
+$$\omega_{ij} \triangleq \mathbb{E}_\eta[W_{ij}] \stackrel{?}{=} \frac{d_id_j}{\sum_\ell d_\ell} + \text{small terms}$$
+]
+
+.pink-bg[
+.embolden[Actual Theorem]: $$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} > 0)] = \frac{\beta_i\beta_j}{\sum_\ell \beta_\ell} + \text{small terms}$$
+]
+]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Expected Edge Densities
+
+<br>
+
+.white-bg[
+.pink-bg[
+.embolden[Theorem] (PSC 2020): $$\omega_{ij}\triangleq \mathbb{E}_\eta[W_{ij}] = \left(1 + O(\beta^{-1/2})\right)\frac{\chi_{ij}}{1 - \chi_{ij}}$$ 
+]
+
+Can also get higher-order moments: variances, etc. 
+]
+
+
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Computing $\beta$ from $\mathbf{d}$
+
+.white-bg[
+
+The vector $\beta$ approximately solves
+
+$$h_i(\beta) \triangleq \sum_{j\neq i}\frac{\beta_i\beta_j}{\sum_\ell\beta_\ell - \beta_i\beta_j} = d_i \quad \forall i\;.$$
+
+.alert[
+.embolden[Theorem] (PSC 2020): Solution of $\mathbb{h}(\beta) = \mathbb{d}$ (if it exists) is unique on the set 
+$$\mathcal{B} = \left\{\beta: \beta \geq \mathbf{0},\; \beta_i^2 < \sum_\ell \beta_\ell \quad \forall i\right\}\;.$$
+ 
+]
+]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# Proof Sketch
+We want to solve $\mathbf{h}(\beta) = \mathbf{d}$. 
+Equivalently, $$\mathcal{L}(\beta) \triangleq \lVert \mathbf{h}(\beta) - \mathbf{d} \rVert^2 = \mathbf{0}$$
+
+1. The Jacobian $\mathbf{J}$ of $\mathbf{h}$ has strictly positive eigenvalues on $\mathcal{B}$ (linear algebra tricks).
+2. The Hessian $\mathcal{H}$ of $\mathcal{L}$ is positive-definite at all critical points of $\mathcal{L}$ $\implies$ all critical points are isolated local minima (more linear algebra tricks). 
+3. .embolden[Mountain Pass Theorem]:<sup>1</sup> If two or more isolated local minima, $\exists$ a third which is not a local minimum. 
+4. So, $\exists$ at most one local minimizer of $\mathcal{L}$ on $\mathcal{B}$. 
+
+.footnote[Bisgard, "Mountain Passes and Saddle Points," *SIREV* (2015)]
+]
+
+
+---
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# State of the Theory
+
+<br>
+d
+1. We can analyze Monte Carlo to derive low-dimensional estimators for quantities like $\omega_{ij} = \mathbb{E}[W_{ij}]$ in terms of an unknown vector $\beta$. 
+2. We can estimate $\beta$ by solving a nonlinear system. 
+3. The solution $\hat{\beta}$, if it exists, is unique on the set $\mathcal{B}$ of "well-behaved" vectors. 
+4. Let's try it out!
+]
+
+
+---
+
+# .midi[Experiments: High School Contact Data]
+
+.centered-image[![](img/sociopatterns.jpg)]
+
+.footnote[.embolden[SocioPatterns project]: Mastrandrea et al. (2015), Benson et al. (2018)]
+
+---
+
+background-image: url(img/eval_figs.png)
+background-size: contain
+
+### .midi[Evaluating Approximations]
+
+---
+
+background-image: url(img/error_matrices.png)
+background-size: contain
+
+## Estimating $\mathbb{E}[W]$
+
+---
+
+background-image: url(img/modularity_high_school.png)
+background-size: contain
+
+## Downstream Consequences: Modularity Maximization
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# Takeaways
+
+Deploying random graph models requires that we 
+
+- Carefully articulate which ones we're using
+- Checking that our heuristics work
+
+Entropy-maximizing random graphs with fixed degree sequences break our standard heuristics, but we can get rigorous approximations. 
+
+**#MethodsMatter** for downstream analysis. 
+
+
+.midi[`https://github.com/PhilChodrow/multigraph_moments`]
+]
+
+
+---
+
+# Thanks!
+
+.pull-left-narrow[.thanks[
+.centered-image[![:scale 100%](img/bio-photo.jpg)]
+Phil <br> Chodrow
+.small[
+  
+  Math @ UCLA
+  
+  [philchodrow.com](https://www.philchodrow.com)
+
+  [@philchodrow](https://twitter.com/PhilChodrow)
+]
+
+
+]]
+.pull-right-wide[.centered-image[.alert[
+![](img/arxiv.png)
+`arxiv:1909.09037`
+]
+.funding[
+![:scale 120px](img/nsf_logo.png)
+![:scale 250px](img/logo_UCLA_blue_boxed.png)]
+]
+]
+
+

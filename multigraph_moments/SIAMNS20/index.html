@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Moments of Uniformly Random Multigraphs with Fixed Degree Sequences</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Phil Chodrow (UCLA)" />
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style/css/DJN_xaringan_theme.css" type="text/css" />
+    <link rel="stylesheet" href="style/css/DJN_style.css" type="text/css" />
+    <link rel="stylesheet" href="style/css/pc_custom_style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# <p>Moments of Uniformly Random Multigraphs with Fixed Degree Sequences</p>
+### Phil Chodrow (UCLA)
+
+---
+
+
+
+
+&lt;!-- This file was retrieved from file was retrieved from Danielle J. Navarro's repository "Robust Tools for Psychological Science" (https://github.com/djnavarro/robust-tools) */ --&gt;
+
+
+
+&lt;!-- layout: true --&gt;
+
+&lt;!-- &lt;div class="my-footer"&gt; --&gt;
+&lt;!-- &lt;span&gt; --&gt;
+&lt;!-- &lt;a href="https://djnavarro.link/robust-tools" target="_blank"&gt;djnavarro.link/robust-tools&lt;/a&gt; --&gt;
+&lt;!-- &lt;/span&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
+
+&lt;!-- --- --&gt;
+
+---
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# .midi[Modularity]
+An objective function for .embolden[finding communities] in networks (terms and conditions apply). 
+
+Usually .embolden[defined] as: 
+
+`$$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#0F4C81}{\mathbb{E}_\eta[W_{ij}]}\right]\delta(g_i, g_j)$$`
+
+- `\(\mathbf{G}\)`: a partition of nodes into groups. 
+- `\(\mathbf{W}\)`: a weighted adjacency matrix of a graph. 
+- `\(\color{#0F4C81}{\eta}\)`: "a random graph with degree sequence `\(\mathbf{d}\)`." 
+]
+
+.footnote[Newman + Girvan, "Finding and Evaluating Community Structure in Networks." *PRE*, (2003) (12K citations)]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# .midi[Modularity]
+
+An objective function for  .embolden[finding communities] in networks (terms and conditions apply). 
+
+Usually .embolden[computed] as: 
+
+`$$Q(\mathbf{G}) = \frac{1}{2m}\sum_{ij}\left[W_{ij} - \color{#0F4C81}{\frac{d_id_j}{2m}}\right]\delta(g_i, g_j)$$`
+
+- `\(\mathbf{G}\)`: a partition of nodes into groups. 
+- `\(\mathbf{W}\)`: a weighted adjacency matrix of a graph. 
+- `\(\color{#0F4C81}{\eta}\)`: "a random graph with degree sequence `\(\mathbf{d}\)`." 
+]
+
+.footnote[Newman + Girvan, "Finding and Evaluating Community Structure in Networks." *PRE*, (2003) (12K citations)]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# A Folk Theorem
+
+.white-bg[
+.pink-highlight[
+The expected number of edges `\(\omega_{ij}\)` between two nodes in a .embolden["random"] graph .embolden["with degree sequence d]" is 
+
+$$ \omega_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
+]
+
+This is right if you choose your random graph model .embolden[conveniently].
+
+- Chung-Lu model (.embolden[d] fixed in expectation)
+- Stub-matching (biased, not entropy-maximizing)
+]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+class: top
+
+# Which random graph?... 
+
+.white-bg[
+We .embolden[say]: "(entropy-maximizing) random graph." 
+
+We .embolden[mean]: "random graph that makes calculations convenient."
+
+
+.footnote[Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+.pink-bg[
+What if we *actually* used an entropy-maximizing random graph for calculations?]
+]
+
+---
+class: top
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# The Uniform Random Graph
+
+&lt;br&gt;
+
+Let `\(\mathcal{G}_\mathbf{d}\)` be the set of all .embolden[multigraphs] with fixed degree sequence `\(\mathbf{d}\)`. 
+
+The .embolden[uniform random graph model] `\(\eta_\mathbf{d}\)` is the probability distribution that assigns equal weight to each  `\(G \in \mathcal{G}_\mathbf{d}\)`. 
+
+`\(\eta_\mathbf{d}\)` is the entropy-maximizing random graph with fixed degree sequence `\(\mathbf{d}\)`. 
+]
+
+---
+
+# Edge-Swap Monte Carlo
+
+Exact sampling from `\(\eta_\mathbf{d}\)` is Very Hard. 
+
+![](img/swaps.png)
+
+We can approximately sample from `\(\eta_\mathbf{d}\)` by crawling through `\(\mathcal{G}_\mathbf{d}\)`.
+
+
+
+.footnote[Image from Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+---
+
+# Edge-Swap Monte Carlo
+
+![](img/swaps.png)
+
+1. .embolden[Sample edges] `\((i,j)\)` and `\((k,\ell)\)` with random orientations. 
+2. .embolden[Propose swap] `\((i,j), (k,\ell) \mapsto (i,\ell), (k,j)\)`.  
+3. .embolden[Accept swap] with probability `\(w_{ij}^{-1}w_{k\ell}^{-1}\)`. 
+
+.embolden[Theorem]&lt;sup&gt;1&lt;/sup&gt;: This successfully samples from `\(\eta_\mathbf{d}\)`.
+
+.footnote[&lt;sup&gt;1&lt;/sup&gt;Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+
+---
+
+class: top
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Are We Stuck?
+
+&lt;br&gt;
+
+**Wanted** to estimate `\(\omega_{ij} = \mathbb{E}[W_{ij}]\)`, the expected number of edges between `\(i\)` and `\(j\)`. 
+
+Monte Carlo lets us do this...numerically, and Very Slowly.  
+
+Can we learn anything **analytically?**
+
+---
+
+class: top
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Analytical Approach
+
+.white-bg[
+Edge-Swap Monte Carlo is a stochastic process with known equilibrium distribution `\(\eta_\mathbf{d}\)`. 
+
+At equilibrium, .embolden[all expectations are fixed.] 
+
+`$$\mathbb{E}_\eta[f(G_{t+1}) - f(G_t)] = 0\;.$$` 
+
+If we choose `\(f(G) = w_{ij}^p\)` for `\(p = 1,\ldots\)` and handle .embolden[a lot] of algebra, we can get analytical approximations. 
+]
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# A Lot of Algebra
+
+.centered-image[![](img/algebra.png)]
+
+---
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Existence of an Edge
+
+.white-bg[
+Let `\(\beta_i = \mathbb{E}_\eta[\text{# of distinct neighbors of } i]\)`.
+
+.alert[
+.embolden[Theorem] (PSC 2020): `$$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} &gt; 0)] = \left(1 + O(\beta^{-1})\right)\frac{\beta_i\beta_j}{\sum_\ell \beta_\ell}$$`
+]
+]
+
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# A Parallel
+
+.white-bg[
+.yellow-bg[.embolden[Folk Theorem]
+`$$\omega_{ij} \triangleq \mathbb{E}_\eta[W_{ij}] \stackrel{?}{=} \frac{d_id_j}{\sum_\ell d_\ell} + \text{small terms}$$`
+]
+
+.pink-bg[
+.embolden[Actual Theorem]: `$$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} &gt; 0)] = \frac{\beta_i\beta_j}{\sum_\ell \beta_\ell} + \text{small terms}$$`
+]
+]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Expected Edge Densities
+
+&lt;br&gt;
+
+.white-bg[
+.pink-bg[
+.embolden[Theorem] (PSC 2020): `$$\omega_{ij}\triangleq \mathbb{E}_\eta[W_{ij}] = \left(1 + O(\beta^{-1/2})\right)\frac{\chi_{ij}}{1 - \chi_{ij}}$$` 
+]
+
+Can also get higher-order moments: variances, etc. 
+]
+
+
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# Computing `\(\beta\)` from `\(\mathbf{d}\)`
+
+.white-bg[
+
+The vector `\(\beta\)` approximately solves
+
+`$$h_i(\beta) \triangleq \sum_{j\neq i}\frac{\beta_i\beta_j}{\sum_\ell\beta_\ell - \beta_i\beta_j} = d_i \quad \forall i\;.$$`
+
+.alert[
+.embolden[Theorem] (PSC 2020): Solution of `\(\mathbb{h}(\beta) = \mathbb{d}\)` (if it exists) is unique on the set 
+`$$\mathcal{B} = \left\{\beta: \beta \geq \mathbf{0},\; \beta_i^2 &lt; \sum_\ell \beta_\ell \quad \forall i\right\}\;.$$`
+ 
+]
+]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# Proof Sketch
+We want to solve `\(\mathbf{h}(\beta) = \mathbf{d}\)`. 
+Equivalently, `$$\mathcal{L}(\beta) \triangleq \lVert \mathbf{h}(\beta) - \mathbf{d} \rVert^2 = \mathbf{0}$$`
+
+1. The Jacobian `\(\mathbf{J}\)` of `\(\mathbf{h}\)` has strictly positive eigenvalues on `\(\mathcal{B}\)` (linear algebra tricks).
+2. The Hessian `\(\mathcal{H}\)` of `\(\mathcal{L}\)` is positive-definite at all critical points of `\(\mathcal{L}\)` `\(\implies\)` all critical points are isolated local minima (more linear algebra tricks). 
+3. .embolden[Mountain Pass Theorem]:&lt;sup&gt;1&lt;/sup&gt; If two or more isolated local minima, `\(\exists\)` a third which is not a local minimum. 
+4. So, `\(\exists\)` at most one local minimizer of `\(\mathcal{L}\)` on `\(\mathcal{B}\)`. 
+
+.footnote[Bisgard, "Mountain Passes and Saddle Points," *SIREV* (2015)]
+]
+
+
+---
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# State of the Theory
+
+&lt;br&gt;
+d
+1. We can analyze Monte Carlo to derive low-dimensional estimators for quantities like `\(\omega_{ij} = \mathbb{E}[W_{ij}]\)` in terms of an unknown vector `\(\beta\)`. 
+2. We can estimate `\(\beta\)` by solving a nonlinear system. 
+3. The solution `\(\hat{\beta}\)`, if it exists, is unique on the set `\(\mathcal{B}\)` of "well-behaved" vectors. 
+4. Let's try it out!
+]
+
+
+---
+
+# .midi[Experiments: High School Contact Data]
+
+.centered-image[![](img/sociopatterns.jpg)]
+
+.footnote[.embolden[SocioPatterns project]: Mastrandrea et al. (2015), Benson et al. (2018)]
+
+---
+
+background-image: url(img/eval_figs.png)
+background-size: contain
+
+### .midi[Evaluating Approximations]
+
+---
+
+background-image: url(img/error_matrices.png)
+background-size: contain
+
+## Estimating `\(\mathbb{E}[W]\)`
+
+---
+
+background-image: url(img/modularity_high_school.png)
+background-size: contain
+
+## Downstream Consequences: Modularity Maximization
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+.white-bg[
+# Takeaways
+
+Deploying random graph models requires that we 
+
+- Carefully articulate which ones we're using
+- Checking that our heuristics work
+
+Entropy-maximizing random graphs with fixed degree sequences break our standard heuristics, but we can get rigorous approximations. 
+
+**#MethodsMatter** for downstream analysis. 
+
+
+.midi[`https://github.com/PhilChodrow/multigraph_moments`]
+]
+
+
+---
+
+# Thanks!
+
+.pull-left-narrow[.thanks[
+.centered-image[![:scale 100%](img/bio-photo.jpg)]
+Phil &lt;br&gt; Chodrow
+.small[
+  
+  Math @ UCLA
+  
+  [philchodrow.com](https://www.philchodrow.com)
+
+  [@philchodrow](https://twitter.com/PhilChodrow)
+]
+
+
+]]
+.pull-right-wide[.centered-image[.alert[
+![](img/arxiv.png)
+`arxiv:1909.09037`
+]
+.funding[
+![:scale 120px](img/nsf_logo.png)
+![:scale 250px](img/logo_UCLA_blue_boxed.png)]
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="style/js/macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "3:2",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "<div class=\"progress-bar-container\">   <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">   </div> </div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  /* Replace <script> tags in slides area to make them executable
+   *
+   * Runs after post-processing of markdown source into slides and replaces only
+   * <script>s on the last slide of continued slides using the .has-continuation
+   * class added by xaringan. Finally, any <script>s in the slides area that
+   * aren't executed are commented out.
+   */
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container:not(.has-continuation) script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+  var scriptsNotExecuted = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container.has-continuation script'
+  );
+  if (!scriptsNotExecuted.length) return;
+  for (var i = 0; i < scriptsNotExecuted.length; i++) {
+    var comment = document.createComment(scriptsNotExecuted[i].outerHTML)
+    scriptsNotExecuted[i].parentElement.replaceChild(comment, scriptsNotExecuted[i])
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
