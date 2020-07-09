@@ -90,7 +90,7 @@ This works for:
 background-image: url(img/Social_Network_Analysis_Visualization.png)
 background-size: contain
 
-# \#NotAllData is Sparse
+# Dense Network Data
 
 .white-bg[
 .pull-left[
