@@ -24,6 +24,7 @@ output:
 ```{r child = "style/rmd/DJN_setup.Rmd"}
 ```
 
+
 ---
 background-image: url(img/Social_Network_Analysis_Visualization.png)
 background-size: contain
@@ -78,10 +79,41 @@ The expected number of edges $\omega_{ij}$ between two nodes in a .embolden["ran
 $$ \omega_{ij} = \frac{d_id_j}{2m} + \text{small terms}\;.$$
 ]
 
-This is right if you choose your random graph model .embolden[conveniently].
+This works for: 
 
-- Chung-Lu model (.embolden[d] fixed in expectation)
-- Stub-matching (biased, not entropy-maximizing)
+- Chung-Lu model (.embolden[d] fixed in expectation).
+- Very sparse data.
+]
+
+---
+
+background-image: url(img/Social_Network_Analysis_Visualization.png)
+background-size: contain
+
+# \#NotAllData is Sparse
+
+.white-bg[
+.pull-left[
+.centered-image[![](img/sociopatterns.jpg)]
+
+.embolden[SocioPatterns project] 
+
+- Mastrandrea et al. (2015) 
+- Benson et al. (2018)
+]
+.pull-right[
+
+.embolden[High school:]
+
+$\langle d \rangle > 500 > 327 = n$
+
+.embolden[Primary school:]
+
+$\langle d \rangle > 400 > 242 = n$
+
+So, we should expect sparse heuristics to break. 
+]
+
 ]
 
 ---
@@ -91,18 +123,18 @@ background-size: contain
 
 class: top
 
-# Which random graph?... 
-
 .white-bg[
-We .embolden[say]: "(entropy-maximizing) random graph." 
+# A Crossroads...
 
-We .embolden[mean]: "random graph that makes calculations convenient."
+.embolden[Should we...]
 
+...use the Chung-Lu model? Ok if degree sequence doesn't need to be preserved exactly.  
 
-.footnote[Fosdick et al., "Configuring Random Graph Models with Fixed Degree Sequences", *SIAM Review* (2018)]
+...use large, sparse heuristics? Violated assumptions $\implies$ uncontrolled error. 
 
 .pink-bg[
-What if we *actually* used an entropy-maximizing random graph for calculations?]
+...use an entropy maximizing random graph with fixed degree sequence?
+]
 ]
 
 ---
@@ -160,7 +192,7 @@ background-size: contain
 
 <br>
 
-**Wanted** to estimate $\omega_{ij} = \mathbb{E}[W_{ij}]$, the expected number of edges between $i$ and $j$. 
+We **want** to estimate $\omega_{ij} = \mathbb{E}[W_{ij}]$, the expected number of edges between $i$ and $j$. 
 
 Monte Carlo lets us do this...numerically, and Very Slowly.  
 
@@ -177,11 +209,11 @@ background-size: contain
 .white-bg[
 Edge-Swap Monte Carlo is a stochastic process with known equilibrium distribution $\eta_\mathbf{d}$. 
 
-At equilibrium, .embolden[all expectations are fixed.] 
+**At equilibrium, all expectations are fixed.**
 
 $$\mathbb{E}_\eta[f(G_{t+1}) - f(G_t)] = 0\;.$$ 
 
-If we choose $f(G) = w_{ij}^p$ for $p = 1,\ldots$ and handle .embolden[a lot] of algebra, we can get analytical approximations. 
+If we choose $f(G) = w_{ij}^p$ for $p = 1,\ldots$ and handle a lot of algebra, we can get analytical approximations. 
 ]
 ---
 
@@ -196,13 +228,15 @@ background-size: contain
 background-image: url(img/Social_Network_Analysis_Visualization.png)
 background-size: contain
 
-# Existence of an Edge
+# Main Results
 
 .white-bg[
 Let $\beta_i = \mathbb{E}_\eta[\text{# of distinct neighbors of } i]$.
 
 .alert[
 .embolden[Theorem] (PSC 2020): $$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} > 0)] = \left(1 + O(\beta^{-1})\right)\frac{\beta_i\beta_j}{\sum_\ell \beta_\ell}$$
+
+$$\omega_{ij}\triangleq \mathbb{E}_\eta[W_{ij}] = \left(1 + O(\beta^{-1/2})\right)\frac{\chi_{ij}}{1 - \chi_{ij}}$$ 
 ]
 ]
 
@@ -215,33 +249,15 @@ background-size: contain
 # A Parallel
 
 .white-bg[
-.yellow-bg[.embolden[Folk Theorem]
+.yellow-bg[.embolden[Folk Theorem]: Under sparsity,
 $$\omega_{ij} \triangleq \mathbb{E}_\eta[W_{ij}] \stackrel{?}{=} \frac{d_id_j}{\sum_\ell d_\ell} + \text{small terms}$$
 ]
 
 .pink-bg[
-.embolden[Actual Theorem]: $$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} > 0)] = \frac{\beta_i\beta_j}{\sum_\ell \beta_\ell} + \text{small terms}$$
+.embolden[Actual Theorem]: In general, 
+$$\chi_{ij}\triangleq \mathbb{E}_\eta[\mathbb{I}(W_{ij} > 0)] = \frac{\beta_i\beta_j}{\sum_\ell \beta_\ell} + \text{small terms}$$
 ]
 ]
-
----
-
-background-image: url(img/Social_Network_Analysis_Visualization.png)
-background-size: contain
-
-# Expected Edge Densities
-
-<br>
-
-.white-bg[
-.pink-bg[
-.embolden[Theorem] (PSC 2020): $$\omega_{ij}\triangleq \mathbb{E}_\eta[W_{ij}] = \left(1 + O(\beta^{-1/2})\right)\frac{\chi_{ij}}{1 - \chi_{ij}}$$ 
-]
-
-Can also get higher-order moments: variances, etc. 
-]
-
-
 
 ---
 
@@ -275,12 +291,11 @@ Equivalently, $$\mathcal{L}(\beta) \triangleq \lVert \mathbf{h}(\beta) - \mathbf
 
 1. The Jacobian $\mathbf{J}$ of $\mathbf{h}$ has strictly positive eigenvalues on $\mathcal{B}$ (linear algebra tricks).
 2. The Hessian $\mathcal{H}$ of $\mathcal{L}$ is positive-definite at all critical points of $\mathcal{L}$ $\implies$ all critical points are isolated local minima (more linear algebra tricks). 
-3. .embolden[Mountain Pass Theorem]:<sup>1</sup> If two or more isolated local minima, $\exists$ a third which is not a local minimum. 
+3. .embolden[Mountain Pass Theorem]<sup>1</sup>: If two or more isolated local minima, $\exists$ a third which is not a local minimum. 
 4. So, $\exists$ at most one local minimizer of $\mathcal{L}$ on $\mathcal{B}$. 
 
 .footnote[Bisgard, "Mountain Passes and Saddle Points," *SIREV* (2015)]
 ]
-
 
 ---
 background-image: url(img/Social_Network_Analysis_Visualization.png)
@@ -290,11 +305,10 @@ background-size: contain
 # State of the Theory
 
 <br>
-d
+
 1. We can analyze Monte Carlo to derive low-dimensional estimators for quantities like $\omega_{ij} = \mathbb{E}[W_{ij}]$ in terms of an unknown vector $\beta$. 
 2. We can estimate $\beta$ by solving a nonlinear system. 
-3. The solution $\hat{\beta}$, if it exists, is unique on the set $\mathcal{B}$ of "well-behaved" vectors. 
-4. Let's try it out!
+3. The solution, if it exists, is unique on the set $\mathcal{B}$ of "well-behaved" vectors. 
 ]
 
 
@@ -334,18 +348,16 @@ background-size: contain
 
 .white-bg[
 # Takeaways
+<br>
+Entropy-maximizing random graphs with fixed degree sequences break our usual heuristics. 
 
-Deploying random graph models requires that we 
+Analyzing a Monte Carlo algorithm gives us:
 
-- Carefully articulate which ones we're using
-- Checking that our heuristics work
-
-Entropy-maximizing random graphs with fixed degree sequences break our standard heuristics, but we can get rigorous approximations. 
+1. Interesting math. 
+2. Practical computation for data science
 
 **#MethodsMatter** for downstream analysis. 
 
-
-.midi[`https://github.com/PhilChodrow/multigraph_moments`]
 ]
 
 
