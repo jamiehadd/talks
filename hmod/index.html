@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Generative Hypergraph Clustering:   From Blockmodels to Modularity</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Phil Chodrow (UCLA)   Nate Veldt (Cornell)   Austin Benson (Cornell)" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style/css/DJN_xaringan_theme.css" type="text/css" />
+    <link rel="stylesheet" href="style/css/DJN_style.css" type="text/css" />
+    <link rel="stylesheet" href="style/css/pc_custom_style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# <p>Generative Hypergraph Clustering: <br> From Blockmodels to Modularity</p>
+### Phil Chodrow (UCLA) <br> Nate Veldt (Cornell) <br> Austin Benson (Cornell)
+
+---
+
+
+
+
+&lt;!-- This file was retrieved from file was retrieved from Danielle J. Navarro's repository "Robust Tools for Psychological Science" (https://github.com/djnavarro/robust-tools) */ --&gt;
+
+
+
+&lt;!-- layout: true --&gt;
+
+&lt;!-- &lt;div class="my-footer"&gt; --&gt;
+&lt;!-- &lt;span&gt; --&gt;
+&lt;!-- &lt;a href="https://djnavarro.link/robust-tools" target="_blank"&gt;djnavarro.link/robust-tools&lt;/a&gt; --&gt;
+&lt;!-- &lt;/span&gt; --&gt;
+&lt;!-- &lt;/div&gt; --&gt;
+
+&lt;!-- --- --&gt;
+
+---
+
+layout: true
+
+background-size: contain
+
+---
+
+## Team
+
+
+.pull-left-third[.pink-bg[
+.centered-image[![:scale 100%](img/nate.jpg)]
+.embolden[Nate]  .embolden[Veldt]
+.small[
+  Math @ Cornell
+  
+  
+  [Website](https://people.cam.cornell.edu/lnv22/)
+  
+  
+  [@n_veldt](https://twitter.com/n_veldt)
+]]]
+
+.pull-left-third[.yellow-bg[
+.centered-image[![:scale 100%](img/austin.jpg)]
+.embolden[Austin]  .embolden[Benson]
+.small[
+  CS @ Cornell
+  
+  [cs.cornell.edu/~arb/](https://www.cs.cornell.edu/~arb/)
+
+  [@austinbenson](https://twitter.com/austinbenson)
+]]]
+
+
+.pull-left-third[.blue-bg[
+.centered-image[![:scale 100%](img/phil.jpg)]
+.embolden[Phil]  .embolden[Chodrow]
+.small[
+  Math @ UCLA
+  
+  [philchodrow.com](https://www.philchodrow.com)
+
+  [@philchodrow](https://twitter.com/PhilChodrow)
+]]]
+
+
+---
+
+background-image: url(img/arxiv.png)
+
+---
+
+## Hypergraph Stochastic Blockmodel
+
+.midi[
+.pink-bg[
+`$$a_R \equiv \text{# of edges on tuple }R \sim \mathrm{Poisson}\left(\Omega(\mathbf{z}_R)\prod_{i \in R}\theta_i\right)$$`
+]]
+
+- `\(\mathbf{z}\)` is the vector of node labels (clusters).
+- `\(\{\theta_i\}\)` are *degree* parameters. 
+- `\(\Omega\)` is the *affinity function* that governs connections between different groups. 
+
+
+.footnote[
+Extends DCSBM of Karrer + Newman, "Stochastic blockmodels and community structure in networks." *PRE*, 2011
+
+Bernoulli variant proposed by Ke et al., "Community detection for hypergraph networks via regularized tensor power iteration." *arxiv:*:1909.06503, 2019
+]
+
+---
+
+## Symmetry Assumption
+
+Assume that `\(\Omega\)` is symmetric under permutations of node labels. 
+
+Then, `\(\Omega(\mathbf{z}_R) = \Omega(\mathbf{p})\)`, where `\(\mathbf{p}\)` is the partition of `\(\mathbf{z}_R\)`. 
+
+Example: `\(\mathbf{z}_R = (1, 1, 1, 2, 3, 3)\)`, `\(\mathbf{p} = (3, 2, 1)\)`. 
+
+Generalizes the *planted partition* assumption: all clusters statistically identical. 
+
+---
+
+## Approximate Inference
+
+The maximum-likelihood estimates of `\(\{\theta_i\}\)` and `\(\Omega\)` are approximately
+.pink-bg[
+$$
+`\begin{aligned}
+\hat{\theta}_i &amp;\approx\text{degree of node }i \equiv d_i \\ 
+\hat{\Omega}(\mathbf{p}) &amp;\approx \frac{\text{# of hyperedges with partition } \mathbf{p}}{\sum_{\mathbf{y}: \mathbf{p}(\mathbf{y}) = \mathbf{p}}\prod_{y \in \mathbf{y}}y}\;.
+\end{aligned}`
+$$ 
+]
+
+*These approximations are exact when all clusters have the same sum-of-degrees*. 
+
+.footnote[
+Zhang + Peixoto, "Statistical inference of assortative community structures." *PRR*, 2020]
+---
+
+## Approximate Log-Likelihood
+
+.midi[
+.pink-bg[
+$$
+`\begin{aligned}
+Q(\mathbf{z}, \Omega) &amp;\equiv \sum_{\mathbf{p}}[ \Omega(\mathbf{p}) \textbf{cut}_\mathbf{p}(\mathbf{z}) +  \log \Omega(\mathbf{p}) \textbf{vol}_\mathbf{p}(\mathbf{z})] \\ 
+&amp;\approx \text{model log-likelihood} + \text{constants w.r.t.} \mathbf{z} 
+\end{aligned}`
+$$
+]]
+
+$$
+`\begin{aligned}
+  \textbf{cut}_\mathbf{p}(\mathbf{z}) &amp;\equiv \text{# of hyperedges with partition } \mathbf{p}\\
+  \textbf{vol}_\mathbf{p}(\mathbf{z}) &amp;\equiv \sum_{\mathbf{y}: \mathbf{p}(y) = \mathbf{p}} \prod_{y \in \mathbf{y}} \textbf{vol}(y)
+\end{aligned}`
+$$
+
+We call `\(Q(\mathbf{z}, \Omega)\)` a **symmetric hypergraph modularity.**
+
+---
+
+## All Or Nothing
+
+Consider an edge of `\(k\)` nodes. Suppose: 
+`$$\Omega(\mathbf{p}) = \begin{cases}
+  \omega_{k1} &amp;\quad \text{edge has homogeneous labels} \\ 
+  \omega_{k0} &amp;\quad \text{otherwise}\;.  
+\end{cases}$$`
+
+Then, the **All-Or-Nothing hypergraph modularity** is 
+
+.pink-bg[.midi[
+$$
+Q = \sum_k \beta_k \left[\text{# homogeneous }k\text{-edges} - \gamma_k\sum_j \textbf{vol}(j)^k\right]
+$$
+]]
+
+.footnote[
+
+Derivation follows Newman, "Equivalence between modularity optimization and maximum likelihood methods for community detection." *PRE*, 2016
+
+Generalizes Kamiński et al., "Clustering via hypergraph modularity." *PLoS ONE*, 2019]
+
+---
+
+## Parsing Parameters
+
+$$
+Q = \sum_k \color{#0F4C81}{\beta_k} \left[\text{# homogeneous }k\text{-edges} - \color{#ec7a39}{\gamma_k}\sum_j \textbf{vol}(j)^k\right]
+$$
+
+`\(\color{#0F4C81}{\beta_k} \equiv \log \omega_{k1} - \log \omega_{k0}\)`. 
+- .blue[Size parameters] control importance of edge sizes. 
+
+`\(\color{#ec7a39}{\gamma_k} \equiv \frac{1}{\beta_k}(\omega_{k1} - \omega_{k0})\)`.
+- .orange[Resolution parameters] control number of clusters
+
+.embolden[Can be estimated!]
+
+
+---
+
+background-image: url(img/detectability.png)
+
+# Detectability
+
+---
+
+background-image: url(img/contact-clustering.png)
+
+---
+
+background-image: url(img/contact-parameters.png)
+
+---
+
+background-image: url(img/performance.png)
+
+---
+
+background-image: url(img/recovery_experiments.png)
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="style/js/macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "3:2",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "<div class=\"progress-bar-container\">   <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">   </div> </div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
