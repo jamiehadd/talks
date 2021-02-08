@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Generative Hypergraph Clustering:   From Blockmodels to Modularity</title>
+    <title>Generative Hypergraph Clustering   From Blockmodels to Modularity</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Phil Chodrow (UCLA)   Nate Veldt (Cornell)   Austin Benson (Cornell)" />
+    <meta name="author" content="Phil Chodrow (UCLA) Nate Veldt (Cornell) Austin Benson (Cornell)" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
     <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
@@ -15,8 +15,8 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# <p>Generative Hypergraph Clustering: <br> From Blockmodels to Modularity</p>
-### Phil Chodrow (UCLA) <br> Nate Veldt (Cornell) <br> Austin Benson (Cornell)
+# <p>Generative Hypergraph Clustering <br> From Blockmodels to Modularity</p>
+### Phil Chodrow (UCLA)<br>Nate Veldt (Cornell)<br>Austin Benson (Cornell)
 
 ---
 
@@ -45,8 +45,8 @@ background-size: contain
 
 ---
 
-## Team
 
+## The Team
 
 .pull-left-third[.pink-bg[
 .centered-image[![:scale 100%](img/nate.jpg)]
@@ -89,9 +89,240 @@ background-size: contain
 
 background-image: url(img/arxiv.png)
 
+## The Preprint
+
+
+
 ---
 
-## Hypergraph Stochastic Blockmodel
+#### **Graph clustering** is a fundamental problem in network science.
+
+
+.centered-image[
+![:scale 70%](img/graph-clustering.png)
+]
+
+.midi[
+.pink-bg[
+  .embolden[Problem]: find groups of "related" or "densely-interconnected" nodes. 
+]
+
+Applications in social network analysis, healthcare, \*omics,...
+]
+
+.footnote[
+*Image from Sebastian Dery, "Graph-based machine learning: part I" on [Insight Analytics](https://blog.insightdatascience.com/graph-based-machine-learning-6e2bd8926a0).* 
+]
+
+---
+
+
+
+#### **Hypergraphs** generalize graphs to interactions of more than two agents. 
+
+.centered-image[
+![:scale 60%](img/simplicial-complex.png)
+]
+
+
+.footnote[
+*Image from "[Simplicial Complex](https://en.wikipedia.org/wiki/Simplicial_complex)" on Wikipedia.*
+]
+
+---
+
+#### Many **real systems** have "higher-order" interactions that we can model with hypergraphs.
+
+.centered-image[
+![:scale 100%](img/hyperedge-examples.png)
+]
+
+
+- **Nodes**: individual people/links/compounds/items.
+- **Hyperedges**: events/sessions/drugs/shopping trips. 
+
+.footnote[
+*Image courtesy of Nate Veldt.*
+]
+---
+
+class: section, middle
+
+.midi[
+### How can we construct .pink[interpretable], .pink[scalable] objectives for hypergraph clustering? 
+]
+
+---
+
+#### **Modularity maximization** is a common clustering method for graphs. &lt;br&gt; &lt;br&gt;
+
+.pink-bg[
+`$$Q(\mathbf{z}) \equiv \sum_{ij}\left[a_{ij} - \gamma\frac{d_id_j}{2m}\right]\delta(z_i, z_j)$$`
+]
+
+- `\(\mathbf{z}\)` is the vector of *node labels* (clusters).
+- `\(\{d_i\}\)` are *node degrees*. 
+- `\(\gamma\)` is a *resolution parameter* that governs sizes of retrieved clusters.
+
+
+.footnote[
+Newman &amp; Girvan, "Finding and evaluating community structure in networks." *PRE*, 2004, cited 13.7K times.
+]
+
+---
+
+#### Modularity: .pink[Strengths] and **limitations**. &lt;br&gt; &lt;br&gt;
+
+.pull-left[
+.pink-bg[
+
+.midi[.midi[
+
+**Interpretability**
+- .embolden[Null model comparison] 
+  - Newman &amp; Girvan 2004
+- .embolden[Dynamical stability] 
+  - Delvenne et al. 2010
+- .embolden[Blockmodel likelihood] 
+  - Newman 2016
+  - Zhang + Moore 2014
+  
+**Scalability** 
+  - .embolden[Louvain algorithm] 
+    - Blondel et al. 2008
+  - .embolden[Belief propagation] 
+    - Zhang + Moore 2014
+]]]]
+
+.pull-right[
+.blue-bg[
+
+
+.midi[.midi[
+
+**Statistical Problems**
+- .embolden[Underfitting] 
+  - Fortunato + Barthélemy 2007
+- .embolden[Overfitting] 
+  - Zhang + Moore 2014
+
+&lt;br&gt; 
+
+**Optimization Problems**
+- .embolden[Degeneracy] 
+  - Good et al. 2010
+- .embolden[NP-hard objective]  
+  - Brandes et al. 2007
+
+]]]]
+
+---
+
+
+#### Modularity  **in context**.  
+
+
+![:scale 100%](img/clustering-quadrant.png)
+
+
+
+.footnote[
+*Insert preemptive apology here.*
+]
+
+
+
+---
+
+
+#### The **strategy**: scalable modularity for hypergraphs.
+
+&lt;br&gt;
+
+1. Define a practical **generative model** for hypergraphs. 
+2. Derive a family of **hypergraph modularity objectives** by approximating the likelihood. 
+3. Write **fast clustering algorithms** for optimizing these objectives.
+4. &lt;s&gt;Profit&lt;/s&gt; **Learn cool things** about the theoretical and practical performance of these algorithms on data. 
+
+---
+
+#### Here's what we learned. &lt;br&gt; &lt;br&gt;
+
+.pink-bg[
+A generative approach to hypergraph modularity clustering can lead to .embolden[interpretable objectives] and .embolden[fast algorithms].
+]
+.midi[&lt;br&gt;]
+.yellow-bg[
+.embolden[Hypergraph] algorithms can succeed where .embolden[graph] algorithms necessarily fail. 
+]
+.midi[&lt;br&gt;]
+.blue-bg[
+Performance depends on .embolden[matching the structural assumptions] of algorithms to data. 
+]
+
+---
+
+#### There are **other approaches** to modularity in hypergraphs! 
+
+.midi[
+&lt;br&gt;
+**Kaminski et al.** "Clustering via hypergraph modularity." *PLoS ONE*, (2019)
+
+- Defines modularity by comparison to a null random hypergraph.
+- We derive this one as a special case, and add resolution parameters. 
+
+**Kumar et al.** "Hypergraph clustering by iteratively reweighted modularity maximization." *Applied Network Science*, (2020)
+
+- Combines graph modularity with an adaptive penalty for imbalanced hyperedge splits. 
+- Seems to work well, interpretability / connection to generative models unclear. 
+]
+
+---
+
+class: section, middle, right
+
+.midi[
+#### First, let's derive a .pink[hypergraph modularity objective]. 
+]
+---
+
+#### The **statistical view** of graph modularity. 
+
+&lt;br&gt;
+
+.embolden[Degree-corrected stochastic blockmodel (DCSBM)]: a generative model of clustered graphs with heterogeneous degrees.  
+
+`$$\text{number of edges } (i,j) \equiv a_{ij} \sim \text{Poisson}(\theta_i\theta_j\omega(z_i,z_j)).$$`
+
+.footnote[
+Karrer &amp; Newman, "Stochastic blockmodels and community structure in networks." *PRE*, 2011
+]
+
+- `\(\{\theta_i\}\)`: *degree parameters* for each node. 
+- `\(\omega\)`: *affinity function* governing connection rates between groups. 
+
+---
+
+#### Modularity maximization **approximates** maximum-likelihood inference.
+
+Let `\(\mathcal{L}(\mathbf{z}, \hat{\omega}, \hat{\theta})\)` be the DCSBM log-likelihood with maximum-likelihood estimates of `\(\omega\)` and `\(\theta\)`. Then, 
+
+.pink-bg[
+`$$\mathcal{L}(\mathbf{z}, \hat{\omega}, \hat{\theta}) \approx Q(\mathbf{z}) + C(\hat{\omega}, \hat{\theta}).$$`
+]
+
+This approximation is exact when all clusters have the same sum of internal degrees. 
+
+
+.footnote[
+Zhang &amp; Moore, *PNAS* (2015), Newman, *PRE* (2016), Zhang &amp; Peixoto, *PRR* (2020).
+]
+
+---
+
+#### We propose a **hypergraph degree-corrected stochastic blockmodel**.
+
+&lt;br&gt;
 
 .midi[
 .pink-bg[
@@ -104,28 +335,35 @@ background-image: url(img/arxiv.png)
 
 
 .footnote[
-Extends DCSBM of Karrer + Newman, "Stochastic blockmodels and community structure in networks." *PRE*, 2011
-
 Bernoulli variant proposed by Ke et al., "Community detection for hypergraph networks via regularized tensor power iteration." *arxiv:*:1909.06503, 2019
 ]
 
 ---
 
-## Symmetry Assumption
+#### The **affinity function** governs connection rates between groups of nodes. 
 
-Assume that `\(\Omega\)` is symmetric under permutations of node labels. 
+.midi[
+An **assortative** model might satisfy 
 
-Then, `\(\Omega(\mathbf{z}_R) = \Omega(\mathbf{p})\)`, where `\(\mathbf{p}\)` is the partition of `\(\mathbf{z}_R\)`. 
+`$$\Omega(a, a, a) \geq \Omega(a, a, b)\geq \Omega(a, b, c)\ldots$$` 
 
-Example: `\(\mathbf{z}_R = (1, 1, 1, 2, 3, 3)\)`, `\(\mathbf{p} = (3, 2, 1)\)`. 
 
-Generalizes the *planted partition* assumption: all clusters statistically identical. 
+"*Edges within the same group are most common. Edges containing two groups are less common. Edges containing three groups are even less common...*"
+
+.pink-bg[
+.embolden[Assumption]: `\(\Omega(\mathbf{z}_R) = \Omega(\mathbf{p})\)`, where `\(\mathbf{p}\)` is the partition vector of `\(\mathbf{z}_R\)`. &lt;br&gt; `\(\implies\)` all groups are statistically identical. 
+]]
+
+.midi[
+Example: `\(\mathbf{z}_R = (a, a, a, b, c, c)\)`, `\(\mathbf{p} = (3, 2, 1)\)`. 
+]
 
 ---
 
-## Approximate Inference
+#### The parameters ** `\(\theta\)` ** and ** `\(\Omega\)` ** are easy to approximate. 
 
-The maximum-likelihood estimates of `\(\{\theta_i\}\)` and `\(\Omega\)` are approximately
+Approximate maximum-likelihood estimates: 
+
 .pink-bg[
 $$
 `\begin{aligned}
@@ -141,14 +379,15 @@ $$
 Zhang + Peixoto, "Statistical inference of assortative community structures." *PRR*, 2020]
 ---
 
-## Approximate Log-Likelihood
+#### Optimization over ** `\(\mathbf{z}\)` ** leads to a modularity-type objective. 
 
 .midi[
+&lt;br&gt;
 .pink-bg[
 $$
 `\begin{aligned}
 Q(\mathbf{z}, \Omega) &amp;\equiv \sum_{\mathbf{p}}[ \Omega(\mathbf{p}) \textbf{cut}_\mathbf{p}(\mathbf{z}) +  \log \Omega(\mathbf{p}) \textbf{vol}_\mathbf{p}(\mathbf{z})] \\ 
-&amp;\approx \text{model log-likelihood} + \text{constants w.r.t.} \mathbf{z} 
+&amp;\approx \mathcal{L}(\mathbf{z}, \Omega, \mathbf{d}) + \text{constants w.r.t. } \mathbf{z} 
 \end{aligned}`
 $$
 ]]
@@ -164,15 +403,13 @@ We call `\(Q(\mathbf{z}, \Omega)\)` a **symmetric hypergraph modularity.**
 
 ---
 
-## All Or Nothing
+#### The **All-Or-Nothing** modularity is an important special case. 
 
-Consider an edge of `\(k\)` nodes. Suppose: 
-`$$\Omega(\mathbf{p}) = \begin{cases}
-  \omega_{k1} &amp;\quad \text{edge has homogeneous labels} \\ 
+Consider an edge `\(e\)` of `\(k\)` nodes. Suppose: 
+`$$\Omega(\mathbf{z}_e) = \begin{cases}
+  \omega_{k1} &amp;\quad e \text{ has homogeneous labels} \\ 
   \omega_{k0} &amp;\quad \text{otherwise}\;.  
 \end{cases}$$`
-
-Then, the **All-Or-Nothing hypergraph modularity** is 
 
 .pink-bg[.midi[
 $$
@@ -188,26 +425,95 @@ Generalizes Kamiński et al., "Clustering via hypergraph modularity." *PLoS ONE*
 
 ---
 
-## Parsing Parameters
+#### These parameters are **interpretable** and can be **estimated from data.** 
 
+.midi[
+.gray-bg[
 $$
 Q = \sum_k \color{#0F4C81}{\beta_k} \left[\text{# homogeneous }k\text{-edges} - \color{#ec7a39}{\gamma_k}\sum_j \textbf{vol}(j)^k\right]
 $$
+]]
 
 `\(\color{#0F4C81}{\beta_k} \equiv \log \omega_{k1} - \log \omega_{k0}\)`. 
-- .blue[Size parameters] control importance of edge sizes. 
+- .blue[**Size parameters**] control importance of edge sizes. 
 
 `\(\color{#ec7a39}{\gamma_k} \equiv \frac{1}{\beta_k}(\omega_{k1} - \omega_{k0})\)`.
-- .orange[Resolution parameters] control number of clusters
+- **.orange[Resolution parameters]** control number of clusters
 
-.embolden[Can be estimated!]
+---
+
+class: section, middle
+
+### We have objective functions, but how do we .pink[estimate partitions]?
+
+---
+
+#### Nate wrote efficient **hypergraph maximum-likelihood Louvain** (HMLL).
+.small[&lt;br&gt;]
+.pink-bg[
+1. All nodes start in their own cluster. 
+2. Greedily agglomerates nodes to maximize modularity. 
+3. Then, greedily agglomerates entire .embolden[clusters] of nodes.  
+4. Estimate parameters `\(\Omega\)` and `\(\{\theta_i\}\)`
+5. Repeat!
+]
+
+Works for general `\(\Omega\)`, **highly scalable** for All-or-Nothing `\(\Omega\)` due to algebraic simplifications.  
+
+.footnote[Based on Blondel et al. "Fast unfolding of communities in large networks." *J. Stat. Mech.*, 2008]
+
+---
+background-image: url(img/performance.png)
+
+#### We can retrieve correlated partitions on synthetic hypergraphs of **1M nodes**.
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; 
+
+Hypergraph Louvain is roughly as fast as dyadic projection + graph Louvain. 
+
+
+---
+
+.midi[
+#### **Detectability thresholds**: hypergraph methods succeed where graph methods fail.
+]
+
+.centered-image[
+![:scale 120%](img/detectability-setup.png)
+]
 
 
 ---
 
 background-image: url(img/detectability.png)
 
-# Detectability
+.midi[
+#### **Detectability thresholds**: hypergraph methods succeed where graph methods fail.
+]
+
+.footnote[See Abbe, "Community Detection and Stochastic Block Models: Recent Developments." *JMLR*, 2018 for a review in graphs.]
+
+---
+
+class: section, middle
+
+
+### Ok, but does it work on .pink[real data]? 
+
+
+---
+
+#### We compared graph and hypergraph methods on **school contact hypergraphs**. 
+
+.centered-image[
+![:scale 80%](img/sociopatterns.jpg)
+]
+
+.footnote[
+Stehlé et al. "High-resolution measurements of face-to-face contact patterns in a primary school." *PLoS ONE*, 2011
+
+Mastrandrea et al. "Contact patterns in a high school: a comparison between data collected using wearable sensors, contact diaries and friendship surveys." *PLoS ONE*, 2015
+]
 
 ---
 
@@ -217,16 +523,148 @@ background-image: url(img/contact-clustering.png)
 
 background-image: url(img/contact-parameters.png)
 
+#### **Parameter estimates** help us understand how the model "sees" its solution. 
+
+
+
 ---
 
-background-image: url(img/performance.png)
+#### More data!&lt;br&gt;&lt;br&gt; 
+
+
+`trivago-clicks`
+.midi[
+- Edges are online browsing sessions on `trivago.com`, nodes are hotels clicked on by users.
+]
+
+`walmart-trips`
+.midi[
+- Edges are shopping trips, nodes are items purchased in the same trip. 
+]
+
+`house-bills` + `senate-bills`: 
+.midi[
+- Edges are bills in the 103-117th U.S. Congresses, nodes are legislators. 
+]
+
+---
+
+#### More data!&lt;br&gt;&lt;br&gt; 
+
+|                     |  `\(n\)` | `\(m\)`  | `\(&lt;d&gt;\)` | `\(&lt;k&gt;\)` |
+|---------------------|-----:|-----:|------:|----:|
+| `trivago-clicks`    | 171K | 221K |   4.0 | 4.2 |
+| `walmart-purchases` |  89K |  66K |   5.1 | 6.7 |
+| `house-bills`       |   1K | 43K  | 274.0 | 9.5 |
+| `senate-bills`      | 0.3K | 20K  | 406.3 | 7.3 |
+
+`trivago` and `walmart` have lots of singletons, so we took progressively denser cores and studied the behavior. 
+
+.footnote[Data on Austin's website! [https://www.cs.cornell.edu/~arb/data/](https://www.cs.cornell.edu/~arb/data/)]
 
 ---
 
 background-image: url(img/recovery_experiments.png)
 
+---
+
+#### Performance of algorithm is closely tied to higher-order **structure of data**. 
+
+BIC of data under two choices of `\(\Omega\)`, lower is better. 
+
+.midi[
+|                             |  AON `\(\Omega\)` | Pairwise `\(\Omega\)`  
+|-----------------------------|-----------:|-----------:|-------------:|
+| `contact-primary-school`*    | **2.2003** | 2.2003     | `\(\times 10^5\)`|
+| `contact-high-school`*       | **4.1954**  | 4.1954     | `\(\times 10^5\)`|
+| `trivago-clicks`*            | **1.6854** | 1.6960     | `\(\times 10^8\)`|
+| `walmart-purchases`         | 1.0763     | **1.0758** | `\(\times 10^6\)`|
+| `house-bills`               | 9.9719     | **9.9670** | `\(\times 10^6\)`|
+| `senate-bills`*              | **3.1925** | 3.1925     | `\(\times 10^6\)`|
+]
 
 
+---
+
+
+class: section, middle
+
+### Wrapping Up
+
+---
+
+#### What we learned &lt;br&gt; &lt;br&gt;
+
+.pink-bg[
+A generative approach to hypergraph modularity can lead to .embolden[fast, interpretable algorithms].
+]
+.midi[&lt;br&gt;]
+.yellow-bg[
+.embolden[Hypergraph] algorithms can succeed where .embolden[graph] algorithms necessarily fail. 
+]
+.midi[&lt;br&gt;]
+.blue-bg[
+Performance depends on .embolden[matching the structural assumptions] of algorithms to data. 
+]
+---
+
+#### There's still a **lot more to do**... &lt;br&gt; &lt;br&gt; 
+
+1. Alternative inference frameworks/algorithms for DCHSBM:
+  - Bayesian Monte Carlo.
+  - Belief propagation.
+  - Alternative greedy heuristics.
+2. Faster methods for general affinity functions `\(\Omega\)`. 
+3. Mathematical understanding of the information-theoretic limits of hypergraph inference frameworks. 
+4. ...
+
+---
+
+background-image: url(img/arxiv.png)
+
+## The Preprint
+
+
+---
+
+#### Thanks! &lt;br&gt; &lt;br&gt;
+
+.pull-left-third[.pink-bg[
+.centered-image[![:scale 100%](img/nate.jpg)]
+.embolden[Nate]  .embolden[Veldt]
+.small[
+  Math @ Cornell
+]]]
+
+.pull-left-third[.yellow-bg[
+.centered-image[![:scale 100%](img/austin.jpg)]
+.embolden[Austin]  .embolden[Benson]
+.small[
+  CS @ Cornell
+]]]
+
+
+.pull-left-third[.blue-bg[
+.centered-image[![:scale 100%](img/phil.jpg)]
+.embolden[Phil]  .embolden[Chodrow]
+.small[
+  Math @ UCLA
+]]]
+
+.midi[
+ .hidden[d]
+&lt;br&gt; 
+  **Funding**: ARO MURI, NSF, and JP Morgan Chase &amp; Co.
+]
+---
+
+class: section, middle, right
+
+# Supplementary Slides
+
+---
+
+background-image: url(img/recovery-timings.png) 
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

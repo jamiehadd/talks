@@ -10,7 +10,8 @@
 
 
 :root {
-	--light-gray:#dfe9ed;
+	--light-gray:#d9dbdb;
+	--light-gray-30: #d9dbdb30;
 	--bayberry: #25595840;
 	--bayberry-30: #25595810;
 	--rhubarb: #77202F40;
@@ -32,6 +33,14 @@ h2 {
 }
 .remark-slide h1, h2, h3{
 	color: var(--classic-blue);
+}
+
+.remark-slide h4{
+	font-size: 120%;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	margin-top: 1px;
+	margin-bottom: 1px;
 }
 
 .pink-highlight, .blue-highlight, .yellow-highlight, .purple-highlight{
@@ -66,14 +75,19 @@ h2 {
   background-color: var(--lilac-sachet-30);
 }
 
-.thanks, .alert, .funding, .blue-bg, .yellow-bg, .green-bg, .purple-bg, .pink-bg, .white-bg, .red-bg, .teal-bg {
+.thanks, .alert, .funding, .blue-bg, .yellow-bg, .green-bg, .purple-bg, .pink-bg, .white-bg, .red-bg, .teal-bg, .gray-bg {
   padding-top: 1px;
   padding-bottom: 1px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
   border-radius: 25px;
+}
+
+.gray-bg{
+	border: solid 5px var(--light-gray);
+  background-color: var(--light-gray-30);
 }
 
 .teal-bg{
@@ -157,7 +171,7 @@ h2 {
 
 .title-slide h1 {
   font-size: 160%;
-  color: var(--light-gray);
+  color: var(--white);
 }
 
 .title-slide h1::first-line {
@@ -169,7 +183,6 @@ h2 {
 .title-slide h3::first-line {
   color: var(--peach-quartz);
   font-weight: bold;
-  font-size: 90%;
 }
 
 .middle{
@@ -190,16 +203,17 @@ h2 {
 }
 
 
-
-
-
 .section {
 	background-color: var(--classic-blue);
 	color: #FFFFFF;
 }
 
-.section h1 {
+.section h1, h2 {
 	color: #FFFFFF;
+}
+
+.section h3 {
+	font-size: 140%;
 }
 
 .remark-slide tr:nth-child(even) { background: #f2f5f7}
@@ -249,7 +263,8 @@ h2 {
   margin-bottom: 3px;
   margin-right: 5px;
   margin-left: 5px;
-  color: var(--peach-quartz)
+  color: #FFFFFF;
+  font-family: Lato, Roboto, sans-serif;
 }
 
 .hidden {
