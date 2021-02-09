@@ -206,7 +206,7 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
 ---
 
 
-#### Modularity  **in context**.  
+#### Modularity  **in context**.  <br> <br>
 
 
 ![:scale 100%](img/clustering-quadrant.png)
@@ -298,7 +298,9 @@ Let $\mathcal{L}(\mathbf{z}, \hat{\omega}, \hat{\theta})$ be the DCSBM log-likel
 $$\mathcal{L}(\mathbf{z}, \hat{\omega}, \hat{\theta}) \approx Q(\mathbf{z}) + C(\hat{\omega}, \hat{\theta}).$$
 ]
 
-This approximation is exact when all clusters have the same sum of internal degrees. 
+This approximation is exact when all clusters have the same volume (sum of degrees): 
+
+$$\mathbf{vol}(z_j) \equiv \sum_i{d_i}\delta(z_i, z_j) = \text{constant}$$
 
 
 .footnote[
@@ -307,7 +309,7 @@ Zhang & Moore, *PNAS* (2015), Newman, *PRE* (2016), Zhang & Peixoto, *PRR* (2020
 
 ---
 
-#### We propose a **hypergraph degree-corrected stochastic blockmodel**.
+#### We propose a heterogeneous **hypergraph degree-corrected stochastic blockmodel**.
 
 <br>
 
@@ -332,7 +334,7 @@ Bernoulli variant proposed by Ke et al., "Community detection for hypergraph net
 .midi[
 An **assortative** model might satisfy 
 
-$$\Omega(a, a, a) \geq \Omega(a, a, b)\geq \Omega(a, b, c)\ldots$$ 
+$$\Omega(\color{#0F4C81}{\bullet}, \color{#0F4C81}{\bullet}, \color{#0F4C81}{\bullet}) \geq \Omega(\color{#0F4C81}{\bullet}, \color{#0F4C81}{\bullet}, \color{#F5B895}{\bullet})\geq \Omega(\color{#0F4C81}{\bullet}, \color{#F5B895}{\bullet}, \color{#F4DBB3}{\bullet})\ldots$$ 
 
 
 "*Edges within the same group are most common. Edges containing two groups are less common. Edges containing three groups are even less common...*"
@@ -342,7 +344,7 @@ $$\Omega(a, a, a) \geq \Omega(a, a, b)\geq \Omega(a, b, c)\ldots$$
 ]]
 
 .midi[
-Example: $\mathbf{z}_R = (a, a, a, b, c, c)$, $\mathbf{p} = (3, 2, 1)$. 
+Example: $\mathbf{z}_R = (\color{#F5B895}{\bullet}, \color{#0F4C81}{\bullet}, \color{#0F4C81}{\bullet}, \color{#0F4C81}{\bullet},  \color{#F4DBB3}{\bullet}, \color{#F4DBB3}{\bullet})$, $\mathbf{p} = (3, 2, 1)$. 
 ]
 
 ---
@@ -412,7 +414,7 @@ Generalizes Kamiński et al., "Clustering via hypergraph modularity." *PLoS ONE*
 
 ---
 
-#### These parameters are **interpretable** and can be **estimated from data.** 
+#### These parameters are **interpretable** and can be **estimated from data.** <br> <br> 
 
 .midi[
 .gray-bg[
@@ -435,13 +437,13 @@ class: section, middle
 
 ---
 
-#### Nate wrote efficient **hypergraph maximum-likelihood Louvain** (HMLL).
-.small[<br>]
+#### Nate wrote efficient **hypergraph maximum-likelihood Louvain** (HMLL). <br> <br> 
+
 .pink-bg[
 1. All nodes start in their own cluster. 
 2. Greedily agglomerates nodes to maximize modularity. 
 3. Then, greedily agglomerates entire .embolden[clusters] of nodes.  
-4. Estimate parameters $\Omega$ and $\{\theta_i\}$
+4. Estimate parameters $\Omega$ and $\{\theta_i\}$.
 5. Repeat!
 ]
 
@@ -462,7 +464,7 @@ Hypergraph Louvain is roughly as fast as dyadic projection + graph Louvain.
 ---
 
 .midi[
-#### **Detectability thresholds**: hypergraph methods succeed where graph methods fail.
+#### **Detectability thresholds**: hypergraph methods succeed where graph methods fail. 
 ]
 
 .centered-image[
@@ -583,7 +585,7 @@ class: section, middle
 #### What we learned <br> <br>
 
 .pink-bg[
-A generative approach to hypergraph modularity can lead to .embolden[fast, interpretable algorithms].
+A generative approach to hypergraph modularity can lead to .embolden[interpretable objectives] and .embolden[fast algorithms].
 ]
 .midi[<br>]
 .yellow-bg[
@@ -597,13 +599,13 @@ Performance depends on .embolden[matching the structural assumptions] of algorit
 
 #### There's still a **lot more to do**... <br> <br> 
 
-1. Alternative inference frameworks/algorithms for DCHSBM:
+1. Alternative **inference frameworks** for DCHSBM:
   - Bayesian Monte Carlo.
   - Belief propagation.
   - Alternative greedy heuristics.
-2. Faster methods for general affinity functions $\Omega$. 
-3. Mathematical understanding of the information-theoretic limits of hypergraph inference frameworks. 
-4. ...
+2. **Faster algorithms** for general affinity functions $\Omega$. 
+3. Mathematical understanding of the **information-theoretic limits** of hypergraph inference frameworks. 
+4. [Insert **your cool idea** here]. 
 
 ---
 
