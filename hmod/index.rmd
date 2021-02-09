@@ -165,7 +165,7 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
 
 .midi[.midi[
 
-.embolden[Interpretability]
+.embolden[Interpretability + Math]
 
 - .embolden[Null model comparison] 
   - Newman & Girvan 2004
@@ -174,7 +174,9 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
 - .embolden[Blockmodel likelihood] 
   - Newman 2016
   - Zhang + Moore 2014
-  
+- .embolden[Discrete surface tension]
+  - Boyd et al. Boyd et al. 2020
+
 .embolden[Scalability]
 
   - .embolden[Louvain algorithm] 
@@ -196,7 +198,7 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
 - .embolden[Overfitting] 
   - Zhang + Moore 2014
 
-<br> 
+<br> <br> <br> 
 
 .embolden[Optimization Problems]
 
