@@ -158,7 +158,7 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
 
 ---
 
-#### Modularity: .pink[Strengths] and **limitations**. <br> <br>
+#### Modularity: .pink[strengths] and **limitations**. <br> <br>
 
 .pull-left[
 .pink-bg[
@@ -261,7 +261,7 @@ Performance depends on .embolden[matching the structural assumptions] of algorit
 **Kumar et al.** "Hypergraph clustering by iteratively reweighted modularity maximization." *Applied Network Science*, (2020)
 
 - Combines graph modularity with an adaptive penalty for imbalanced hyperedge splits. 
-- Seems to work well, interpretability / connection to generative models unclear. 
+- Seems to work well! Not directly connected to a generative model. 
 ]
 
 ---
@@ -273,13 +273,14 @@ class: section, middle, right
 ]
 ---
 
-#### The **statistical view** of graph modularity. 
-
-<br>
+#### The **generative view** of graph modularity. <br> <br> 
 
 .embolden[Degree-corrected stochastic blockmodel (DCSBM)]: a generative model of clustered graphs with heterogeneous degrees.  
 
+.midi[
+.pink-bg[
 $$\text{number of edges } (i,j) \equiv a_{ij} \sim \text{Poisson}(\theta_i\theta_j\omega(z_i,z_j)).$$
+]]
 
 .footnote[
 Karrer & Newman, "Stochastic blockmodels and community structure in networks." *PRE*, 2011
@@ -300,7 +301,7 @@ $$\mathcal{L}(\mathbf{z}, \hat{\omega}, \hat{\theta}) \approx Q(\mathbf{z}) + C(
 
 This approximation is exact when all clusters have the same volume (sum of degrees): 
 
-$$\mathbf{vol}(z_j) \equiv \sum_i{d_i}\delta(z_i, z_j) = \text{constant}$$
+$$\mathbf{vol}(z_j) \equiv \sum_i{d_i}\delta(z_i, z_j) = \text{constant.}$$
 
 
 .footnote[
@@ -309,9 +310,7 @@ Zhang & Moore, *PNAS* (2015), Newman, *PRE* (2016), Zhang & Peixoto, *PRR* (2020
 
 ---
 
-#### We propose a heterogeneous **hypergraph degree-corrected stochastic blockmodel**.
-
-<br>
+#### We propose a heterogeneous **hypergraph degree-corrected stochastic blockmodel**. <br> <br> 
 
 .midi[
 .pink-bg[
@@ -321,6 +320,7 @@ $$a_R \equiv \text{# of edges on tuple }R \sim \mathrm{Poisson}\left(\Omega(\mat
 - $\mathbf{z}$ is the vector of node labels (clusters).
 - $\{\theta_i\}$ are *degree* parameters. 
 - $\Omega$ is the *affinity function* that governs connections between different groups. 
+- Models hypergraphs with **heterogeneous node degrees and edge sizes**. 
 
 
 .footnote[
