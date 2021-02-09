@@ -165,7 +165,8 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
 
 .midi[.midi[
 
-**Interpretability**
+.embolden[Interpretability]
+
 - .embolden[Null model comparison] 
   - Newman & Girvan 2004
 - .embolden[Dynamical stability] 
@@ -174,7 +175,8 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
   - Newman 2016
   - Zhang + Moore 2014
   
-**Scalability** 
+.embolden[Scalability]
+
   - .embolden[Louvain algorithm] 
     - Blondel et al. 2008
   - .embolden[Belief propagation] 
@@ -187,7 +189,8 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
 
 .midi[.midi[
 
-**Statistical Problems**
+.embolden[Statistical Problems]
+
 - .embolden[Underfitting] 
   - Fortunato + Barthélemy 2007
 - .embolden[Overfitting] 
@@ -195,7 +198,8 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
 
 <br> 
 
-**Optimization Problems**
+.embolden[Optimization Problems]
+
 - .embolden[Degeneracy] 
   - Good et al. 2010
 - .embolden[NP-hard objective]  
