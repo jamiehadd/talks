@@ -246,10 +246,10 @@ Newman &amp; Girvan, "Finding and evaluating community structure in networks." *
 
 ---
 
-#### Here's what we learned. &lt;br&gt; &lt;br&gt;
+#### **Key learnings** (messages for today). &lt;br&gt; &lt;br&gt;
 
 .pink-bg[
-A generative approach to hypergraph modularity clustering can lead to .embolden[interpretable objectives] and .embolden[fast algorithms].
+A generative approach to hypergraph modularity can lead to .embolden[interpretable objectives] and .embolden[fast algorithms].
 ]
 .midi[&lt;br&gt;]
 .yellow-bg[
@@ -347,7 +347,7 @@ Bernoulli variant proposed by Ke et al., "Community detection for hypergraph net
 .midi[
 An **assortative** model might satisfy 
 
-`$$\Omega(\color{#0F4C81}{\bullet}, \color{#0F4C81}{\bullet}, \color{#0F4C81}{\bullet}) \geq \Omega(\color{#0F4C81}{\bullet}, \color{#0F4C81}{\bullet}, \color{#F5B895}{\bullet})\geq \Omega(\color{#0F4C81}{\bullet}, \color{#F5B895}{\bullet}, \color{#F4DBB3}{\bullet})\ldots$$` 
+`$$\Omega(\color{#0F4C81}{\bullet} \color{#0F4C81}{\bullet} \color{#0F4C81}{\bullet}) \geq \Omega(\color{#0F4C81}{\bullet} \color{#0F4C81}{\bullet} \color{#F5B895}{\bullet})\geq \Omega(\color{#0F4C81}{\bullet} \color{#F5B895}{\bullet} \color{#F4DBB3}{\bullet})\ldots$$` 
 
 
 "*Edges within the same group are most common. Edges containing two groups are less common. Edges containing three groups are even less common...*"
@@ -357,7 +357,7 @@ An **assortative** model might satisfy
 ]]
 
 .midi[
-Example: `\(\mathbf{z}_R = (\color{#F5B895}{\bullet}, \color{#0F4C81}{\bullet}, \color{#0F4C81}{\bullet}, \color{#0F4C81}{\bullet},  \color{#F4DBB3}{\bullet}, \color{#F4DBB3}{\bullet})\)`, `\(\mathbf{p} = (3, 2, 1)\)`. 
+Example: `\(\mathbf{z}_R = (\color{#F5B895}{\bullet} \color{#0F4C81}{\bullet} \color{#0F4C81}{\bullet} \color{#0F4C81}{\bullet}  \color{#F4DBB3}{\bullet} \color{#F4DBB3}{\bullet})\)` `\(\implies\)` `\(\mathbf{p} = (3, 2, 1)\)`. 
 ]
 
 ---
@@ -381,10 +381,8 @@ $$
 Zhang + Peixoto, "Statistical inference of assortative community structures." *PRR*, 2020]
 ---
 
-#### Optimization over ** `\(\mathbf{z}\)` ** leads to a modularity-type objective. 
+#### Optimization over `\(\mathbf{z}\)` leads to a **modularity-type objective.** &lt;br&gt; &lt;br&gt;  
 
-.midi[
-&lt;br&gt;
 .pink-bg[
 $$
 `\begin{aligned}
@@ -392,7 +390,7 @@ Q(\mathbf{z}, \Omega) &amp;\equiv \sum_{\mathbf{p}}[ \Omega(\mathbf{p}) \textbf{
 &amp;\approx \mathcal{L}(\mathbf{z}, \Omega, \mathbf{d}) + \text{constants w.r.t. } \mathbf{z} 
 \end{aligned}`
 $$
-]]
+]
 
 $$
 `\begin{aligned}
@@ -413,9 +411,10 @@ Consider an edge `\(e\)` of `\(k\)` nodes. Suppose:
   \omega_{k0} &amp;\quad \text{otherwise}\;.  
 \end{cases}$$`
 
-.pink-bg[.midi[
+.midi[
+.gray-bg[
 $$
-Q = \sum_k \beta_k \left[\text{# homogeneous }k\text{-edges} - \gamma_k\sum_j \textbf{vol}(j)^k\right]
+Q = \sum_k \color{#0F4C81}{\beta_k} \left[\text{# homogeneous }k\text{-edges} - \color{#ec7a39}{\gamma_k}\sum_j \textbf{vol}(j)^k\right]
 $$
 ]]
 
@@ -454,8 +453,8 @@ class: section, middle
 
 .pink-bg[
 1. All nodes start in their own cluster. 
-2. Greedily agglomerates nodes to maximize modularity. 
-3. Then, greedily agglomerates entire .embolden[clusters] of nodes.  
+2. Greedily agglomerate nodes to maximize modularity. 
+3. Then, greedily agglomerate entire .embolden[clusters] of nodes.  
 4. Estimate parameters `\(\Omega\)` and `\(\{\theta_i\}\)`.
 5. Repeat!
 ]
