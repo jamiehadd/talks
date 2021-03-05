@@ -175,7 +175,7 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
   - Newman 2016
   - Zhang + Moore 2014
 - .embolden[Discrete surface tension]
-  - Boyd et al. Boyd et al. 2020
+  - Boyd et al. 2020
 
 .embolden[Scalability]
 
@@ -228,7 +228,7 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
 ---
 
 
-#### The **strategy**: scalable modularity for hypergraphs.
+####**Agenda**: get modularity on the hype(rgraph) train. 
 
 <br>
 
@@ -239,7 +239,7 @@ Newman & Girvan, "Finding and evaluating community structure in networks." *PRE*
 
 ---
 
-#### **Key learnings** (messages for today). <br> <br>
+#### **Key messages**  for today. <br> <br>
 
 .pink-bg[
 A generative approach to hypergraph modularity can lead to .embolden[interpretable objectives] and .embolden[fast algorithms].
@@ -469,7 +469,7 @@ Hypergraph Louvain is roughly as fast as dyadic projection + graph Louvain.
 ---
 
 .midi[
-#### **Detectability thresholds**: hypergraph methods succeed where graph methods fail. 
+#### **Detectability thresholds**: hypergraph methods can succeed where graph methods fail. 
 ]
 
 .centered-image[
@@ -564,7 +564,7 @@ background-image: url(img/recovery_experiments.png)
 
 #### Performance of algorithm is closely tied to higher-order **structure of data**. 
 
-BIC of data under two choices of $\Omega$, lower is better. 
+*BIC of data under two choices of $\Omega$, lower is better.* 
 
 .midi[
 |                             |  AON $\Omega$ | Pairwise $\Omega$  
