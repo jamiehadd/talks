@@ -36,7 +36,7 @@ class: split-50 bg-main1
 .split-four[
 .column[.image-caption-right[
   <br>
-  ### .alert[<nobr>Mari Kawakatsu</nobr>]
+  ## .alert[<nobr>Mari Kawakatsu</nobr>]
   .font_medium[Applied and Computational Mathematics <br> Princeton University ]
   ]   
 ]
@@ -50,7 +50,7 @@ class: split-50 bg-main1
 ] 
 .column[.image-caption-left[
   <br>
-  ### .alert[<nobr>Phil Chodrow</nobr>]
+  ## .alert[<nobr>Phil Chodrow</nobr>]
   .font_large[Mathematics <br> UCLA]
   ] 
 ]
@@ -60,7 +60,7 @@ class: split-50 bg-main1
 .row[
 .split-four[
 .column[.image-caption-right[
-  ### .alert[<nobr>Nicole Eikmeier</nobr>]
+  ## .alert[<nobr>Nicole Eikmeier</nobr>]
   .font_large[<nobr>Computer Science</nobr> <br> Grinnell]      
   ]   
 ]
@@ -71,7 +71,7 @@ class: split-50 bg-main1
   <img src="img/dan_portrait.jpeg" width=100%>
 ] 
 .column[.image-caption-left[
-  ### .alert[Dan Larremore]
+  ## .alert[<nobr>Dan Larremore</nobr>]
   .font_large[<nobr>Computer Science</nobr> <br> CU Boulder ]
   ] 
 ]
@@ -88,13 +88,13 @@ class: split-two with-border
 Quick overview of .alert[networks] and why we care about them.
   ]]
   .row.bg-main2[.content.font2[
-.alert[Ranking] in networks (here be linear algebra.)
+.alert[Ranking] in networks. <br> (Here be linear algebra.)
   ]]
   .row.bg-main3[.content.font2[
-When are prestige-based hierarchies <br> .alert[self-sustaining]? 
+From ranks to self-sustaining  <br>.alert[feedback loops]. 
   ]]
   .row.bg-main5[.content.font2[
-.alert[Having fun] while doing science. 
+.alert[**Having fun**] while doing science. 
   ]]
 ]]
 
@@ -105,7 +105,7 @@ When are prestige-based hierarchies <br> .alert[self-sustaining]?
 ---
 class: hide-row2-col1 hide-row3-col1 hide-row4-col1
 <img src="img/network.jpeg" width=100%>
-***Image:*** *Wikipedia*
+***Image credit:*** *Wikipedia*
 ---
 class: hide-row3-col1 hide-row4-col1
 <img src="img/schematic.png" width=100%>
@@ -125,20 +125,63 @@ class:
 <img src="img/page-rank.png" width=30%>
 ---
 class: fade-row2-col1 fade-row3-col1 fade-row4-col1
+<img src="img/network.jpeg" width=100%>
+***Image credit:*** *Wikipedia*    
 ---
-layout: true
-class: split-two with-border
+layout: false
+class: middle
 
-.column[.split-four[
-.row[
-# Why am I .color-alert[here]?  
+.split-two[
+.column.bg-main1[
+<br><br>
+# Networks
+.blockquote.font_large[A ***.alert2[network]*** (or ***.alert2[graph]***) consists of:
+- A set $\mathcal{N}$ of entities, called *.alert2[nodes]*.
+- A set of $\mathcal{E}$ of connections between pairs of nodes, called *.alert2[edges]*.]
+
+.font_large[Today we are mostly going to focus on *directed networks*, like this one. $\rightarrow$
+
+It has 6 nodes and 6 edges. 
 ]
-.row[
-# more
-]]]
-.column[
-{{content}}
 ]
+.column[<br><br> 
+#   <br><br>
+.content.center[
+<img src="img/digraph.png" width=100%>
+***Image credit:*** *Wikipedia*
+]]
+]
+
+---
+class: middle
+
+.split-two[ 
+.column.bg-main5[
+<br> <br> 
+# The Adjacency Matrix <br> <br> 
+.content.center[.font_large[ 
+  $$\mathbf{A} = \left[\begin{matrix}
+    <!-- 0 & \mathbf{1} & 0 & 0 & 0 & 0 \\  -->
+    <!-- 0 & 0 & \mathbf{1} & 0 & 0 & 0 \\ -->
+    <!-- 0 & 0 & 0 & 0 & \mathbf{1} & 0 \\ -->
+    <!-- 0 & \mathbf{1} & 0 & 0 & 0 & 0 \\ -->
+    <!-- 0 & 0 & 0 & \mathbf{1} & 0 & \mathbf{1} \\  -->
+    <!-- 0 & 0 & 0 & 0 & 0 & 0  -->
+    \end{matrix}\right] 
+    $$
+  ]
+  ]
+]
+.column[<br> <br> 
+#  <br> <br> 
+.content.center[
+<img src="img/digraph.png" width=100%>
+***Image credit:*** *Wikipedia*
+]]
+]
+
+
+
 ---
 class: 
 # this is the content

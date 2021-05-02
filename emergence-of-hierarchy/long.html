@@ -39,7 +39,7 @@ class: split-50 bg-main1
 .split-four[
 .column[.image-caption-right[
   &lt;br&gt;
-  ### .alert[&lt;nobr&gt;Mari Kawakatsu&lt;/nobr&gt;]
+  ## .alert[&lt;nobr&gt;Mari Kawakatsu&lt;/nobr&gt;]
   .font_medium[Applied and Computational Mathematics &lt;br&gt; Princeton University ]
   ]   
 ]
@@ -53,7 +53,7 @@ class: split-50 bg-main1
 ] 
 .column[.image-caption-left[
   &lt;br&gt;
-  ### .alert[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]
+  ## .alert[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]
   .font_large[Mathematics &lt;br&gt; UCLA]
   ] 
 ]
@@ -63,7 +63,7 @@ class: split-50 bg-main1
 .row[
 .split-four[
 .column[.image-caption-right[
-  ### .alert[&lt;nobr&gt;Nicole Eikmeier&lt;/nobr&gt;]
+  ## .alert[&lt;nobr&gt;Nicole Eikmeier&lt;/nobr&gt;]
   .font_large[&lt;nobr&gt;Computer Science&lt;/nobr&gt; &lt;br&gt; Grinnell]      
   ]   
 ]
@@ -74,7 +74,7 @@ class: split-50 bg-main1
   &lt;img src="img/dan_portrait.jpeg" width=100%&gt;
 ] 
 .column[.image-caption-left[
-  ### .alert[Dan Larremore]
+  ## .alert[&lt;nobr&gt;Dan Larremore&lt;/nobr&gt;]
   .font_large[&lt;nobr&gt;Computer Science&lt;/nobr&gt; &lt;br&gt; CU Boulder ]
   ] 
 ]
@@ -91,13 +91,13 @@ class: split-two with-border
 Quick overview of .alert[networks] and why we care about them.
   ]]
   .row.bg-main2[.content.font2[
-.alert[Ranking] in networks (here be linear algebra.)
+.alert[Ranking] in networks. &lt;br&gt; (Here be linear algebra.)
   ]]
   .row.bg-main3[.content.font2[
-When are prestige-based hierarchies &lt;br&gt; .alert[self-sustaining]? 
+From ranks to self-sustaining  &lt;br&gt;.alert[feedback loops]. 
   ]]
   .row.bg-main5[.content.font2[
-.alert[Having fun] while doing science. 
+.alert[**Having fun**] while doing science. 
   ]]
 ]]
 
@@ -108,7 +108,7 @@ When are prestige-based hierarchies &lt;br&gt; .alert[self-sustaining]?
 ---
 class: hide-row2-col1 hide-row3-col1 hide-row4-col1
 &lt;img src="img/network.jpeg" width=100%&gt;
-***Image:*** *Wikipedia*
+***Image credit:*** *Wikipedia*
 ---
 class: hide-row3-col1 hide-row4-col1
 &lt;img src="img/schematic.png" width=100%&gt;
@@ -128,20 +128,63 @@ class:
 &lt;img src="img/page-rank.png" width=30%&gt;
 ---
 class: fade-row2-col1 fade-row3-col1 fade-row4-col1
+&lt;img src="img/network.jpeg" width=100%&gt;
+***Image credit:*** *Wikipedia*    
 ---
-layout: true
-class: split-two with-border
+layout: false
+class: middle
 
-.column[.split-four[
-.row[
-# Why am I .color-alert[here]?  
+.split-two[
+.column.bg-main1[
+&lt;br&gt;&lt;br&gt;
+# Networks
+.blockquote.font_large[A ***.alert2[network]*** (or ***.alert2[graph]***) consists of:
+- A set `\(\mathcal{N}\)` of entities, called *.alert2[nodes]*.
+- A set of `\(\mathcal{E}\)` of connections between pairs of nodes, called *.alert2[edges]*.]
+
+.font_large[Today we are mostly going to focus on *directed networks*, like this one. `\(\rightarrow\)`
+
+It has 6 nodes and 6 edges. 
 ]
-.row[
-# more
-]]]
-.column[
-{{content}}
 ]
+.column[&lt;br&gt;&lt;br&gt; 
+#   &lt;br&gt;&lt;br&gt;
+.content.center[
+&lt;img src="img/digraph.png" width=100%&gt;
+***Image credit:*** *Wikipedia*
+]]
+]
+
+---
+class: middle
+
+.split-two[ 
+.column.bg-main5[
+&lt;br&gt; &lt;br&gt; 
+# The Adjacency Matrix &lt;br&gt; &lt;br&gt; 
+.content.center[.font_large[ 
+  $$\mathbf{A} = \left[\begin{matrix}
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; \mathbf{1} \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0  --&gt;
+    \end{matrix}\right] 
+    $$
+  ]
+  ]
+]
+.column[&lt;br&gt; &lt;br&gt; 
+#  &lt;br&gt; &lt;br&gt; 
+.content.center[
+&lt;img src="img/digraph.png" width=100%&gt;
+***Image credit:*** *Wikipedia*
+]]
+]
+
+
+
 ---
 class: 
 # this is the content
