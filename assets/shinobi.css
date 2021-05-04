@@ -45,7 +45,8 @@ See https://emitanaka.github.io/ninja-theme for the kunoichi example (replace wi
 }
 
 p {
-	padding-left: 10%;
+	padding-left: 20%;
+	margin-left: 20px;
 }
 
 .remark-slide {
