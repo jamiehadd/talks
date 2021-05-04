@@ -118,7 +118,7 @@ class:
 <img src="img/heart-cookies.jpg" width=32%>
 <img src="img/book.jpg" width=32%>
 <img src="img/apollo.jpg" width=32%>
-<img src="img/yes.gif" width=65%>
+<img src="img/yes.GIF" width=65%>
 <img src="img/so-pumped.png" width=32%>
 <img src="img/ezra.jpg" width=32%>
 <img src="img/cat.jpeg" width=32%>
