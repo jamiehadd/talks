@@ -139,9 +139,44 @@ class: middle
 - A set $\mathcal{N}$ of entities, called *.alert2[nodes]*.
 - A set of $\mathcal{E}$ of connections between pairs of nodes, called *.alert2[edges]*.]
 
-.font_large[Today we are mostly going to focus on *directed networks*, like this one. $\rightarrow$
+.font_large[Social groups, complex infrastructure, and natural ecosystems are among the .alert[many] systems we can model with networks. 
+]
+]
+.column[
+#   <br><br>
+.content.center[
+<img src="img/network.jpeg" width=100%>   
+***Image credit:*** *Wikipedia*
+]]
+]
 
-It has 6 nodes and 6 edges. 
+---
+class: middle
+
+.split-two[
+.column.bg-main1[
+<br><br>
+# .alert[Directed] Networks
+
+.font_large[ 
+
+.alert2[Competitions] (chess, basketball...): 
+
+> - Nodes are competitors. 
+<br>
+> - $A\rightarrow B$ $\implies$ $B$ beat $A$. 
+
+The .alert2[Internet] (Google, Facebook...): 
+
+> - Nodes are webpages. 
+> - $A\rightarrow B$ $\implies$ $A$ links to $B$. 
+
+
+.alert2[Endorsements] (politics, Twitter...):  
+  
+> - Nodes are people. 
+> - $A\rightarrow B$ $\implies$ $A$ thinks $B$ is good. 
+
 ]
 ]
 .column[<br><br> 
@@ -169,6 +204,8 @@ class: middle
     <!-- 0 & 0 & 0 & 0 & 0 & 0  -->
     \end{matrix}\right] 
     $$
+    
+  Turns **network** problems into **linear algebra** problems. 
   ]
   ]
 ]
