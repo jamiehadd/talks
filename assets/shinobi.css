@@ -18,7 +18,7 @@ See https://emitanaka.github.io/ninja-theme for the kunoichi example (replace wi
 		--text-color4: white;
 		--text-color5: main-color1;
 		--text-opacity: white;
-		--link-color: orange;
+		--link-color: #ff5252;
 		--alert-color: #ff5252;
 			--text-alert: #ff5252;
 		--code-background: transparent;
@@ -79,7 +79,7 @@ p {
 
 .title-slide .remark-slide-number { display: none; }
 
-.bg-main1 { background-color: var(--main-color1); color: var(--text-color1);}
+.bg-main1 { background-color: var(--main-color1); color: var(--text-color1); border: 2px solid var(--main-color1)}
 .bg-main2 { background-color: var(--main-color2); color: var(--text-color2);}
 .bg-main3 { background-color: var(--main-color3); color: var(--text-color3);}
 .bg-main4 { background-color: var(--main-color4); color: var(--text-color4);}
@@ -90,7 +90,7 @@ p {
 .color-main2 { color: var(--main-color2);}
 .color-main3 { color: var(--main-color3);}
 .color-main4 { color: var(--main-color4);}
-.color-main4 { color: var(--main-color5);}
+.color-main5 { color: var(--main-color5);}
 .color-alert { color: var(--alert-color);}
 
 .shade_main  {

@@ -83,18 +83,18 @@ class: split-50 bg-main1
 
 ---
 layout: true
-class: split-two with-border
+class: split-two with-border middle
 
 .column[
   .split-four[
   .row.bg-main1[.content.font2[
-Quick overview of .alert[networks] and why we care about them.
+Quick overview of .alert[**networks**] and why we care about them.
   ]]
   .row.bg-main2[.content.font2[
-.alert[Ranking] in networks. &lt;br&gt; (Here be linear algebra.)
+.alert[**Ranking**] in networks. &lt;br&gt; (Here be linear algebra.)
   ]]
   .row.bg-main3[.content.font2[
-From ranks to self-sustaining  &lt;br&gt;.alert[feedback loops]. 
+From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
   ]]
   .row.bg-main5[.content.font2[
 .alert[**Having fun**] while doing science. 
@@ -130,68 +130,137 @@ class:
 class: fade-row2-col1 fade-row3-col1 fade-row4-col1
 &lt;img src="img/network.jpeg" width=100%&gt;   
 ***Image credit:*** *Wikipedia*    
+
 ---
 layout: false
-class: middle
-
-.split-two[
-.column.bg-main1[
-&lt;br&gt;&lt;br&gt;
-# Networks
+class: split-two
+  
+.column.bg-main1[&lt;br&gt; &lt;br&gt;
+.content.font3[.color-main1[Directed] Networks] 
 .blockquote.font_large[A ***.alert2[network]*** (or ***.alert2[graph]***) consists of:
 - A set `\(\mathcal{N}\)` of entities, called *.alert2[nodes]*.
 - A set of `\(\mathcal{E}\)` of connections between pairs of nodes, called *.alert2[edges]*.]
 
-.font_large[Social groups, complex infrastructure, and natural ecosystems are among the .alert[many] systems we can model with networks. 
+.font_large[Social groups, complex infrastructure, and natural ecosystems are among the .alert[many] systems we can model with networks.]
 ]
-]
+
 .column[
-#   &lt;br&gt;&lt;br&gt;
-.content.center[
+.content.center.vmiddle[
 &lt;img src="img/network.jpeg" width=100%&gt;   
 ***Image credit:*** *Wikipedia*
-]]
+]
 ]
 
 ---
+layout: true
+class: split-two
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font3[
+.alert[Directed] Networks
+  ]]
+  .row.bg-main1[.content.font_large[
+  .alert2[Competitions] (chess, basketball...)  &lt;br&gt; 
+  .color-main1[tab] Nodes are competitors/teams. &lt;br&gt;
+  .color-main1[tab] `\(A \rightarrow B\)` `\(\implies\)` `\(B\)` beats `\(A\)`. 
+  ]]
+  .row.bg-main1[.content.font_large[ 
+  .alert2[Internet] (Google, Facebook) &lt;br&gt;
+  .color-main1[tab] Nodes are webpages. &lt;br&gt;
+  .color-main1[tab] `\(A\rightarrow B\)` `\(\implies\)` `\(A\)` links to `\(B\)`. 
+  ]] 
+  .row.bg-main1[.content.font_large[
+  .alert2[Endorsements] (politics, Twitter) &lt;br&gt; 
+  .color-main1[tab] Nodes are people. &lt;br&gt;
+  .color-main1[tab] `\(A\rightarrow B\)` `\(\implies\)` `\(A\)` thinks `\(B\)` is good.   
+  ]]
+]]
+
+.column[.content.center.hmiddle[&lt;br&gt;
+&lt;img src="img/digraph.png" width=70%&gt;&lt;br&gt;
+***Image credit:*** *Wikipedia*
+{{content}}
+]]
+
+---
+class: hide-row2-col1 hide-row3-col1 hide-row4-col1 
+
+---
+class: hide-row3-col1 hide-row4-col1
+&lt;img src="img/magnus.jpeg" width=70%&gt; 
+
+---
+class:hide-row4-col1
+&lt;img src="img/how-pagerank-works.png" width=70%&gt;
+
+---
+
+class:
+&lt;img src="img/lamberson-social-network.jpeg" width=70%&gt;&lt;br&gt; 
+***Image credit***: [PJ Lamberson](http://social-dynamics.org/twitter-network-data/)
+
+---
+layout: true
+class: split-two with-border middle
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font2[
+Quick overview of .alert[networks] and why we care about them.
+  ]]
+  .row.bg-main2[.content.font2[
+.alert[Ranking] in networks. &lt;br&gt; (Here be linear algebra.)
+  ]]
+  .row.bg-main3[.content.font2[
+From ranks to self-sustaining  &lt;br&gt;.alert[feedback loops]. 
+  ]]
+  .row.bg-main5[.content.font2[
+.alert[**Having fun**] while doing science. 
+  ]]
+]]
+
+.column[.content.center.vmiddle[
+{{content}}
+]]
+
+---
+class: fade-row1-col1 fade-row3-col1 fade-row4-col1
+&lt;img src="img/schematic.png" width=100%&gt;
+`$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) +\alpha \mathbf{I}\right]\mathbf{s} = \left[\mathbf{D}^i- \mathbf{D}^o \right]\mathbb{1}$$`
+
+---
 class: middle
+layout: false
 
 .split-two[
 .column.bg-main1[
 &lt;br&gt;&lt;br&gt;
-# .alert[Directed] Networks
+# The Network Ranking Problem
 
-.font_large[ 
-
-.alert2[Competitions] (chess, basketball...): 
-
-&gt; - Nodes are competitors. 
-&lt;br&gt;
-&gt; - `\(A\rightarrow B\)` `\(\implies\)` `\(B\)` beat `\(A\)`. 
-
-The .alert2[Internet] (Google, Facebook...): 
-
-&gt; - Nodes are webpages. 
-&gt; - `\(A\rightarrow B\)` `\(\implies\)` `\(A\)` links to `\(B\)`. 
+.blockquote.font_large[Given a network, assign a scalar .alert2[**rank**] or .alert2[**score**] to each node in `\(\mathcal{N}\)` based on its links between pairs.   
+]
 
 
-.alert2[Endorsements] (politics, Twitter...):  
-  
-&gt; - Nodes are people. 
-&gt; - `\(A\rightarrow B\)` `\(\implies\)` `\(A\)` thinks `\(B\)` is good. 
-
+.content.font_large[
+1. Who is the **best** chessplayer? 
+  - [Magnus Carlsen](https://twitter.com/MagnusCarlsen?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor)
+2. Which website is **most central** to the internet?
+  - [philchodrow.com](www.philchodrow.com)
+3. What is the **most important** account on Twitter?
+  - [No Context Star Trek](https://twitter.com/NoContextTrek)]
+]
+.column[
+.content.center.vmiddle[
+&lt;img src="img/pagerank-example.jpeg" width=90%&gt;&lt;br&gt; 
+***Image credit:*** *Wikipedia* 
 ]
 ]
-.column[&lt;br&gt;&lt;br&gt; 
-#   &lt;br&gt;&lt;br&gt;
-.content.center[
-&lt;img src="img/digraph.png" width=100%&gt;
-***Image credit:*** *Wikipedia*
-]]
 ]
 
 ---
 class: middle
+layout: false
 
 .split-two[ 
 .column.bg-main5[
@@ -212,12 +281,12 @@ class: middle
   ]
   ]
 ]
-.column[&lt;br&gt; &lt;br&gt; 
-#  &lt;br&gt; &lt;br&gt; 
-.content.center[
-&lt;img src="img/digraph.png" width=100%&gt;
+.column[
+.content.center.vmiddle[
+&lt;img src="img/digraph.png" width=90%&gt;&lt;br&gt; 
 ***Image credit:*** *Wikipedia*
-]]
+]
+]
 ]
 
 
