@@ -17,7 +17,7 @@ output:
 ---
 exclude: true
 <style type="text/css">
-code.r{
+code.r{ 
   font-size: 16px; 
 }
 pre {
@@ -28,56 +28,16 @@ pre {
 options(htmltools.dir.version = FALSE)
 ```
 
-
 ---
-class: split-50 bg-main1
 
-.row[
-.split-four[
-.column[.image-caption-right[
-  <br>
-  ## .alert[<nobr>Mari Kawakatsu</nobr>]
-  .font_medium[Applied and Computational Mathematics <br> Princeton University ]
-  ]   
-]
-.column[.image-bottom[
-  <img src="img/mari_portrait.jpeg" width=100%> 
-]]
-.column[  
-.image-bottom[
-  <img src="img/phil_portrait.jpeg" width=100%>
-]  
-] 
-.column[.image-caption-left[
-  <br>
-  ## .alert[<nobr>Phil Chodrow</nobr>]
-  .font_large[Mathematics <br> UCLA]
-  ] 
-]
-]
-]
+class: bg-main1 
+background-image: url("../img-shared/geo-intro.png")
+background-size: contain
+ 
 
-.row[
-.split-four[
-.column[.image-caption-right[
-  ## .alert[<nobr>Nicole Eikmeier</nobr>]
-  .font_large[<nobr>Computer Science</nobr> <br> Grinnell]      
-  ]   
-]
-.column[
-  <img src="img/nicole_portrait.jpeg" width=100%> 
-]
-.column[    
-  <img src="img/dan_portrait.jpeg" width=100%>
-] 
-.column[.image-caption-left[
-  ## .alert[<nobr>Dan Larremore</nobr>]
-  .font_large[<nobr>Computer Science</nobr> <br> CU Boulder ]
-  ] 
-]
-]
-]
+# My Journey
 
+ 
 ---
 layout: true
 class: split-two with-border middle
@@ -122,7 +82,7 @@ class:
 <img src="img/so-pumped.png" width=32%>
 <img src="img/ezra.jpg" width=32%>
 <img src="img/cat.jpeg" width=32%>
-<img src="img/page-rank.png" width=30%>
+<img src="img/page-rank.png" width=30%> 
 ---
 class: fade-row2-col1 fade-row3-col1 fade-row4-col1
 <img src="img/network.jpeg" width=100%>   
@@ -235,7 +195,7 @@ layout: false
 <br><br>
 # The Network Ranking Problem
 
-.blockquote.font_large[Given a network, assign a scalar .alert2[**rank**] or .alert2[**score**] to each node in $\mathcal{N}$ based on its links between pairs.   
+.blockquote.font_large[Given a network, assign a scalar .alert2[**rank**] or .alert2[**score**] vector $\mathbf{r} \in \mathbb{R}^n$ based on the network structure. $r_i$ is the rank of node $i \in \mathcal{N}$.    
 ]
 
 
@@ -256,11 +216,11 @@ layout: false
 ]
 
 ---
-class: middle
+class: 
 layout: false
 
 .split-two[ 
-.column.bg-main5[
+.column.bg-main1[
 <br> <br> 
 # The Adjacency Matrix <br> <br> 
 .content.center[.font_large[ 
@@ -274,7 +234,7 @@ layout: false
     \end{matrix}\right] 
     $$
     
-  Turns **network** problems into **linear algebra** problems. 
+  Turns **.alert[network]** problems into **.alert2[linear algebra]** problems. 
   ]
   ]
 ]
@@ -285,6 +245,151 @@ layout: false
 ]
 ]
 ]
+
+---
+layout: true
+class: split-two
+
+.column.bg-main1[
+<br> <br> 
+# Computing .alert[Ranks] <br> <br> 
+.content.center[.font_large[ 
+  $$\mathbf{A} = \left[\begin{matrix}
+    <!-- 0 & \mathbf{1} & 0 & 0 & 0 & 0 \\  -->
+    <!-- 0 & 0 & \mathbf{1} & 0 & 0 & 0 \\ -->
+    <!-- 0 & 0 & 0 & 0 & \mathbf{1} & 0 \\ -->
+    <!-- 0 & \mathbf{1} & 0 & 0 & 0 & 0 \\ -->
+    <!-- 0 & 0 & 0 & \mathbf{1} & 0 & \mathbf{1} \\  -->
+    <!-- 0 & 0 & 0 & 0 & 0 & 0  -->
+    \end{matrix}\right] 
+    $$
+    Lots of ways to compute a rank vector $\mathbf{r} \in \mathbb{R}^n$...
+  ]
+  ]
+]
+
+.column[<br>
+  .split-three[
+  .row.bg-main4[.content.font_large[
+  .alert2[Degree] (Number of positive interactions) 
+  .color-main4[tab] $$\mathbf{r} = \mathbf{d} = \mathbf{e}^T\mathbf{A}$$ <br>
+  ]]
+  .row.bg-main4[.content.font_large[ 
+  .alert2[PageRank] (Google) Leading eigenvector of 
+  $$\mathbf{P} = \mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha)\mathbf{E}$$
+  ]] 
+  .row.bg-main4[.content.font_large[
+  .alert2[SpringRank] (DeBacco et al. 2018) Solve linear system 
+  .font_medium[.font_small[$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) + \alpha\mathbf{I}\right]  \mathbf{r} = \left[\mathbf{D}^i - \mathbf{D}^o\right]\mathbf{e}$$]
+  ]]]
+]]
+
+
+---
+class: hide-row1-col2 hide-row2-col2 hide-row3-col2 
+
+---
+class: hide-row2-col2 hide-row3-col2
+
+
+---
+class:hide-row3-col2 
+
+---
+class: 
+
+---
+layout: false
+class: bg-main1
+
+# .alert2[Example]: PageRank in *Hamilton* mention network
+
+.content.center[
+<img src="img/hamilton.png" width=85%><br> 
+
+.font2[Leading eigenvector of 
+$\mathbf{P} = \mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha)\mathbf{E}$.]
+]
+
+
+---
+layout: true
+class: split-two with-border middle
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font2[
+Quick overview of .alert[networks] and why we care about them.
+  ]]
+  .row.bg-main2[.content.font2[
+.alert[Ranking] in networks. <br> (Here be linear algebra.)
+  ]]
+  .row.bg-main3[.content.font2[
+From ranks to self-sustaining  <br>.alert[feedback loops]. 
+  ]]
+  .row.bg-main5[.content.font2[
+.alert[**Having fun**] while doing science. 
+  ]]
+]]
+
+.column[.content.center.vmiddle[
+{{content}}
+]]
+
+---
+class: fade-row1-col1 fade-row2-col1 fade-row4-col1
+<img src="img/pnas.png" width=95%>
+
+---
+class: split-50 bg-main1 
+layout: false 
+
+.row[ 
+.split-four[
+.column[.image-caption-right[
+  <br> 
+  ## .alert[<nobr>Mari Kawakatsu</nobr>]
+  .font_medium[Applied and Computational Mathematics <br> Princeton University ]
+  ]    
+]
+.column[.image-bottom[
+  <img src="img/mari_portrait.jpeg" width=100%> 
+]]
+.column[  
+.image-bottom[
+  <img src="img/phil_portrait.jpeg" width=100%>
+]  
+] 
+.column[.image-caption-left[
+  <br>
+  ## .alert[<nobr>Phil Chodrow</nobr>]
+  .font_large[Mathematics <br> UCLA]
+  ] 
+]
+]
+]
+
+.row[
+.split-four[
+.column[.image-caption-right[
+  ## .alert[<nobr>Nicole Eikmeier</nobr>]
+  .font_large[<nobr>Computer Science</nobr> <br> Grinnell]      
+  ]   
+]
+.column[
+  <img src="img/nicole_portrait.jpeg" width=100%> 
+]
+.column[    
+  <img src="img/dan_portrait.jpeg" width=100%>
+] 
+.column[.image-caption-left[
+  ## .alert[<nobr>Dan Larremore</nobr>]
+  .font_large[<nobr>Computer Science</nobr> <br> CU Boulder ]
+  ] 
+]
+]
+]
+
 
 
 

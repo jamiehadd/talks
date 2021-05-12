@@ -1,4 +1,4 @@
-library(ggplot2)
+library(tidyverse)
 library(sf)
 library(rnaturalearth)
 library(rnaturalearthdata)
@@ -7,9 +7,10 @@ library(maps)
 library(ggtext)
 library(gganimate)
 
+
 theme_set(theme_void())
 
-world_map <- map("state", fill = TRUE)
+world_map <- maps::map("state", fill = TRUE)
 
 world <- sf::st_as_sf(world_map)
 
@@ -19,14 +20,14 @@ coords <- tibble(
 	state = c("", "VA", "PA", "Norway", "MA", "CA"),
 	lat  = c(0, 38.1496, 39.9526, 50, 42.3601, 34.0522),
 	lon  = c(0, -79.0717, -75.1652, -65, -71.0589, -118.2437),
-	label_lat = c(0, 37, 43.9526, 53, 40.7601, 36.0522),
-	label_lon = c(0, -78.0717, -75.1652, -65, -59, -118.2437),
+	label_lat = c(0, 37.3, 43.9526, 54, 40.7601, 37.5522),
+	label_lon = c(0, -79.3717, -75.1652, -65, -59, -118.2437),
 	description = c("",
 									"Grew up!<br>Chess<br>Taekwondo",
-									"College (philosophy + math)<br>New friends<br>General tomfoolery",
-									"More study (philosophy)<br>New friends<br>Smoked fish",
-									"Married!<br>Nonprofit<br>New friends<br>PhD",
-									"Hi!<br>First 'real' job.<br>New friends")
+									"College (philosophy + math)<br>Met wife<br>General tomfoolery",
+									"More study (philosophy)<br>Smoked fish<br>Adventures",
+									"Married!<br>Worked @ nonprofit<br>PhD",
+									"Hi!<br>First 'real' job<br>New friends")
 )
 
 coords <- coords %>%
@@ -68,8 +69,8 @@ coord_cxns <- coord_cxns %>%
 	mutate(fact = row_number())
 
 
-anim <- ggplot(data = world) +
-	geom_sf() +
+plot <- ggplot(data = world) +
+	geom_sf(fill = "#b1ccbe") +
 	xlab("Longitude") + ylab("Latitude") +
 	geom_curve(data = coord_cxns %>% slice(-1),
 						 aes(y = lat,
@@ -77,7 +78,7 @@ anim <- ggplot(data = world) +
 						 		yend = lat_next,
 						 		xend = lon_next,
 						 		group = seq_along(city_order)),
-						 color = "#181818",
+						 color = "white",
 						 curvature = -0.5,
 						 # arrow = arrow(type = "closed", length = unit(0.02, "npc")),
 						 size  = 0.5) +
@@ -106,30 +107,14 @@ anim <- ggplot(data = world) +
 		# R ladies purple ----
 		# R ladies font used in xaringan theme ----
 		family = "Lato",
-		alpha = 0.9
+		alpha = 1.0
 	) +
-	xlim(-130, -60) +
-	ylim(25, 54) +
+	xlim(-125, -60) +
+	ylim(25, 55) +
 	guides(color = FALSE, fill = FALSE) +
-	scale_color_brewer(palette = "Accent") +
-	scale_fill_brewer(palette = "Accent")
+	scale_color_brewer(palette = "Set3") +
+	scale_fill_brewer(palette = "Set3") 
 
-anim
+plot
 
-# +
-# 		ggtitle("Home {closest_state} of 6") +
-# 		# create animation ----
-# 	transition_states(
-# 		city_order,
-# 		transition_length = 2,
-# 		state_length = 5
-# 	) +
-# 		# style title ----
-# 	theme(
-# 		plot.title = element_text(
-# 			color = "#562457",
-# 			size = 12
-# 		)
-# 	)
-#
-# animate(anim, nframes = 150, height = 2, width = 3, units = "in", res = 150, renderer=gifski_renderer("test.gif"))
+ggsave("img-shared/geo-intro.png", width = 6, height = 4, bg = "transparent")
