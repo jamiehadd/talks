@@ -279,11 +279,11 @@ class: split-two
   ]]
   .row.bg-main4[.content.font_large[ 
   .alert2[PageRank] (Google) Leading eigenvector of 
-  `$$\mathbf{P} = \mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha)\mathbf{E}$$`
+  `$$\mathbf{P} = \mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha_p)\mathbf{E}$$`
   ]] 
   .row.bg-main4[.content.font_large[
   .alert2[SpringRank] (DeBacco et al. 2018) Solve linear system 
-  .font_medium[.font_small[$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) + \alpha\mathbf{I}\right]  \mathbf{r} = \left[\mathbf{D}^i - \mathbf{D}^o\right]\mathbf{e}$$]
+  .font_medium[.font_small[$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) + \alpha_s\mathbf{I}\right]  \mathbf{r} = \left[\mathbf{D}^i - \mathbf{D}^o\right]\mathbf{e}$$]
   ]]]
 ]]
 
@@ -311,7 +311,7 @@ class: bg-main1
 &lt;img src="img/hamilton.png" width=85%&gt;&lt;br&gt; 
 
 .font2[Leading eigenvector of 
-`\(\mathbf{P} = \mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha)\mathbf{E}\)`.]
+`\(\mathbf{P} = \mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha_p)\mathbf{E}\)`.]
 ]
 
 
@@ -507,6 +507,58 @@ class: split-two bg-main1
 .column.bg-main4[.content.vmiddle[
 &lt;img src="img/fig_1.png" width=100%&gt; 
 ]]
+
+---
+
+class: split-two bg-main1
+
+.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[What happens?]]&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.font_large[
+
+`\(\color{#63d297}{\beta_1}\)` : Preference for .alert2[*prestige*]. &lt;br&gt;
+
+- `\(\beta_1\)` small: fluctuating egalitarianism.
+- `\(\beta_1\)` large: emergence of time-varying hierarchies. 
+
+`\(\color{#ff5252}{\beta_2}\)` : Preference for *.alert[proximity]*. 
+
+- `\(\beta_2 &lt; 0\)`: stabilization of hierarchical ranks. 
+
+&lt;br&gt;
+Can we say anything *mathematical* about these observations?
+]
+]
+.column.bg-main4[
+&lt;img src="img/dynamics_examples.png" width=100%&gt; 
+]
+
+---
+
+class: split-two bg-main1
+
+.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[Theorem [KCEL 2021]]]&lt;br&gt;&lt;br&gt;
+.font_large[
+
+Consider the deterministic function 
+`$$\mathbf{f}(\mathbf{r}, \mathbf{A}) = \lim_{\lambda \rightarrow 1} \frac{\mathbb{E}[\mathbf{r}|\mathbf{A}] - \mathbf{r}}{1 - \lambda}\;.$$`
+
+This function `\(\mathbf{f}\)` has an egalitarian fixed point such that `\(\mathbf{r} = r \mathbb{e}\)`. The egalitarian fixed point is linearly stable if `\(\beta_1 &lt; \beta_1^c\)`, where 
+
+`$$\beta_1^c = \begin{cases}
+  2\sqrt{\frac{n}{m}} &amp;\quad \text{Root-Degree} \\ 
+  1/\alpha_p &amp;\quad \text{PageRank} \\ 
+  2 + \alpha_s\frac{n}{m} &amp;\quad \text{SpringRank}.
+\end{cases}$$`
+]
+
+.color-main1[tab] (*m* is the number of endorsements per timestep, *n* is the number of nodes) 
+]
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/dynamics_examples.png" width=100%&gt; 
+]]
+
+
+
 
 
 
