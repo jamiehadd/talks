@@ -344,6 +344,36 @@ class: fade-row1-col1 fade-row2-col1 fade-row4-col1
 &lt;img src="img/pnas.png" width=95%&gt;
 
 ---
+
+class: split-two bg-main1
+layout: false
+
+.column[
+&lt;br&gt; 
+.font_large[.font_large[.font_large[
+.content.center[Ranks .alert2[⟳] Decisions]]]
+]
+.blockquote[
+.content.font_large[.content.font_large[
+  What happens when network ranks .alert2[inform] decision-making within a    system?]
+]]
+]
+
+
+
+
+.column.bg-main4[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/us-news-rankings.jpeg" width=60%&gt; 
+  ]
+  .content.font_large[.alert2[Example]: 
+  College ranks are based on selectivity. 
+  
+  High ranks &lt;br&gt;  `\(\implies\)` more applications &lt;br&gt; `\(\implies\)`     higher selectivity &lt;br&gt; `\(\implies\)` even higher ranks....
+]]
+
+
+
+---
 class: split-50 bg-main1 
 layout: false 
 
@@ -412,35 +442,72 @@ class: split-two bg-main1
   .content.font_medium[Cafe Felin Ma Langue Aux Chats (yes, it's a .alert[cat cafe]])
 ]]
 
+
 ---
 
 class: split-two bg-main1
 
-&lt;br&gt;
-# Guiding Question
+.column[.content[
+&lt;br&gt; 
+.font_large[.content.center[.font_large[.font_large[The Model]]] &lt;br&gt;
 
+Matrix `\(\mathbf{A} = \mathbf{A}^{(t)}\)` of *endorsements*: `\(a_{ij}^{(t)}\)` is the weighted number of times `\(i\)` endorses `\(j\)` by time `\(t\)`. 
 
-.column[
-&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
-.blockquote[
-.content.font_large[.content.font_large[
-  What happens when network ranks inform decision-making within a    system?]
+1. Compute rank vector `\(\mathbf{r} = \sigma(\mathbf{A})\)` (degree, PageRank, SpringRank...)
+2. Each node `\(i\)` computes a *utility* of endorsing `\(j\)`:  `$$u_{ij} = \color{#63d297}{\beta_1} r_j + \color{#ff5252}{\beta_2} (r_j - r_i)^2\;.$$` 
+
+`\(\color{#63d297}{\beta_1}\)` : Preference for *prestige*. &lt;br&gt;
+`\(\color{#ff5252}{\beta_2}\)` : Preference for *proximity*. 
+]]]
+
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/fig_1.png" width=100%&gt; 
 ]]
 
+---
 
+class: split-two bg-main1
+
+.column[.content[
+&lt;br&gt; 
+.font_large[.content.center[.font_large[.font_large[The Model]]] &lt;br&gt;
+
+
+3\. Node `\(i\)` endorses node `\(j\)` with probability `$$p_{ij} =    \frac{e^{u_{ij}}}{\sum_k e^{u_{ik}}}\;.$$`
+
+4\. Matrix `\(\mathbf{A}\)` updated with .alert2[new endorsements]: 
+
+`$$\mathbf{A}^{(t+1)} = \color{#ff5252}{\lambda} \mathbf{A}^{(t)} + (1-\color{#ff5252}{\lambda}) \color{#63d297}{\mathbf{\Delta}^{(t)}}$$`
+
+`\(\lambda\)` is a .alert[memory parameter]: `\(\lambda \approx 1 \rightarrow\)` system evolves slowly. 
+
+]]]
+
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/fig_1.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[.content[
+&lt;br&gt; 
 .font_large[.font_large[.font_large[
-.content.center[Ranks .alert2[⟳] Decisions]]]
-]
+.center[Ranks .alert2[⟳] Decisions]
+]]
+
+.blockquote[Agents develop prestige by receiving endorsements.
 ]
 
-.column.bg-main4[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-  &lt;img src="img/us-news-rankings.jpeg" width=60%&gt; 
-  ]
-  .content.font_large[.alert2[Example]: 
-  College ranks are based on selectivity. 
-  
-  High ranks &lt;br&gt;  `\(\implies\)` more applications &lt;br&gt; `\(\implies\)`     higher selectivity &lt;br&gt; `\(\implies\)` even higher ranks....
+.blockquote[Agents make endorsement decisions based on prestige. 
+]
+]]]
+
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/fig_1.png" width=100%&gt; 
 ]]
+
 
 
 
