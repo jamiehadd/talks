@@ -81,7 +81,7 @@ class:
 <img src="img/yes.GIF" width=65%>
 <img src="img/so-pumped.png" width=32%>
 <img src="img/obama.png" width=33%>
-<img src="img/cat.jpeg" width=32%>
+<img src="img/two-cats.jpeg" width=32%>
 <img src="img/page-rank.png" width=30%> 
 ---
 class: fade-row2-col1 fade-row3-col1 fade-row4-col1
