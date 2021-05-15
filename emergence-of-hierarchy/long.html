@@ -83,7 +83,7 @@ class:
 &lt;img src="img/apollo.jpg" width=32%&gt;
 &lt;img src="img/yes.GIF" width=65%&gt;
 &lt;img src="img/so-pumped.png" width=32%&gt;
-&lt;img src="img/ezra.jpg" width=32%&gt;
+&lt;img src="img/obama.png" width=33%&gt;
 &lt;img src="img/cat.jpeg" width=32%&gt;
 &lt;img src="img/page-rank.png" width=30%&gt; 
 ---
@@ -305,7 +305,7 @@ class:
 layout: false
 class: bg-main1
 
-# .alert2[Example]: PageRank in *Hamilton* mention network
+# .alert2[Example]: PageRank in the *Hamilton* mention network
 
 .content.center[
 &lt;img src="img/hamilton.png" width=85%&gt;&lt;br&gt; 
@@ -365,7 +365,7 @@ layout: false
 .column.bg-main4[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
   &lt;img src="img/us-news-rankings.jpeg" width=60%&gt; 
   ]
-  .content.font_large[.alert2[Example]: 
+  .content.font_large[.alert[Example]: 
   College ranks are based on selectivity. 
   
   High ranks &lt;br&gt;  `\(\implies\)` more applications &lt;br&gt; `\(\implies\)`     higher selectivity &lt;br&gt; `\(\implies\)` even higher ranks....
@@ -500,7 +500,7 @@ class: split-two bg-main1
 .blockquote[Agents develop prestige by receiving endorsements.
 ]
 
-.blockquote[Agents make endorsement decisions based on prestige. 
+.blockquote[Agents make endorsements based on prestige. 
 ]
 ]]]
 
@@ -528,9 +528,9 @@ class: split-two bg-main1
 Can we say anything *mathematical* about these observations?
 ]
 ]
-.column.bg-main4[
+.column.bg-main4[.content.vmiddle[
 &lt;img src="img/dynamics_examples.png" width=100%&gt; 
-]
+]]
 
 ---
 
@@ -556,6 +556,183 @@ This function `\(\mathbf{f}\)` has an egalitarian fixed point such that `\(\math
 .column.bg-main4[.content.vmiddle[
 &lt;img src="img/dynamics_examples.png" width=100%&gt; 
 ]]
+
+---
+
+class: 
+background-image: url("img/bifurcations_with_curves.png")
+background-size: contain
+
+---
+
+class: split-two
+
+.column.bg-main1[&lt;br&gt;
+# Ok, but what about **data**?
+
+.content.font_large[
+
+Model assigns a *likelihood* to the observed data. 
+
+`$$\mathcal{L}(\lambda, \beta) = \sum_{t = 0}\sum_{i, j \in \mathcal{N}}\color{#ff5252}{k_{ij}^{(t)}} \log \color{#63d297}{\gamma_{ij}^{(t)}}$$`
+
+- `\(\color{#ff5252}{k_{ij}^{(t)}}\)`: \# of observed endorsements `\(i\rightarrow j\)` in time `\(t\)` (from data).
+- `\(\color{#63d297}{\gamma_{ij}^{(t)}}\)`: Probability that `\(i\)` chooses `\(j\)` as recipient of endorsement at time `\(t\)` (depends on `\(\lambda\)`, `\(\beta\)`, and data from previous timesteps). 
+
+**Method of maximum likelihood**: find parameters `\(\hat{\lambda}\)` and `\(\hat{\beta}\)` to maximize `\(\mathcal{L}\)`. 
+]
+]
+
+.column.bg-main4[.content.vmiddle[.font_large[&lt;br&gt; 
+**Math PhD Exchange**¹: University *A* "endorses" *B* by hiring a PhD trained at *B*, over 50 years. &lt;br&gt;&lt;br&gt;  
+**Monk Parakeets**²: Parakeet *A* "endorses" *B* by losing a fight to *B*, over 4 observation periods.  &lt;br&gt;&lt;br&gt;&lt;br&gt; 
+**Newcomb Fraternity**³: Fraternity brother *A* "endorses" *B* by stating that they like *B* on a survey, over a semester (15 weeks).
+]
+
+&lt;br&gt; &lt;br&gt; 
+¹D. Taylor, S. A. Meyers, A. Clauset, M. A. Porter, P. J. Mucha, Eigenvector-based centrality measures for temporal networks. *Multiscale Model. Simul.* 15, 537–574 (2017). &lt;br&gt; 
+North Dakota State University Department of Mathematics, Data from “The Mathematics Genealogy Project.”  ([link](https://www.genealogy.math.ndsu.nodak.edu/index.php.)) &lt;br&gt; 
+²E. A. Hobson, S. DeDeo, Social feedback and the emergence of rank in animal society. *PLoS Comput. Biol.* 11, e1004411 (2015) &lt;br&gt; 
+³T. Newcomb, *The Acquaintance Process* (Holt, Reinhard, and Winston, New York, NY, 1961).
+]]
+
+
+---
+
+class: split-two
+
+.column.bg-main1[&lt;br&gt;
+# Ok, but what about **data**?
+
+.content.font_large[
+
+Model assigns a *likelihood* to the observed data. 
+
+`$$\mathcal{L}(\lambda, \beta) = \sum_{t = 0}\sum_{i, j \in \mathcal{N}}\color{#ff5252}{k_{ij}^{(t)}} \log \color{#63d297}{\gamma_{ij}^{(t)}}$$`
+
+- `\(\color{#ff5252}{k_{ij}^{(t)}}\)`: \# of observed endorsements `\(i\rightarrow j\)` in time `\(t\)` (from data).
+- `\(\color{#63d297}{\gamma_{ij}^{(t)}}\)`: Probability that `\(i\)` chooses `\(j\)` as recipient of endorsement at time `\(t\)` (depends on `\(\lambda\)`, `\(\beta\)`, and data from previous timesteps). 
+
+**Method of maximum likelihood**: find parameters `\(\hat{\lambda}\)` and `\(\hat{\beta}\)` to maximize `\(\mathcal{L}\)`. 
+]
+]
+
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/inference-table.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[Are we in the hierarchical regime?]]&lt;br&gt;&lt;br&gt;
+.font_large[
+
+**Theorem from before**: Egalitarianism is stable iff `\(\beta_1 &lt; \beta_1^c\)`, where 
+
+`$$\beta_1^c = \begin{cases}
+  2\sqrt{\frac{n}{m}} &amp;\quad \text{Root-Degree} \\ 
+  1/\alpha_p &amp;\quad \text{PageRank} \\ 
+  2 + \alpha_s\frac{n}{m} &amp;\quad \text{SpringRank}.
+\end{cases}$$`
+&lt;br&gt; &lt;br&gt; 
+Math PhD exchange is .alert2[**barely subcritical**]. 
+
+Parakeets + Newcomb Frat: .alert[**supercritical**]. 
+
+]
+]
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/criticality-table.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[It matters how we conceptualize rank! ]]&lt;br&gt;&lt;br&gt;
+.font_large[
+
+Placement share, Root-Degree, and PageRank: MIT dominates, esp. recently. 
+
+
+**SpringRank**: Favors Harvard, Stanford, Princeton, and Berkeley (based on prestigious placements of their graduates).
+
+Different estimates of fluidity in ranks.  
+]
+]
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/phd-exchange.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[.font_large[.font_large[.font_large[
+.center[Ranks .alert2[⟳] Decisions]
+]] 
+
+We wrote a simple .alert[math model] of hierarchies emerging from feedback loops.
+
+Feedback loops can generate stable hierarchies, even when are .alert[no meaningful differences] between agents.
+
+Some systems are .alert[near criticality] -- small interventions could help to promote equality and equity. 
+
+
+
+
+.alert[Interdisciplinary math is fun]! Commentary by biologist friends Simon DeDeo and Elizabeth Hobson ➔
+
+]
+]
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/commentary.png" width=100%&gt; 
+]]
+
+---
+layout: true
+class: split-two with-border middle
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font2[
+Quick overview of .alert[networks] and why we care about them.
+  ]]
+  .row.bg-main2[.content.font2[
+.alert[Ranking] in networks. &lt;br&gt; (Here be linear algebra.)
+  ]]
+  .row.bg-main3[.content.font2[
+From ranks to self-sustaining  &lt;br&gt;.alert[feedback loops]. 
+  ]]
+  .row.bg-main5[.content.font2[
+.alert[**Having fun**] while doing science. 
+  ]]
+]]
+
+.column[.content.center.vmiddle[
+{{content}}
+]]
+
+---
+class: fade-row1-col1 fade-row2-col1 fade-row3-col1
+
+&lt;!-- &lt;img src="img/heart-cookies.jpg" width=32%&gt; --&gt;
+&lt;!-- &lt;img src="img/book.jpg" width=32%&gt; --&gt;
+&lt;!-- &lt;img src="img/apollo.jpg" width=32%&gt; --&gt;
+
+&lt;img src="img/dinner.jpg" width=48%&gt;
+&lt;img src="img/ezra.jpg" width=48%&gt;
+
+&lt;img src="img/cats.jpeg" width=65%&gt;
+&lt;img src="img/cinnamon-rolls.jpg" width=32%&gt;
+&lt;img src="img/mari-mp.png" width=62%&gt;
+&lt;img src="img/ready.jpg" width=30%&gt; 
+
+---
+
+
+
 
 
 
