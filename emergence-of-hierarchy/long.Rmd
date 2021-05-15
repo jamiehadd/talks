@@ -451,7 +451,7 @@ class: split-two bg-main1
 Matrix $\mathbf{A} = \mathbf{A}^{(t)}$ of *endorsements*: $a_{ij}^{(t)}$ is the weighted number of times $i$ endorses $j$ by time $t$. 
 
 1. Compute rank vector $\mathbf{r} = \sigma(\mathbf{A})$ (degree, PageRank, SpringRank...)
-2. Each node $i$ computes a *utility* of endorsing $j$:  $$u_{ij} = \color{#63d297}{\beta_1} r_j + \color{#ff5252}{\beta_2} (r_j - r_i)^2\;.$$ 
+2. Node $i$ computes a *utility* of endorsing $j$:  $$u_{ij} = \color{#63d297}{\beta_1} r_j + \color{#ff5252}{\beta_2} (r_j - r_i)^2\;.$$ 
 
 $\color{#63d297}{\beta_1}$ : Preference for *prestige*. <br>
 $\color{#ff5252}{\beta_2}$ : Preference for *proximity*. 
@@ -470,7 +470,7 @@ class: split-two bg-main1
 .font_large[.content.center[.font_large[.font_large[The Model]]] <br>
 
 
-3\. Node $i$ endorses node $j$ with probability $$p_{ij} =    \frac{e^{u_{ij}}}{\sum_k e^{u_{ik}}}\;.$$
+3\.  $m$ nodes make endorsements. Node $i$ selects node $j$ to endorse with probability $$p_{ij} =    \frac{e^{u_{ij}}}{\sum_k e^{u_{ik}}}\;.$$
 
 4\. Matrix $\mathbf{A}$ updated with .alert2[new endorsements]: 
 
@@ -539,17 +539,17 @@ class: split-two bg-main1
 Consider the deterministic function 
 $$\mathbf{f}(\mathbf{r}, \mathbf{A}) = \lim_{\lambda \rightarrow 1} \frac{\mathbb{E}[\mathbf{r}|\mathbf{A}] - \mathbf{r}}{1 - \lambda}\;.$$
 
-This function $\mathbf{f}$ has an egalitarian fixed point such that $\mathbf{r} = r \mathbb{e}$. The egalitarian fixed point is linearly stable if $\beta_1 < \beta_1^c$, where 
+This function has an egalitarian fixed point such that $\mathbf{r} = r \mathbb{e}$. This point is linearly stable iff $\beta_1 < \beta_1^c$: 
 
 $$\beta_1^c = \begin{cases}
   2\sqrt{\frac{n}{m}} &\quad \text{Root-Degree} \\ 
   1/\alpha_p &\quad \text{PageRank} \\ 
   2 + \alpha_s\frac{n}{m} &\quad \text{SpringRank}.
 \end{cases}$$
-]
 
-.color-main1[tab] (*m* is the number of endorsements per timestep, *n* is the number of nodes) 
-]
+
+(Proof: lots of .alert[linear algebra].) 
+]]
 .column.bg-main4[.content.vmiddle[
 <img src="img/dynamics_examples.png" width=100%> 
 ]]
@@ -728,7 +728,122 @@ class: fade-row1-col1 fade-row2-col1 fade-row3-col1
 
 ---
 
+layout: false
+class: split-two
+ 
 
+.column.bg-main1[
+<br>
+# Tips for ~~Interdisciplinary Applied Math~~ Life
+
+.font_large[
+Find people worth your trust, and trust them. 
+
+Be thankful, and say so. 
+
+Check in often about ideas, feelings, and goals. 
+
+Be honest about your strengths and time availability.
+
+Work with your heart, not just your brain. 
+
+Take time to see things from multiple angles. 
+
+]
+]
+]
+
+---
+
+layout: false
+class: split-two
+ 
+
+.column.bg-main1[
+
+<br>
+# Tips for ~~Interdisciplinary Applied Math~~ Life
+
+.font_large[
+Find people worth your trust, and trust them. 
+
+Be thankful, and say so. 
+
+Check in often about ideas, feelings, and goals. 
+
+Be honest about your strengths and time availability.
+
+Work with your heart, not just your brain. 
+
+Take time to see things from multiple angles. 
+
+]
+]
+]
+
+.column[
+  .content.vmiddle[.font_large[.font_large[
+  
+Brush up on your .alert[linear algebra].
+
+]
+]
+]
+]
+
+---
+
+class: split-two 
+
+.column.bg-main1[
+
+<br>
+# Thanks! 
+
+<img src="img/mari_portrait.jpeg" width=24%> 
+<img src="img/phil_portrait.jpeg" width=24%> 
+<img src="img/nicole_portrait.jpeg" width=24%>
+<img src="img/dan_portrait.jpeg" width=24%> 
+
+
+.font_large[
+Fab team: Mari, Nicole, Dan. 
+
+CNWW 2019
+
+The cats
+
+UMSA
+
+Y'all! 
+]]
+
+.column.bg-main4[.content[<br> .font_large[
+
+# Shameless plug 
+
+Math 168: Introduction to Networks
+
+Planned for Spring 2022
+
+### Prereqs: 
+
+- Upper division .alert[linear algebra] (Math 115A)
+- .alert2[Probability] (Math 170A, Stats 100A, or ECE 131A)
+
+### Topics: 
+
+- Network basics
+- Random graph models
+- Data science with networks
+- Dynamics on networks
+]
+]
+
+
+
+
+]
 
 
 
