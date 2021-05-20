@@ -158,7 +158,7 @@ class: split-two
 
 ## I am...
 - ...male, cisgendered, heterosexual, White.
-- ...2nd generation academic (father was a physicist).
+- ...2nd generation academic (Dad was a physicist).
 - ...comfortably middle class.
 
 ## This means I...
@@ -191,7 +191,7 @@ class: split-two
 
 ## What role do oppression and privilege play in your journey?
 
-- Take some time to [assess your privilege](http://www.cpedv.org/sites/main/files/oppression_and_privilege_self_assessment.pdf). 
+- Take some time for a [self-assessment ](http://www.cpedv.org/sites/main/files/oppression_and_privilege_self_assessment.pdf). 
 
 ]
 ]
@@ -203,41 +203,48 @@ class: split-two
 
 class: split-two
 
-.column.bg-main1[
-.content.font_large[.font_large[Questions in .alert[Industry]]]
+.column.bg-main1[<br>
+.content.font_large[.font_large[**Questions** for STEM Careers]]
 
-.font_large[<br> <br> <br> ]
+.font_large[<br>  ]
 
-.font_large[What, *really*, am I making?]
+.font_large[What, *really*, am I making or studying?]
 
-.font_large[**Who benefits** from my work? Who is .alert2[included], and who is .alert[excluded] or .alert[oppressed] by what I produce?]
+.font_large[**Who benefits** from my product or research? Who is .alert2[included], and who is .alert[excluded] or .alert[oppressed] by my work?]
 
-.font_large[Does my product .alert[reinforce] existing inequities, or will it .alert2[break them down]?]
+.font_large[What identities are .alert2[present] in my workplace or program? What identities are .alert[absent]? What about in **leadership roles**?]
 
-.font_large[What identities are .alert2[present] in my workplace? What identities are .alert[absent]? What about in **leadership roles**?]
+.font_large[Does my interpersonal presence (collaboration, leadership, teaching) .alert2[actively welcome] all identities to share in scholarship? Whom does it .alert[quietly exclude]?]
+]
+
+.column[<br>
+.content.font_large[.font_large[What can you do **today**?]]
+  
+.font_large[<br>  ]
+
+.font_large[Self-assessments (links on previous slide).]
+
+<br> 
+
+.font_large[.font_large[Challenge]]
+
+.blockquote[.font_large[Identify **two** identity groups that you see underrepresented in your major. For each: 
+
+- Find 5 **social media accounts** and follow them. 
+- Add a **podcast** hosted a member of that identity group to your regular rotation. 
+]
+]
+
 
 ]
 
-.column[
-.content.font_large[.font_large[Questions in .alert2[Grad School]/.alert2[Academia]]]
 
-.font_large[<br> <br> <br> ]
-
-.font_large[What, *really*, am I studying?]
-
-
-.font_large[**Who benefits** from my research? Who is .alert2[included], and who is .alert[excluded] or .alert[oppressed] by what I produce?]
-
-.font_large[Does my teaching .alert2[actively welcome] all identities to share in scholarship? Does it .alert[quietly exclude] anyone?]
-
-.font_large[What identities are .alert2[present] in my program? What identities are .alert[absent]? What about in **leadership roles**?]
-]
 
 ---
 
 class: bg-main1 middle
 
-# *How can we work together to to make STEM a more .alert[**just**] and .alert[**inclusive**] social endeavor?*
+# *How can we work together to to make STEM a more .alert2[**just**] and .alert2[**inclusive**] social endeavor?*
 
 
 ---
@@ -885,7 +892,7 @@ $$\beta_1^c = \begin{cases}
   2 + \alpha_s\frac{n}{m} &\quad \text{SpringRank}.
 \end{cases}$$
 <br> <br> 
-Math PhD exchange is .alert2[**barely subcritical**]. 
+Math PhD exchange:.alert2[**barely subcritical**]. 
 
 Parakeets + Newcomb Frat: .alert[**supercritical**]. 
 

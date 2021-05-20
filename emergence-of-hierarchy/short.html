@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Networks, Ranking, and Feedback Loops</title>
+    <title>Emergence of Hierarchy in Networked Endorsement Dynamics</title>
     <meta charset="utf-8" />
-    <meta name="author" content="  Prof. Phil Chodrow   UCLA Department of Mathematics" />
+    <meta name="author" content=" Mari Kawakatsu, Princeton Applied and Computational Mathematics    Phil Chodrow, UCLA Mathematics   Nicole Eikmeier, Grinnell Computer Science    Dan Larremore, CU Boulder Computer Science and BioFrontiers Institute  " />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link rel="stylesheet" href="../assets/shinobi.css" type="text/css" />
     <link rel="stylesheet" href="../assets/ninpo.css" type="text/css" />
@@ -13,10 +13,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Networks, Ranking, and Feedback Loops
-## Or, The Real Math Was The Friends We Made Along The Way
-### <br> Prof. <span class="author-highlight">Phil Chodrow</span> <br> UCLA Department of Mathematics
-### <br>May 27th, 2021
+# Emergence of Hierarchy in Networked Endorsement Dynamics
+## SIAM DS 21: Minisymposium on Mathematics of Inequity and Inequality
+### <br>Mari Kawakatsu, <span class="institution"><em>Princeton Applied and Computational Mathematics</em> </span> <br> <span class="author-highlight">Phil Chodrow</span>, <span class="institution">UCLA Mathematics</span> <br> Nicole Eikmeier, <span class="institution">Grinnell Computer Science </span> <br> Dan Larremore, <span class="institution">CU Boulder Computer Science and BioFrontiers Institute</span> <br>
 
 ---
 
@@ -29,548 +28,6 @@ pre {
   font-size: 16px !important;
 }
 &lt;/style&gt;
-
-
----
-
-class: split-two 
-
-
-.column.bg-main1[.content[
-.font3[Hi! I'm Phil.]
-
-.font_large[Things I .alert[like]:
-
-- Mathematics of complex systems
-  - Network science
-  - Nonlinear dynamics
-  - Probability and statistics
-  - Linear algebra
-- Data science
-- Traditional martial arts 
-- *Star Trek: Deep Space 9*
-- Effective pedagogy 
-
-Courses I .alert2[teach]: 
-
-- **PIC16A**: intro Python 
-- **PIC16B**: computational science with Python
-- **MATH 168**: mathematical network science (S22)
-
-]
-]]
-
-.column[
-&lt;img src="../img-shared/cartoon-avatar-no-bg.png" width=100%&gt;
-
-.font_medium[*Artist's rendering of me from back when haircuts were a thing.*] &lt;br&gt;
-*Image via [Picrew.me](https://picrew.me/image_maker/634561)*
-]
-
-
-
----
-
-class: bg-main1 
-background-image: url("../img-shared/geo-intro.png")
-background-size: contain
- 
-
-# My Journey
-
- 
----
-layout: true
-class: split-two with-border middle
-
-.column[
-  .split-five[
-  .row.bg-main1[.content.font2[
-.alert[**Identity**] and .alert[**privilege**] in STEM careers. 
-  ]]
-  .row.bg-main2[.content.font2[
-Quick overview of .alert[**networks**] and why we care about them.
-  ]]
-  .row.bg-main3[.content.font2[
-.alert[**Ranking**] in networks.
-  ]]
-  .row.bg-main4[.content.font2[
-From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
-  ]]
-  .row.bg-main5[.content.font2[
-.alert[**Having fun**] while doing science. 
-  ]]
-]]
-
-.column[.content.center.vmiddle[
-{{content}}
-]]
-
----
-class: hide-row2-col1 hide-row3-col1 hide-row4-col1 hide-row5-col1
-
-&lt;img src="img/pew-article.png" width=100%&gt;
-[Source](https://www.pewresearch.org/science/2021/04/01/stem-jobs-see-uneven-progress-in-increasing-gender-racial-and-ethnic-diversity/)
-
----
-class: hide-row3-col1 hide-row4-col1 hide-row5-col1
-&lt;img src="img/network.jpeg" width=100%&gt;
-***Image credit:*** *Wikipedia*
-
----
-class: hide-row4-col1 hide-row5-col1
-&lt;img src="img/schematic.png" width=100%&gt;
-`$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) +\alpha \mathbf{I}\right]\mathbf{s} = \left[\mathbf{D}^i- \mathbf{D}^o \right]\mathbb{1}$$`
-
----
-class: hide-row5-col1
-&lt;img src="img/pnas.png" width=95%&gt;
-
----
-class: 
-
-&lt;img src="img/heart-cookies.jpg" width=32%&gt;
-&lt;img src="img/book.jpg" width=32%&gt;
-&lt;img src="img/apollo.jpg" width=32%&gt;
-&lt;img src="img/yes.GIF" width=65%&gt;
-&lt;img src="img/so-pumped.png" width=32%&gt;
-&lt;img src="img/obama.png" width=33%&gt;
-&lt;img src="img/two-cats.jpeg" width=32%&gt;
-&lt;img src="img/page-rank.png" width=30%&gt; 
-
-
----
-
-class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
-&lt;img src="img/pew-article.png" width=100%&gt;
-[Source](https://www.pewresearch.org/science/2021/04/01/stem-jobs-see-uneven-progress-in-increasing-gender-racial-and-ethnic-diversity/)
-
----
-
-layout: false
-class: split-two
-
-.column[
-
-.content.font_large[.font_large[
-
-&lt;img src="../img-shared/cartoon-avatar-no-bg.png" width=100%&gt; 
-]]]
-
-.column[.content.vmiddle[.font_large[
-
-## I am...
-- ...male, cisgendered, heterosexual, White.
-- ...2nd generation academic (Dad was a physicist).
-- ...comfortably middle class.
-
-## This means I...
-
-- "...look like a professor." 
-- ...know how school "works."
-- ...am rarely questioned in my credentials or authority.
-- ...benefit from many other biases and inequities, both implicit and explicit. 
-
-]
-]
-]
-
----
-
-class: split-two
-
-.column[
-
-.content.font_large[.font_large[
-&lt;br&gt;
-&lt;img src="img/question-mark.png" width=100%&gt; 
-]]]
-
-.column[.content.vmiddle[.font_large[
-
-## Who are you? 
-
-- What is your [social identity](https://sites.lsa.umich.edu/inclusive-teaching/wp-content/uploads/sites/732/2020/07/Social-Identity-WheelDefinitions.pdf)? 
-
-## What role do oppression and privilege play in your journey?
-
-- Take some time for a [self-assessment ](http://www.cpedv.org/sites/main/files/oppression_and_privilege_self_assessment.pdf). 
-
-]
-]
-]
-
-
-
----
-
-class: split-two
-
-.column.bg-main1[&lt;br&gt;
-.content.font_large[.font_large[**Questions** for STEM Careers]]
-
-.font_large[&lt;br&gt;  ]
-
-.font_large[What, *really*, am I making or studying?]
-
-.font_large[**Who benefits** from my product or research? Who is .alert2[included], and who is .alert[excluded] or .alert[oppressed] by my work?]
-
-.font_large[What identities are .alert2[present] in my workplace or program? What identities are .alert[absent]? What about in **leadership roles**?]
-
-.font_large[Does my interpersonal presence (collaboration, leadership, teaching) .alert2[actively welcome] all identities to share in scholarship? Whom does it .alert[quietly exclude]?]
-]
-
-.column[&lt;br&gt;
-.content.font_large[.font_large[What can you do **today**?]]
-  
-.font_large[&lt;br&gt;  ]
-
-.font_large[Self-assessments (links on previous slide).]
-
-&lt;br&gt; 
-
-.font_large[.font_large[Challenge]]
-
-.blockquote[.font_large[Identify **two** identity groups that you see underrepresented in your major. For each: 
-
-- Find 5 **social media accounts** and follow them. 
-- Add a **podcast** hosted a member of that identity group to your regular rotation. 
-]
-]
-
-
-]
-
-
-
----
-
-class: bg-main1 middle
-
-# *How can we work together to to make STEM a more .alert2[**just**] and .alert2[**inclusive**] social endeavor?*
-
-
----
-layout: true
-class: split-two with-border middle
-
-.column[
-  .split-five[
-  .row.bg-main1[.content.font2[
-.alert[**Identity**] and .alert[**privilege**] in STEM careers. 
-  ]]
-  .row.bg-main2[.content.font2[
-Quick overview of .alert[**networks**] and why we care about them.
-  ]]
-  .row.bg-main3[.content.font2[
-.alert[**Ranking**] in networks.
-  ]]
-  .row.bg-main4[.content.font2[
-From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
-  ]]
-  .row.bg-main5[.content.font2[
-.alert[**Having fun**] while doing science. 
-  ]]
-]]
-
-.column[.content.center.vmiddle[
-{{content}}
-]]
-
----
-
-class: fade-row1-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
-
-&lt;img src="img/network.jpeg" width=100%&gt;   
-***Image credit:*** *Wikipedia*
-
----
-layout: false
-class: split-two
-  
-.column.bg-main1[&lt;br&gt; &lt;br&gt;
-.content.font3[.color-main1[Directed] Networks] 
-.blockquote.font_large[A ***.alert2[network]*** (or ***.alert2[graph]***) consists of:
-- A set `\(\mathcal{N}\)` of entities, called *.alert2[nodes]*.
-- A set of `\(\mathcal{E}\)` of connections between pairs of nodes, called *.alert2[edges]*.]
-
-.font_large[Social groups, complex infrastructure, and natural ecosystems are among the .alert[many] systems we can model with networks.]
-]
-
-.column[
-.content.center.vmiddle[
-&lt;img src="img/network.jpeg" width=100%&gt;   
-***Image credit:*** *Wikipedia*
-]
-]
-
----
-layout: true
-class: split-two
-
-.column[
-  .split-four[
-  .row.bg-main1[.content.font3[
-.alert[Directed] Networks
-  ]]
-  .row.bg-main1[.content.font_large[
-  .alert2[Competitions] (chess, basketball...)  &lt;br&gt; 
-  .color-main1[tab] Nodes are competitors/teams. &lt;br&gt;
-  .color-main1[tab] `\(A \rightarrow B\)` `\(\implies\)` `\(B\)` beats `\(A\)`. 
-  ]]
-  .row.bg-main1[.content.font_large[ 
-  .alert2[Internet] (Google, Facebook) &lt;br&gt;
-  .color-main1[tab] Nodes are webpages. &lt;br&gt;
-  .color-main1[tab] `\(A\rightarrow B\)` `\(\implies\)` `\(A\)` links to `\(B\)`. 
-  ]] 
-  .row.bg-main1[.content.font_large[
-  .alert2[Endorsements] (politics, Twitter) &lt;br&gt; 
-  .color-main1[tab] Nodes are people. &lt;br&gt;
-  .color-main1[tab] `\(A\rightarrow B\)` `\(\implies\)` `\(A\)` thinks `\(B\)` is good.   
-  ]]
-]]
-
-.column[.content.center.hmiddle[&lt;br&gt;
-&lt;img src="img/digraph.png" width=70%&gt;&lt;br&gt;
-***Image credit:*** *Wikipedia*
-{{content}}
-]]
-
----
-class: hide-row2-col1 hide-row3-col1 hide-row4-col1 
-
----
-class: hide-row3-col1 hide-row4-col1
-&lt;img src="img/magnus.jpeg" width=70%&gt; 
-
----
-class:hide-row4-col1
-&lt;img src="img/how-pagerank-works.png" width=70%&gt;
-
----
-
-class:
-&lt;img src="img/lamberson-social-network.jpeg" width=70%&gt;&lt;br&gt; 
-***Image credit***: [PJ Lamberson](http://social-dynamics.org/twitter-network-data/)
-
----
-layout: true
-class: split-two with-border middle
-
-.column[
-  .split-five[
-  .row.bg-main1[.content.font2[
-.alert[**Identity**] and .alert[**privilege**] in STEM careers. 
-  ]]
-  .row.bg-main2[.content.font2[
-Quick overview of .alert[**networks**] and why we care about them.
-  ]]
-  .row.bg-main3[.content.font2[
-.alert[**Ranking**] in networks.
-  ]]
-  .row.bg-main4[.content.font2[
-From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
-  ]]
-  .row.bg-main5[.content.font2[
-.alert[**Having fun**] while doing science. 
-  ]]
-]]
-
-.column[.content.center.vmiddle[
-{{content}}
-]]
-
----
-class: fade-row1-col1 fade-row2-col1 fade-row4-col1 fade-row5-col1
-&lt;img src="img/schematic.png" width=100%&gt;
-`$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) +\alpha \mathbf{I}\right]\mathbf{s} = \left[\mathbf{D}^i- \mathbf{D}^o \right]\mathbb{1}$$`
-
----
-class: middle
-layout: false
-
-.split-two[
-.column.bg-main1[
-&lt;br&gt;&lt;br&gt;
-# The Network Ranking Problem
-
-.blockquote.font_large[Given a network, assign a scalar .alert2[**rank**] or .alert2[**score**] vector `\(\mathbf{r} \in \mathbb{R}^n\)` based on the network structure. `\(r_i\)` is the rank of node `\(i \in \mathcal{N}\)`.    
-]
-
-
-.content.font_large[
-1. Who is the **best** chessplayer? 
-  - [Magnus Carlsen](https://twitter.com/MagnusCarlsen?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor)
-2. Which website is **most central** to the internet?
-  - [philchodrow.com](www.philchodrow.com)
-3. What is the **most important** account on Twitter?
-  - [No Context Star Trek](https://twitter.com/NoContextTrek)]
-]
-.column[
-.content.center.vmiddle[
-&lt;img src="img/pagerank-example.jpeg" width=90%&gt;&lt;br&gt; 
-***Image credit:*** *Wikipedia* 
-]
-]
-]
-
----
-class: 
-layout: false
-
-.split-two[ 
-.column.bg-main1[
-&lt;br&gt; &lt;br&gt; 
-# The Adjacency Matrix &lt;br&gt; &lt;br&gt; 
-.content.center[.font_large[ 
-  $$\mathbf{A} = \left[\begin{matrix}
-    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\  --&gt;
-    &lt;!-- 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
-    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 \\ --&gt;
-    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
-    &lt;!-- 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; \mathbf{1} \\  --&gt;
-    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0  --&gt;
-    \end{matrix}\right] 
-    $$
-    
-  Turns **.alert[network]** problems into **.alert2[linear algebra]** problems. 
-  ]
-  ]
-]
-.column[
-.content.center.vmiddle[
-&lt;img src="img/digraph.png" width=90%&gt;&lt;br&gt; 
-***Image credit:*** *Wikipedia*
-]
-]
-]
-
----
-layout: true
-class: split-two
-
-.column.bg-main1[
-&lt;br&gt; &lt;br&gt; 
-# Computing .alert[Ranks] &lt;br&gt; &lt;br&gt; 
-.content.center[.font_large[ 
-  $$\mathbf{A} = \left[\begin{matrix}
-    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\  --&gt;
-    &lt;!-- 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
-    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 \\ --&gt;
-    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
-    &lt;!-- 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; \mathbf{1} \\  --&gt;
-    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0  --&gt;
-    \end{matrix}\right] 
-    $$
-    Lots of ways to compute a rank vector `\(\mathbf{r} \in \mathbb{R}^n\)`...
-  ]
-  ]
-]
-
-.column[&lt;br&gt;
-  .split-three[
-  .row.bg-main4[.content.font_large[
-  .alert2[Degree] (Number of positive interactions) 
-  .color-main4[tab] `$$\mathbf{r} = \mathbf{d} = \mathbf{e}^T\mathbf{A}$$` &lt;br&gt;
-  ]]
-  .row.bg-main4[.content.font_large[ 
-  .alert2[PageRank] (Google) **r** is leading eigenvector of 
-  `$$\mathbf{P} = \mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha_p)\mathbf{E}$$`
-  ]] 
-  .row.bg-main4[.content.font_large[
-  .alert2[SpringRank] (DeBacco et al. 2018) Solve linear system 
-  .font_medium[.font_small[$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) + \alpha_s\mathbf{I}\right]  \mathbf{r} = \left[\mathbf{D}^i - \mathbf{D}^o\right]\mathbf{e}$$]
-  ]]]
-]]
-
-
----
-class: hide-row1-col2 hide-row2-col2 hide-row3-col2 
-
----
-class: hide-row2-col2 hide-row3-col2
-
-
----
-class:hide-row3-col2 
-
----
-class: 
-
----
-layout: false
-class: bg-main1
-
-# .alert2[Example]: PageRank in the *Hamilton* mention network
-
-.content.center[
-&lt;img src="img/hamilton.png" width=85%&gt;&lt;br&gt; 
-
-.font2[Leading eigenvector of 
-`\(\mathbf{P} = \mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha_p)\mathbf{E}\)`.]
-]
-
-
----
-
-layout: true
-class: split-two with-border middle
-
-.column[
-  .split-five[
-  .row.bg-main1[.content.font2[
-.alert[**Identity**] and .alert[**privilege**] in STEM careers. 
-  ]]
-  .row.bg-main2[.content.font2[
-Quick overview of .alert[**networks**] and why we care about them.
-  ]]
-  .row.bg-main3[.content.font2[
-.alert[**Ranking**] in networks.
-  ]]
-  .row.bg-main4[.content.font2[
-From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
-  ]]
-  .row.bg-main5[.content.font2[
-.alert[**Having fun**] while doing science. 
-  ]]
-]]
-
-.column[.content.center.vmiddle[
-{{content}}
-]]
-
----
-class: fade-row1-col1 fade-row2-col1 fade-row3-col1 fade-row5-col1
-&lt;img src="img/pnas.png" width=95%&gt;
-
----
-
-class: split-two bg-main1
-layout: false
-
-.column[
-&lt;br&gt; 
-.font_large[.font_large[.font_large[
-.content.center[Ranks .alert2[⟳] Decisions]]]
-]
-.blockquote[
-.content.font_large[.content.font_large[
-  What happens when network ranks .alert2[inform] decision-making within a    system?]
-]]
-]
-
-
-
-
-.column.bg-main4[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-  &lt;img src="img/us-news-rankings.jpeg" width=60%&gt; 
-  ]
-  .content.font_large[.alert[Example]: 
-  College ranks are based on selectivity. 
-  
-  High ranks &lt;br&gt;  `\(\implies\)` more applications &lt;br&gt; `\(\implies\)`     higher selectivity &lt;br&gt; `\(\implies\)` even higher ranks....
-]]
-
 
 
 ---
@@ -627,24 +84,219 @@ layout: false
 
 class: split-two bg-main1
 
-# Working Environment (.alert2[Very Important]) 
+.column[.font_large[.font_large[.font_large[
+.center[Ranks .alert2[⟳] Decisions]
+]] 
 
-.content.font2[Complex Networks Winter Workshop 2019 (\#CNWW)]
+We propose a simple .alert[math model] of hierarchies emerging from feedback loops.
 
-.column[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-  &lt;img src="img/monastere.jpeg" width=100%&gt; 
-  
-  .content.font_medium[Le Monastère des Augustines, Québec City]
-]]
-.column[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-  &lt;img src="img/cats-2.jpeg" width=97%&gt; 
-  
-  .content.font_medium[Cafe Felin Ma Langue Aux Chats (yes, it's a .alert[cat cafe]])
+Feedback loops can generate stable hierarchies, even when are .alert[no meaningful differences] between agents.
+
+Some social systems are .alert[near criticality] -- small interventions could help to promote equality and equity. 
+
+]
+]
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/pnas.png" width=100%&gt; 
 ]]
 
 
 ---
 
+# Scenes from a (really fun) collaboration
+
+&lt;img src="img/heart-cookies.jpg" width=14.7%&gt;
+&lt;img src="img/apollo.jpg" width=14.7%&gt;
+&lt;img src="img/book.jpg" width=14.7%&gt;
+&lt;img src="img/dinner.jpg" width=26%&gt;
+&lt;img src="img/ezra.jpg" width=26%&gt;
+
+&lt;img src="img/so-pumped.png" width=16%&gt;
+&lt;img src="img/yes.GIF" width=32%&gt;
+&lt;img src="img/mari-mp.png" width=50%&gt;
+
+&lt;img src="img/ready.jpg" width=24.5%&gt; 
+&lt;img src="img/obama.png" width=25.5%&gt;
+&lt;img src="img/two-cats.jpeg" width=24.5%&gt;
+&lt;img src="img/page-rank.png" width=22.7%&gt;
+
+&lt;!-- &lt;img src="img/cats.jpeg" width=32%&gt; --&gt;
+&lt;!-- &lt;img src="img/cinnamon-rolls.jpg" width=16%&gt; --&gt;
+
+---
+
+class: split-two bg-main1
+
+# Complex Networks Winter Workshop 2019 (.alert2[\#CNWW])
+
+.column[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/monastere.jpeg" width=100%&gt; 
+  
+  .content.font_medium[Le Monastère des Augustines, Québec City]
+]]
+.column[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/cats-2.jpeg" width=97%&gt; 
+  
+  .content.font_medium[Cafe Felin Ma Langue Aux Chats (yes, it's a .alert[cat cafe]])
+]]
+
+---
+layout: true
+class: split-two
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font3[
+.alert[Directed] Networks
+  ]]
+  .row.bg-main1[.content.font_large[
+  .alert2[Competitions] (sports, animal dominance...)  &lt;br&gt; 
+  .color-main1[tab] Nodes are competitors/individuals. &lt;br&gt;
+  .color-main1[tab] `\(A \rightarrow B\)` `\(\implies\)` `\(B\)` beats `\(A\)`. 
+  ]]
+  .row.bg-main1[.content.font_large[ 
+  .alert2[Internet] (Google, Facebook) &lt;br&gt;
+  .color-main1[tab] Nodes are webpages. &lt;br&gt;
+  .color-main1[tab] `\(A\rightarrow B\)` `\(\implies\)` `\(A\)` links to `\(B\)`. 
+  ]] 
+  .row.bg-main1[.content.font_large[
+  .alert2[Endorsements] (politics, Twitter) &lt;br&gt; 
+  .color-main1[tab] Nodes are people. &lt;br&gt;
+  .color-main1[tab] `\(A\rightarrow B\)` `\(\implies\)` `\(A\)` thinks `\(B\)` is good.   
+  ]]
+]]
+
+.column[.content.center.hmiddle[&lt;br&gt;
+&lt;img src="img/digraph.png" width=70%&gt;&lt;br&gt;
+***Image credit:*** *Wikipedia*
+{{content}}
+]]
+
+---
+class: hide-row2-col1 hide-row3-col1 hide-row4-col1 
+
+---
+class: hide-row3-col1 hide-row4-col1
+&lt;img src="img/magnus.jpeg" width=70%&gt; 
+
+---
+class:hide-row4-col1
+&lt;img src="img/how-pagerank-works.png" width=70%&gt;
+
+---
+
+class:
+&lt;img src="img/lamberson-social-network.jpeg" width=70%&gt;&lt;br&gt; 
+***Image credit***: [PJ Lamberson](http://social-dynamics.org/twitter-network-data/)
+
+---
+class: middle
+layout: false
+
+.split-two[
+.column.bg-main1[
+&lt;br&gt;&lt;br&gt;
+# The Network Ranking Problem
+
+.blockquote.font_large[Given a network, assign a scalar .alert2[**rank**] or .alert2[**score**] vector `\(\mathbf{r} \in \mathbb{R}^n\)` based on the network structure. `\(r_i\)` is the rank of node `\(i \in \mathcal{N}\)`.    
+]
+
+
+.content.font_large[
+1. Who is the **best** chessplayer or **most dominant** parakeet? 
+2. Which website is **most central** to the internet?
+3. What is the **most important** account on Twitter?
+]]
+.column[
+.content.center.vmiddle[
+&lt;img src="img/pagerank-example.jpeg" width=90%&gt;&lt;br&gt; 
+***Image credit:*** *Wikipedia* 
+]
+]
+]
+
+---
+layout: true
+class: split-two
+
+.column[
+&lt;br&gt; 
+# .alert[Ranks] from Matrices&lt;br&gt;
+
+.content.center[.font_large[
+&lt;img src="img/digraph.png" width=50%&gt;
+  $$\mathbf{A} = \left[\begin{matrix}
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; \mathbf{1} \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0  --&gt;
+    \end{matrix}\right] 
+    $$
+  ]
+  ]
+]
+
+.column.bg-main1[&lt;br&gt;
+  .split-three[
+  .row[.content.font_large[
+  .alert2[Degree] (Number of positive interactions) 
+  .color-main4[tab] `$$\mathbf{r} = \mathbf{d} = \mathbf{e}^T\mathbf{A}$$` &lt;br&gt;
+  ]]
+  .row[.content.font_large[ 
+  .alert2[PageRank] (Google) **r** is leading eigenvector of 
+  `$$\mathbf{P} = \mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha_p)\mathbf{E}$$`
+  ]] 
+  .row[.content.font_large[
+  .alert2[SpringRank] (DeBacco et al. 2018) Solve linear system 
+  .font_medium[.font_small[$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) + \alpha_s\mathbf{I}\right]  \mathbf{r} = \left[\mathbf{D}^i - \mathbf{D}^o\right]\mathbf{e}$$]
+  ]]]
+]]
+
+
+---
+class: hide-row1-col2 hide-row2-col2 hide-row3-col2 
+
+---
+class: hide-row2-col2 hide-row3-col2
+
+
+---
+class:hide-row3-col2 
+
+---
+class: 
+
+
+---
+layout: false
+class: split-two bg-main1
+
+.column[
+  &lt;br&gt; 
+  .font_large[.font_large[.font_large[
+  .content.center[Ranks .alert2[⟳] Decisions]]]
+]
+.blockquote[
+  .content.font_large[.content.font_large[
+  What happens when network ranks .alert2[inform] decision-making within a    system?]
+]]
+]
+
+.column.bg-main4[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/us-news-rankings.jpeg" width=60%&gt; 
+  ]
+  .content.font_large[.alert[Example]: 
+  College ranks are based in part on selectivity. 
+  
+  High ranks &lt;br&gt;  `\(\implies\)` more applications &lt;br&gt; `\(\implies\)`     higher selectivity &lt;br&gt; `\(\implies\)` even higher ranks....
+]]
+
+
+---
+
+layout: false
 class: split-two bg-main1
 
 .column[.content[
@@ -653,7 +305,7 @@ class: split-two bg-main1
 
 Matrix `\(\mathbf{A} = \mathbf{A}^{(t)}\)` of *endorsements*: `\(a_{ij}^{(t)}\)` is the weighted number of times `\(i\)` endorses `\(j\)` by time `\(t\)`. 
 
-1. Compute rank vector `\(\mathbf{r} = \sigma(\mathbf{A})\)` (degree, PageRank, SpringRank...)
+1. Compute rank vector `\(\mathbf{r}\)` (degree, PageRank, SpringRank...)
 2. Node `\(i\)` computes a *utility* of endorsing `\(j\)`:  `$$u_{ij} = \color{#63d297}{\beta_1} r_j + \color{#ff5252}{\beta_2} (r_j - r_i)^2\;.$$` 
 
 `\(\color{#63d297}{\beta_1}\)` : Preference for *prestige*. &lt;br&gt;
@@ -679,7 +331,7 @@ class: split-two bg-main1
 
 `$$\mathbf{A}^{(t+1)} = \color{#ff5252}{\lambda} \mathbf{A}^{(t)} + (1-\color{#ff5252}{\lambda}) \color{#63d297}{\mathbf{\Delta}^{(t)}}$$`
 
-`\(\lambda\)` is a .alert[memory parameter]: `\(\lambda \approx 1 \rightarrow\)` system evolves slowly. 
+`\(\lambda\)` is a .alert[memory parameter]: `\(\lambda \approx 1 \rightarrow\)` system state evolves very slowly. 
 
 ]]]
 
@@ -692,7 +344,7 @@ class: split-two bg-main1
 class: split-two bg-main1
 
 .column[.content[
-&lt;br&gt; 
+
 .font_large[.font_large[.font_large[
 .center[Ranks .alert2[⟳] Decisions]
 ]]
@@ -740,7 +392,7 @@ class: split-two bg-main1
 .font_large[
 
 Consider the deterministic function 
-`$$\mathbf{f}(\mathbf{r}, \mathbf{A}) = \lim_{\lambda \rightarrow 1} \frac{\mathbb{E}[\mathbf{r}|\mathbf{A}] - \mathbf{r}}{1 - \lambda}\;.$$`
+`$$\mathbf{f}(\mathbf{r}, \mathbf{A}) = \lim_{\lambda \rightarrow 1} \frac{\mathbb{E}[\mathbf{r}'|\mathbf{A}] - \mathbf{r}}{1 - \lambda}\;.$$`
 
 This function has an egalitarian fixed point such that `\(\mathbf{r} = r \mathbb{e}\)`. This point is linearly stable iff `\(\beta_1 &lt; \beta_1^c\)`: 
 
@@ -779,40 +431,14 @@ This function has an egalitarian fixed point such that `\(\mathbf{r} = r \mathbb
   1/\alpha_p &amp;\quad \text{PageRank} \\ 
   2 + \alpha_s\frac{n}{m} &amp;\quad \text{SpringRank}.
 \end{cases}$$`
+
+.alert2[**Proof**]: Compute Jacobian, linear algebra exercise.
 ]]
 
 
 .column.bg-main4[.content.font_medium[
   {{content}}
 ]]
-
----
-class: 
-
-&lt;br&gt;
-Heuristically, a fixed point `\(\mathbf{x}_0\)` of some dynamics is **stable** if, when you perturb the the system to some nearby point, it eventually comes back to `\(\mathbf{x}_0\)`. 
-
-&lt;img src="img/stability.jpg" width=100%&gt; 
-Image credit: [Desmond Winterborne](https://www.sciencedirect.com/topics/engineering/stable-equilibrium)
-
----
-class: 
-
-&lt;br&gt;
-Here, stability of the egalitarian fixed point of `\(\mathbf{f}\)` is governed by the **Jacobian matrix** of partial derivatives: 
-
-`$$\mathbf{J} = \left[\begin{matrix}\frac{\partial f_1}{\partial r_1} &amp; \frac{\partial f_1}{\partial r_2} &amp; \cdots  &amp; \frac{\partial f_1}{\partial r_n}  \\ 
-\frac{\partial f_2}{\partial r_1} &amp; \frac{\partial f_2}{\partial r_2} &amp; \cdots  &amp; \frac{\partial f_2}{\partial r_b} \\ 
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
-\frac{\partial f_n}{\partial r_1} &amp; \frac{\partial f_n}{\partial r_2} &amp; \cdots  &amp; \frac{\partial f_n}{\partial r_n}
-\end{matrix}\right]$$`
-
-
-Fixed point is **linearly stable** if `\(\mathbf{J}\)` only has eigenvalues with negative real part. 
-
-Fixed point is **unstable** of `\(\mathbf{J}\)` has any eigenvalues with positive real part. 
-
-Checking for stability conditions is a long linear algebra exercise...
 
 ---
 
@@ -835,7 +461,7 @@ Model assigns a *likelihood* to the observed data.
 
 `$$\mathcal{L}(\lambda, \beta) = \sum_{t = 0}\sum_{i, j \in \mathcal{N}}\color{#ff5252}{k_{ij}^{(t)}} \log \color{#63d297}{\gamma_{ij}^{(t)}}$$`
 
-- `\(\color{#ff5252}{k_{ij}^{(t)}}\)`: \# of observed endorsements `\(i\rightarrow j\)` in time `\(t\)` (from data).
+- `\(\color{#ff5252}{k_{ij}^{(t)}}\)`: \# of observed endorsements `\(i\rightarrow j\)` in timestep `\(t\)` (from data).
 - `\(\color{#63d297}{\gamma_{ij}^{(t)}}\)`: Probability that `\(i\)` chooses `\(j\)` as recipient of endorsement at time `\(t\)` (depends on `\(\lambda\)`, `\(\beta\)`, and data from previous timesteps). 
 
 **Method of maximum likelihood**: find parameters `\(\hat{\lambda}\)` and `\(\hat{\beta}\)` to maximize `\(\mathcal{L}\)`. 
@@ -869,7 +495,7 @@ Model assigns a *likelihood* to the observed data.
 
 `$$\mathcal{L}(\lambda, \beta) = \sum_{t = 0}\sum_{i, j \in \mathcal{N}}\color{#ff5252}{k_{ij}^{(t)}} \log \color{#63d297}{\gamma_{ij}^{(t)}}$$`
 
-- `\(\color{#ff5252}{k_{ij}^{(t)}}\)`: \# of observed endorsements `\(i\rightarrow j\)` in time `\(t\)` (from data).
+- `\(\color{#ff5252}{k_{ij}^{(t)}}\)`: \# of observed endorsements `\(i\rightarrow j\)` in timestep `\(t\)` (from data).
 - `\(\color{#63d297}{\gamma_{ij}^{(t)}}\)`: Probability that `\(i\)` chooses `\(j\)` as recipient of endorsement at time `\(t\)` (depends on `\(\lambda\)`, `\(\beta\)`, and data from previous timesteps). 
 
 **Method of maximum likelihood**: find parameters `\(\hat{\lambda}\)` and `\(\hat{\beta}\)` to maximize `\(\mathcal{L}\)`. 
@@ -909,7 +535,7 @@ Parakeets + Newcomb Frat: .alert[**supercritical**].
 
 class: split-two bg-main1
 
-.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[It matters how we conceptualize rank! ]]&lt;br&gt;&lt;br&gt;
+.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[It matters how we model prestige! ]]&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
 .font_large[
 
 Placement share, Root-Degree, and PageRank: MIT dominates, esp. recently. 
@@ -920,9 +546,9 @@ Placement share, Root-Degree, and PageRank: MIT dominates, esp. recently.
 Different estimates of fluidity in ranks.  
 ]
 ]
-.column.bg-main4[.content.vmiddle[
+.column.bg-main4[&lt;br&gt; &lt;br&gt; .content.font_large[.font_large[Math PhD Exchange]] &lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;img src="img/phd-exchange.png" width=100%&gt; 
-]]
+]
 
 ---
 
@@ -938,140 +564,24 @@ Feedback loops can generate stable hierarchies, even when are .alert[no meaningf
 
 Some systems are .alert[near criticality] -- small interventions could help to promote equality and equity. 
 
-
-
-
-.alert[Interdisciplinary math is fun]! Commentary by biologist friends Simon DeDeo and Elizabeth Hobson ➔
-
 ]
 ]
 .column.bg-main4[.content.vmiddle[
-&lt;img src="img/commentary.png" width=100%&gt; 
+&lt;img src="img/pnas.png" width=100%&gt; 
 ]]
 
 ---
-layout: true
-class: split-two with-border middle
 
-
-.column[
-  .split-five[
-  .row.bg-main1[.content.font2[
-.alert[**Identity**] and .alert[**privilege**] in STEM careers. 
-  ]]
-  .row.bg-main2[.content.font2[
-Quick overview of .alert[**networks**] and why we care about them.
-  ]]
-  .row.bg-main3[.content.font2[
-.alert[**Ranking**] in networks.
-  ]]
-  .row.bg-main4[.content.font2[
-From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
-  ]]
-  .row.bg-main5[.content.font2[
-.alert[**Having fun**] while doing science. 
-  ]]
-]]
-
-.column[.content.center.vmiddle[
-{{content}}
-]]
-
----
-class: fade-row1-col1 fade-row2-col1 fade-row3-col1 fade-row4-col1
-
-&lt;!-- &lt;img src="img/heart-cookies.jpg" width=32%&gt; --&gt;
-&lt;!-- &lt;img src="img/book.jpg" width=32%&gt; --&gt;
-&lt;!-- &lt;img src="img/apollo.jpg" width=32%&gt; --&gt;
-
-&lt;img src="img/dinner.jpg" width=48%&gt;
-&lt;img src="img/ezra.jpg" width=48%&gt;
-
-&lt;img src="img/cats.jpeg" width=65%&gt;
-&lt;img src="img/cinnamon-rolls.jpg" width=32%&gt;
-&lt;img src="img/mari-mp.png" width=62%&gt;
-&lt;img src="img/ready.jpg" width=30%&gt; 
-
----
 
 layout: false
-class: split-two
- 
-
-.column.bg-main1[
-&lt;br&gt;
-# Tips for ~~Interdisciplinary Applied Math~~ Life
-
-.font_large[
-Find people worth your trust, and trust them. 
-
-Be thankful, and say so. 
-
-Check in often about ideas, feelings, and goals. 
-
-Be honest about your strengths and time availability.
-
-Work with your heart, not just your brain. 
-
-Take time to see things from multiple angles. 
-
-Laugh. A lot. 
-
-]
-]
-]
-
----
-
-layout: false
-class: split-two
- 
-
-.column.bg-main1[
-
-&lt;br&gt;
-# Tips for ~~Interdisciplinary Applied Math~~ Life
-
-.font_large[
-Find people worth your trust, and trust them. 
-
-Be thankful, and say so. 
-
-Check in often about ideas, feelings, and goals. 
-
-Be honest about your strengths and time availability.
-
-Work with your heart, not just your brain. 
-
-Take time to see things from multiple angles. 
-
-Laugh. A lot. 
-
-]
-]
-]
-
-.column[
-  .content.vmiddle[.font_large[.font_large[
-  
-Brush up on your .alert[linear algebra].
-
-]
-]
-]
-]
-
-
-
----
-
 class: split-two 
 
-.column.bg-main1[
+.column.bg-main1[&lt;br&gt;.font_large[
+
+# Thanks! 
+]
 
 &lt;br&gt;
-# Thanks! 
-
 &lt;img src="img/mari_portrait.jpeg" width=24%&gt; 
 &lt;img src="img/phil_portrait.jpeg" width=24%&gt; 
 &lt;img src="img/nicole_portrait.jpeg" width=24%&gt;
@@ -1085,30 +595,37 @@ Complex Networks Winter Workshop 2019
 
 The cats 
 
-UMSA
+Minisymposium organizers: Skylar + Joel
 
 Y'all! 
 ]]
 
 .column.bg-main4[.content[&lt;br&gt; .font_large[
 
-# Shameless plug 
+## arXiv version
 
-**Math 168: Introduction to Networks**
+https://arxiv.org/abs/2007.04448
 
-Planned for Spring 2022
+*Includes a gender representation analysis of bibliography.*
 
-### Prereqs: 
+## These slides
 
-- Upper division .alert[linear algebra] (Math 115A)
-- .alert2[Probability] (Math 170A, Stats 100A, or ECE 131A)
+https://philchodrow.github.io/talks/emergence-of-hierarchy/short#1
 
-### Topics: 
 
-- Network basics
-- Random graph models
-- Data science with networks
-- Dynamics on networks
+## Socials
+
+@mkawakatsu &lt;br&gt;
+@philchodrow &lt;br&gt;
+@NicoleEikmeier &lt;br&gt;
+@DanLarremore
+
+
+
+
+
+
+
 ]
 ]
 
