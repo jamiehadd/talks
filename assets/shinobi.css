@@ -29,6 +29,7 @@ See https://emitanaka.github.io/ninja-theme for the kunoichi example (replace wi
 		--color-opacity30: rgba(26,23,56 ,0.3);
 		--title-background: url("");
 		--logo: url("");
+		--text-color6: #949494;
 	}
 
 .title-slide {
@@ -118,6 +119,11 @@ h1, h2, h3, body{
 }
 .author-highlight {
 	color: var(--alert-color);
+}
+
+.institution {
+	color: var(--text-color6);
+	font-style: italic;
 }
 
 h1, h2, h3, h4 {
