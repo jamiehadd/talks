@@ -36,8 +36,8 @@ layout: false
 .split-four[
 .column[.image-caption-right[
   <br> 
-  ## .alert[<nobr>Mari Kawakatsu</nobr>]
-  .font_medium[Applied and Computational Mathematics <br> Princeton University ]
+  ## .alert2[<nobr>Mari Kawakatsu</nobr>]
+  .font_medium[Applied and Computational Mathematics <br> Princeton University <br> .alert2[MS144, 3:00pm-3:25pm]]
   ]    
 ]
 .column[.image-bottom[
@@ -61,7 +61,7 @@ layout: false
 .split-four[
 .column[.image-caption-right[
   ## .alert[<nobr>Nicole Eikmeier</nobr>]
-  .font_large[<nobr>Computer Science</nobr> <br> Grinnell]      
+  .font_large[<nobr>Computer Science</nobr><br>Grinnell]      
   ]   
 ]
 .column[
@@ -99,6 +99,24 @@ Some social systems are .alert[near criticality] -- small interventions could he
 ]]
 
 
+
+---
+
+class: split-two bg-main1
+
+# Complex Networks Winter Workshop 2019 (.alert2[\#CNWW])
+
+.column[.content.center[<br><br><br><br><br><br><br>
+  <img src="img/monastere.jpeg" width=100%> 
+  
+  .content.font_medium[Le Monastère des Augustines, Québec City]
+]]
+.column[.content.center[<br><br><br><br><br><br><br>
+  <img src="img/cats-2.jpeg" width=97%> 
+  
+  .content.font_medium[Cafe Felin Ma Langue Aux Chats (yes, it's a .alert[cat cafe]])
+]]
+
 ---
 
 # Scenes from a (really fun) collaboration
@@ -121,22 +139,6 @@ Some social systems are .alert[near criticality] -- small interventions could he
 <!-- <img src="img/cats.jpeg" width=32%> -->
 <!-- <img src="img/cinnamon-rolls.jpg" width=16%> -->
 
----
-
-class: split-two bg-main1
-
-# Complex Networks Winter Workshop 2019 (.alert2[\#CNWW])
-
-.column[.content.center[<br><br><br><br><br><br><br>
-  <img src="img/monastere.jpeg" width=100%> 
-  
-  .content.font_medium[Le Monastère des Augustines, Québec City]
-]]
-.column[.content.center[<br><br><br><br><br><br><br>
-  <img src="img/cats-2.jpeg" width=97%> 
-  
-  .content.font_medium[Cafe Felin Ma Langue Aux Chats (yes, it's a .alert[cat cafe]])
-]]
 
 ---
 layout: true
@@ -240,7 +242,7 @@ class: split-two
   .split-three[
   .row[.content.font_large[
   .alert2[Degree] (Number of positive interactions) 
-  .color-main4[tab] $$\mathbf{r} = \mathbf{d} = \mathbf{e}^T\mathbf{A}$$ <br>
+  $$\mathbf{r} = \mathbf{d} = \mathbf{e}^T\mathbf{A}$$ <br>
   ]]
   .row[.content.font_large[ 
   .alert2[PageRank] (Google) **r** is leading eigenvector of 
@@ -365,17 +367,19 @@ class: split-two bg-main1
 .column[<br><br>.content.font_large[.font_large[What happens?]]<br><br><br>
 .font_large[
 
+$$u_{ij} = \color{#63d297}{\beta_1} r_j + \color{#ff5252}{\beta_2} (r_j - r_i)^2\;.$$ 
+
 $\color{#63d297}{\beta_1}$ : Preference for .alert2[*prestige*]. <br>
 
 - $\beta_1$ small: fluctuating egalitarianism.
-- $\beta_1$ large: emergence of time-varying hierarchies. 
+- $\beta_1$ large: emergence of distinct node ranks. 
 
 $\color{#ff5252}{\beta_2}$ : Preference for *.alert[proximity]*. 
 
 - $\beta_2 < 0$: stabilization of hierarchical ranks. 
 
 <br>
-Can we say anything *mathematical* about these observations?
+Can we say anything analytic about these observations?
 ]
 ]
 .column.bg-main4[.content.vmiddle[
@@ -392,7 +396,7 @@ class: split-two bg-main1
 Consider the deterministic function 
 $$\mathbf{f}(\mathbf{r}, \mathbf{A}) = \lim_{\lambda \rightarrow 1} \frac{\mathbb{E}[\mathbf{r}'|\mathbf{A}] - \mathbf{r}}{1 - \lambda}\;.$$
 
-This function has an egalitarian fixed point such that $\mathbf{r} = r \mathbb{e}$. This point is linearly stable iff $\beta_1 < \beta_1^c$: 
+This function has an egalitarian root such that $\mathbf{r} = r \mathbb{e}$. This root is linearly stable iff $\beta_1 < \beta_1^c$: 
 
 $$\beta_1^c = \begin{cases}
   2\sqrt{\frac{n}{m}} &\quad \text{Root-Degree} \\ 
@@ -422,7 +426,7 @@ layout: true
 Consider the deterministic function 
 $$\mathbf{f}(\mathbf{r}, \mathbf{A}) = \lim_{\lambda \rightarrow 1} \frac{\mathbb{E}[\mathbf{r}|\mathbf{A}] - \mathbf{r}}{1 - \lambda}\;.$$
 
-This function has an egalitarian fixed point such that $\mathbf{r} = r \mathbb{e}$. This point is .alert[linearly stable] iff $\beta_1 < \beta_1^c$: 
+This function has an egalitarian root such that $\mathbf{r} = r \mathbb{e}$. This root is .alert[linearly stable] iff $\beta_1 < \beta_1^c$: 
 
 $$\beta_1^c = \begin{cases}
   2\sqrt{\frac{n}{m}} &\quad \text{Root-Degree} \\ 
@@ -430,7 +434,7 @@ $$\beta_1^c = \begin{cases}
   2 + \alpha_s\frac{n}{m} &\quad \text{SpringRank}.
 \end{cases}$$
 
-.alert2[**Proof**]: Compute Jacobian, linear algebra exercise.
+.alert2[**Proof**]: Compute Jacobian, long linear algebra exercise.
 ]]
 
 
@@ -460,7 +464,7 @@ Model assigns a *likelihood* to the observed data.
 $$\mathcal{L}(\lambda, \beta) = \sum_{t = 0}\sum_{i, j \in \mathcal{N}}\color{#ff5252}{k_{ij}^{(t)}} \log \color{#63d297}{\gamma_{ij}^{(t)}}$$
 
 - $\color{#ff5252}{k_{ij}^{(t)}}$: \# of observed endorsements $i\rightarrow j$ in timestep $t$ (from data).
-- $\color{#63d297}{\gamma_{ij}^{(t)}}$: Probability that $i$ chooses $j$ as recipient of endorsement at time $t$ (depends on $\lambda$, $\beta$, and data from previous timesteps). 
+- $\color{#63d297}{\gamma_{ij}^{(t)}}$: Modeled probability that $i$ chooses $j$ as recipient of endorsement at time $t$ (depends on $\lambda$, $\beta$, and data from previous timesteps). 
 
 **Method of maximum likelihood**: find parameters $\hat{\lambda}$ and $\hat{\beta}$ to maximize $\mathcal{L}$. 
 ]
