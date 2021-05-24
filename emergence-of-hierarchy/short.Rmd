@@ -28,55 +28,6 @@ pre {
 options(htmltools.dir.version = FALSE)
 ```
 
----
-class: split-50 bg-main1 
-layout: false 
-
-.row[ 
-.split-four[
-.column[.image-caption-right[
-  <br> 
-  ## .alert2[<nobr>Mari Kawakatsu</nobr>]
-  .font_medium[Applied and Computational Mathematics <br> Princeton University <br> .alert2[MS144, 3:00pm-3:25pm]]
-  ]    
-]
-.column[.image-bottom[
-  <img src="img/mari_portrait.jpeg" width=100%> 
-]]
-.column[  
-.image-bottom[
-  <img src="img/phil_portrait.jpeg" width=100%>
-]  
-] 
-.column[.image-caption-left[
-  <br>
-  ## .alert[<nobr>Phil Chodrow</nobr>]
-  .font_large[Mathematics <br> UCLA]
-  ] 
-]
-]
-]
-
-.row[
-.split-four[
-.column[.image-caption-right[
-  ## .alert[<nobr>Nicole Eikmeier</nobr>]
-  .font_large[<nobr>Computer Science</nobr><br>Grinnell]      
-  ]   
-]
-.column[
-  <img src="img/nicole_portrait.jpeg" width=100%> 
-]
-.column[    
-  <img src="img/dan_portrait.jpeg" width=100%>
-] 
-.column[.image-caption-left[
-  ## .alert[<nobr>Dan Larremore</nobr>]
-  .font_large[<nobr>Computer Science</nobr> <br> CU Boulder ]
-  ] 
-]
-]
-]
 
 ---
 
@@ -98,6 +49,55 @@ Some social systems are .alert[near criticality] -- small interventions could he
 <img src="img/pnas.png" width=100%> 
 ]]
 
+---
+class: split-50 bg-main1 
+layout: false 
+
+.row[ 
+.split-four[
+.column[.image-caption-right[
+  <br> 
+  ## .alert2[<nobr>Mari Kawakatsu</nobr>]
+  .font_large[Applied + Computational Mathematics <br> Princeton University <br> .alert2[MS144, 3pm Wed.]]
+  ]    
+]
+.column[.image-bottom[
+  <img src="img/mari_portrait.jpeg" width=100%> 
+]]
+.column[  
+.image-bottom[
+  <img src="img/phil_portrait.jpeg" width=100%>
+]  
+] 
+.column[.image-caption-left[
+  <br>
+  ## .alert[<nobr>Phil Chodrow</nobr>]
+  .font_large[Mathematics <br><br> UCLA]
+  ] 
+]
+]
+]
+
+.row[
+.split-four[
+.column[.image-caption-right[
+  ## .alert[<nobr>Nicole Eikmeier</nobr>]
+  .font_large[Computer Science<br><br>Grinnell College]      
+  ]   
+]
+.column[
+  <img src="img/nicole_portrait.jpeg" width=100%> 
+]
+.column[    
+  <img src="img/dan_portrait.jpeg" width=100%>
+] 
+.column[.image-caption-left[
+  ## .alert[<nobr>Dan Larremore</nobr>]
+  .font_large[Computer Science + BioFrontiers Inst. <br> CU Boulder ]
+  ] 
+]
+]
+]
 
 
 ---
