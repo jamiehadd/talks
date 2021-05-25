@@ -30,26 +30,6 @@ options(htmltools.dir.version = FALSE)
 
 
 ---
-
-class: split-two bg-main1
-
-.column[.font_large[.font_large[.font_large[
-.center[Ranks .alert2[⟳] Decisions]
-]] 
-
-We propose a simple .alert[math model] of social hierarchies emerging from feedback loops.
-
-Feedback loops can generate stable hierarchies, even when are .alert[no meaningful differences] between agents.
-
-Some social systems are .alert[near criticality] -- small interventions could help to promote equality and equity.  
-
-]
-]
-.column.bg-main4[.content.vmiddle[
-<img src="img/pnas.png" width=100%> 
-]]
-
----
 class: split-50 bg-main1 
 layout: false 
 
@@ -100,44 +80,28 @@ layout: false
 ]
 
 
+
+
+
 ---
 
 class: split-two bg-main1
 
-# Complex Networks Winter Workshop 2019 (.alert2[\#CNWW])
+.column[.font_large[.font_large[.font_large[
+.center[Ranks .alert2[⟳] Decisions]
+]] 
 
-.column[.content.center[<br><br><br><br><br><br><br>
-  <img src="img/monastere.jpeg" width=100%> 
-  
-  .content.font_medium[Le Monastère des Augustines, Québec City]
+We propose a simple .alert[math model] of social hierarchies emerging from feedback loops.
+
+Feedback loops can generate stable hierarchies, even when are .alert[no meaningful differences] between agents.
+
+Some social systems are .alert[near criticality] -- small interventions could help to promote equality and equity.  
+
+]
+]
+.column.bg-main4[.content.vmiddle[
+<img src="img/pnas.png" width=100%> 
 ]]
-.column[.content.center[<br><br><br><br><br><br><br>
-  <img src="img/cats-2.jpeg" width=97%> 
-  
-  .content.font_medium[Cafe Felin Ma Langue Aux Chats (yes, it's a .alert[cat cafe]])
-]]
-
----
-
-# Scenes from a (really fun) collaboration
-
-<img src="img/heart-cookies.jpg" width=14.7%>
-<img src="img/apollo.jpg" width=14.7%>
-<img src="img/book.jpg" width=14.7%>
-<img src="img/dinner.jpg" width=26%>
-<img src="img/ezra.jpg" width=26%>
-
-<img src="img/so-pumped.png" width=16%>
-<img src="img/yes.GIF" width=32%>
-<img src="img/mari-mp.png" width=50%>
-
-<img src="img/ready.jpg" width=24.5%> 
-<img src="img/obama.png" width=25.5%>
-<img src="img/two-cats.jpeg" width=24.5%>
-<img src="img/page-rank.png" width=22.7%>
-
-<!-- <img src="img/cats.jpeg" width=32%> -->
-<!-- <img src="img/cinnamon-rolls.jpg" width=16%> -->
 
 
 ---
@@ -573,6 +537,34 @@ Some systems are .alert[near criticality] -- small interventions could help to p
 ]]
 
 ---
+
+# Scenes from a (really fun) collaboration
+
+<img src="img/heart-cookies.jpg" width=14.7%>
+<img src="img/apollo.jpg" width=14.7%>
+<img src="img/book.jpg" width=14.7%>
+<img src="img/dinner.jpg" width=26%>
+<img src="img/ezra.jpg" width=26%>
+
+<img src="img/so-pumped.png" width=16%>
+<img src="img/yes.GIF" width=32%>
+<img src="img/mari-mp.png" width=50%>
+
+<img src="img/ready.jpg" width=24.5%> 
+<img src="img/obama.png" width=25.5%>
+<img src="img/two-cats.jpeg" width=24.5%>
+<img src="img/page-rank.png" width=22.7%>
+
+<!-- <img src="img/cats.jpeg" width=32%> -->
+<!-- <img src="img/cinnamon-rolls.jpg" width=16%> -->
+
+
+
+
+---
+
+
+
 
 
 layout: false
