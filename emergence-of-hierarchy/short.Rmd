@@ -37,11 +37,11 @@ class: split-two bg-main1
 .center[Ranks .alert2[⟳] Decisions]
 ]] 
 
-We propose a simple .alert[math model] of hierarchies emerging from feedback loops.
+We propose a simple .alert[math model] of social hierarchies emerging from feedback loops.
 
 Feedback loops can generate stable hierarchies, even when are .alert[no meaningful differences] between agents.
 
-Some social systems are .alert[near criticality] -- small interventions could help to promote equality and equity. 
+Some social systems are .alert[near criticality] -- small interventions could help to promote equality and equity.  
 
 ]
 ]
@@ -426,7 +426,7 @@ layout: true
 Consider the deterministic function 
 $$\mathbf{f}(\mathbf{r}, \mathbf{A}) = \lim_{\lambda \rightarrow 1} \frac{\mathbb{E}[\mathbf{r}|\mathbf{A}] - \mathbf{r}}{1 - \lambda}\;.$$
 
-This function has an egalitarian root such that $\mathbf{r} = r \mathbb{e}$. This root is .alert[linearly stable] iff $\beta_1 < \beta_1^c$: 
+This function has an egalitarian root such that $\mathbf{r} = r \mathbb{e}$. This root is linearly stable iff $\beta_1 < \beta_1^c$: 
 
 $$\beta_1^c = \begin{cases}
   2\sqrt{\frac{n}{m}} &\quad \text{Root-Degree} \\ 
@@ -455,7 +455,7 @@ class: split-two
 layout: false
 
 .column.bg-main1[<br>
-# Ok, but what about **data**?
+# Inference in Data
 
 .content.font_large[
 
@@ -489,7 +489,7 @@ North Dakota State University Department of Mathematics, Data from “The Mathem
 class: split-two
 
 .column.bg-main1[<br>
-# Ok, but what about **data**?
+# Inference in Data
 
 .content.font_large[
 
@@ -498,7 +498,7 @@ Model assigns a *likelihood* to the observed data.
 $$\mathcal{L}(\lambda, \beta) = \sum_{t = 0}\sum_{i, j \in \mathcal{N}}\color{#ff5252}{k_{ij}^{(t)}} \log \color{#63d297}{\gamma_{ij}^{(t)}}$$
 
 - $\color{#ff5252}{k_{ij}^{(t)}}$: \# of observed endorsements $i\rightarrow j$ in timestep $t$ (from data).
-- $\color{#63d297}{\gamma_{ij}^{(t)}}$: Probability that $i$ chooses $j$ as recipient of endorsement at time $t$ (depends on $\lambda$, $\beta$, and data from previous timesteps). 
+- $\color{#63d297}{\gamma_{ij}^{(t)}}$: Modeled probability that $i$ chooses $j$ as recipient of endorsement at time $t$ (depends on $\lambda$, $\beta$, and data from previous timesteps). 
 
 **Method of maximum likelihood**: find parameters $\hat{\lambda}$ and $\hat{\beta}$ to maximize $\mathcal{L}$. 
 ]
@@ -523,7 +523,7 @@ $$\beta_1^c = \begin{cases}
   2 + \alpha_s\frac{n}{m} &\quad \text{SpringRank}.
 \end{cases}$$
 <br> <br> 
-Math PhD exchange:.alert2[**barely subcritical**]. 
+Math PhD exchange: .alert2[**barely subcritical**]. 
 
 Parakeets + Newcomb Frat: .alert[**supercritical**]. 
 
@@ -599,7 +599,9 @@ The cats
 
 Minisymposium organizers: Skylar + Joel
 
-Y'all! 
+"Travel" support: SIAM, NSF
+
+You!  
 ]]
 
 .column.bg-main4[.content[<br> .font_large[
@@ -612,7 +614,7 @@ https://arxiv.org/abs/2007.04448
 
 ## These slides
 
-https://philchodrow.github.io/talks/emergence-of-hierarchy/short#1
+[philchodrow.github.io/talks/emergence-of-hierarchy/short](https://philchodrow.github.io/talks/emergence-of-hierarchy/short#1)
 
 
 ## Socials
