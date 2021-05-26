@@ -746,11 +746,6 @@ $$\beta_1^c = \begin{cases}
 <img src="img/dynamics_examples.png" width=100%> 
 ]]
 
----
-
-class: 
-background-image: url("img/bifurcations_with_curves.png")
-background-size: contain
 
 ---
 
@@ -811,6 +806,16 @@ class:
 
 <br> <br> <br> <br> <br> 
 <img src="img/linear-algebra.jpeg" width=100%> 
+
+
+---
+
+class: 
+layout: false
+
+background-image: url("img/bifurcations_with_curves.png")
+background-size: contain
+
 
 
 ---
