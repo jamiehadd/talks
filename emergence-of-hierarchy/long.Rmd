@@ -408,10 +408,15 @@ class:
 layout: false
 
 .split-two[ 
-.column.bg-main1[
-<br> <br> 
-# The Adjacency Matrix <br> <br> 
-.content.center[.font_large[ 
+.column[
+<br>
+# The Adjacency Matrix
+
+
+.content.center[.font_medium[
+<img src="img/digraph.png" width=60%><br> 
+***Image credit:*** *Wikipedia*
+
   $$\mathbf{A} = \left[\begin{matrix}
     <!-- 0 & \mathbf{1} & 0 & 0 & 0 & 0 \\  -->
     <!-- 0 & 0 & \mathbf{1} & 0 & 0 & 0 \\ -->
@@ -421,15 +426,12 @@ layout: false
     <!-- 0 & 0 & 0 & 0 & 0 & 0  -->
     \end{matrix}\right] 
     $$
-    
-  Turns **.alert[network]** problems into **.alert2[linear algebra]** problems. 
   ]
   ]
 ]
-.column[
+.column.bg-main1[
 .content.center.vmiddle[
-<img src="img/digraph.png" width=90%><br> 
-***Image credit:*** *Wikipedia*
+<img src="img/linear-algebra.jpeg" width=100%> 
 ]
 ]
 ]
@@ -801,13 +803,15 @@ Fixed point is **linearly stable** if $\mathbf{J}$ only has eigenvalues with neg
 
 Fixed point is **unstable** of $\mathbf{J}$ has any eigenvalues with positive real part. 
 
-Checking for stability conditions is a long linear algebra exercise...
+To check this, you use a lot of...
 
 ---
 
 class: 
 
-<img src="img/algebra.png" width=100%> 
+<br> <br> <br> <br> <br> 
+<img src="img/linear-algebra.jpeg" width=100%> 
+
 
 ---
 
