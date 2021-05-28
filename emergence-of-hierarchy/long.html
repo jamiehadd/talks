@@ -39,24 +39,26 @@ class: split-two
 .column.bg-main1[.content[
 .font3[Hi! I'm Phil.]
 
-.font_large[Things I .alert[like]:
+.font_medium[.font_large[Things I .alert[like]:]]
 
+.font_large[
 - Mathematics of complex systems
   - Network science
   - Nonlinear dynamics
   - Probability and statistics
   - Linear algebra
-- Data science
-- Traditional martial arts 
+- Tea
 - *Star Trek: Deep Space 9*
 - Effective pedagogy 
+]
 
-Courses I .alert2[teach]: 
+.font_medium[.font_large[Courses I .alert2[teach]:]]
 
+.font_large[
 - **PIC16A**: intro Python 
 - **PIC16B**: computational science with Python
 - **MATH 168**: mathematical network science (S22)
-
+]
 ]
 ]]
 
@@ -433,11 +435,42 @@ layout: false
   ]
 ]
 .column.bg-main1[
+]
+]
+
+---
+class: 
+layout: false
+
+.split-two[ 
+.column[
+&lt;br&gt;
+# The Adjacency Matrix
+
+
+.content.center[.font_medium[
+&lt;img src="img/digraph.png" width=60%&gt;&lt;br&gt; 
+***Image credit:*** *Wikipedia*
+
+  $$\mathbf{A} = \left[\begin{matrix}
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; \mathbf{1} \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0  --&gt;
+    \end{matrix}\right] 
+    $$
+  ]
+  ]
+]
+.column.bg-main1[
 .content.center.vmiddle[
 &lt;img src="img/linear-algebra.jpeg" width=100%&gt; 
 ]
 ]
 ]
+
 
 ---
 layout: true
@@ -537,34 +570,6 @@ From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**].
 class: fade-row1-col1 fade-row2-col1 fade-row3-col1 fade-row5-col1
 &lt;img src="img/pnas.png" width=95%&gt;
 
----
-
-class: split-two bg-main1
-layout: false
-
-.column[
-&lt;br&gt; 
-.font_large[.font_large[.font_large[
-.content.center[Ranks .alert2[⟳] Decisions]]]
-]
-.blockquote[
-.content.font_large[.content.font_large[
-  What happens when network ranks .alert2[inform] decision-making within a    system?]
-]]
-]
-
-
-
-
-.column.bg-main4[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-  &lt;img src="img/us-news-rankings.jpeg" width=60%&gt; 
-  ]
-  .content.font_large[.alert[Example]: 
-  College ranks are based on selectivity. 
-  
-  High ranks &lt;br&gt;  `\(\implies\)` more applications &lt;br&gt; `\(\implies\)`     higher selectivity &lt;br&gt; `\(\implies\)` even higher ranks....
-]]
-
 
 
 ---
@@ -635,6 +640,37 @@ class: split-two bg-main1
   
   .content.font_medium[Cafe Felin Ma Langue Aux Chats (yes, it's a .alert[cat cafe]])
 ]]
+
+
+---
+
+class: split-two bg-main1
+layout: false
+
+.column[
+&lt;br&gt; 
+.font_large[.font_large[.font_large[
+.content.center[Ranks .alert2[⟳] Decisions]]]
+]
+.blockquote[
+.content.font_large[.content.font_large[
+  What happens when network ranks .alert2[inform] decision-making within a    system?]
+]]
+]
+
+
+
+
+.column.bg-main4[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/us-news-rankings.jpeg" width=60%&gt; 
+  ]
+  .content.font_large[.alert[Example]: 
+  College ranks are based on selectivity. 
+  
+  High ranks &lt;br&gt;  `\(\implies\)` more applications &lt;br&gt; `\(\implies\)`     higher selectivity &lt;br&gt; `\(\implies\)` even higher ranks....
+]]
+
+
 
 
 ---
@@ -801,7 +837,7 @@ Fixed point is **linearly stable** if `\(\mathbf{J}\)` only has eigenvalues with
 
 Fixed point is **unstable** of `\(\mathbf{J}\)` has any eigenvalues with positive real part. 
 
-To check this, you use a lot of...
+So, we need...
 
 ---
 
@@ -896,7 +932,7 @@ class: split-two bg-main1
   2 + \alpha_s\frac{n}{m} &amp;\quad \text{SpringRank}.
 \end{cases}$$`
 &lt;br&gt; &lt;br&gt; 
-Math PhD exchange:.alert2[**barely subcritical**]. 
+Math PhD exchange: .alert2[**barely subcritical**]. 
 
 Parakeets + Newcomb Frat: .alert[**supercritical**]. 
 
@@ -1067,7 +1103,7 @@ class: split-two
 .column.bg-main1[
 
 &lt;br&gt;
-# Tips for ~~Interdisciplinary Applied Math~~ Life
+# Tips for ~~Interdisciplinary Applied Math~~ .alert[Being a Human]
 
 .font_large[
 Find people worth your trust, and trust them. 
