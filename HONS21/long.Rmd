@@ -78,19 +78,16 @@ layout: true
 class: split-two with-border middle 
 
 .column[
-  .split-four[ 
-  .row.bg-main1[.content[
+  .split-three[ 
+  .row.bg-main1[.content[.font_medium[
 .alert[**Detectability thresholds**] for communities in graphs. 
-  ]]     
-  .row.bg-main2[.content[
-.alert[**Experimental results**] in random hypergraphs. 
-  ]]
-  .row.bg-main3[.content[
+  ]]]     
+  .row.bg-main2[.content[.font_medium[
+.alert[**Experimental results**] in random hypergraphs.
+  ]]] 
+  .row.bg-main5[.content[.font_medium[
 Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
-  ]]
-  .row.bg-main5[.content[ 
-.alert[**Future directions**]: proofs, fast algorithms, extensions.  
-  ]]
+  ]]]
 ]]
 
 .column[
@@ -124,10 +121,6 @@ class: hide-row4-col1 hide-row5-col1
 <img src="img/hypergraph-nonbacktracking.png" width=100%>
 
 
----
-class: 
-
-# placeholder, something about future directions.
 
 ---
 
@@ -146,7 +139,7 @@ layout: false
 
 .column.bg-main1[
 
-# Detectability in Graphs
+## Detectability in Graphs
 
 In a stochastic blockmodel with two, equally-sized communities:
 
@@ -182,7 +175,7 @@ layout: false
 
 .column.bg-main1[
 
-# Detectability in Graphs
+## Detectability in Graphs
 
 In a stochastic blockmodel with two, equally-sized communities:
 
@@ -212,19 +205,16 @@ layout: true
 class: split-two with-border middle 
 
 .column[
-  .split-four[ 
-  .row.bg-main1[.content[
+  .split-three[ 
+  .row.bg-main1[.content[.font_medium[
 .alert[**Detectability thresholds**] for communities in graphs. 
-  ]]     
-  .row.bg-main2[.content[
+  ]]]     
+  .row.bg-main2[.content[.font_medium[
 .alert[**Experimental results**] in random hypergraphs. 
-  ]]
-  .row.bg-main3[.content[
+  ]]]
+  .row.bg-main5[.content[.font_medium[
 Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
-  ]]
-  .row.bg-main5[.content[ 
-.alert[**Future directions**]: proofs, fast algorithms, extensions.  
-  ]]
+  ]]]
 ]]
 
 .column[
@@ -251,13 +241,13 @@ layout: false
 
 .row[ 
 .split-three[
-.column[<br><br><br>
+.column[<br><br>
   <img src="img/nate_portrait.jpeg" width=90%> 
   ]
-.column[<br><br><br>
+.column[<br><br>
   <img src="img/austin_portrait.jpeg" width=90%> 
 ]
-.column[<br><br><br>
+.column[<br><br>
   <img src="img/phil_portrait.jpeg" width=90%> 
 ] 
 
@@ -265,17 +255,20 @@ layout: false
 ]
 .row[ 
 .split-three[
-.column[<br><br>
+.column[<br>
   .font_large[.alert[<nobr>Nate Veldt</nobr>]]
   <nobr>Applied Mathematics</nobr> <br> Cornell University
+  @n_veldt
 ]
-.column[<br><br>
+.column[<br>
   .font_large[.alert[<nobr>Austin Benson</nobr>]]
    Computer Science <br> Cornell University
+   @austinbenson
 ]
-.column[<br><br>
+.column[<br>
   .font_large[.alert[<nobr>Phil Chodrow</nobr>]]
   <nobr>Mathematics</nobr> <br> UCLA
+  <br> @PhilChodrow
 ]
 ]
 ]
@@ -384,19 +377,16 @@ layout: true
 class: split-two with-border middle 
 
 .column[
-  .split-four[ 
-  .row.bg-main1[.content[
+  .split-three[ 
+  .row.bg-main1[.content[.font_medium[
 .alert[**Detectability thresholds**] for communities in graphs. 
-  ]]     
-  .row.bg-main2[.content[
+  ]]]     
+  .row.bg-main2[.content[.font_medium[
 .alert[**Experimental results**] in random hypergraphs. 
-  ]]
-  .row.bg-main3[.content[
+  ]]]
+  .row.bg-main5[.content[.font_medium[
 Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
-  ]]
-  .row.bg-main5[.content[ 
-.alert[**Future directions**]: proofs, fast algorithms, extensions.  
-  ]]
+  ]]]
 ]]
 
 .column[
@@ -417,13 +407,13 @@ layout: false
 
 .row[ 
 .split-three[
-.column[<br><br><br>
+.column[<br><br>
   <img src="img/jamie_portrait.jpeg" width=90%> 
   ]
-.column[<br><br><br>
-  <img src="img/nicole_portrait.jpeg" width=90%> 
+.column[<br><br>
+  <img src="img/eikmeier-3.png" width=90%> 
 ]
-.column[<br><br><br>
+.column[<br><br>
   <img src="img/phil_portrait.jpeg" width=90%> 
 ] 
 
@@ -431,17 +421,20 @@ layout: false
 ]
 .row[ 
 .split-three[
-.column[<br><br>
+.column[<br>
   .font_large[.alert[<nobr>Jamie Haddock</nobr>]]
   <nobr>Mathematics</nobr> <br> Harvey Mudd College      
+  @jamie_hadd
 ]
-.column[<br><br>
+.column[<br>
   .font_large[.alert[<nobr>Nicole Eikmeier</nobr>]]
    Computer Science <br> Grinnell College      
+   @NicoleEikmeier 
 ]
-.column[<br><br>
+.column[<br>
   .font_large[.alert[<nobr>Phil Chodrow</nobr>]]
   <nobr>Mathematics</nobr> <br> UCLA
+  <br> @PhilChodrow <br>
 ]
 ]
 ]
@@ -569,9 +562,10 @@ We use a modified nonbacktracking operator to adapt to .alert[qualitatively dist
 
 The community-correlated eigenvector can either the first or second eigenvector of the modified operator. 
 
-"Seams": first and second eigenvalues cross.   
-
 Under some approximations, we can analytically derive the undetectable region: 
+
+$$(2p_2 - 1)^2 c_2  + 2\left(\frac{4p_3 - 1}{3}\right)^2c_3 \leq 1$$
+
 
 ]
 
@@ -583,4 +577,71 @@ Under some approximations, we can analytically derive the undetectable region:
 <img src="img/linearized-bp-heatmap-1-panel-no-label.png" width=100%>
 ---
 <img src="img/linearized-bp-heatmap-1-panel-label.png" width=100%>
+
+
+---
+
+class:
+layout: false
+
+# Future Directions
+
+### Speed 
+
+Fast computation via Ihara-Bass determinants (reduce the effective size of $\mathbf{B}$).
+
+### Generalizations
+
+  - More than two communities.
+  - Communities of different sizes.
+
+### Theory
+
+Bounds on spectral clustering $\stackrel{?}{\implies}$ bounds on any algorithm?
+
+
+---
+layout: false
+class: split-two  
+
+
+.column.bg-main1[
+
+# Thanks!
+
+.row[ 
+.split-two[
+.column[<br><br>
+  <img src="img/jamie_portrait.jpeg" width=90%> 
+  ]
+.column[<br><br>
+  <img src="img/eikmeier-3.png" width=90%> 
+]]]
+.row[ 
+.split-two[
+.column[<br><br><br><br><br><br><br><br> 
+  .alert[Jamie Haddock] <br> Harvey Mudd
+  ]
+.column[<br><br><br><br><br><br><br><br> 
+  .alert[Nicole Eikmeier] <br> Grinnell
+]]]
+
+<br><br><br><br><br><br><br><br>
+
+### Organizers
+
+- Leonie
+- Christopher
+- Jürgen
+
+
+]
+
+]
+
+
+.column[
+# Questions? 
+<img src="img/chef-parrot.gif" width=80%>
+]
 

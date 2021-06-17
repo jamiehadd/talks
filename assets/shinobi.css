@@ -170,6 +170,13 @@ p {
 	padding-bottom:10px;
 }
 
+.split-three p {
+	font-size: 1.0em;
+	padding-left:15px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
 .footnote {
   position: absolute;
   bottom: 1em;
