@@ -1,0 +1,586 @@
+---
+title: "Detectability of Communities in Heterogeneous Hypergraphs"       
+subtitle: "Satellite on Higher Order Models in Network Science<br>Networks 2021"
+author: "<span class = 'author-highlight'>Phil Chodrow</span> <br> UCLA Mathematics <br> July 2nd, 2021"
+date: ""     
+output: 
+  xaringan::moon_reader:    
+    lib_dir: libs    
+    css: ["../assets/ninpo.css",  "../assets/ninjutsu.css",   "../assets/shinobi.css"]  
+    seal: true   
+    self_contained: false  
+    nature: 
+      ratio: "16:10"
+      highlightStyle: github    
+      highlightLines: true 
+      countIncrementalSlides: false  
+---
+exclude: true
+<style type="text/css">
+code.r{ 
+  font-size: 16px; 
+}
+pre {
+  font-size: 16px !important;
+}
+</style>
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+---
+
+class: split-two
+layout: true
+
+.column.bg-main1[
+
+# Community Detection in Hypergraphs
+
+**Core Problem**: Label nodes on the basis of observed (hyper)edges. 
+
+We often picture .alert[assortative], densely-connected communities.  
+
+What happens when edges of .alert2[different sizes] play .alert2[different roles]?  
+
+*E.g. Large gatherings play different social/connective roles than small meetings.*
+
+]
+
+.column[
+  {{content}}
+]
+
+---
+
+class: 
+
+<img src="img/detection-1.png" width=100%>
+
+---
+
+class: 
+
+<img src="img/detection-2.png" width=100%>
+
+---
+
+class: bg-main5 middle
+layout: false
+
+# ***When is community detection possible?*** 
+
+
+
+
+---
+layout: true
+class: split-two with-border middle 
+
+.column[
+  .split-four[ 
+  .row.bg-main1[.content[
+.alert[**Detectability thresholds**] for communities in graphs. 
+  ]]     
+  .row.bg-main2[.content[
+.alert[**Experimental results**] in random hypergraphs. 
+  ]]
+  .row.bg-main3[.content[
+Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
+  ]]
+  .row.bg-main5[.content[ 
+.alert[**Future directions**]: proofs, fast algorithms, extensions.  
+  ]]
+]]
+
+.column[
+{{content}}]
+ 
+---
+class: hide-row2-col1 hide-row3-col1 hide-row4-col1 hide-row5-col1
+
+<br><br><br>
+  <img src="img/newman-detection-experiment.png" width=100%>
+  
+<div class="footnote">
+  Nadakuditi, R. R., & Newman, M. E. (2012). Graph spectra and the detectability of community structure in networks. <i>Physical Review Letters</i>, 108(18), 188701.  
+</div>
+
+
+
+
+---
+class: hide-row3-col1 hide-row4-col1 hide-row5-col1
+<br> <br> 
+<img src="img/detectability-second-panel.png" width=100%>
+<br> 
+<div class="footnote">
+  <b>PSC</b>, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, <i>Science Advances (forthcoming)</i>
+</div>
+
+---
+class: hide-row4-col1 hide-row5-col1
+<br> <br> <br> 
+<img src="img/hypergraph-nonbacktracking.png" width=100%>
+
+
+---
+class: 
+
+# placeholder, something about future directions.
+
+---
+
+class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+<br><br><br>
+  <img src="img/newman-detection-experiment.png" width=100%>
+  
+<div class="footnote">
+  Nadakuditi, R. R., & Newman, M. E. (2012). Graph spectra and the detectability of community structure in networks. <i>Physical Review Letters</i>, 108(18), 188701.  
+</div>
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+# Detectability in Graphs
+
+In a stochastic blockmodel with two, equally-sized communities:
+
+- $\color{#63d297}{c_i}$: average number of .alert2[within-cluster] neighbors per node.
+- $\color{#ff5252}{c_o}$: the average number of .alert[between-cluster] neighbors per node. 
+
+**Detectability threshold (informal)**: In the large-graph limit, it is possible to detect communities iff  
+
+$$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 > \frac{1}{2}\sqrt{\color{#63d297}{c_i} + \color{#ff5252}{c_o}}\;.$$ 
+
+]
+
+.column[.font_smaller[
+
+# <br>
+
+**Conjectured** using belief-propagation by Decelle, A., Krzakala, F., Moore, C., & Zdeborová, L. (2011),  <i>PRE</i>. 
+
+**Re-conjectured** via nonbacktracking operators in Krzakala, F., Moore, C., Mossel, E., Neeman, J., Sly, A., Zdeborová, L., & Zhang, P. (2013), *PNAS*.
+
+**Negative direction proved** via a coupling to broadcasting on trees: Mossel, E., Neeman, J., & Sly, A. (2015). *Probability Theory and Related Fields*.
+
+**Positive direction proved** via weighted nonbacktracking paths by by Mossel, E., Neeman, J., & Sly, A. (2018), *Combinatorica*.
+
+**Helpful review**: Abbe, E. (2017), *JMLR*.
+]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+# Detectability in Graphs
+
+In a stochastic blockmodel with two, equally-sized communities:
+
+- $\color{#63d297}{c_i}$: average number of .alert2[within-cluster] neighbors per node.
+- $\color{#ff5252}{c_o}$: the average number of .alert[between-cluster] neighbors per node. 
+
+**Detectability threshold (informal)**: In the large-graph limit, it is possible to detect communities iff  
+
+$$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 > \frac{1}{2}\sqrt{\color{#63d297}{c_i} + \color{#ff5252}{c_o}}\;.$$ 
+
+]
+
+.column[
+<br>
+  <img src="img/newman-detection-experiment.png" width=100%>
+.font_smaller[A spectral method is shown, but the threshold applies to **any algorithm.**]
+  
+<div class="footnote">
+  Nadakuditi, R. R., & Newman, M. E. (2012). Graph spectra and the detectability of community structure in networks. <i>Physical Review Letters</i>, 108(18), 188701.  
+</div>
+]
+
+
+
+---
+layout: true
+class: split-two with-border middle 
+
+.column[
+  .split-four[ 
+  .row.bg-main1[.content[
+.alert[**Detectability thresholds**] for communities in graphs. 
+  ]]     
+  .row.bg-main2[.content[
+.alert[**Experimental results**] in random hypergraphs. 
+  ]]
+  .row.bg-main3[.content[
+Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
+  ]]
+  .row.bg-main5[.content[ 
+.alert[**Future directions**]: proofs, fast algorithms, extensions.  
+  ]]
+]]
+
+.column[
+{{content}}]
+ 
+
+
+---
+
+class: fade-row1-col1 fade-row3-col1 fade-row4-col1
+
+<br> <br> 
+<img src="img/detectability-second-panel.png" width=100%>
+<br> 
+<div class="footnote">
+  <b>PSC</b>, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, <i>Science Advances (forthcoming)</i>
+</div>
+
+
+
+---
+class: split-50 bg-main1 
+layout: false 
+
+.row[ 
+.split-three[
+.column[<br><br><br>
+  <img src="img/nate_portrait.jpeg" width=90%> 
+  ]
+.column[<br><br><br>
+  <img src="img/austin_portrait.jpeg" width=90%> 
+]
+.column[<br><br><br>
+  <img src="img/phil_portrait.jpeg" width=90%> 
+] 
+
+]
+]
+.row[ 
+.split-three[
+.column[<br><br>
+  .font_large[.alert[<nobr>Nate Veldt</nobr>]]
+  <nobr>Applied Mathematics</nobr> <br> Cornell University
+]
+.column[<br><br>
+  .font_large[.alert[<nobr>Austin Benson</nobr>]]
+   Computer Science <br> Cornell University
+]
+.column[<br><br>
+  .font_large[.alert[<nobr>Phil Chodrow</nobr>]]
+  <nobr>Mathematics</nobr> <br> UCLA
+]
+]
+]
+
+---
+
+class: split-two
+layout: false
+
+
+
+.column.bg-main1[
+## Modularity Objective
+
+$$Q = \sum_k\color{#ff5252}{\beta_k}\left[ \mathbf{cut}_k(\mathbf{z}) - \color{#63d297}{\gamma_k}\sum_{\ell} \mathbf{vol}(\ell)^k\right]$$
+
+- $\mathbf{z}$: cluster labels. 
+- $\mathbf{cut}(\mathbf{z})$: number of $k$-edges split by $\mathbf{z}$. 
+- $\mathbf{vol}(\ell)$: Sum of degrees in cluster $\ell$. 
+- $\color{#ff5252}{\beta_k}$: importance of edges of size $k$. 
+- $\color{#63d297}{\gamma_k}$: resolution parameter for edges of size $k$.   
+
+Approximates to the likelihood of a degree-corrected hypergraph blockmodel with "All-Or-Nothing" affinities.  
+]
+
+.column[
+## Louvain Algorithm
+
+In loop: 
+
+1. All nodes start in their own clusters. 
+  - Greedily agglomerate nodes to maximize $Q$. 
+  - Greedily agglomerate **clusters** of nodes to further maximize $Q$. 
+2. Re-estimate $\beta_k$ and $\gamma_k$. 
+3. Repeat...
+
+<div class="footnote">
+  <b>PSC</b>, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, <i>Science Advances (forthcoming)</i>
+</div>
+
+]
+
+
+
+
+---
+
+layout: false
+
+## Experimental Setup
+
+<img src="img/detectability-setup.png" width=85%> 
+
+.footnote[**PSC**, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity. *Science Advances (forthcoming)*] 
+ 
+
+
+
+---
+
+layout: false
+class:  
+
+## Detectability limits: graphs vs. hypergraphs
+
+<img src="img/detectability-louvain.png" width=100%> 
+
+.footnote[**PSC**, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity. *Science Advances (forthcoming)*] 
+
+---
+
+class: split-two
+
+
+.column.bg-main1[
+## Can we do better? <br> 
+
+<br> <br> 
+Unclear! Extant theory on hypergraphs only treats *uniform* hypergraphs (all edges same size).
+
+Most hypergraph data sets are non-uniform...
+
+We seek **.alert[detectability theory for non-uniform hypergraphs].**
+
+
+]
+
+.column[
+
+## A few papers treating uniform hypergraphs
+
+<br> 
+.font_smaller[
+Lin, C. Y., Chien, I. E., & Wang, I. H. (2017).  *IEEE International Symposium on Information Theory*.
+
+Ghoshdastidar, D., & Dukkipati, A. (2017). *Annals of Statistics*.
+
+Angelini, M. C., Caltagirone, F., Krzakala, F., & Zdeborová, L. (2015), *Allerton Conference*.
+
+]
+]
+
+
+---
+layout: true
+class: split-two with-border middle 
+
+.column[
+  .split-four[ 
+  .row.bg-main1[.content[
+.alert[**Detectability thresholds**] for communities in graphs. 
+  ]]     
+  .row.bg-main2[.content[
+.alert[**Experimental results**] in random hypergraphs. 
+  ]]
+  .row.bg-main3[.content[
+Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
+  ]]
+  .row.bg-main5[.content[ 
+.alert[**Future directions**]: proofs, fast algorithms, extensions.  
+  ]]
+]]
+
+.column[
+{{content}}]
+ 
+
+---
+
+class: fade-row1-col1 fade-row2-col1 fade-row4-col1
+
+<br> <br> <br> 
+<img src="img/hypergraph-nonbacktracking.png" width=100%>
+
+
+---
+class: split-50 bg-main1 
+layout: false 
+
+.row[ 
+.split-three[
+.column[<br><br><br>
+  <img src="img/jamie_portrait.jpeg" width=90%> 
+  ]
+.column[<br><br><br>
+  <img src="img/nicole_portrait.jpeg" width=90%> 
+]
+.column[<br><br><br>
+  <img src="img/phil_portrait.jpeg" width=90%> 
+] 
+
+]
+]
+.row[ 
+.split-three[
+.column[<br><br>
+  .font_large[.alert[<nobr>Jamie Haddock</nobr>]]
+  <nobr>Mathematics</nobr> <br> Harvey Mudd College      
+]
+.column[<br><br>
+  .font_large[.alert[<nobr>Nicole Eikmeier</nobr>]]
+   Computer Science <br> Grinnell College      
+]
+.column[<br><br>
+  .font_large[.alert[<nobr>Phil Chodrow</nobr>]]
+  <nobr>Mathematics</nobr> <br> UCLA
+]
+]
+]
+
+---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## Hypergraph Nonbacktracking
+
+Write $(e_1, p_1) \sim (e_2, p_2)$ if: 
+
+- $p_1 \in e_1$ and $p_2 \in e_2$
+- $p_1 \in e_2 \setminus p_2$
+- $e_1 \neq e_2$
+
+The .alert[hypergraph nonbacktracking operator] $\color{#ff5252}{\mathbf{B}}$ is the linear operator 
+
+.font_smaller[ 
+$$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &\quad (e_1, p_1) \sim (e_2, p_2) \\ 
+0 &\quad \text{otherwise.}\end{cases}$$
+]]
+
+.column[
+<br> <br> <br> 
+<img src="img/hypergraph-nonbacktracking.png" width=100%>
+]
+
+---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## Hypergraph Nonbacktracking
+
+
+First formulated by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
+
+"Rediscovered" and used for community detection by Angelini, M. C., Caltagirone, F., Krzakala, F., & Zdeborová, L. (2015), *Allerton Conference*.
+
+
+
+ **Well-defined** on non-uniform hypergraphs!
+
+ **.alert[Second eigenvector]** correlated with communities in detectable regime. 
+ 
+]
+
+.column[
+<br> <br> <br> 
+<img src="img/hypergraph-nonbacktracking.png" width=100%>
+]
+
+
+
+---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## Hypergraph Nonbacktracking
+
+
+First formulated by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
+
+"Rediscovered" and used for community detection by Angelini, M. C., Caltagirone, F., Krzakala, F., & Zdeborová, L. (2015), *Allerton Conference*.
+
+
+
+ **Well-defined** on non-uniform hypergraphs!
+
+ **.alert[Second eigenvector]** correlated with communities in detectable regime. 
+ 
+]
+
+.column[
+<br> <br>
+<img src="img/eigen-illustration.png" width=100%>
+.footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
+]
+
+---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## Hypergraph Nonbacktracking
+
+<br>
+ .alert[**Second eigenvector**] correlated with communities in detectable regime. 
+ 
+Surprisingly disappointing performance in experiments...
+
+We know experimentally that detection is possible in the ? corners... 
+
+]
+
+.column[
+<br> <br> <br> 
+<img src="img/vanilla-heatmap.png" width=100%>
+.footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
+]
+
+
+
+
+
+---
+layout: true
+class: split-two  
+
+.column.bg-main1[
+## Reaching the Corners
+
+We use a modified nonbacktracking operator to adapt to .alert[qualitatively distinct roles] for edges of multiple sizes.
+
+The community-correlated eigenvector can either the first or second eigenvector of the modified operator. 
+
+"Seams": first and second eigenvalues cross.   
+
+Under some approximations, we can analytically derive the undetectable region: 
+
+]
+
+.column[.content.center.vmiddle[
+  {{content}}
+  
+].footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
+---
+<img src="img/linearized-bp-heatmap-1-panel-no-label.png" width=100%>
+---
+<img src="img/linearized-bp-heatmap-1-panel-label.png" width=100%>
+

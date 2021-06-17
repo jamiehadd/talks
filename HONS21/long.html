@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Detectability of Communities in Heterogeneous Hypergraphs</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Phil Chodrow   UCLA Mathematics   July 2nd, 2021" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="../assets/ninpo.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/ninjutsu.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/shinobi.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Detectability of Communities in Heterogeneous Hypergraphs
+## Satellite on Higher Order Models in Network Science<br>Networks 2021
+### <span class="author-highlight">Phil Chodrow</span> <br> UCLA Mathematics <br> July 2nd, 2021
+
+---
+
+exclude: true
+&lt;style type="text/css"&gt;
+code.r{ 
+  font-size: 16px; 
+}
+pre {
+  font-size: 16px !important;
+}
+&lt;/style&gt;
+
+
+---
+
+class: split-two
+layout: true
+
+.column.bg-main1[
+
+# Community Detection in Hypergraphs
+
+**Core Problem**: Label nodes on the basis of observed (hyper)edges. 
+
+We often picture .alert[assortative], densely-connected communities.  
+
+What happens when edges of .alert2[different sizes] play .alert2[different roles]?  
+
+*E.g. Large gatherings play different social/connective roles than small meetings.*
+
+]
+
+.column[
+  {{content}}
+]
+
+---
+
+class: 
+
+&lt;img src="img/detection-1.png" width=100%&gt;
+
+---
+
+class: 
+
+&lt;img src="img/detection-2.png" width=100%&gt;
+
+---
+
+class: bg-main5 middle
+layout: false
+
+# ***When is community detection possible?*** 
+
+
+
+
+---
+layout: true
+class: split-two with-border middle 
+
+.column[
+  .split-four[ 
+  .row.bg-main1[.content[
+.alert[**Detectability thresholds**] for communities in graphs. 
+  ]]     
+  .row.bg-main2[.content[
+.alert[**Experimental results**] in random hypergraphs. 
+  ]]
+  .row.bg-main3[.content[
+Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
+  ]]
+  .row.bg-main5[.content[ 
+.alert[**Future directions**]: proofs, fast algorithms, extensions.  
+  ]]
+]]
+
+.column[
+{{content}}]
+ 
+---
+class: hide-row2-col1 hide-row3-col1 hide-row4-col1 hide-row5-col1
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/newman-detection-experiment.png" width=100%&gt;
+  
+&lt;div class="footnote"&gt;
+  Nadakuditi, R. R., &amp; Newman, M. E. (2012). Graph spectra and the detectability of community structure in networks. &lt;i&gt;Physical Review Letters&lt;/i&gt;, 108(18), 188701.  
+&lt;/div&gt;
+
+
+
+
+---
+class: hide-row3-col1 hide-row4-col1 hide-row5-col1
+&lt;br&gt; &lt;br&gt; 
+&lt;img src="img/detectability-second-panel.png" width=100%&gt;
+&lt;br&gt; 
+&lt;div class="footnote"&gt;
+  &lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances (forthcoming)&lt;/i&gt;
+&lt;/div&gt;
+
+---
+class: hide-row4-col1 hide-row5-col1
+&lt;br&gt; &lt;br&gt; &lt;br&gt; 
+&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;
+
+
+---
+class: 
+
+# placeholder, something about future directions.
+
+---
+
+class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/newman-detection-experiment.png" width=100%&gt;
+  
+&lt;div class="footnote"&gt;
+  Nadakuditi, R. R., &amp; Newman, M. E. (2012). Graph spectra and the detectability of community structure in networks. &lt;i&gt;Physical Review Letters&lt;/i&gt;, 108(18), 188701.  
+&lt;/div&gt;
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+# Detectability in Graphs
+
+In a stochastic blockmodel with two, equally-sized communities:
+
+- `\(\color{#63d297}{c_i}\)`: average number of .alert2[within-cluster] neighbors per node.
+- `\(\color{#ff5252}{c_o}\)`: the average number of .alert[between-cluster] neighbors per node. 
+
+**Detectability threshold (informal)**: In the large-graph limit, it is possible to detect communities iff  
+
+`$$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 &gt; \frac{1}{2}\sqrt{\color{#63d297}{c_i} + \color{#ff5252}{c_o}}\;.$$` 
+
+]
+
+.column[.font_smaller[
+
+# &lt;br&gt;
+
+**Conjectured** using belief-propagation by Decelle, A., Krzakala, F., Moore, C., &amp; Zdeborová, L. (2011),  &lt;i&gt;PRE&lt;/i&gt;. 
+
+**Re-conjectured** via nonbacktracking operators in Krzakala, F., Moore, C., Mossel, E., Neeman, J., Sly, A., Zdeborová, L., &amp; Zhang, P. (2013), *PNAS*.
+
+**Negative direction proved** via a coupling to broadcasting on trees: Mossel, E., Neeman, J., &amp; Sly, A. (2015). *Probability Theory and Related Fields*.
+
+**Positive direction proved** via weighted nonbacktracking paths by by Mossel, E., Neeman, J., &amp; Sly, A. (2018), *Combinatorica*.
+
+**Helpful review**: Abbe, E. (2017), *JMLR*.
+]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+# Detectability in Graphs
+
+In a stochastic blockmodel with two, equally-sized communities:
+
+- `\(\color{#63d297}{c_i}\)`: average number of .alert2[within-cluster] neighbors per node.
+- `\(\color{#ff5252}{c_o}\)`: the average number of .alert[between-cluster] neighbors per node. 
+
+**Detectability threshold (informal)**: In the large-graph limit, it is possible to detect communities iff  
+
+`$$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 &gt; \frac{1}{2}\sqrt{\color{#63d297}{c_i} + \color{#ff5252}{c_o}}\;.$$` 
+
+]
+
+.column[
+&lt;br&gt;
+  &lt;img src="img/newman-detection-experiment.png" width=100%&gt;
+.font_smaller[A spectral method is shown, but the threshold applies to **any algorithm.**]
+  
+&lt;div class="footnote"&gt;
+  Nadakuditi, R. R., &amp; Newman, M. E. (2012). Graph spectra and the detectability of community structure in networks. &lt;i&gt;Physical Review Letters&lt;/i&gt;, 108(18), 188701.  
+&lt;/div&gt;
+]
+
+
+
+---
+layout: true
+class: split-two with-border middle 
+
+.column[
+  .split-four[ 
+  .row.bg-main1[.content[
+.alert[**Detectability thresholds**] for communities in graphs. 
+  ]]     
+  .row.bg-main2[.content[
+.alert[**Experimental results**] in random hypergraphs. 
+  ]]
+  .row.bg-main3[.content[
+Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
+  ]]
+  .row.bg-main5[.content[ 
+.alert[**Future directions**]: proofs, fast algorithms, extensions.  
+  ]]
+]]
+
+.column[
+{{content}}]
+ 
+
+
+---
+
+class: fade-row1-col1 fade-row3-col1 fade-row4-col1
+
+&lt;br&gt; &lt;br&gt; 
+&lt;img src="img/detectability-second-panel.png" width=100%&gt;
+&lt;br&gt; 
+&lt;div class="footnote"&gt;
+  &lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances (forthcoming)&lt;/i&gt;
+&lt;/div&gt;
+
+
+
+---
+class: split-50 bg-main1 
+layout: false 
+
+.row[ 
+.split-three[
+.column[&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/nate_portrait.jpeg" width=90%&gt; 
+  ]
+.column[&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/austin_portrait.jpeg" width=90%&gt; 
+]
+.column[&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/phil_portrait.jpeg" width=90%&gt; 
+] 
+
+]
+]
+.row[ 
+.split-three[
+.column[&lt;br&gt;&lt;br&gt;
+  .font_large[.alert[&lt;nobr&gt;Nate Veldt&lt;/nobr&gt;]]
+  &lt;nobr&gt;Applied Mathematics&lt;/nobr&gt; &lt;br&gt; Cornell University
+]
+.column[&lt;br&gt;&lt;br&gt;
+  .font_large[.alert[&lt;nobr&gt;Austin Benson&lt;/nobr&gt;]]
+   Computer Science &lt;br&gt; Cornell University
+]
+.column[&lt;br&gt;&lt;br&gt;
+  .font_large[.alert[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]]
+  &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; UCLA
+]
+]
+]
+
+---
+
+class: split-two
+layout: false
+
+
+
+.column.bg-main1[
+## Modularity Objective
+
+`$$Q = \sum_k\color{#ff5252}{\beta_k}\left[ \mathbf{cut}_k(\mathbf{z}) - \color{#63d297}{\gamma_k}\sum_{\ell} \mathbf{vol}(\ell)^k\right]$$`
+
+- `\(\mathbf{z}\)`: cluster labels. 
+- `\(\mathbf{cut}(\mathbf{z})\)`: number of `\(k\)`-edges split by `\(\mathbf{z}\)`. 
+- `\(\mathbf{vol}(\ell)\)`: Sum of degrees in cluster `\(\ell\)`. 
+- `\(\color{#ff5252}{\beta_k}\)`: importance of edges of size `\(k\)`. 
+- `\(\color{#63d297}{\gamma_k}\)`: resolution parameter for edges of size `\(k\)`.   
+
+Approximates to the likelihood of a degree-corrected hypergraph blockmodel with "All-Or-Nothing" affinities.  
+]
+
+.column[
+## Louvain Algorithm
+
+In loop: 
+
+1. All nodes start in their own clusters. 
+  - Greedily agglomerate nodes to maximize `\(Q\)`. 
+  - Greedily agglomerate **clusters** of nodes to further maximize `\(Q\)`. 
+2. Re-estimate `\(\beta_k\)` and `\(\gamma_k\)`. 
+3. Repeat...
+
+&lt;div class="footnote"&gt;
+  &lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances (forthcoming)&lt;/i&gt;
+&lt;/div&gt;
+
+]
+
+
+
+
+---
+
+layout: false
+
+## Experimental Setup
+
+&lt;img src="img/detectability-setup.png" width=85%&gt; 
+
+.footnote[**PSC**, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity. *Science Advances (forthcoming)*] 
+ 
+
+
+
+---
+
+layout: false
+class:  
+
+## Detectability limits: graphs vs. hypergraphs
+
+&lt;img src="img/detectability-louvain.png" width=100%&gt; 
+
+.footnote[**PSC**, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity. *Science Advances (forthcoming)*] 
+
+---
+
+class: split-two
+
+
+.column.bg-main1[
+## Can we do better? &lt;br&gt; 
+
+&lt;br&gt; &lt;br&gt; 
+Unclear! Extant theory on hypergraphs only treats *uniform* hypergraphs (all edges same size).
+
+Most hypergraph data sets are non-uniform...
+
+We seek **.alert[detectability theory for non-uniform hypergraphs].**
+
+
+]
+
+.column[
+
+## A few papers treating uniform hypergraphs
+
+&lt;br&gt; 
+.font_smaller[
+Lin, C. Y., Chien, I. E., &amp; Wang, I. H. (2017).  *IEEE International Symposium on Information Theory*.
+
+Ghoshdastidar, D., &amp; Dukkipati, A. (2017). *Annals of Statistics*.
+
+Angelini, M. C., Caltagirone, F., Krzakala, F., &amp; Zdeborová, L. (2015), *Allerton Conference*.
+
+]
+]
+
+
+---
+layout: true
+class: split-two with-border middle 
+
+.column[
+  .split-four[ 
+  .row.bg-main1[.content[
+.alert[**Detectability thresholds**] for communities in graphs. 
+  ]]     
+  .row.bg-main2[.content[
+.alert[**Experimental results**] in random hypergraphs. 
+  ]]
+  .row.bg-main3[.content[
+Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
+  ]]
+  .row.bg-main5[.content[ 
+.alert[**Future directions**]: proofs, fast algorithms, extensions.  
+  ]]
+]]
+
+.column[
+{{content}}]
+ 
+
+---
+
+class: fade-row1-col1 fade-row2-col1 fade-row4-col1
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; 
+&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;
+
+
+---
+class: split-50 bg-main1 
+layout: false 
+
+.row[ 
+.split-three[
+.column[&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/jamie_portrait.jpeg" width=90%&gt; 
+  ]
+.column[&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/nicole_portrait.jpeg" width=90%&gt; 
+]
+.column[&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/phil_portrait.jpeg" width=90%&gt; 
+] 
+
+]
+]
+.row[ 
+.split-three[
+.column[&lt;br&gt;&lt;br&gt;
+  .font_large[.alert[&lt;nobr&gt;Jamie Haddock&lt;/nobr&gt;]]
+  &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; Harvey Mudd College      
+]
+.column[&lt;br&gt;&lt;br&gt;
+  .font_large[.alert[&lt;nobr&gt;Nicole Eikmeier&lt;/nobr&gt;]]
+   Computer Science &lt;br&gt; Grinnell College      
+]
+.column[&lt;br&gt;&lt;br&gt;
+  .font_large[.alert[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]]
+  &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; UCLA
+]
+]
+]
+
+---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## Hypergraph Nonbacktracking
+
+Write `\((e_1, p_1) \sim (e_2, p_2)\)` if: 
+
+- `\(p_1 \in e_1\)` and `\(p_2 \in e_2\)`
+- `\(p_1 \in e_2 \setminus p_2\)`
+- `\(e_1 \neq e_2\)`
+
+The .alert[hypergraph nonbacktracking operator] `\(\color{#ff5252}{\mathbf{B}}\)` is the linear operator 
+
+.font_smaller[ 
+`$$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &amp;\quad (e_1, p_1) \sim (e_2, p_2) \\ 
+0 &amp;\quad \text{otherwise.}\end{cases}$$`
+]]
+
+.column[
+&lt;br&gt; &lt;br&gt; &lt;br&gt; 
+&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;
+]
+
+---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## Hypergraph Nonbacktracking
+
+
+First formulated by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
+
+"Rediscovered" and used for community detection by Angelini, M. C., Caltagirone, F., Krzakala, F., &amp; Zdeborová, L. (2015), *Allerton Conference*.
+
+
+
+ **Well-defined** on non-uniform hypergraphs!
+
+ **.alert[Second eigenvector]** correlated with communities in detectable regime. 
+ 
+]
+
+.column[
+&lt;br&gt; &lt;br&gt; &lt;br&gt; 
+&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;
+]
+
+
+
+---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## Hypergraph Nonbacktracking
+
+
+First formulated by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
+
+"Rediscovered" and used for community detection by Angelini, M. C., Caltagirone, F., Krzakala, F., &amp; Zdeborová, L. (2015), *Allerton Conference*.
+
+
+
+ **Well-defined** on non-uniform hypergraphs!
+
+ **.alert[Second eigenvector]** correlated with communities in detectable regime. 
+ 
+]
+
+.column[
+&lt;br&gt; &lt;br&gt;
+&lt;img src="img/eigen-illustration.png" width=100%&gt;
+.footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
+]
+
+---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## Hypergraph Nonbacktracking
+
+&lt;br&gt;
+ .alert[**Second eigenvector**] correlated with communities in detectable regime. 
+ 
+Surprisingly disappointing performance in experiments...
+
+We know experimentally that detection is possible in the ? corners... 
+
+]
+
+.column[
+&lt;br&gt; &lt;br&gt; &lt;br&gt; 
+&lt;img src="img/vanilla-heatmap.png" width=100%&gt;
+.footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
+]
+
+
+
+
+
+---
+layout: true
+class: split-two  
+
+.column.bg-main1[
+## Reaching the Corners
+
+We use a modified nonbacktracking operator to adapt to .alert[qualitatively distinct roles] for edges of multiple sizes.
+
+The community-correlated eigenvector can either the first or second eigenvector of the modified operator. 
+
+"Seams": first and second eigenvalues cross.   
+
+Under some approximations, we can analytically derive the undetectable region: 
+
+]
+
+.column[.content.center.vmiddle[
+  {{content}}
+  
+].footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
+---
+&lt;img src="img/linearized-bp-heatmap-1-panel-no-label.png" width=100%&gt;
+---
+&lt;img src="img/linearized-bp-heatmap-1-panel-label.png" width=100%&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:10",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
