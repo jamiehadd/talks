@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700);
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,700;1,300;1,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,700;1,300;1,700&family=Titillium+Web:ital,wght@0,300;0,600;1,300;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;1,300;1,400&family=Titillium+Web:ital,wght@0,300;0,400;1,300;1,400&display=swap');
 
 
 /******************
@@ -48,8 +47,10 @@ See https://emitanaka.github.io/ninja-theme for the kunoichi example (replace wi
 }
 
 p {
-	padding-left: 10%;
-	margin-left: 15px;
+	padding-left: 35px;
+	padding-right:35px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .remark-slide {
@@ -64,16 +65,17 @@ p {
 	font-family: monospace;
 }
 
-.title-slide h1 { padding-top: 7%; font-size: 2.5em; font-weight: 600;}
-.title-slide h3 {font-size: 1.4em; text-align: right; margin-right: 40px; margin-top: 20px}
+.title-slide h1 { padding-top: 5%; font-size: 2.7em; font-weight: 400;}
+.title-slide h3 {font-size: 1.5em; text-align: right; margin-right: 40px; margin-top: 20px}
+
 .title-slide h2 {
 	padding-bottom: 30px;
 	color: var(--text-color1);
-	border-bottom: 2px solid var(--main-color5);
+	border-bottom: 3px solid var(--main-color5);
 	width: 100%;
 	display: block;
 	font-style: italic;
-	font-size: 1.4em;
+	font-size: 1.5em;
 }
 
 .title-slide h1, .title-slide h2, .title-slide h3  {
@@ -110,17 +112,21 @@ p {
 .remark-code-line-highlighted { background-color: var(--code-highlight); }
 
 
-body { 
-	font-size: 30px;
+h1, h2, h3 {
+	font-weight: normal;
+	margin-bottom: 0;
+	margin-top: 10px;
+	padding-left: 35px;
+	padding-right: 20px;
+	padding-top: 25px;
 }
 
-h1, h2, h3, body{
-	font-weight: normal;
-	padding-left: 15px;
-}
+
+
 
 body{
 	font-family: 'Poppins';
+	font-weight: 300;
 }
 
 h1, h2, h3{
@@ -128,7 +134,7 @@ h1, h2, h3{
 }
 
 .remark-slide-content {
-    font-size: 25px;
+    font-size: 22px;
 }
 .remark-code, .remark-inline-code {
 	font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace;
@@ -145,23 +151,12 @@ h1, h2, h3{
 	font-style: italic;
 }
 
-h1, h2, h3, h4 {
-	font-weight: 400;
-	margin-bottom: 0;
-	margin-top: 10px;
-	padding-left: 20px;
-}
- 
-h1 { font-size: 2.2em; }
+h1 { font-size: 2.0em; }
 h2 { font-size: 1.7em; }
 h3 { font-size: 1.4em; }
 h4 { font-size: 1em; }
 
 a { color: var(--link-color); text-decoration: none; }
-
-p {
-	padding-left:15px;
-}
 
 .split-four p {
 	font-size: 1.2em;
@@ -171,10 +166,10 @@ p {
 }
 
 .split-three p {
-	font-size: 1.0em;
-	padding-left:15px;
-	padding-top:10px;
-	padding-bottom:10px;
+	font-size: 1.2em;
+	padding-left:20px;
+	padding-right:20px;
+	margin: 0;
 }
 
 .footnote {
@@ -182,17 +177,51 @@ p {
   bottom: 1em;
   padding-right: 1em;
   padding-left: 1em;
-  padding-bottom: 1em;
+  padding-bottom: 2em;
   font-size: 70%;
   text-align: left;
 }
 
 ul, ol{
-  margin-left:20px;
+  margin-left:45px;
+  padding-left:30px;
   padding-right: 15px;
 }
 
 .font_smaller {
 	font-size: 80%;
 }
+
+.font_larger {
+	font-size: 125%;
+}
+
+.center {
+    display:block;
+    margin:auto;
+}
+
+.stretch {
+	padding: 0;
+	margin: 10px;
+}
+
+.stretch p {
+	padding: 0;
+	margin: 10px;
+}
+
+.lil-stretch {
+	padding: 0;
+	margin: 15px;
+}
+
+.lil-stretch p {
+	padding: 0;
+	margin: 15px;
+}
+
+
+
+
 

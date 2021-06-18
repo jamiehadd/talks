@@ -1,10 +1,10 @@
 ---
-title: "Detectability of Communities in Heterogeneous Hypergraphs"       
+title: "Detectability of Communities in Heterogeneous Hypergraphs"        
 subtitle: "Satellite on Higher Order Models in Network Science<br>Networks 2021"
-author: "<span class = 'author-highlight'>Phil Chodrow</span> <br> UCLA Mathematics <br> July 2nd, 2021"
+author: "<span class = 'author-highlight'>Phil Chodrow</span> <br> UCLA Mathematics <br> July 2nd, 2021"       
 date: ""     
 output: 
-  xaringan::moon_reader:    
+  xaringan::moon_reader:         
     lib_dir: libs    
     css: ["../assets/ninpo.css",  "../assets/ninjutsu.css",   "../assets/shinobi.css"]  
     seal: true   
@@ -35,21 +35,22 @@ layout: true
 
 .column.bg-main1[
 
-# Community Detection in Hypergraphs
+## Community Detection in Hypergraphs 
 
+<br> 
 **Core Problem**: Label nodes on the basis of observed (hyper)edges. 
 
 We often picture .alert[assortative], densely-connected communities.  
 
 What happens when edges of .alert2[different sizes] play .alert2[different roles]?  
 
-*E.g. Large gatherings play different social/connective roles than small meetings.*
+*E.g. Large gatherings play different social/connective roles than small meetings.*                
 
 ]
 
-.column[
-  {{content}}
-]
+.column[.content.vmiddle[.stretch[
+  {{content}}           
+]]]
 
 ---
 
@@ -60,7 +61,7 @@ class:
 ---
 
 class: 
-
+ 
 <img src="img/detection-2.png" width=100%>
 
 ---
@@ -68,7 +69,7 @@ class:
 class: bg-main5 middle
 layout: false
 
-# ***When is community detection possible?*** 
+# ***When is community detection in hypergraphs possible?*** 
 
 
 
@@ -79,13 +80,13 @@ class: split-two with-border middle
 
 .column[
   .split-three[ 
-  .row.bg-main1[.content[.font_medium[
+  .row.bg-main1[.content.vmiddle[.font_medium[  
 .alert[**Detectability thresholds**] for communities in graphs. 
   ]]]     
-  .row.bg-main2[.content[.font_medium[
+  .row.bg-main2[.content.vmiddle[.font_medium[
 .alert[**Experimental results**] in random hypergraphs.
   ]]] 
-  .row.bg-main5[.content[.font_medium[
+  .row.bg-main5[.content.vmiddle[.font_medium[
 Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
   ]]]
 ]]
@@ -108,15 +109,15 @@ class: hide-row2-col1 hide-row3-col1 hide-row4-col1 hide-row5-col1
 
 ---
 class: hide-row3-col1 hide-row4-col1 hide-row5-col1
-<br> <br> 
+<br> <br> <br>
 <img src="img/detectability-second-panel.png" width=100%>
 <br> 
 <div class="footnote">
   <b>PSC</b>, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, <i>Science Advances (forthcoming)</i>
-</div>
+</div> 
 
 ---
-class: hide-row4-col1 hide-row5-col1
+class: hide-row4-col1 hide-row5-col1 
 <br> <br> <br> 
 <img src="img/hypergraph-nonbacktracking.png" width=100%>
 
@@ -141,7 +142,9 @@ layout: false
 
 ## Detectability in Graphs
 
-In a stochastic blockmodel with two, equally-sized communities:
+<br>
+
+In a random graph (SBM) with two, equally-sized communities, let:
 
 - $\color{#63d297}{c_i}$: average number of .alert2[within-cluster] neighbors per node.
 - $\color{#ff5252}{c_o}$: the average number of .alert[between-cluster] neighbors per node. 
@@ -152,9 +155,13 @@ $$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 > \frac{1}{2}\sqrt{\color{#63d
 
 ]
 
-.column[.font_smaller[
+.column[
 
-# <br>
+## *A Brief History*
+
+<br>
+
+.font_smaller[
 
 **Conjectured** using belief-propagation by Decelle, A., Krzakala, F., Moore, C., & Zdeborová, L. (2011),  <i>PRE</i>. 
 
@@ -177,7 +184,9 @@ layout: false
 
 ## Detectability in Graphs
 
-In a stochastic blockmodel with two, equally-sized communities:
+<br> 
+
+In a random graph (SBM) with two, equally-sized communities, let:
 
 - $\color{#63d297}{c_i}$: average number of .alert2[within-cluster] neighbors per node.
 - $\color{#ff5252}{c_o}$: the average number of .alert[between-cluster] neighbors per node. 
@@ -189,7 +198,7 @@ $$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 > \frac{1}{2}\sqrt{\color{#63d
 ]
 
 .column[
-<br>
+<br><br><br>
   <img src="img/newman-detection-experiment.png" width=100%>
 .font_smaller[A spectral method is shown, but the threshold applies to **any algorithm.**]
   
@@ -206,13 +215,13 @@ class: split-two with-border middle
 
 .column[
   .split-three[ 
-  .row.bg-main1[.content[.font_medium[
+  .row.bg-main1[.content.vmiddle[.font_medium[
 .alert[**Detectability thresholds**] for communities in graphs. 
   ]]]     
-  .row.bg-main2[.content[.font_medium[
+  .row.bg-main2[.content.vmiddle[.font_medium[
 .alert[**Experimental results**] in random hypergraphs. 
   ]]]
-  .row.bg-main5[.content[.font_medium[
+  .row.bg-main5[.content.vmiddle[.font_medium[
 Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
   ]]]
 ]]
@@ -226,7 +235,7 @@ Steps toward hypergraph theory via .alert[**nonbacktracking operators**].
 
 class: fade-row1-col1 fade-row3-col1 fade-row4-col1
 
-<br> <br> 
+<br> <br> <br> 
 <img src="img/detectability-second-panel.png" width=100%>
 <br> 
 <div class="footnote">
@@ -272,17 +281,18 @@ layout: false
 ]
 ]
 ]
-
+    
 ---
 
 class: split-two
 layout: false
 
 
-
+ 
 .column.bg-main1[
-## Modularity Objective
+## Modularity Objective 
 
+<br> 
 $$Q = \sum_k\color{#ff5252}{\beta_k}\left[ \mathbf{cut}_k(\mathbf{z}) - \color{#63d297}{\gamma_k}\sum_{\ell} \mathbf{vol}(\ell)^k\right]$$
 
 - $\mathbf{z}$: cluster labels. 
@@ -291,19 +301,21 @@ $$Q = \sum_k\color{#ff5252}{\beta_k}\left[ \mathbf{cut}_k(\mathbf{z}) - \color{#
 - $\color{#ff5252}{\beta_k}$: importance of edges of size $k$. 
 - $\color{#63d297}{\gamma_k}$: resolution parameter for edges of size $k$.   
 
-Approximates to the likelihood of a degree-corrected hypergraph blockmodel with "All-Or-Nothing" affinities.  
+Approximates maximum-likelihood in a certain blockmodel. 
 ]
 
 .column[
 ## Louvain Algorithm
 
-In loop: 
+<br>
 
 1. All nodes start in their own clusters. 
-  - Greedily agglomerate nodes to maximize $Q$. 
-  - Greedily agglomerate **clusters** of nodes to further maximize $Q$. 
-2. Re-estimate $\beta_k$ and $\gamma_k$. 
-3. Repeat...
+2. Greedily agglomerate nodes to maximize $Q$. 
+3. Greedily agglomerate **clusters** of nodes to further maximize $Q$. 
+
+Re-estimate $\beta_k$ and $\gamma_k$. 
+
+Repeat...
 
 <div class="footnote">
   <b>PSC</b>, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, <i>Science Advances (forthcoming)</i>
@@ -347,29 +359,30 @@ class: split-two
 ## Can we do better? <br> 
 
 <br> <br> 
-Unclear! Extant theory on hypergraphs only treats *uniform* hypergraphs (all edges same size).
+Unclear! Extant theory on hypergraphs only treats .alert[*uniform*] hypergraphs (all edges same size).
 
 Most hypergraph data sets are non-uniform...
 
-We seek **.alert[detectability theory for non-uniform hypergraphs].**
+We seek .alert2[detectability theory] for .alert[non-uniform hypergraphs].
 
 
 ]
 
 .column[
 
-## A few papers treating uniform hypergraphs
+### (*Papers on Uniform Hypergraphs*)
 
-<br> 
 .font_smaller[
+
+<br> <br> <br>
+
 Lin, C. Y., Chien, I. E., & Wang, I. H. (2017).  *IEEE International Symposium on Information Theory*.
 
 Ghoshdastidar, D., & Dukkipati, A. (2017). *Annals of Statistics*.
 
 Angelini, M. C., Caltagirone, F., Krzakala, F., & Zdeborová, L. (2015), *Allerton Conference*.
 
-]
-]
+]]
 
 
 ---
@@ -378,13 +391,13 @@ class: split-two with-border middle
 
 .column[
   .split-three[ 
-  .row.bg-main1[.content[.font_medium[
+  .row.bg-main1[.content.vmiddle[.font_medium[
 .alert[**Detectability thresholds**] for communities in graphs. 
   ]]]     
-  .row.bg-main2[.content[.font_medium[
+  .row.bg-main2[.content.vmiddle[.font_medium[
 .alert[**Experimental results**] in random hypergraphs. 
   ]]]
-  .row.bg-main5[.content[.font_medium[
+  .row.bg-main5[.content.vmiddle[.font_medium[
 Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
   ]]]
 ]]
@@ -404,7 +417,7 @@ class: fade-row1-col1 fade-row2-col1 fade-row4-col1
 ---
 class: split-50 bg-main1 
 layout: false 
-
+ 
 .row[ 
 .split-three[
 .column[<br><br>
@@ -414,7 +427,7 @@ layout: false
   <img src="img/eikmeier-3.png" width=90%> 
 ]
 .column[<br><br>
-  <img src="img/phil_portrait.jpeg" width=90%> 
+  <img src="img/phil_portrait.jpeg" width=90%>   
 ] 
 
 ]
@@ -454,7 +467,7 @@ Write $(e_1, p_1) \sim (e_2, p_2)$ if:
 - $p_1 \in e_2 \setminus p_2$
 - $e_1 \neq e_2$
 
-The .alert[hypergraph nonbacktracking operator] $\color{#ff5252}{\mathbf{B}}$ is the linear operator 
+The .alert2[hypergraph nonbacktracking operator] $\color{#63d297}{\mathbf{B}}$ is the linear operator 
 
 .font_smaller[ 
 $$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &\quad (e_1, p_1) \sim (e_2, p_2) \\ 
@@ -463,7 +476,7 @@ $$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &\quad (e_1, p_1) \sim (e
 
 .column[
 <br> <br> <br> 
-<img src="img/hypergraph-nonbacktracking.png" width=100%>
+.stretch[<img src="img/hypergraph-nonbacktracking.png" width=100%>]
 ]
 
 ---
@@ -478,13 +491,13 @@ layout: false
 
 First formulated by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
 
-"Rediscovered" and used for community detection by Angelini, M. C., Caltagirone, F., Krzakala, F., & Zdeborová, L. (2015), *Allerton Conference*.
+"Rediscovered" by Angelini, M. C., Caltagirone, F., Krzakala, F., & Zdeborová, L. (2015), *Allerton Conference*.
 
 
 
- **Well-defined** on non-uniform hypergraphs!
+ .alert2[Well-defined on non-uniform hypergraphs!]
 
- **.alert[Second eigenvector]** correlated with communities in detectable regime. 
+ .alert[Second eigenvector] is correlated with communities in detectable regime. 
  
 ]
 
@@ -507,19 +520,19 @@ layout: false
 
 First formulated by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
 
-"Rediscovered" and used for community detection by Angelini, M. C., Caltagirone, F., Krzakala, F., & Zdeborová, L. (2015), *Allerton Conference*.
+"Rediscovered" by Angelini, M. C., Caltagirone, F., Krzakala, F., & Zdeborová, L. (2015), *Allerton Conference*.
 
 
 
- **Well-defined** on non-uniform hypergraphs!
+ .alert2[Well-defined on non-uniform hypergraphs!]
 
- **.alert[Second eigenvector]** correlated with communities in detectable regime. 
+ .alert[Second eigenvector] is correlated with communities in detectable regime. 
  
 ]
 
-.column[
-<br> <br>
-<img src="img/eigen-illustration.png" width=100%>
+.column[.content.vmiddle[.stretch[
+<img src="img/eigen-illustration.png" width=100%>   
+]] 
 .footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
 ]
 
@@ -532,18 +545,17 @@ layout: false
 .column.bg-main1[
 ## Hypergraph Nonbacktracking
 
-<br>
- .alert[**Second eigenvector**] correlated with communities in detectable regime. 
+<br><br> 
+ .alert[Second eigenvector] correlated with communities in detectable regime. 
  
-Surprisingly disappointing performance in experiments...
+Surprisingly, can't reach the ? corners in experiments, even though we know this to be .alert2[experimentally possible.]
 
-We know experimentally that detection is possible in the ? corners... 
 
 ]
 
-.column[
-<br> <br> <br> 
+.column[.content.vmiddle[.stretch[
 <img src="img/vanilla-heatmap.png" width=100%>
+]]
 .footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
 ]
 
@@ -558,46 +570,56 @@ class: split-two
 .column.bg-main1[
 ## Reaching the Corners
 
-We use a modified nonbacktracking operator to adapt to .alert[qualitatively distinct roles] for edges of multiple sizes.
+We use a modified nonbacktracking operator to adapt to .alert2[qualitatively distinct roles] for edges of multiple sizes.
 
 The community-correlated eigenvector can either the first or second eigenvector of the modified operator. 
 
-Under some approximations, we can analytically derive the undetectable region: 
+Under some approximations, we can .alert[analytically derive] the undetectable region: 
 
 $$(2p_2 - 1)^2 c_2  + 2\left(\frac{4p_3 - 1}{3}\right)^2c_3 \leq 1$$
 
 
 ]
 
-.column[.content.center.vmiddle[
+.column[.content.center.vmiddle[.stretch[
   {{content}}
   
-].footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
+]].footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
 ---
-<img src="img/linearized-bp-heatmap-1-panel-no-label.png" width=100%>
+<img src="img/linearized-bp-heatmap-1-panel-no-label.png"  width=100%>
 ---
-<img src="img/linearized-bp-heatmap-1-panel-label.png" width=100%>
+<img src="img/linearized-bp-heatmap-1-panel-label.png" width=100%> 
 
 
 ---
 
-class:
+class: split-two
 layout: false
+
+.column.bg-main1[
 
 # Future Directions
 
-### Speed 
+**Performance**
 
-Fast computation via Ihara-Bass determinants (reduce the effective size of $\mathbf{B}$).
+- Fast computation of spectrum via .alert[Ihara-Bass determinants]. 
 
-### Generalizations
+**Generalizations**
 
-  - More than two communities.
-  - Communities of different sizes.
+- Arbitrary .alert2[numbers] and .alert2[sizes] of communities.
 
-### Theory
 
-Bounds on spectral clustering $\stackrel{?}{\implies}$ bounds on any algorithm?
+**Theory**
+
+- Bounds on spectral clustering $\stackrel{?}{\implies}$ bounds on .alert[*any* algorithm]?
+
+]
+
+.column[.content.vmiddle[.stretch[
+<img src="img/million-things.jpeg" width=100%> 
+]]]
+
+
 
 
 ---
@@ -607,32 +629,33 @@ class: split-two
 
 .column.bg-main1[
 
-# Thanks!
+# **Thanks!!**
 
 .row[ 
 .split-two[
-.column[<br><br>
-  <img src="img/jamie_portrait.jpeg" width=90%> 
-  ]
-.column[<br><br>
-  <img src="img/eikmeier-3.png" width=90%> 
-]]]
+.column[.lil-stretch[<br><br><br><br> 
+  <img src="img/jamie_portrait.jpeg" width=80%> 
+  ]]
+.column[.lil-stretch[<br><br><br><br>
+  <img src="img/eikmeier-3.png" width=80%> 
+]]]]
 .row[ 
 .split-two[
-.column[<br><br><br><br><br><br><br><br> 
+.column[.lil-stretch[<br><br><br><br><br><br><br><br><br><br>
   .alert[Jamie Haddock] <br> Harvey Mudd
-  ]
-.column[<br><br><br><br><br><br><br><br> 
+  ]]
+.column[.lil-stretch[<br><br><br><br><br><br><br><br><br><br>
   .alert[Nicole Eikmeier] <br> Grinnell
-]]]
+]]]]
 
-<br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
 
-### Organizers
 
-- Leonie
-- Christopher
-- Jürgen
+
+- Leonie Neuhäuser 
+- Christopher Blöcker
+- Jürgen Hackl
+- Y'all!! 
 
 
 ]
@@ -641,7 +664,8 @@ class: split-two
 
 
 .column[
-# Questions? 
-<img src="img/chef-parrot.gif" width=80%>
+<br> <br> <br> <br> <br> <br> <br> 
+# **Questions?** 
+<!-- <img src="img/chef-parrot.gif" width=80%> -->
 ]
 
