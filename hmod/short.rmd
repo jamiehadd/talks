@@ -31,7 +31,7 @@ background-size: contain
 
 ---
 
-#### Team <br> <br> <br>
+####  <br> <br>
 
 .pull-left-third[.pink-bg[
 .centered-image[![:scale 100%](img/nate.jpg)]
@@ -54,6 +54,10 @@ background-size: contain
 .small[
   Math @ UCLA
 ]]]
+
+<br><br>
+arXiv:2101.09611 <br>
+Forthcoming in *Science Advances*
 
 
 ---
