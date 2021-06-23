@@ -31,7 +31,7 @@ background-size: contain
 
 ---
 
-####  <br> <br>
+#### Generative hypergraph clustering: From blockmodels to modularities  <br> <br>
 
 .pull-left-third[.pink-bg[
 .centered-image[![:scale 100%](img/nate.jpg)]
