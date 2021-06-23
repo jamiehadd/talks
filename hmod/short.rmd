@@ -320,7 +320,7 @@ Performance depends on .embolden[matching the structural assumptions] of algorit
 ]
 ---
 
-#### There's still a **lot more to do**... <br> <br> 
+#### There's still a **lot more to do**... <br> <br> <br>
 
 1. Alternative **inference frameworks** for DCHSBM:
   - Bayesian Monte Carlo.
