@@ -2,7 +2,7 @@
 title: "Generative Hypergraph Clustering <br> From Blockmodels to Modularity\n"
 subtitle: ""
 author: "Phil Chodrow (UCLA)<br>Nate Veldt (Cornell)<br>Austin Benson (Cornell)"
-date: ""
+date: "<br><i>SINM, June 23rd 2021</i>"
 output:
   xaringan::moon_reader:
     lib_dir: libs
