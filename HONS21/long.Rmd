@@ -615,20 +615,35 @@ layout: false
 
 ]
 
-.column[.content.vmiddle[.stretch[
-<img src="img/million-things.jpeg" width=100%> 
-]]]
+.column[
 
-
-
+]
 
 ---
-layout: false
-class: split-two  
 
+class: split-two
+layout: false
 
 .column.bg-main1[
 
+# Future Directions
+
+**Performance**
+
+- Fast computation of spectrum via .alert[Ihara-Bass determinants]. 
+
+**Generalizations**
+
+- Arbitrary .alert2[numbers] and .alert2[sizes] of communities.
+
+
+**Theory**
+
+- Bounds on spectral clustering $\stackrel{?}{\implies}$ bounds on .alert[*any* algorithm]?
+
+]
+
+.column[
 # **Thanks!!**
 
 .row[ 
@@ -657,15 +672,7 @@ class: split-two
 - Jürgen Hackl
 - Y'all!! 
 
-
-]
-
-]
+]]]
 
 
-.column[
-<br> <br> <br> <br> <br> <br> <br> 
-# **Questions?** 
-<!-- <img src="img/chef-parrot.gif" width=80%> -->
-]
 
