@@ -150,9 +150,9 @@ layout: false
 In a random graph (SBM) with two, equally-sized communities, let:
 
 - `\(\color{#63d297}{c_i}\)`: average number of .alert2[within-cluster] neighbors per node.
-- `\(\color{#ff5252}{c_o}\)`: the average number of .alert[between-cluster] neighbors per node. 
+- `\(\color{#ff5252}{c_o}\)`: average number of .alert[between-cluster] neighbors per node. 
 
-**Detectability threshold (informal)**: In the large-graph limit, it is possible to detect communities iff  
+**Detectability threshold (informal)**: In the large-graph limit, it is possible to *detect communities* iff  
 
 `$$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 &gt; \frac{1}{2}\sqrt{\color{#63d297}{c_i} + \color{#ff5252}{c_o}}\;.$$` 
 
@@ -192,7 +192,7 @@ layout: false
 In a random graph (SBM) with two, equally-sized communities, let:
 
 - `\(\color{#63d297}{c_i}\)`: average number of .alert2[within-cluster] neighbors per node.
-- `\(\color{#ff5252}{c_o}\)`: the average number of .alert[between-cluster] neighbors per node. 
+- `\(\color{#ff5252}{c_o}\)`: average number of .alert[between-cluster] neighbors per node. 
 
 **Detectability threshold (informal)**: In the large-graph limit, it is possible to detect communities iff  
 
@@ -543,7 +543,9 @@ layout: false
 
 ## Interlude: Faster Eigenvalue Computations
 
-**Theorem [PC, JH, NE 2021] (Ihara-Determinant Formula)**: Under mild restrictions, the "interesting" eigenvalues of `\(\mathbf{B} \in \mathbb{R}^{m\langle k\rangle \times m\langle k\rangle}\)` coincide with the eigenvalues of the matrix 
+&lt;br&gt; 
+
+**Theorem [PC, JH, NE 2021] (Ihara Bass Determinant Formula)**: Under mild restrictions, the "interesting" eigenvalues of `\(\mathbf{B} \in \mathbb{R}^{m\langle k\rangle \times m\langle k\rangle}\)` coincide with the eigenvalues of the matrix 
  
 $$
 \mathbf{B}' = \left[\begin{matrix}
