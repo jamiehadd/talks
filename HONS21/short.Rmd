@@ -159,7 +159,7 @@ $$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 > \frac{1}{2}\sqrt{\color{#63d
 .column[
 
 # <br> <br> 
-Informally, an algorithm **detects communities** if the output of the algorithm has better-than-random correlation with true communities. 
+Informally, an algorithm **detects communities** if the output of the algorithm has better-than-random correlation with true communities (in expectation). 
 
 ]
 
