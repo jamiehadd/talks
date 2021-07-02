@@ -464,7 +464,7 @@ layout: false
 .column.bg-main1[
 ## Hypergraph Nonbacktracking
 
-Write `\((e_1, p_1) \sim (e_2, p_2)\)` if: 
+Write `\((e_1, p_1) \rightarrow (e_2, p_2)\)` if: 
 
 - `\(p_1 \in e_1\)` and `\(p_2 \in e_2\)`
 - `\(p_1 \in e_2 \setminus p_2\)`
@@ -473,7 +473,7 @@ Write `\((e_1, p_1) \sim (e_2, p_2)\)` if:
 The .alert2[hypergraph nonbacktracking operator] `\(\color{#63d297}{\mathbf{B}}\)` is the linear operator 
 
 .font_smaller[ 
-`$$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &amp;\quad (e_1, p_1) \sim (e_2, p_2) \\ 
+`$$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &amp;\quad (e_1, p_1) \rightarrow (e_2, p_2) \\ 
 0 &amp;\quad \text{otherwise.}\end{cases}$$`
 ]]
 
