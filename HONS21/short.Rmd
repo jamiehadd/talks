@@ -547,14 +547,15 @@ layout: false
  
 $$
 \mathbf{B}' = \left[\begin{matrix}
-  <!-- \mathbf{0} & \mathbf{D} - \mathbf{I}_{\bar{k}n} \\ -->
-  <!--   (\mathbf{I}_{\bar{k}}- \mathbf{K}) \otimes \mathbf{I}_n &  \mathbf{A} + (2\mathbf{I}_{\bar{k}} - \mathbf{K})\otimes \mathbf{I}_n -->
+  <!-- \mathbf{0} & \mathbb{D} - \mathbf{I}_{\bar{k}n} \\ -->
+  <!--   (\mathbf{I}_{\bar{k}}- \mathbf{K}) \otimes \mathbf{I}_n &  \mathbb{A} + (2\mathbf{I}_{\bar{k}} - \mathbf{K})\otimes \mathbf{I}_n -->
 \end{matrix}\right] \in \mathbb{R}^{2\bar{k}n\times 2\bar{k}n}\;.
 $$
 
-- $\mathbf{A}$ holds "basic" adjacency information.
-- $\mathbf{D}$ holds node degrees. 
-- $\mathbf{K}$ holds edge sizes. 
+- $\mathbb{A} \in \mathbb{R}^{\bar{k}n}$ holds "basic" adjacency information for each hyperedge size.
+- $\mathbb{D} \in \mathbb{R}^{\bar{k}n}$ holds node degrees for each hyperedge size. 
+- $\mathbf{K} \in \mathbb{R}^{\bar{k}}$ lists possible edge sizes. 
+- $\mathbf{I}_{p} \in \mathbb{R}^{p}$ is the matrix identity. 
 
 ---
 

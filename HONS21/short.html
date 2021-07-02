@@ -549,14 +549,15 @@ layout: false
  
 $$
 \mathbf{B}' = \left[\begin{matrix}
-  &lt;!-- \mathbf{0} &amp; \mathbf{D} - \mathbf{I}_{\bar{k}n} \\ --&gt;
-  &lt;!--   (\mathbf{I}_{\bar{k}}- \mathbf{K}) \otimes \mathbf{I}_n &amp;  \mathbf{A} + (2\mathbf{I}_{\bar{k}} - \mathbf{K})\otimes \mathbf{I}_n --&gt;
+  &lt;!-- \mathbf{0} &amp; \mathbb{D} - \mathbf{I}_{\bar{k}n} \\ --&gt;
+  &lt;!--   (\mathbf{I}_{\bar{k}}- \mathbf{K}) \otimes \mathbf{I}_n &amp;  \mathbb{A} + (2\mathbf{I}_{\bar{k}} - \mathbf{K})\otimes \mathbf{I}_n --&gt;
 \end{matrix}\right] \in \mathbb{R}^{2\bar{k}n\times 2\bar{k}n}\;.
 $$
 
-- `\(\mathbf{A}\)` holds "basic" adjacency information.
-- `\(\mathbf{D}\)` holds node degrees. 
-- `\(\mathbf{K}\)` holds edge sizes. 
+- `\(\mathbb{A} \in \mathbb{R}^{\bar{k}n}\)` holds "basic" adjacency information for each hyperedge size.
+- `\(\mathbb{D} \in \mathbb{R}^{\bar{k}n}\)` holds node degrees for each hyperedge size. 
+- `\(\mathbf{K} \in \mathbb{R}^{\bar{k}}\)` lists possible edge sizes. 
+- `\(\mathbf{I}_{p} \in \mathbb{R}^{p}\)` is the matrix identity. 
 
 ---
 
