@@ -69,7 +69,8 @@ class:
 class: bg-main5 middle
 layout: false
 
-# ***When is community detection in hypergraphs possible?*** 
+
+# *When is community detection in hypergraphs **possible**?* 
 
 
 
@@ -169,7 +170,7 @@ $$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 > \frac{1}{2}\sqrt{\color{#63d
 
 **Negative direction proved** via a coupling to broadcasting on trees: Mossel, E., Neeman, J., & Sly, A. (2015). *Probability Theory and Related Fields*.
 
-**Positive direction proved** via weighted nonbacktracking paths by by Mossel, E., Neeman, J., & Sly, A. (2018), *Combinatorica*.
+**Positive direction proved** via weighted nonbacktracking paths by Mossel, E., Neeman, J., & Sly, A. (2018), *Combinatorica*.
 
 **Helpful review**: Abbe, E. (2017), *JMLR*.
 ]
@@ -197,8 +198,8 @@ $$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 > \frac{1}{2}\sqrt{\color{#63d
 
 ]
 
-.column[
-<br><br><br>
+.column[ ## Illustration
+<br>
   <img src="img/newman-detection-experiment.png" width=100%>
 .font_smaller[A spectral method is shown, but the threshold applies to **any algorithm.**]
   
@@ -506,8 +507,6 @@ First formulated by Storm, C. K. (2006). *The Electronic Journal of Combinatoric
 <img src="img/hypergraph-nonbacktracking.png" width=100%>
 ]
 
-
-
 ---
 
 class: split-two
@@ -534,13 +533,31 @@ First formulated by Storm, C. K. (2006). *The Electronic Journal of Combinatoric
 <img src="img/eigen-illustration.png" width=100%>   
 ]] 
 .footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
-]
 
 ---
 
 class: split-two
 layout: false
 
+## Interlude: Faster Eigenvalue Computations
+
+**Theorem [PC, JH, NE 2021] (Ihara-Determinant Formula)**: Under mild restrictions, the "interesting" eigenvalues of $\mathbf{B} \in \mathbb{R}^{m\langle k\rangle \times m\langle k\rangle}$ coincide with the eigenvalues of the matrix 
+ 
+$$
+\mathbf{B}' = \left[\begin{matrix}
+  <!-- \mathbf{0} & \mathbf{D} - \mathbf{I}_{\bar{k}n} \\ -->
+  <!--   (\mathbf{I}_{\bar{k}}- \mathbf{K}) \otimes \mathbf{I}_n &  \mathbf{A} + (2\mathbf{I}_{\bar{k}} - \mathbf{K})\otimes \mathbf{I}_n -->
+\end{matrix}\right] \in \mathbb{R}^{2\bar{k}n\times 2\bar{k}n}\;.
+$$
+
+- $\mathbf{A}$ holds "basic" adjacency information.
+- $\mathbf{D}$ holds node degrees. 
+- $\mathbf{K}$ holds edge sizes. 
+
+---
+
+class: split-two
+layout: false
 
 .column.bg-main1[
 ## Hypergraph Nonbacktracking
@@ -598,21 +615,15 @@ layout: false
 
 .column.bg-main1[
 
-# Future Directions
+# Summing Up
 
-**Performance**
+Hypergraphs have a .alert[rich detectability theory] which is still under development. 
 
-- Fast computation of spectrum via .alert[Ihara-Bass determinants]. 
+Hypergraph nonbacktracking operators are likely to play a role in both theory and algorithms. 
 
-**Generalizations**
-
-- Arbitrary .alert2[numbers] and .alert2[sizes] of communities.
-
-
-**Theory**
-
-- Bounds on spectral clustering $\stackrel{?}{\implies}$ bounds on .alert[*any* algorithm]?
-
+.alert2[**There's lots left to be done!**]
+- Thresholds with degree heterogeneity, more than 2 communities, etc. 
+- **Conj**: failure of nonbacktracking methods coincides with fundamental .alert2[information-theoretic and computational thresholds].  
 ]
 
 .column[
@@ -626,21 +637,15 @@ layout: false
 
 .column.bg-main1[
 
-# Future Directions
+# Summing Up
 
-**Performance**
+Hypergraphs have a .alert[rich detectability theory] which is still under development. 
 
-- Fast computation of spectrum via .alert[Ihara-Bass determinants]. 
+Hypergraph nonbacktracking operators are likely to play a role in both theory and algorithms. 
 
-**Generalizations**
-
-- Arbitrary .alert2[numbers] and .alert2[sizes] of communities.
-
-
-**Theory**
-
-- Bounds on spectral clustering $\stackrel{?}{\implies}$ bounds on .alert[*any* algorithm]?
-
+.alert2[**There's lots left to be done!**]
+- Thresholds with degree heterogeneity, more than 2 communities, etc. 
+- **Conj**: failure of nonbacktracking methods coincides with fundamental .alert2[information-theoretic and computational thresholds].  
 ]
 
 .column[
@@ -657,10 +662,10 @@ layout: false
 .row[ 
 .split-two[
 .column[.lil-stretch[<br><br><br><br><br><br><br><br><br><br>
-  .alert[Jamie Haddock] <br> Harvey Mudd
+  .alert[Jamie Haddock] <br> Harvey Mudd @jamie_hadd
   ]]
 .column[.lil-stretch[<br><br><br><br><br><br><br><br><br><br>
-  .alert[Nicole Eikmeier] <br> Grinnell
+  .alert[Nicole Eikmeier] <br> Grinnell @NicoleEikmeier
 ]]]]
 
 <br><br><br><br><br><br><br><br><br>
