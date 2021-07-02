@@ -147,12 +147,41 @@ layout: false
 
 &lt;br&gt;
 
-In a random graph (SBM) with two, equally-sized communities, let:
+In a random graph (SBM) with two, equally-sized communities:
 
 - `\(\color{#63d297}{c_i}\)`: average number of .alert2[within-cluster] neighbors per node.
 - `\(\color{#ff5252}{c_o}\)`: average number of .alert[between-cluster] neighbors per node. 
 
-**Detectability threshold (informal)**: In the large-graph limit, it is possible to *detect communities* iff  
+**Detectability threshold**: In the large-graph limit, it is possible to *detect communities* iff  
+
+`$$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 &gt; \frac{1}{2}\sqrt{\color{#63d297}{c_i} + \color{#ff5252}{c_o}}\;.$$` 
+
+]
+
+.column[
+
+# &lt;br&gt; &lt;br&gt; 
+Informally, an algorithm **detects communities** if the output of the algorithm has better-than-random correlation with true communities. 
+
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+## Detectability in Graphs
+
+&lt;br&gt;
+
+In a random graph (SBM) with two, equally-sized communities:
+
+- `\(\color{#63d297}{c_i}\)`: average number of .alert2[within-cluster] neighbors per node.
+- `\(\color{#ff5252}{c_o}\)`: average number of .alert[between-cluster] neighbors per node. 
+
+**Detectability threshold**: In the large-graph limit, it is possible to *detect communities* iff  
 
 `$$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 &gt; \frac{1}{2}\sqrt{\color{#63d297}{c_i} + \color{#ff5252}{c_o}}\;.$$` 
 
@@ -189,12 +218,12 @@ layout: false
 
 &lt;br&gt; 
 
-In a random graph (SBM) with two, equally-sized communities, let:
+In a random graph (SBM) with two, equally-sized communities:
 
 - `\(\color{#63d297}{c_i}\)`: average number of .alert2[within-cluster] neighbors per node.
 - `\(\color{#ff5252}{c_o}\)`: average number of .alert[between-cluster] neighbors per node. 
 
-**Detectability threshold (informal)**: In the large-graph limit, it is possible to detect communities iff  
+**Detectability threshold**: In the large-graph limit, it is possible to *detect communities* iff  
 
 `$$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 &gt; \frac{1}{2}\sqrt{\color{#63d297}{c_i} + \color{#ff5252}{c_o}}\;.$$` 
 
