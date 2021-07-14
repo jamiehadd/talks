@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Networks, Ranking, and Feedback Loops</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=" Phil Chodrow   UCLA Department of Mathematics" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="css/shinobi.css" type="text/css" />
+    <link rel="stylesheet" href="css/ninpo.css" type="text/css" />
+    <link rel="stylesheet" href="css/ninjutsu.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Networks, Ranking, and Feedback Loops
+## Or, The Real Math Was The Friends We Made Along The Way
+### <br><span class="author-highlight">Phil Chodrow</span> <br> UCLA Department of Mathematics
+### <br>July 15th, 2021
+
+---
+
+exclude: true
+&lt;style type="text/css"&gt;
+code.r{ 
+  font-size: 16px; 
+}
+pre {
+  font-size: 16px !important;
+}
+&lt;/style&gt;
+
+
+---
+
+class: split-two 
+
+
+.column.bg-main1[.content[
+.font3[Hi! I'm Phil.]
+
+.font_medium[.font_large[Things I .alert[like]:]]
+
+.font_large[
+- Mathematics of complex systems
+  - Network science
+  - Nonlinear dynamics
+  - Probability and statistics
+  - Linear algebra
+- Tea
+- *Star Trek: Deep Space 9*
+- Effective pedagogy 
+- Martial arts (aikido, tai chi)
+]
+
+.font_medium[.font_large[Things I .alert2[teach]:]]
+
+.font_large[
+- Python programming
+- Data science
+- Mathematical network science
+- Aikido
+]
+]
+]]
+
+.column[.content.center[
+&lt;img src="../img-shared/cartoon-avatar-no-bg.png" width=80%&gt;]
+
+.font_medium[*Artist's rendering of me from back when haircuts were a thing.*] &lt;br&gt;
+*Image via [Picrew.me](https://picrew.me/image_maker/634561)*
+]
+
+
+
+---
+
+class: bg-main1 
+background-image: url("../img-shared/geo-intro.png")
+background-size: contain
+ 
+
+# My Journey
+
+ 
+---
+layout: true
+class: split-two with-border middle
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font2[
+Quick overview of .alert[**networks**] and why we care about them.
+  ]]
+  .row.bg-main3[.content.font2[
+.alert[**Ranking**] in networks.
+  ]]
+  .row.bg-main4[.content.font2[
+From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
+  ]]
+  .row.bg-main5[.content.font2[
+.alert[**Having fun**] while doing science. 
+  ]]
+]]
+
+.column[.content.center.vmiddle[
+{{content}}
+]]
+
+---
+class: hide-row2-col1 hide-row4-col1 hide-row3-col1
+&lt;img src="img/network.jpeg" width=100%&gt;
+***Image credit:*** *Wikipedia*
+
+---
+class: hide-row3-col1 hide-row4-col1
+&lt;img src="img/schematic.png" width=100%&gt;
+`$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) +\alpha \mathbf{I}\right]\mathbf{s} = \left[\mathbf{D}^i- \mathbf{D}^o \right]\mathbb{1}$$`
+
+---
+class: hide-row4-col1
+&lt;img src="img/pnas.png" width=95%&gt;
+
+---
+class: 
+
+&lt;img src="img/heart-cookies.jpg" width=32%&gt;
+&lt;img src="img/book.jpg" width=32%&gt;
+&lt;img src="img/apollo.jpg" width=32%&gt;
+&lt;img src="img/yes.GIF" width=65%&gt;
+&lt;img src="img/so-pumped.png" width=32%&gt;
+&lt;img src="img/obama.png" width=33%&gt;
+&lt;img src="img/two-cats.jpeg" width=32%&gt;
+&lt;img src="img/page-rank.png" width=30%&gt; 
+
+
+---
+layout: true
+class: split-two with-border middle
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font2[
+Quick overview of .alert[**networks**] and why we care about them.
+  ]]
+  .row.bg-main3[.content.font2[
+.alert[**Ranking**] in networks.
+  ]]
+  .row.bg-main4[.content.font2[
+From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
+  ]]
+  .row.bg-main5[.content.font2[
+.alert[**Having fun**] while doing science. 
+  ]]
+]]
+
+.column[.content.center.vmiddle[
+{{content}}
+]]
+
+---
+
+class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+
+&lt;img src="img/network.jpeg" width=100%&gt;   
+***Image credit:*** *Wikipedia*
+
+---
+layout: false
+class: split-two
+  
+.column.bg-main1[&lt;br&gt; &lt;br&gt;
+.content.font3[.color-main1[Directed] Networks] 
+.blockquote.font_large[A ***.alert2[network]*** (or ***.alert2[graph]***) consists of:
+- A set `\(\mathcal{N}\)` of entities, called *.alert2[nodes]*.
+- A set of `\(\mathcal{E}\)` of connections between pairs of nodes, called *.alert2[edges]*.]
+
+.font_large[Social groups, complex infrastructure, and natural ecosystems are among the .alert[many] systems we can model with networks.]
+]
+
+.column[
+.content.center.vmiddle[
+&lt;img src="img/network.jpeg" width=100%&gt;   
+***Image credit:*** *Wikipedia*
+]
+]
+
+---
+layout: true
+class: split-two
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font3[
+.alert[Directed] Networks
+  ]]
+  .row.bg-main1[.content.font_large[
+  .alert2[Competitions] (chess, basketball...)  &lt;br&gt; 
+  .color-main1[tab] Nodes are competitors/teams. &lt;br&gt;
+  .color-main1[tab] `\(A \rightarrow B\)` `\(\implies\)` `\(B\)` beats `\(A\)`. 
+  ]]
+  .row.bg-main1[.content.font_large[ 
+  .alert2[Internet] (Google, Facebook) &lt;br&gt;
+  .color-main1[tab] Nodes are webpages. &lt;br&gt;
+  .color-main1[tab] `\(A\rightarrow B\)` `\(\implies\)` `\(A\)` links to `\(B\)`. 
+  ]] 
+  .row.bg-main1[.content.font_large[
+  .alert2[Endorsements] (politics, Twitter) &lt;br&gt; 
+  .color-main1[tab] Nodes are people. &lt;br&gt;
+  .color-main1[tab] `\(A\rightarrow B\)` `\(\implies\)` `\(A\)` thinks `\(B\)` is good.   
+  ]]
+]]
+
+.column[.content.center.hmiddle[&lt;br&gt;
+&lt;img src="img/digraph.png" width=70%&gt;&lt;br&gt;
+***Image credit:*** *Wikipedia*
+{{content}}
+]]
+
+---
+class: hide-row2-col1 hide-row3-col1 hide-row4-col1 
+
+---
+class: hide-row3-col1 hide-row4-col1
+&lt;img src="img/magnus.jpeg" width=70%&gt; 
+
+---
+class:hide-row4-col1
+&lt;img src="img/how-pagerank-works.png" width=70%&gt;
+
+---
+
+class:
+&lt;img src="img/lamberson-social-network.jpeg" width=70%&gt;&lt;br&gt; 
+***Image credit***: [PJ Lamberson](http://social-dynamics.org/twitter-network-data/)
+
+---
+layout: true
+class: split-two with-border middle
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font2[
+Quick overview of .alert[**networks**] and why we care about them.
+  ]]
+  .row.bg-main3[.content.font2[
+.alert[**Ranking**] in networks.
+  ]]
+  .row.bg-main4[.content.font2[
+From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
+  ]]
+  .row.bg-main5[.content.font2[
+.alert[**Having fun**] while doing science. 
+  ]]
+]]
+
+.column[.content.center.vmiddle[
+{{content}}
+]]
+
+---
+class: fade-row1-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+&lt;img src="img/schematic.png" width=100%&gt;
+`$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) +\alpha \mathbf{I}\right]\mathbf{s} = \left[\mathbf{D}^i- \mathbf{D}^o \right]\mathbb{1}$$`
+
+---
+class: middle
+layout: false
+
+.split-two[
+.column.bg-main1[
+&lt;br&gt;&lt;br&gt;
+# The Network Ranking Problem
+
+.blockquote.font_large[Given a network, assign a .alert2[**rank**] or .alert2[**score**] vector `\(\mathbf{r} \in \mathbb{R}^n\)` based on the network structure. `\(r_i\)` is the rank of node `\(i \in \mathcal{N}\)`.    
+]
+
+
+.content.font_large[
+1. Who is the **best** chessplayer? 
+  - [Magnus Carlsen](https://twitter.com/MagnusCarlsen?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor)
+2. Which website is **most central** to the internet?
+  - [philchodrow.com](www.philchodrow.com)
+3. What is the **most important** account on Twitter?
+  - [No Context Star Trek](https://twitter.com/NoContextTrek)]
+]
+.column[
+.content.center.vmiddle[
+&lt;img src="img/pagerank-example.jpeg" width=90%&gt;&lt;br&gt; 
+***Image credit:*** *Wikipedia* 
+]
+]
+]
+
+---
+class: 
+layout: false
+
+.split-two[ 
+.column[
+&lt;br&gt;
+# The Adjacency Matrix
+
+
+.content.center[.font_medium[
+&lt;img src="img/digraph.png" width=60%&gt;&lt;br&gt; 
+***Image credit:*** *Wikipedia*
+
+  $$\mathbf{A} = \left[\begin{matrix}
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; \mathbf{1} \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0  --&gt;
+    \end{matrix}\right] 
+    $$
+  ]
+  ]
+]
+.column.bg-main1[
+]
+]
+
+---
+class: 
+layout: false
+
+.split-two[ 
+.column[
+&lt;br&gt;
+# The Adjacency Matrix
+
+
+.content.center[.font_medium[
+&lt;img src="img/digraph.png" width=60%&gt;&lt;br&gt; 
+***Image credit:*** *Wikipedia*
+
+  $$\mathbf{A} = \left[\begin{matrix}
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; \mathbf{1} \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0  --&gt;
+    \end{matrix}\right] 
+    $$
+  ]
+  ]
+]
+.column.bg-main1[
+.content.center.vmiddle[
+&lt;img src="img/linear-algebra.jpeg" width=100%&gt; 
+]
+]
+]
+
+
+---
+layout: true
+class: split-two
+
+.column.bg-main1[
+&lt;br&gt; &lt;br&gt; 
+# Computing .alert[Ranks] &lt;br&gt; &lt;br&gt; 
+.content.center[.font_large[ 
+  $$\mathbf{A} = \left[\begin{matrix}
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; \mathbf{1} \\  --&gt;
+    &lt;!-- 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0  --&gt;
+    \end{matrix}\right] 
+    $$
+    Lots of ways to compute a rank vector `\(\mathbf{r} \in \mathbb{R}^n\)`...
+  ]
+  ]
+]
+
+.column[&lt;br&gt;
+  .split-three[
+  .row.bg-main4[.content.font_large[
+  .alert2[Degree] (Number of positive interactions) 
+  .color-main4[tab] `$$\mathbf{r} = \mathbf{d} = \mathbf{1}^T\mathbf{A}$$` &lt;br&gt;
+  ]]
+  .row.bg-main4[.content.font_large[ 
+  .alert2[PageRank] (Google) **r** is leading eigenvector of 
+  `$$\mathbf{P} = \alpha_p\mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha_p)\mathbf{E}$$`
+  ]] 
+  .row.bg-main4[.content.font_large[
+  .alert2[SpringRank] (DeBacco et al. 2018) Solve linear system 
+  .font_medium[.font_small[$$\left[\mathbf{D}^i + \mathbf{D}^o - (\mathbf{A} + \mathbf{A}^T) + \alpha_s\mathbf{I}\right]  \mathbf{r} = \left[\mathbf{D}^i - \mathbf{D}^o\right]\mathbf{1}$$]
+  ]]]
+]]
+
+
+---
+class: hide-row1-col2 hide-row2-col2 hide-row3-col2 
+
+---
+class: hide-row2-col2 hide-row3-col2
+
+
+---
+class:hide-row3-col2 
+
+---
+class: 
+
+---
+layout: false
+class: bg-main1
+
+# .alert2[Example]: PageRank in the *Hamilton* mention network
+
+.content.center[
+&lt;img src="img/hamilton.png" width=85%&gt;&lt;br&gt; 
+
+.font2[Leading eigenvector of 
+`\(\mathbf{P} = \alpha_p\mathbf{D}^{-1}\mathbf{A} + \frac{1}{n}(1-\alpha_p)\mathbf{E}\)`.]
+]
+
+
+---
+
+layout: true
+class: split-two with-border middle
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font2[
+Quick overview of .alert[**networks**] and why we care about them.
+  ]]
+  .row.bg-main3[.content.font2[
+.alert[**Ranking**] in networks.
+  ]]
+  .row.bg-main4[.content.font2[
+From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
+  ]]
+  .row.bg-main5[.content.font2[
+.alert[**Having fun**] while doing science. 
+  ]]
+]]
+
+.column[.content.center.vmiddle[
+{{content}}
+]]
+
+---
+class: fade-row1-col1 fade-row2-col1 fade-row4-col1 fade-row5-col1
+&lt;img src="img/pnas.png" width=95%&gt;
+
+
+
+---
+class: split-50 bg-main1 
+layout: false 
+
+.row[ 
+.split-four[
+.column[.image-caption-right[
+  &lt;br&gt; 
+  ## .alert[&lt;nobr&gt;Mari Kawakatsu&lt;/nobr&gt;]
+  .font_medium[Applied and Computational Mathematics &lt;br&gt; Princeton University ]
+  ]    
+]
+.column[.image-bottom[
+  &lt;img src="img/mari_portrait.jpeg" width=100%&gt; 
+]]
+.column[  
+.image-bottom[
+  &lt;img src="img/phil_portrait.jpeg" width=100%&gt;
+]  
+] 
+.column[.image-caption-left[
+  &lt;br&gt;
+  ## .alert[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]
+  .font_large[Mathematics &lt;br&gt; UCLA]
+  ] 
+]
+]
+]
+
+.row[
+.split-four[
+.column[.image-caption-right[
+  ## .alert[&lt;nobr&gt;Nicole Eikmeier&lt;/nobr&gt;]
+  .font_large[&lt;nobr&gt;Computer Science&lt;/nobr&gt; &lt;br&gt; Grinnell]      
+  ]   
+]
+.column[
+  &lt;img src="img/nicole_portrait.jpeg" width=100%&gt; 
+]
+.column[    
+  &lt;img src="img/dan_portrait.jpeg" width=100%&gt;
+] 
+.column[.image-caption-left[
+  ## .alert[&lt;nobr&gt;Dan Larremore&lt;/nobr&gt;]
+  .font_large[&lt;nobr&gt;Computer Science&lt;/nobr&gt; &lt;br&gt; CU Boulder ]
+  ] 
+]
+]
+]
+
+---
+
+class: split-two bg-main1
+
+# Working Environment (.alert2[Very Important]) 
+
+.content.font2[Complex Networks Winter Workshop 2019 (\#CNWW)]
+
+.column[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/monastere.jpeg" width=100%&gt; 
+  
+  .content.font_medium[Le Monastère des Augustines, Québec City]
+]]
+.column[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/cats-2.jpeg" width=97%&gt; 
+  
+  .content.font_medium[Cafe Felin Ma Langue Aux Chats (yes, it's a .alert[cat cafe]])
+]]
+
+
+---
+
+class: split-two bg-main1
+layout: false
+
+.column[
+&lt;br&gt; 
+.font_large[.font_large[.font_large[
+.content.center[Ranks .alert2[⟳] Decisions]]]
+]
+.blockquote[
+.content.font_large[.content.font_large[
+  What happens when network ranks .alert2[inform] decision-making within a    system?]
+]]
+]
+
+
+
+
+.column.bg-main4[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="img/us-news-rankings.jpeg" width=60%&gt; 
+  ]
+  .content.font_large[.alert[Example]: 
+  College ranks are based on selectivity. 
+  
+  High ranks &lt;br&gt;  `\(\implies\)` more applications &lt;br&gt; `\(\implies\)`     higher selectivity &lt;br&gt; `\(\implies\)` even higher ranks....
+]]
+
+
+
+
+---
+
+class: split-two bg-main1
+
+.column[.content[
+&lt;br&gt; 
+.font_large[.content.center[.font_large[.font_large[The Model]]] &lt;br&gt;
+
+Matrix `\(\mathbf{A} = \mathbf{A}^{(t)}\)` of *endorsements*: `\(a_{ij}^{(t)}\)` is the weighted number of times `\(i\)` endorses `\(j\)` by time `\(t\)`. 
+
+1. Compute rank vector `\(\mathbf{r} = \sigma(\mathbf{A})\)` (degree, PageRank, SpringRank...)
+2. Node `\(i\)` computes a *utility* of endorsing `\(j\)`:  `$$u_{ij} = \color{#63d297}{\beta_1} r_j + \color{#ff5252}{\beta_2} (r_j - r_i)^2\;.$$` 
+
+`\(\color{#63d297}{\beta_1}\)` : Preference for *prestige*. &lt;br&gt;
+`\(\color{#ff5252}{\beta_2}\)` : Preference for *proximity*. 
+]]]
+
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/fig_1.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[.content[
+&lt;br&gt; 
+.font_large[.content.center[.font_large[.font_large[The Model]]] &lt;br&gt;
+
+
+3\.  `\(m\)` nodes make endorsements. Node `\(i\)` selects node `\(j\)` to endorse with probability `$$p_{ij} =    \frac{e^{u_{ij}}}{\sum_k e^{u_{ik}}}\;.$$`
+
+4\. Matrix `\(\mathbf{A}\)` updated with .alert2[new endorsements]: 
+
+`$$\mathbf{A}^{(t+1)} = \color{#ff5252}{\lambda} \mathbf{A}^{(t)} + (1-\color{#ff5252}{\lambda}) \color{#63d297}{\mathbf{\Delta}^{(t)}}$$`
+
+`\(\lambda\)` is a .alert[memory parameter]: `\(\lambda \approx 1 \rightarrow\)` system evolves slowly. 
+
+]]]
+
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/fig_1.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[.content[
+&lt;br&gt; 
+.font_large[.font_large[.font_large[
+.center[Ranks .alert2[⟳] Decisions]
+]]
+
+.blockquote[Agents develop prestige by receiving endorsements.
+]
+
+.blockquote[Agents make endorsements based on prestige. 
+]
+]]]
+
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/fig_1.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[What happens?]]&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.font_large[
+
+`\(\color{#63d297}{\beta_1}\)` : Preference for .alert2[*prestige*]. &lt;br&gt;
+
+- `\(\beta_1\)` small: fluctuating egalitarianism.
+- `\(\beta_1\)` large: emergence of time-varying hierarchies. 
+
+`\(\color{#ff5252}{\beta_2}\)` : Preference for *.alert[proximity]*. 
+
+- `\(\beta_2 &lt; 0\)`: stabilization of hierarchical ranks. 
+
+&lt;br&gt;
+Can we say anything *mathematical* about these observations?
+]
+]
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/dynamics_examples.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[Theorem [KCEL 2021]]]&lt;br&gt;&lt;br&gt;
+.font_large[
+
+Consider the deterministic function 
+`$$\mathbf{f}(\mathbf{r}, \mathbf{A}) = \lim_{\lambda \rightarrow 1} \frac{\mathbb{E}[\mathbf{r}|\mathbf{A}] - \mathbf{r}}{1 - \lambda}\;.$$`
+
+This function has an egalitarian fixed point such that `\(\mathbf{r} = r \mathbb{e}\)`. This point is linearly stable iff `\(\beta_1 &lt; \beta_1^c\)`: 
+
+`$$\beta_1^c = \begin{cases}
+  2\sqrt{\frac{n}{m}} &amp;\quad \text{Root-Degree} \\ 
+  1/\alpha_p &amp;\quad \text{PageRank} \\ 
+  2 + \alpha_s\frac{n}{m} &amp;\quad \text{SpringRank}.
+\end{cases}$$`
+
+]]
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/dynamics_examples.png" width=100%&gt; 
+]]
+
+
+---
+
+class: split-two bg-main1
+layout: true
+
+.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[Theorem [KCEL 2021]]]&lt;br&gt;&lt;br&gt;
+.font_large[
+
+Consider the deterministic function 
+`$$\mathbf{f}(\mathbf{r}, \mathbf{A}) = \lim_{\lambda \rightarrow 1} \frac{\mathbb{E}[\mathbf{r}|\mathbf{A}] - \mathbf{r}}{1 - \lambda}\;.$$`
+
+This function has an egalitarian fixed point such that `\(\mathbf{r} = r \mathbb{e}\)`. This point is .alert[linearly stable] iff `\(\beta_1 &lt; \beta_1^c\)`: 
+
+`$$\beta_1^c = \begin{cases}
+  2\sqrt{\frac{n}{m}} &amp;\quad \text{Root-Degree} \\ 
+  1/\alpha_p &amp;\quad \text{PageRank} \\ 
+  2 + \alpha_s\frac{n}{m} &amp;\quad \text{SpringRank}.
+\end{cases}$$`
+]]
+
+
+.column.bg-main4[.content.font_medium[
+  {{content}}
+]]
+
+---
+class: 
+
+&lt;br&gt;
+Heuristically, a fixed point `\(\mathbf{x}_0\)` of some dynamics is **stable** if, when you perturb the the system to some nearby point, it eventually comes back to `\(\mathbf{x}_0\)`. 
+
+&lt;img src="img/stability.jpg" width=100%&gt; 
+Image credit: [Desmond Winterborne](https://www.sciencedirect.com/topics/engineering/stable-equilibrium)
+
+---
+class: 
+
+&lt;br&gt;
+Here, stability of the egalitarian fixed point of `\(\mathbf{f}\)` is governed by the **Jacobian matrix** of partial derivatives: 
+
+`$$\mathbf{J} = \left[\begin{matrix}\frac{\partial f_1}{\partial r_1} &amp; \frac{\partial f_1}{\partial r_2} &amp; \cdots  &amp; \frac{\partial f_1}{\partial r_n}  \\ 
+\frac{\partial f_2}{\partial r_1} &amp; \frac{\partial f_2}{\partial r_2} &amp; \cdots  &amp; \frac{\partial f_2}{\partial r_n} \\ 
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 
+\frac{\partial f_n}{\partial r_1} &amp; \frac{\partial f_n}{\partial r_2} &amp; \cdots  &amp; \frac{\partial f_n}{\partial r_n}
+\end{matrix}\right]$$`
+
+
+Fixed point is **linearly stable** if `\(\mathbf{J}\)` only has eigenvalues with negative real part. 
+
+Fixed point is **unstable** of `\(\mathbf{J}\)` has any eigenvalues with positive real part. 
+
+So, we need...
+
+---
+
+class: 
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; 
+&lt;img src="img/linear-algebra.jpeg" width=100%&gt; 
+
+
+---
+
+class: 
+layout: false
+
+background-image: url("img/bifurcations_with_curves.png")
+background-size: contain
+
+
+
+---
+
+
+class: split-two
+layout: false
+
+.column.bg-main1[&lt;br&gt;
+# Ok, but what about **data**?
+
+.content.font_large[
+
+Model assigns a *likelihood* to the observed data. 
+
+`$$\mathcal{L}(\lambda, \beta) = \sum_{t = 0}\sum_{i, j \in \mathcal{N}}\color{#ff5252}{k_{ij}^{(t)}} \log \color{#63d297}{\gamma_{ij}^{(t)}}$$`
+
+- `\(\color{#ff5252}{k_{ij}^{(t)}}\)`: \# of observed endorsements `\(i\rightarrow j\)` in time `\(t\)` (from data).
+- `\(\color{#63d297}{\gamma_{ij}^{(t)}}\)`: Probability that `\(i\)` chooses `\(j\)` as recipient of endorsement at time `\(t\)` (depends on `\(\lambda\)`, `\(\beta\)`, and data from previous timesteps). 
+
+**Method of maximum likelihood**: find parameters `\(\hat{\lambda}\)` and `\(\hat{\beta}\)` to maximize `\(\mathcal{L}\)`. 
+]
+]
+
+.column.bg-main4[.content.vmiddle[.font_large[&lt;br&gt; 
+**Math PhD Exchange**¹: University *A* "endorses" *B* by hiring a PhD trained at *B*, over 50 years. &lt;br&gt;&lt;br&gt;  
+**Monk Parakeets**²: Parakeet *A* "endorses" *B* by losing a fight to *B*, over 4 observation periods.  &lt;br&gt;&lt;br&gt;&lt;br&gt; 
+**Newcomb Fraternity**³: Fraternity brother *A* "endorses" *B* by stating that they like *B* on a survey, over a semester (15 weeks).
+]
+
+&lt;br&gt; &lt;br&gt; 
+¹D. Taylor, S. A. Meyers, A. Clauset, M. A. Porter, P. J. Mucha, Eigenvector-based centrality measures for temporal networks. *Multiscale Model. Simul.* 15, 537–574 (2017). &lt;br&gt; 
+North Dakota State University Department of Mathematics, Data from “The Mathematics Genealogy Project.”  ([link](https://www.genealogy.math.ndsu.nodak.edu/index.php.)) &lt;br&gt; 
+²E. A. Hobson, S. DeDeo, Social feedback and the emergence of rank in animal society. *PLoS Comput. Biol.* 11, e1004411 (2015) &lt;br&gt; 
+³T. Newcomb, *The Acquaintance Process* (Holt, Reinhard, and Winston, New York, NY, 1961).
+]]
+
+
+---
+
+class: split-two
+
+.column.bg-main1[&lt;br&gt;
+# Ok, but what about **data**?
+
+.content.font_large[
+
+Model assigns a *likelihood* to the observed data. 
+
+`$$\mathcal{L}(\lambda, \beta) = \sum_{t = 0}\sum_{i, j \in \mathcal{N}}\color{#ff5252}{k_{ij}^{(t)}} \log \color{#63d297}{\gamma_{ij}^{(t)}}$$`
+
+- `\(\color{#ff5252}{k_{ij}^{(t)}}\)`: \# of observed endorsements `\(i\rightarrow j\)` in time `\(t\)` (from data).
+- `\(\color{#63d297}{\gamma_{ij}^{(t)}}\)`: Probability that `\(i\)` chooses `\(j\)` as recipient of endorsement at time `\(t\)` (depends on `\(\lambda\)`, `\(\beta\)`, and data from previous timesteps). 
+
+**Method of maximum likelihood**: find parameters `\(\hat{\lambda}\)` and `\(\hat{\beta}\)` to maximize `\(\mathcal{L}\)`. 
+]
+]
+
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/inference-table.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[Are we in the hierarchical regime?]]&lt;br&gt;&lt;br&gt;
+.font_large[
+
+**Theorem from before**: Egalitarianism is stable iff `\(\beta_1 &lt; \beta_1^c\)`, where 
+
+`$$\beta_1^c = \begin{cases}
+  2\sqrt{\frac{n}{m}} &amp;\quad \text{Root-Degree} \\ 
+  1/\alpha_p &amp;\quad \text{PageRank} \\ 
+  2 + \alpha_s\frac{n}{m} &amp;\quad \text{SpringRank}.
+\end{cases}$$`
+&lt;br&gt; &lt;br&gt; 
+Math PhD exchange: .alert2[**bistable**] `\(-\)` both egalitarianism and hierarchy are possible. 
+
+Parakeets + Newcomb Frat: .alert[**supercritical**]. 
+
+]
+]
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/criticality-table.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[&lt;br&gt;&lt;br&gt;.content.font_large[.font_large[It matters how we conceptualize rank! ]]&lt;br&gt;&lt;br&gt;
+.font_large[
+
+**Placement share, Root-Degree, and PageRank**: MIT dominates, esp. recently. 
+
+
+**SpringRank**: Favors Harvard, Stanford, Princeton, and Berkeley (based on prestigious placements of their graduates).
+
+Different estimates of fluidity in ranks.  
+]
+]
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/phd-exchange.png" width=100%&gt; 
+]]
+
+---
+
+class: split-two bg-main1
+
+.column[.font_large[.font_large[.font_large[
+.center[Ranks .alert2[⟳] Decisions]
+]] 
+
+We wrote a simple .alert[math model] of hierarchies emerging from feedback loops.
+
+Feedback loops can generate stable hierarchies, even when are .alert[no meaningful differences] between agents.
+
+Some systems are .alert[near criticality]: small interventions could help to promote equality and equity. 
+
+
+
+
+.alert[Interdisciplinary math is fun]! Commentary by biology friends Simon DeDeo and Elizabeth Hobson ➔
+
+]
+]
+.column.bg-main4[.content.vmiddle[
+&lt;img src="img/commentary.png" width=100%&gt; 
+]]
+
+---
+layout: true
+class: split-two with-border middle
+
+
+.column[
+  .split-four[
+  .row.bg-main1[.content.font2[
+Quick overview of .alert[**networks**] and why we care about them.
+  ]]
+  .row.bg-main3[.content.font2[
+.alert[**Ranking**] in networks.
+  ]]
+  .row.bg-main4[.content.font2[
+From ranks to self-sustaining  &lt;br&gt;.alert[**feedback loops**]. 
+  ]]
+  .row.bg-main5[.content.font2[
+.alert[**Having fun**] while doing science. 
+  ]]
+]]
+
+.column[.content.center.vmiddle[
+{{content}}
+]]
+
+
+
+
+---
+class: fade-row1-col1 fade-row2-col1 fade-row3-col1 
+
+&lt;!-- &lt;img src="img/heart-cookies.jpg" width=32%&gt; --&gt;
+&lt;!-- &lt;img src="img/book.jpg" width=32%&gt; --&gt;
+&lt;!-- &lt;img src="img/apollo.jpg" width=32%&gt; --&gt;
+
+&lt;img src="img/dinner.jpg" width=48%&gt;
+&lt;img src="img/ezra.jpg" width=48%&gt;
+
+&lt;img src="img/cats.jpeg" width=65%&gt;
+&lt;img src="img/cinnamon-rolls.jpg" width=32%&gt;
+&lt;img src="img/mari-mp.png" width=62%&gt;
+&lt;img src="img/ready.jpg" width=30%&gt; 
+
+---
+
+layout: false
+class: split-two
+
+
+.column.bg-main1[&lt;br&gt; 
+# Two Ways to Start Research
+
+&lt;br&gt; 
+
+.content.font_large[.font_large[.alert[**Idea**] First]]
+
+.content.font_large[.font_large[*"Here's a cool idea! &lt;br&gt;What/who do I need to do in order to achieve this?"*]]
+
+&lt;br&gt; 
+.content.font_large[.font_large[.alert2[**People**] First]]
+
+.content.font_large[.font_large[*"Here are some people I like! &lt;br&gt; What cool things can we achieve together?"*]]
+]
+
+.column[.content.vmiddle[
+.font_large[.font_large[I do both of these, but I have the most fun when I  .alert2[start with people].]]
+
+.font_large[.font_large[
+I look for folks who 
+- Are **fun to work with**
+- Can **teach me stuff**
+]]
+]
+  
+]
+
+---
+
+class: split-two
+
+.column.bg-main1[&lt;br&gt; 
+# Parting Wisdom
+&lt;br&gt; &lt;br&gt; &lt;br&gt; 
+.content.font_large[.font_medium[
+
+
+
+Question hierarchy. 
+
+Seek cat cafes. 
+
+Focus on what's important:
+]]]
+]
+
+.column[.content.vmiddle[
+]
+]
+]
+
+---
+
+class: split-two
+
+.column.bg-main1[&lt;br&gt; 
+# Parting Wisdom
+&lt;br&gt; &lt;br&gt; &lt;br&gt; 
+.content.font_large[.font_medium[
+
+
+
+Question hierarchy. 
+
+Seek cat cafes. 
+
+Focus on what's important:
+]]]
+]
+
+.column[.content.vmiddle[
+&lt;img src="img/linear-algebra.jpeg" width=100%&gt;
+]
+]
+]
+
+---
+
+class: split-two bg-main1
+
+
+&lt;br&gt;
+
+.column[
+&lt;br&gt; 
+# Thanks!! 
+
+&lt;img src="img/mari_portrait.jpeg" width=40%&gt; 
+&lt;img src="img/phil_portrait.jpeg" width=40%&gt; 
+&lt;img src="img/nicole_portrait.jpeg" width=40%&gt;
+&lt;img src="img/dan_portrait.jpeg" width=40%&gt; 
+
+.font_large[.alert[Fab team]: Mari, Nicole, Dan]
+]
+
+.column.bg-main4[
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;bR&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; 
+.font_large[
+
+Complex Networks Winter Workshop 2019
+
+The cats 
+
+Jamie
+
+.alert2[Y'all!] 
+
+
+.font_large[What questions do you have?]
+
+
+]
+
+]
+
+
+
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:10",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
