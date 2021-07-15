@@ -28,16 +28,6 @@ pre {
 options(htmltools.dir.version = FALSE)
 ```
 
----
-
-class: center middle
-background-image: url(img/vegetables.jpeg)
-background-size: cover
-
-.content.vmiddle[
-.color-main4[
-.font_large[.font_large[.font_large[.font_large[.font_large[.font_large[.font_large[.font_large[ ?]]]]]]]]
-]] 
 
 ---
 
@@ -74,12 +64,12 @@ class: split-two
 ]]
 
 .column[.content.center[
-<img src="../img-shared/cartoon-avatar-no-bg.png" width=70%>]
+<img src="../img-shared/cartoon-avatar-no-bg.png" width=80%>]
 
 .font_medium[*Artist's rendering of me from back when haircuts were a thing.*] <br>
 *Image via [Picrew.me](https://picrew.me/image_maker/634561)*
 
-.font_medium[.font_large[🧅🧅🧅 I would be an onion.  🧅🧅🧅]]
+]
 ]
 
 
@@ -90,6 +80,20 @@ class: bg-main1
 background-image: url("../img-shared/geo-intro.png")
 background-size: contain
  
+
+---
+
+class: center middle
+background-image: url(img/vegetables.jpeg)
+background-size: cover
+
+.content.vmiddle[
+.color-main4[
+.font_large[.font_large[.font_large[.font_large[.font_large[.font_large[.font_large[.font_large[ ?]]]]]]]]
+]] 
+
+
+---
 
 # My Journey
 
