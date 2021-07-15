@@ -34,8 +34,6 @@ class: center middle
 background-image: url(img/vegetables.jpeg)
 background-size: cover
 
-<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> 
-
 .content.vmiddle[
 .color-main4[
 .font_large[.font_large[.font_large[.font_large[.font_large[.font_large[.font_large[.font_large[ ?]]]]]]]]
