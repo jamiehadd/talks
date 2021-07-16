@@ -1020,7 +1020,7 @@ class: split-two bg-main1
 
 <img src="img/mari_portrait.jpeg" width=40%> 
 <img src="img/phil_portrait.jpeg" width=40%> 
-<img src="img/nicole_portrait.jpeg" width=40%>
+<img src="img/nicole_portrait.png" width=40%>
 <img src="img/dan_portrait.jpeg" width=40%> 
 
 .font_large[.alert[Fab team]: Mari, Nicole, Dan]
