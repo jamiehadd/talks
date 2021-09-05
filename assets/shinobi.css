@@ -12,7 +12,7 @@ See https://emitanaka.github.io/ninja-theme for the kunoichi example (replace wi
 			--main-color2: #424242;
 			--main-color3: #616161;
 			--main-color4: white;
-			--main-color5: #63d297;
+			--main-color5: #6CAE75;
 		--text-color1: white;
 		--text-color2: white;
 		--text-color3: white;
@@ -65,13 +65,18 @@ p {
 	font-family: monospace;
 }
 
-.title-slide h1 { padding-top: 5%; font-size: 2.7em; font-weight: 400;}
+.title-slide h1 { 
+	padding-top: 5%; 
+	font-size: 2.7em; 
+	font-weight: 400;
+	margin-top: 60px}
+
 .title-slide h3 {font-size: 1.5em; text-align: right; margin-right: 40px; margin-top: 20px}
 
 .title-slide h2 {
 	padding-bottom: 30px;
 	color: var(--text-color1);
-	border-bottom: 3px solid var(--main-color5);
+	border-bottom: 1px solid var(--alert-color1);
 	width: 100%;
 	display: block;
 	font-style: italic;
@@ -90,14 +95,18 @@ p {
 .bg-main3 { background-color: var(--main-color3); color: var(--text-color3);}
 .bg-main4 { background-color: var(--main-color4); color: var(--text-color4);}
 .bg-main5 { background-color: var(--main-color5); color: var(--text-color5);}
-.bgcolor_alert { background-color: var(--alert-color)!important; color: var(--text-alert); }
+.bgcolor_alert { background-color: var(--alert-color1)!important; color: var(--text-alert1); }
 
 .color-main1 { color: var(--main-color1);}
 .color-main2 { color: var(--main-color2);}
 .color-main3 { color: var(--main-color3);}
 .color-main4 { color: var(--main-color4);}
 .color-main5 { color: var(--main-color5);}
-.color-alert { color: var(--alert-color);}
+.color-alert1 { color: var(--alert-color1);}
+.color-alert2 { color: var(--alert-color2);}
+
+.alert { color: var(--alert-color1);}
+.alert2 { color: var(--alert-color2);}
 
 .shade_main  {
 	background-color: var(--color-opacity70);
@@ -141,10 +150,7 @@ h1, h2, h3{
 	color: var(--code-text-color);
 	background-color: var(--code-background);
 }
-.author-highlight {
-	font-weight: bold;
-	color: var(--alert-color);
-}
+
 
 .institution {
 	color: var(--text-color6);

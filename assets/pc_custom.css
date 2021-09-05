@@ -1,3 +1,71 @@
 :root {
-		--main-color1: #202729;
+		--main-color1: #384d54;
+		--main-color2: #fffdfa;
+		--main-color3: #f5f7fa;
+		--main-color4: #FFFCF2;
+		--main-color5: #6CAE75;
+		--alert-color1: #EE6C4D;
+		--alert-color2: #21728f;
+		--alert-color3: #FFD046;
+		--text-color1: #fffefc;
+		--text-color2: main-color1;
+		--text-color3: main-color1;
+}
+
+.alert1 { 
+	color: var(--alert-color1);
+}
+
+.alert2 { 
+	color: var(--alert-color2);
+}
+
+.alert3 { 
+	color: var(--alert-color3);
+}
+
+.bg-main1 .alert {
+	color: var(--alert-color1);
+}
+
+.bg-main1 .alert2 {
+	color: var(--alert-color3);
+}
+
+.bg-main2 .alert {
+	color: var(--alert-color2);
+}
+
+.bg-main3 .alert {
+	color: var(--alert-color1);
+}
+
+.bg-main4 .alert {
+	color: var(--alert-color1);
+}
+
+.bg-main5 .alert {
+	color: var(--alert-color2);
+}
+
+
+.bg-main2  {
+	color: var(--text-color2);
+}
+
+.bg-main3  {
+	color: var(--text-color3);
+}
+
+.bg-main4  {
+	color: var(--text-color4);
+}
+
+.bg-main5  {
+	color: var(--text-color5);
+}
+
+.author-highlight {
+	font-weight: bold;
+	color: var(--alert-color3);
 }
