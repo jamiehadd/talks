@@ -1,0 +1,7 @@
+## Eigenvector Methods for Community Detection in Hypergraphs
+
+*Presented by Phil Chodrow (UCLA), joint work with Jamie Haddock (Harvey Mudd) and Nicole Eikmeier (Grinnell)*
+
+Hypergraphs are generalizations of graphs in which edges are allowed to contain arbitrary numbers of nodes. Hypergraphs are well-suited for modeling complex systems with multi-body interactions. Familiar examples include email threads with multiple participants, projects with multiple collaborators, and forum posts with multiple tags. 
+
+The *hypergraph community detection problem* asks us to find groups of related or similar entities in hypergraph data. While there are many approaches to this problem, I'll focus on methods that rely on matrix eigenvectors. I'll give a  quick illustration of how eigenvector methods work in the graph case, and explain the roadblocks to extending these standard methods for hypergraphs. I'll then describe the Hashimoto operator, a matrix that smoothly generalizes for hypergraphs. I'll present a theorem for speeding up eigenvector calculations with this matrix, and discuss detection algorithms that use these eigenvectors. I'll touch on the relationship between the Hashimoto operator and belief-propagation for statistical inference, using this relationship to obtain a performant hypergraph community detection algorithm. I'll discuss the phase transition separating success from failure for this detection algorithm. I'll close by posing some conjectures on the fundamental limits of community detection in hypergraphs. 

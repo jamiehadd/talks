@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Eigenvector Methods for Clustering Hypergraphs</title>
+    <title>Eigenvector Methods for Community Detection in Hypergraphs</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Phil Chodrow   UCLA Mathematics   Sept 20th, 2021" />
-    <script src="libs/header-attrs/header-attrs.js"></script>
+    <meta name="author" content="Dr. Phil Chodrow   Dept. of Mathematics, UCLA   Sept 20th, 2021" />
     <link rel="stylesheet" href="../assets/ninpo.css" type="text/css" />
     <link rel="stylesheet" href="../assets/ninjutsu.css" type="text/css" />
     <link rel="stylesheet" href="../assets/shinobi.css" type="text/css" />
@@ -14,9 +13,9 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Eigenvector Methods for Clustering Hypergraphs
-## Applied Math Seminar, CCMS
-### <span class="author-highlight">Phil Chodrow</span> <br> UCLA Mathematics <br> Sept 20th, 2021
+# Eigenvector Methods for Community Detection in Hypergraphs
+## Applied Math Seminar <br> Claremont Center for the Mathematical Sciences
+### Dr. <span class="author-highlight">Phil Chodrow</span> <br> Dept. of Mathematics, UCLA <br> Sept 20th, 2021
 
 ---
 
@@ -34,430 +33,355 @@ pre {
 ---
 
 class: split-two
-layout: true
+layout: false
 
 .column.bg-main1[
-## Community Detection in Hypergraphs 
+.content[ 
+  ## Graphs and Hypergraphs
+ 
+  &lt;br&gt; 
+  A .alert[graph] consists of a set of nodes `\(\mathcal{N}\)` and a set of edges `\(\mathcal{E}\)`. Each edge in `\(\mathcal{E}\)` is a set of two nodes. 
 
-&lt;br&gt; 
-**Core Problem**: Label nodes on the basis of observed (hyper)edges. 
-
-We often picture .alert[assortative], densely-connected communities.  
-
-What happens when edges of .alert2[different sizes] play .alert2[different roles]?   
-
-*E.g. Large gatherings play different social/connective roles than small meetings.*                
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  In .alert[hypergraphs], edges in `\(\mathcal{E}\)` can contain *any number* of nodes.     
 ]
 
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/graph-hypergraph.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Examples of Hypergraphs
+
+  
+
+]
+
+.column.bg-main2[.vmiddle[
+  &lt;br&gt;
+]]
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Examples of Hypergraphs
+
+&lt;br&gt; &lt;br&gt; 
+
+  - .alert[**Interaction**]: nodes are agents, edges are interaction events (socializing in groups, attending events).
+  
+
+]
+
+.column.bg-main2[.vmiddle[
+  &lt;img src="img/social-interaction.jpeg" width=100%&gt;&lt;/img&gt; 
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Examples of Hypergraphs
+
+&lt;br&gt; &lt;br&gt; 
+
+  - .alert[**Interaction**]: nodes are agents, edges are interaction events (socializing in groups, attending events).
+  - .alert[**Collaboration**]: nodes are collaborators, edges are projects (papers, legislation, etc). 
+  
+
+]
+
+.column.bg-main2[.vmiddle[
+  &lt;img src="img/teamwork.jpeg" width=100%&gt;&lt;/img&gt; 
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Examples of Hypergraphs
+
+&lt;br&gt; &lt;br&gt; 
+
+  - .alert[**Interaction**]: nodes are agents, edges are interaction events (socializing in groups, attending events).
+  - .alert[**Collaboration**]: nodes are collaborators, edges are projects (papers, legislation, etc). 
+  - .alert[**Co-presence**]: nodes are chemical compounds, edges are drugs formed from those compounds.
+
+]
+
+.column.bg-main2[.vmiddle[
+  &lt;img src="img/mccoy.png" width=100%&gt;&lt;/img&gt; 
+]]
+
+---
+
+
+
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ### The Hypergraph Community Detection Problem 
+
+  Given a hypergraph data set, assign each node to a .alert[**community**] (or "cluster") of "related" nodes. 
+  &lt;br&gt; &lt;br&gt;
+  "*Related*": often interpreted as "*densely interconnected.*"
+&lt;br&gt; &lt;br&gt;
+  Applications in social network analysis, drug discovery, image processing, data visualization...
+
+  
+  &lt;div class="footnote"&gt;
+  .alert2[One review]: &lt;br&gt; &lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances&lt;/i&gt;, 7:eabh1303
+&lt;/div&gt;
+
+  
+]
 .column[.content.vmiddle[.stretch[
-  {{content}}           
+  &lt;img src="img/detection-1.png" width=100%&gt;
 ]]]
 
 ---
-class: 
 
-&lt;img src="img/detection-1.png" width=100%&gt;
-
----
-class: 
- 
-&lt;img src="img/detection-2.png" width=100%&gt;
- 
----
 layout: true
 class: split-two middle 
  
 .column[
   .split-three[ 
   .row.bg-main1[.content.vmiddle[.font_medium[  
-.alert2[**Graph clustering**] with eigenvectors.
+.alert[**Graph community detection**] with eigenvectors.
   ]]]     
   .row.bg-main2[.content.vmiddle[.font_medium[
 .alert[**Hashimoto operators**] and eigenvector methods for hypergraphs.  
   ]]] 
   .row.bg-main3[.content.vmiddle[.font_medium[ 
-.alert[**Open questions**] and future work. 
+.alert[**Detectability thresholds**] and open questions. 
   ]]]
 ]] 
 
-.column[
-{{content}} 
-]
+.column[.center[.stretch[
+  {{content}} 
+]]]
  
 ---
 class: hide-row2-col1 hide-row3-col1 hide-row4-col1 hide-row5-col1
 
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-  &lt;img src="img/opportunity.jpeg" width=100%&gt;
-   
-&lt;div class="footnote"&gt;
-  Nadakuditi, R. R., &amp; Newman, M. E. (2012). Graph spectra and the detectability of community structure in networks. &lt;i&gt;Physical Review Letters&lt;/i&gt;, 108(18), 188701.  
-&lt;/div&gt;
+
+  &lt;img src="img/pol-blogs.png" width=60%&gt;
+
+  &lt;div class="footnote"&gt;
+  Image from &lt;a href="http://allthingsgraphed.com/2014/10/09/visualizing-political-polarization/"&gt; All Things Graphed &lt;/a&gt; 
+  &lt;/div&gt;
+
+
+
 
 ---
 class: hide-row3-col1 hide-row4-col1   hide-row5-col1 
 &lt;br&gt; &lt;br&gt; &lt;br&gt; 
-&lt;img src="img/detectability-second-panel.png" width=100%&gt; 
+&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;
 &lt;br&gt; 
-&lt;div class="footnote"&gt;  
-  &lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances (forthcoming)&lt;/i&gt;
-&lt;/div&gt; 
 
 ---
 class: hide-row4-col1 hide-row5-col1 
-&lt;br&gt; &lt;br&gt; &lt;br&gt; 
-&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+&lt;img src="img/heatmap-exp-1-with-curve.png" width=100%&gt; 
 
 ---
 
 class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-  &lt;img src="img/newman-detection-experiment.png" width=100%&gt; 
-  
-&lt;div class="footnote"&gt;
-  Nadakuditi, R. R., &amp; Newman, M. E. (2012). Graph spectra and the detectability of community structure in networks. &lt;i&gt;Physical Review Letters&lt;/i&gt;, 108(18), 188701.  
-&lt;/div&gt;  
 
----
+  &lt;img src="img/pol-blogs.png" width=60%&gt;
 
-class: split-two
-layout: false
-
-.column.bg-main1[
-
-## Detectability in Graphs
-
-
-&lt;br&gt;
-In a random graph (SBM) with two, equally-sized communities:
-
-- `\(\color{#FFD046}{c_i}\)`: average number of .alert2[within-cluster] neighbors per node.
-- `\(\color{#EE6C4D}{c_o}\)`: average number of .alert[between-cluster] neighbors per node. 
-
-**Detectability threshold**: In the large-graph limit, it is possible to *detect communities* iff  
-
-`$$(\color{#FFD046}{c_i} - \color{#EE6C4D}{c_o})^2 &gt; \frac{1}{2}\sqrt{\color{#FFD046}{c_i} + \color{#EE6C4D}{c_o}}\;.$$`  
-
-]
-
-.column.bg-main2[
-
-# &lt;br&gt; &lt;br&gt; 
-Informally, an algorithm .alert[**detects communities**] if the output of the algorithm has better-than-random correlation with true communities (in expectation). 
-
-]
-
+  &lt;div class="footnote"&gt;
+    Image from &lt;a href="http://allthingsgraphed.com/2014/10/09/visualizing-political-polarization/"&gt; All Things Graphed &lt;/a&gt; 
+  &lt;/div&gt;
 ---
 
 class: bg-main2
+layout: false
 background-image: url(img/opportunity.jpeg)
 background-size: contain
 
-
 ---
 
 class: split-two
 layout: false
 
-.column.bg-main1[
+.column[
+  ## The graph...
 
-## Detectability in Graphs
-
-&lt;br&gt;
-
-In a random graph (SBM) with two, equally-sized communities:
-
-- `\(\color{#63d297}{c_i}\)`: average number of .alert2[within-cluster] neighbors per node.
-- `\(\color{#ff5252}{c_o}\)`: average number of .alert[between-cluster] neighbors per node. 
-
-**Detectability threshold**: In the large-graph limit, it is possible to *detect communities* iff  
-
-`$$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 &gt; \frac{1}{2}\sqrt{\color{#63d297}{c_i} + \color{#ff5252}{c_o}}\;.$$` 
-
-]
-
-.column.bg-main2[
-
-## *A Brief History*
-
-&lt;br&gt;
-
-.font_smaller[
-
-**Conjectured** using belief-propagation by Decelle, A., Krzakala, F., Moore, C., &amp; Zdeborová, L. (2011),  &lt;i&gt;PRE&lt;/i&gt;. 
-
-**Re-conjectured** via nonbacktracking operators in Krzakala, F., Moore, C., Mossel, E., Neeman, J., Sly, A., Zdeborová, L., &amp; Zhang, P. (2013), *PNAS*.
-
-**Negative direction proved** via a coupling to broadcasting on trees: Mossel, E., Neeman, J., &amp; Sly, A. (2015). *Probability Theory and Related Fields*.
-
-**Positive direction proved** via weighted nonbacktracking paths by Mossel, E., Neeman, J., &amp; Sly, A. (2018), *Combinatorica*.
-
-**Helpful review**: Abbe, E. (2017), *JMLR*.
+.center[
+  &lt;img src="img/pol-blogs.png" width=58%&gt;
 ]
 ]
+.column[
 
----
-
-class: split-two
-layout: false
-
-.column.bg-main1[
-
-## Detectability in Graphs
-
-&lt;br&gt; 
-
-In a random graph (SBM) with two, equally-sized communities:
-
-- `\(\color{#63d297}{c_i}\)`: average number of .alert2[within-cluster] neighbors per node.
-- `\(\color{#ff5252}{c_o}\)`: average number of .alert[between-cluster] neighbors per node. 
-
-**Detectability threshold**: In the large-graph limit, it is possible to *detect communities* iff  
-
-`$$(\color{#63d297}{c_i} - \color{#ff5252}{c_o})^2 &gt; \frac{1}{2}\sqrt{\color{#63d297}{c_i} + \color{#ff5252}{c_o}}\;.$$` 
-
-]
-
-.column[ ## Illustration
-&lt;br&gt;
-  &lt;img src="img/newman-detection-experiment.png" width=100%&gt;
-.font_smaller[A spectral method is shown, but the threshold applies to **any algorithm.**]
+  ## ...and the matrix
   
-&lt;div class="footnote"&gt;
-  Nadakuditi, R. R., &amp; Newman, M. E. (2012). Graph spectra and the detectability of community structure in networks. &lt;i&gt;Physical Review Letters&lt;/i&gt;, 108(18), 188701.  
-&lt;/div&gt;
-]
-
-
-
----
-layout: true
-class: split-two with-border middle 
-
-.column[
-  .split-three[ 
-  .row.bg-main1[.content.vmiddle[.font_medium[
-.alert[**Detectability thresholds**] for communities in graphs. 
-  ]]]     
-  .row.bg-main2[.content.vmiddle[.font_medium[
-.alert[**Experimental results**] in random hypergraphs. 
-  ]]]
-  .row.bg-main5[.content.vmiddle[.font_medium[
-Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
-  ]]]
-]]
-
-.column[
-{{content}}]
- 
-
-
----
-
-class: fade-row1-col1 fade-row3-col1 fade-row4-col1
-
-&lt;br&gt; &lt;br&gt; &lt;br&gt; 
-&lt;img src="img/detectability-second-panel.png" width=100%&gt;
-&lt;br&gt; 
-&lt;div class="footnote"&gt;
-  &lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances (forthcoming)&lt;/i&gt;
-&lt;/div&gt;
-
-
-
----
-class: split-50 bg-main1 
-layout: false 
-
-.row[ 
-.split-three[
-.column[&lt;br&gt;&lt;br&gt;
-  &lt;img src="img/nate_portrait.jpeg" width=90%&gt; 
+  .center[
+  &lt;br&gt; 
+  &lt;img src="img/sample-matrix.png" width=100%&gt;
   ]
-.column[&lt;br&gt;&lt;br&gt;
-  &lt;img src="img/austin_portrait.jpeg" width=90%&gt; 
-]
-.column[&lt;br&gt;&lt;br&gt;
-  &lt;img src="img/phil_portrait.jpeg" width=90%&gt; 
-] 
 
 ]
-]
-.row[ 
-.split-three[
-.column[&lt;br&gt;
-  .font_large[.alert[&lt;nobr&gt;Nate Veldt&lt;/nobr&gt;]]
-  &lt;nobr&gt;Applied Mathematics&lt;/nobr&gt; &lt;br&gt; Cornell University
-  @n_veldt
-]
-.column[&lt;br&gt;
-  .font_large[.alert[&lt;nobr&gt;Austin Benson&lt;/nobr&gt;]]
-   Computer Science &lt;br&gt; Cornell University
-   @austinbenson
-]
-.column[&lt;br&gt;
-  .font_large[.alert[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]]
-  &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; UCLA
-  &lt;br&gt; @PhilChodrow
-]
-]
-]
-    
+
 ---
 
 class: split-two
 layout: false
 
-
- 
 .column.bg-main1[
-## Modularity Objective 
+  ## Modeling Clustered Graphs
 
-&lt;br&gt; 
-`$$Q = \sum_k\color{#ff5252}{\beta_k}\left[ \mathbf{cut}_k(\mathbf{z}) - \color{#63d297}{\gamma_k}\sum_{\ell} \mathbf{vol}(\ell)^k\right]$$`
+  Take `\(n\)` nodes and divide them into two groups `\(a\)` and `\(b\)`. 
 
-- `\(\mathbf{z}\)`: cluster labels. 
-- `\(\mathbf{cut}(\mathbf{z})\)`: number of `\(k\)`-edges split by `\(\mathbf{z}\)`. 
-- `\(\mathbf{vol}(\ell)\)`: Sum of degrees in cluster `\(\ell\)`. 
-- `\(\color{#ff5252}{\beta_k}\)`: importance of edges of size `\(k\)`. 
-- `\(\color{#63d297}{\gamma_k}\)`: resolution parameter for edges of size `\(k\)`.   
+  For each pair of nodes `\(i\)` and `\(j\)`, draw an edge with probability 
 
-Approximates maximum-likelihood in a certain blockmodel. 
+  `$$p_{ij} = \begin{cases} p &amp;\quad i,j \text{ are in the same group} \\ q &amp;\quad i,j \text{ are in different groups} \end{cases}$$`
+
+  We can represent the result as an adjacency matrix `\(\mathbf{A}\)`, where 
+
+  `$$a_{ij} = \begin{cases} 1 &amp;\quad (i,j) \in \mathcal{E} \\ 0 &amp;\quad  \text{otherwise} \end{cases}$$`
 ]
 
-.column[
-## Louvain Algorithm
+.column[.vmiddle[.center[
 
-&lt;br&gt;
-
-1. All nodes start in their own clusters. 
-2. Greedily agglomerate nodes to maximize `\(Q\)`. 
-3. Greedily agglomerate **clusters** of nodes to further maximize `\(Q\)`. 
-
-Re-estimate `\(\beta_k\)` and `\(\gamma_k\)`. 
-
-Repeat...
-
-&lt;div class="footnote"&gt;
-  &lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances (forthcoming)&lt;/i&gt;
-&lt;/div&gt;
-
+&lt;img src="img/sbm-matrix.png" width=80%&gt;
+]]
 ]
-
-
-
-
----
-
-layout: false
-
-## Experimental Setup
-
-&lt;img src="img/detectability-setup.png" width=85%&gt; 
-
-.footnote[**PSC**, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity. *Science Advances (forthcoming)*] 
- 
-
-
-
----
-
-layout: false
-class:  
-
-## Detectability limits: graphs vs. hypergraphs
-
-&lt;img src="img/detectability-louvain.png" width=100%&gt; 
-
-.footnote[**PSC**, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity. *Science Advances (forthcoming)*] 
 
 ---
 
 class: split-two
-
+layout: false
 
 .column.bg-main1[
-## Can we do better? &lt;br&gt; 
-
-&lt;br&gt; &lt;br&gt; 
-Unclear! Extant theory on hypergraphs only treats .alert[*uniform*] hypergraphs (all edges same size).
-
-Most hypergraph data sets are non-uniform...
-
-We seek .alert2[detectability theory] for .alert[non-uniform hypergraphs].
-
-
-]
-
-.column[
-
-### (*Papers on Uniform Hypergraphs*)
+  ### Clusters from Eigenvectors
 
 .font_smaller[
+  Leading eigenvectors of `\(\mathbf{P}\)`:
 
-&lt;br&gt; &lt;br&gt; &lt;br&gt;
+  `\(\mathbf{v}_1 = {\underbrace{(1,1,\ldots,1,1)}_{2n \text{ copies}}}^T\)` &lt;br&gt; 
+  `\(\lambda_1 = \frac{n}{2}(p + q)\)`.
 
-Lin, C. Y., Chien, I. E., &amp; Wang, I. H. (2017).  *IEEE International Symposium on Information Theory*.
+&lt;br&gt;
+  `\(\mathbf{v}_2 = (\underbrace{1,1,\ldots,1}_{n \text{ copies } (a)}, \underbrace{-1,-1,\ldots,-1}_{n \text{ copies } (b)})\)` &lt;br&gt;
+  `\(\lambda_2 = \frac{n}{2}(p - q)\)`.
 
-Ghoshdastidar, D., &amp; Dukkipati, A. (2017). *Annals of Statistics*.
 
-Angelini, M. C., Caltagirone, F., Krzakala, F., &amp; Zdeborová, L. (2015), *Allerton Conference*.
+  .alert[Results from random matrix theory]: the "interesting" eigenvalues/vectors of `\(\mathbf{A}\)` are very close to the "interesting" eigenvalues/vectors of `\(\mathbf{P}\)` with high probability as `\(n\)` grows large.  
+]
+]
 
+.column[.vmiddle[.center[
+
+&lt;img src="img/sbm-matrix.png" width=80%&gt;
 ]]
+]
 
 ---
 
 class: split-two
-
+layout: false
 
 .column.bg-main1[
-## Eigenvectors to Clusters &lt;br&gt; 
+  ## An Algorithm
+
+Suppose we don't know the cluster labels. We can estimate them (under the right conditions) using `\(\mathbf{v}_2\)`. 
 
 &lt;br&gt;
-1. Arrange the top `\(k\)` eigenvectors in a matrix `\(\mathbf{M}\)`, `\(k\)` should be close to the desired number of clusters. 
-2. Threshold: let `\(\bar{m}_{ij} = \mathbb{1}[m_{ij} &gt; 0]\)`. 
-2. Perform k-means or your personal favorite Euclidean clustering algorithm on `\(\bar{\mathbf{M}}\)`. 
+.alert[Adjacency Spectral Clustering]
 
-&lt;br&gt; 
+1. Compute the second-largest eigenvector `\(\mathbf{v}_2\)` of `\(\mathbf{A}\)`. 
+2. If `\(\mathbf{v}_{2i} &gt; 0\)`, guess that node `\(i\)` is in group `\(a\)`, otherwise in group `\(b\)`. 
 
-Visualization of true clusters (classes) in a high-school contact hypergraph `\(\rightarrow\)` 
-
+Variations on this work for other graph matrices. 
 ]
 
-.column[
+.column[.center[
 
-
-&lt;img src="img/PCA.png" width=100%&gt;
-
-]
-
----
-layout: true
-class: split-two with-border middle 
-
-.column[
-  .split-three[ 
-  .row.bg-main1[.content.vmiddle[.font_medium[
-.alert[**Detectability thresholds**] for communities in graphs. 
-  ]]]     
-  .row.bg-main2[.content.vmiddle[.font_medium[
-.alert[**Experimental results**] in random hypergraphs. 
-  ]]]
-  .row.bg-main5[.content.vmiddle[.font_medium[
-Steps toward hypergraph theory via .alert[**nonbacktracking operators**]. 
-  ]]]
+&lt;img src="img/sbm-clustering.png" width=75%&gt;
 ]]
 
-.column[
-{{content}}]
- 
-
 ---
 
-class: fade-row1-col1 fade-row2-col1 fade-row4-col1
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[  
+.alert[**Graph community detection**] with eigenvectors. 
+  ]]]     
+  .row.bg-main2[.content.vmiddle[.font_medium[
+.alert[**Hashimoto operators**] and eigenvector methods for hypergraphs.  
+  ]]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[ 
+.alert[**Detectability thresholds**] and open questions. 
+  ]]]
+]] 
 
+.column[.center[
+  {{content}} 
+]]
+
+---
+class: fade-row1-col1 fade-row3-col1
 &lt;br&gt; &lt;br&gt; &lt;br&gt; 
 &lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;
+&lt;br&gt; 
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+### Matrices for Hypergraphs? 
+
+The adjacency matrix `\(\mathbf{A}\)` is .alert[two-dimensional], and is therefore good for capturing .alert[pairwise] relationships. 
+
+For hypergraphs, there are options: 
+
+- Transform into a graph (loses information)
+- Represent adjacency via "tensors" (hyperarrays):
+
+`$$a_{ijk} = \begin{cases} 1 &amp;\quad (i,j,k)\in \mathcal{E} \\ 0 &amp;\quad \text{otherwise...}\end{cases}$$`
+
+
+- Other (please specify)
+
+]
+
+.column[
+  &lt;br&gt;
+  &lt;img src="img/graph-hypergraph.png" width=100%&gt;
+]
+
+
 
 
 ---
@@ -483,17 +407,17 @@ layout: false
 .column[&lt;br&gt;
   .font_large[.alert[&lt;nobr&gt;Jamie Haddock&lt;/nobr&gt;]]
   &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; Harvey Mudd College      
-  @jamie_hadd
+  .alert2[@jamie_hadd]
 ]
 .column[&lt;br&gt;
   .font_large[.alert[&lt;nobr&gt;Nicole Eikmeier&lt;/nobr&gt;]]
    Computer Science &lt;br&gt; Grinnell College      
-   @NicoleEikmeier 
+   .alert2[@NicoleEikmeier]
 ]
 .column[&lt;br&gt;
   .font_large[.alert[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]]
   &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; UCLA
-  &lt;br&gt; @PhilChodrow &lt;br&gt;
+  &lt;br&gt; .alert2[@PhilChodrow] &lt;br&gt;
 ]
 ]
 ]
@@ -505,24 +429,28 @@ layout: false
 
 
 .column.bg-main1[
-## Hypergraph Nonbacktracking
+## The Hashimoto Operator
 
-Write `\((e_1, p_1) \rightarrow (e_2, p_2)\)` if: 
+The adjacency matrix is `\(n\times n\)`,  operates on nodes. 
+
+The .alert[Hashimoto operator] operates on .alert2[edge-node pairs]: 
+
+Let `\((e_1, p_1) \rightarrow (e_2, p_2)\)` if: 
 
 - `\(p_1 \in e_1\)` and `\(p_2 \in e_2\)`
 - `\(p_1 \in e_2 \setminus p_2\)`
 - `\(e_1 \neq e_2\)`
 
-The .alert2[hypergraph nonbacktracking operator] `\(\color{#63d297}{\mathbf{B}}\)` is the linear operator 
+Then, 
 
-.font_smaller[ 
+.font_smaller[ .font_smaller[
 `$$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &amp;\quad (e_1, p_1) \rightarrow (e_2, p_2) \\ 
 0 &amp;\quad \text{otherwise.}\end{cases}$$`
-]]
+]]]
 
 .column[
 &lt;br&gt; &lt;br&gt; &lt;br&gt; 
-.stretch[&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;]
+&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;
 ]
 
 ---
@@ -532,19 +460,18 @@ layout: false
 
 
 .column.bg-main1[
-## Hypergraph Nonbacktracking
+## The Hashimoto Operator
 
+&lt;br&gt; 
 
-First formulated by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
+Popularized (for graphs) in Hashimoto K. (1990), *Int. J. Math.* 1, 381–396
 
-"Rediscovered" by Angelini, M. C., Caltagirone, F., Krzakala, F., &amp; Zdeborová, L. (2015), *Allerton Conference*.
+First formulated for hypergraphs by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
 
+"Rediscovered" for hypergraphs by Angelini, M. C., Caltagirone, F., Krzakala, F., &amp; Zdeborová, L. (2015), *Allerton Conference*.
 
+*Also often called the "nonbacktracking operator/matrix."*
 
- .alert2[Well-defined on non-uniform hypergraphs!]
-
- .alert[Second eigenvector] is correlated with communities in detectable regime. 
- 
 ]
 
 .column[
@@ -559,37 +486,68 @@ layout: false
 
 
 .column.bg-main1[
-## Hypergraph Nonbacktracking
+## The Hashimoto Operator
 
+&lt;br&gt; 
 
-First formulated by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
+Connected to prime cycles and zeta functions on graphs. 
 
-"Rediscovered" by Angelini, M. C., Caltagirone, F., Krzakala, F., &amp; Zdeborová, L. (2015), *Allerton Conference*.
+Same construction works for hypergraphs with edges of different sizes. 
 
-
-
- .alert2[Well-defined on non-uniform hypergraphs!]
-
- .alert[Second eigenvector] is correlated with communities in detectable regime. 
+.alert[Second eigenvector] is correlated with communities, if corresponding eigenvalue is real.  
+  - Needs to be aggregated to node level
  
 ]
 
 .column[.content.vmiddle[.stretch[
 &lt;img src="img/eigen-illustration.png" width=100%&gt;   
-]] 
-.footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
+]]]
 
 ---
 
 class: split-two
 layout: false
 
-## Interlude: Faster Eigenvalue Computations
 
-&lt;br&gt; 
+.column.bg-main1[
+## Issue \# 1: Computation
 
-**Theorem [PC, JH, NE '21] (Ihara Bass Determinant Formula)**: Under mild restrictions, the "interesting" eigenvalues of `\(\mathbf{B} \in \mathbb{R}^{m\langle k\rangle \times m\langle k\rangle}\)` coincide with the eigenvalues of the matrix 
+`\(\mathbf{B}\)` is indexed by edge-node pairs. 
+
+So, `\(\mathbf{B}\)` is of size `\(m\langle k\rangle \times m\langle k\rangle\)`, where `\(m\)` is the number of edges and `\(\langle k \rangle\)` is the average edge size. 
+
+The `contact-high-school` data set we'll study soon has `\(n = 327\)` nodes, `\(m = 7,818\)` hyperedges, and `\(\langle k\rangle = 2.4\)`. 
+
+
+So, `\(m\langle k \rangle = 7,818 \times 2.4 \approx 19,000\)`, which is already a pretty big matrix. And this is *small* data!
+
  
+]
+
+.column[.content.vmiddle[.stretch[
+&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;   
+]]]
+
+---
+
+class: bg-main2
+background-image: url("img/large-matrix.jpeg")
+background-size: contain
+
+
+
+---
+
+class: bg-main2
+layout: false
+
+## Linear Algebra to the Rescue
+
+**Theorem (PSC, JH, NE '21)**: Under mild conditions, if `\(\lambda\)` is an eigenvalue of `\(\mathbf{B},\)` then either: 
+
+1. `\(\lambda \in \{1, -1, -2, \ldots, 1-\bar{k}\}\)` and carries no structural information about the hypergraph, or
+2. `\(\lambda\)` is an eigenvalue of the matrix 
+
 $$
 \mathbf{B}' = \left[\begin{matrix}
   &lt;!-- \mathbf{0} &amp; \mathbb{D} - \mathbf{I}_{\bar{k}n} \\ --&gt;
@@ -597,10 +555,128 @@ $$
 \end{matrix}\right] \in \mathbb{R}^{2\bar{k}n\times 2\bar{k}n}\;.
 $$
 
-- `\(\mathbb{A} \in \mathbb{R}^{\bar{k}n}\)` holds "basic" adjacency information for each hyperedge size.
-- `\(\mathbb{D} \in \mathbb{R}^{\bar{k}n}\)` holds node degrees for each hyperedge size. 
-- `\(\mathbf{K} \in \mathbb{R}^{\bar{k}}\)` lists possible edge sizes. 
-- `\(\mathbf{I}_{p} \in \mathbb{R}^{p}\)` is the matrix identity. 
+.font_smaller[.font_smaller[
+- `\(\bar{k}\)` is the number of distinct edge sizes, `\(n\)` is the number of nodes. 
+- `\(\mathbb{A} \in \mathbb{R}^{\bar{k}n\times \bar{k}n}\)` collects adjacency information for each hyperedge size.
+- `\(\mathbb{D} \in \mathbb{R}^{\bar{k}n\times \bar{k}n}\)` collects node degrees for each hyperedge size. 
+- `\(\mathbf{K} \in \mathbb{R}^{\bar{k}\times \bar{k}}\)` lists possible edge sizes. 
+- `\(\mathbf{I}_{\ell} \in \mathbb{R}^{\ell\times \ell}\)` is the matrix identity of size `\(\ell\)`. 
+- `\(\otimes\)` is the Kronecker product. 
+]]
+
+---
+
+class: bg-main2
+  
+
+## Proof Sketch
+
+1. `\(\mathbf{B}\)` can be written as `\(\mathbf{S}\mathbf{T} - \mathbf{R}\)` for suitable operators `\(\mathbf{S}\)`, `\(\mathbf{T}\)` and `\(\mathbf{R}\)`, which also satisfy handy relations like `\(\mathbf{T}\mathbf{S} = \mathbb{A}\)`.  
+2. Consider `\(\det(\lambda\mathbf{I} - \mathbf{B})\)`, substitute `\(\mathbf{B} = \mathbf{S}\mathbf{T} - \mathbf{R}\)`, and use the *push-through identity*:
+$$
+\det(\mathbf{X + \mathbf{Y}\mathbf{Z}}) = \det(\mathbf{X}) \det(\mathbf{I} + \mathbf{Z}\mathbf{X}^{-1}\mathbf{Y})
+$$
+provided all inverses and products are defined. 
+3. Battle through a .alert1[**LOT**] of algebraic simplifications, obtaining 
+$$
+\det(\lambda \mathbf{I} - \mathbf{B}) = \det(\text{boring part})\det(\lambda\mathbf{I} - \mathbf{B}')\,.
+$$ 
+
+
+.footnote[Approach based on a proof of the the graph Ihara-Bass formula in: &lt;br&gt; M. C. Kempton (2016). Non-backtracking random walks and a weighted Ihara’s theorem. *Open Journal of Discrete Mathematics*
+]
+
+
+---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## Issue \# 1: Computation
+
+&lt;br&gt; &lt;br&gt; 
+The `contact-high-school` data set we'll study soon has `\(n = 327\)` nodes, `\(m = 7,818\)` hyperedges, and `\(\langle k\rangle = 2.4\)`. 
+
+&lt;br&gt; 
+By theorem, can compute eigenvectors in `\(2n\bar{k} \approx 2,000 \color{#FFD046}{\ll} 19,000 \approx m\langle k\rangle\)` dimensions instead.
+
+
+]
+
+.column[.content.vmiddle[.stretch[
+&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;   
+]]]
+
+---
+
+class: split-two
+layout: true
+
+.column.bg-main1[
+
+  ## First Algorithm
+
+  
+  2. Compute the second eigenpair `\((\lambda_2, \mathbf{v}_2)\)` of `\(\mathbf{B}'\)`. 
+  3. .alert[If] `\(\color{#FFD046}{\lambda_2}\)` .alert[is] .alert2[real], separate `\(\mathbf{v}_2 = (\alpha, \beta)\)`, with `\(\alpha, \beta \in \mathbb{R}^{n\bar{k}}\)`. 
+  4. If
+     `$$u_i = \sum_{k = 1}^{\bar{k}}\alpha_{ik} &lt; 0\;,$$`
+    assign `\(i\)` to cluster `\(A\)`, else assign `\(i\)` to cluster `\(B\)`. 
+
+(.alert[If] `\(\color{#FFD046}{\lambda_2}\)` .alert[is] .alert2[complex] then this doesn't work, and the story gets pretty interesting! More later.)
+]
+
+.column[.content.vmiddle[.stretch[
+{{ content }}
+]]]
+
+---
+
+class: split-two
+
+
+&lt;img src="img/eigen-illustration.png" width=100%&gt;   
+
+---
+
+class: split-two
+
+
+&lt;img src="img/detectability-setup.png" width=100%&gt;   
+
+---
+
+class: split-two
+
+
+&lt;img src="img/vanilla-heatmap.png" width=100%&gt;   
+
+---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## Issue \# 2: Edge Sizes
+
+As we've just seen, our first spectral algorithm only works well when edges of different sizes carry .alert[similar types of information] about the clusters. 
+
+&lt;br&gt; 
+
+What if edges of different sizes mean different things? 
+
+&lt;br&gt; 
+
+Example: small interactions might be very likely to be within a cluster, but larger interactions might be more likely to be *between* clusters. 
+
+]
+
+.column[.content.vmiddle[.stretch[
+&lt;img src="img/different-roles.png" width=100%&gt;   
+]]]
 
 ---
 
@@ -608,55 +684,247 @@ class: split-two
 layout: false
 
 .column.bg-main1[
-## Hypergraph Nonbacktracking
+  ## Belief Propagation...
 
-&lt;br&gt;&lt;br&gt; 
- .alert[Second eigenvector] correlated with communities in detectable regime. 
- 
-Surprisingly, can't reach the ? corners, even though we know this to be .alert2[experimentally possible.]
+  &lt;br&gt;
 
-
+  
 ]
-
-.column[.content.vmiddle[.stretch[
-&lt;img src="img/vanilla-heatmap.png" width=100%&gt;
-]]
-.footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
-]
-
-
-
-
 
 ---
-layout: true
-class: split-two  
+
+class: split-two
+layout: false
 
 .column.bg-main1[
-## Reaching the Corners
+  ## Belief Propagation...
 
-We use a modified nonbacktracking operator to adapt to .alert2[qualitatively distinct roles] for edges of multiple sizes.
+  &lt;br&gt;
 
-The community-correlated eigenvector can either the first or second eigenvector of the modified operator. 
+  ...is the "cavity method" of statistical physics. 
 
-Under some approximations, we can .alert[analytically derive] the undetectable region: 
+  
+]
 
-`$$(2p_2 - 1)^2 c_2  + 2\left(\frac{4p_3 - 1}{3}\right)^2c_3 \leq 1$$`
+---
 
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ## Belief Propagation...
+
+  &lt;br&gt;
+
+  ...is the "cavity method" of statistical physics. 
+
+  ...is an approximate method for ~~statistical inference~~ Machine Learning®.
+
+  
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ## Belief Propagation...
+
+  &lt;br&gt;
+
+  ...is the "cavity method" of statistical physics. 
+
+  ...is an approximate method for ~~statistical inference~~ Machine Learning®.
+
+  ...is a discrete-time dynamical system.  
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ## Belief Propagation...
+
+  &lt;br&gt;
+
+  ...is the "cavity method" of statistical physics. 
+
+  ...is an approximate method for ~~statistical inference~~ Machine Learning®.
+
+  ...is a discrete-time dynamical system.  
+]
+
+.column[
+
+&lt;br&gt; 
+Formally, iterate these updates to convergence: 
+&lt;br&gt; 
+`\begin{align}
+\mu_{iR}^{(s)} &amp;\gets \frac{1}{Z_{iR}}\prod_{Q \in \binom{[n]}{|R|}\setminus R} \nu_{Qi}^{(s)} \\ 
+\nu_{Ri}^{(s)} &amp;\gets \frac{1}{Z_{Ri}}\sum_{\mathbf{z}:z_i = s}\mathbb{P}(a_R| \mathbb{z}_R)\prod_{j \in R\setminus i} \mu_{jR}^{(z_j)}
+\end{align}`
+
+.font_smaller[  
+`\(\mu_{iR}^{(s)}\)` is "node `\(i\)`'s confidence that it belongs to cluster `\(s\)` based on other nodes in tuple `\(R\)`."
+
+`\(Z_{iR}\)` is a normalization constant. 
+
+`\(\mathbb{P}(a_R|\mathbb{z}_R)\)` is a statistical model of how likely there are to be `\(a_R\)` edges on tuple `\(R\)` given the cluster labels `\(\mathbf{z}_R\)`. 
+]
+]
+
+---
+
+class: split-two
+
+.column.bg-main1[
+
+### The Factorized Fixed Point
+
+It is "easy to verify" that if all all clusters have the same average degree (number of edges), then `\(\mu_{iR}^{(s)} = \mu_{iR}^{(t)}\)` is a fixed point of the BP dynamics. `\(\implies\)` no information about clusters available. 
+
+.alert[Key question]: is this fixed point stable?
+
+.alert2[Standard method]: compute Jacobian matrix `\(\mathbf{J}\)` of the dynamics at this fixed point and ask whether any `\(\lambda \geq 1\)` for any eigenvalue `\(\lambda\)` of `\(\mathbf{J}\)`. 
+
+Corresponding eigenvectors give first-order perturbations away from the uninformative fixed point. 
 
 ]
 
-.column[.content.center.vmiddle[.stretch[
-  {{content}}
+.column[
   
-]].footnote[**PSC**, J. Haddock, N. Eikmeier, *ongoing work.*]]
+  &lt;br&gt; &lt;br&gt; 
+
+  "It turns out that"
+
+  `$$\mathbf{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k + O(n^{-1})\;,$$`
+
+  where: 
+
+  - `\(\mathbf{C}_k\)` is a matrix of parameters that depends on the statistical model `\(\mathbb{P}\)`. 
+  - `\(\mathbf{B}_k\)` is our friend the Hashimoto operator, restricted to edges of size `\(k\)`. 
+  - `\(\otimes\)` is the Kronecker product. 
+
+
+&lt;div class="footnote"&gt;
+  .alert2[Shown for graphs by]: &lt;br&gt; Krzakala et al. (2013)  Spectral redemption in clustering sparse networks, &lt;i&gt;PNAS&lt;/i&gt; 110 (52) 20935-20940
+&lt;/div&gt;
+
+]
+
 ---
-&lt;img src="img/linearized-bp-heatmap-1-panel-no-label.png"  width=100%&gt;
+
+class: split-two
+
+.column.bg-main1[
+
+### Second Algorithm
+
+1. Start with a guess about `\(\mathbf{C}_k\)` and form 
+`$$\mathbf{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k\;.$$`
+2. Compute the leading `\(\ell\)` eigenvectors of `\(\mathbf{J}\)`, provided they have real eigenvalues. 
+3. For each eigenvector `\(\mathbf{v} = (\alpha, \beta)\)`, compute `\(u_{i\ell} = \mathbb{1}\left(\sum_{k = 1}^{\bar{k}} \alpha_{ik}^{(\ell)} &gt; 0\right)\)`. 
+4. Use a Euclidean clustering algorithm in the space spanned by the vectors `\(\{\mathbf{u}\}\)`. 
+5. Re-estimate `\(\mathbf{C}_k\)` and repeat...
+
+Example: high-school contact hypergraph.
+
+]
+
+.column[.vmiddle[.center[
+
+&lt;img src="img/PCA.png" width=90%&gt; 
+
+]]]
+
 ---
-&lt;img src="img/linearized-bp-heatmap-1-panel-label.png" width=100%&gt; 
+
+class: split-two
+
+# A Cheat
+
+`\(\mathbf{J}\)` is a *really* big matrix. 
+
+As before, we can use a smaller one: 
+
+**Theorem (PSC, JH, NE '21)**: Under mild conditions, if `\(\lambda\)` is an "interesting" eigenvalue of `\(\mathbf{J},\)` then `\(\lambda\)` is also an eigenvalue of 
+
+`$$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix} 
+\mathbf{0} &amp; \mathbf{I}_\ell \otimes \bar{\mathbf{D}} \\ 
+\mathbf{0} &amp; \mathbf{I}_\ell \otimes \bar{\mathbf{A}}
+\end{matrix}\right] - \bar{\mathbf{G}} \left[\begin{matrix} 
+\mathbf{0} &amp; \mathbf{I}_\ell \otimes \mathbf{I}_{\bar{k}} \\ 
+\mathbf{I}_\ell \otimes (\mathbf{K} - \mathbf{I}_{\bar{k}-1}) &amp; \mathbf{I}_\ell \otimes (\mathbf{K} - 2\mathbf{I}_{\bar{k}-1})
+\end{matrix}\right] \otimes \mathbf{I}_n$$`
+
+**Proof Sketch**: 
+
+---
+
+class: split-two
+background-image: url("img/scream.jpeg")
+background-size: contain
 
 
 ---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ## Ok, but does it work? 
+
+  Recall that we were having issues with situations in which edges of different sizes carried different kinds of information. 
+]
+
+.column[.vmiddle[.stretch[
+  &lt;img src="img/vanilla-heatmap.png" width=100%&gt;   
+]]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ## Ok, but does it work? 
+
+  Recall that we were having issues with situations in which edges of different sizes carried different kinds of information. 
+
+&lt;br&gt; 
+
+  Working with the more complicated matrix `\(\mathbf{J}\)` increases computation time, but also allows us to detect clusters in these situations.  
+]
+
+.column[.vmiddle[.stretch[
+  &lt;img src="img/heatmap-exp-1.png" width=100%&gt;   
+]]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ## Ok, but does it work? 
+
+  Recall that we were having issues with situations in which edges of different sizes carried different kinds of information. 
+
+&lt;br&gt; 
+
+  Working with the more complicated matrix `\(\mathbf{J}\)` increases computation time, but also allows us to detect clusters in these situations.  
+]
+
+.column[.vmiddle[.stretch[
+  &lt;img src="img/heatmap-exp-1-with-curve.png" width=100%&gt;   
+]]]
+
+
+---
+
 
 class: split-two
 layout: false
@@ -726,9 +994,6 @@ Hypergraph nonbacktracking operators are likely to play a role in both theory an
 - Y'all!! 
 
 ]]]
-
-
-
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

@@ -25,11 +25,11 @@
 }
 
 .bg-main1 .alert {
-	color: var(--alert-color1);
+	color: var(--alert-color3);
 }
 
 .bg-main1 .alert2 {
-	color: var(--alert-color3);
+	color: var(--alert-color1);
 }
 
 .bg-main2 .alert {
@@ -69,3 +69,15 @@
 	font-weight: bold;
 	color: var(--alert-color3);
 }
+
+
+.footnote {
+	position: absolute;
+	bottom: 1em;
+	padding-right: 1em;
+	padding-left: 35px;
+	padding-bottom: 2em;
+	font-size: 70%;
+	text-align: left;
+  }
+  
