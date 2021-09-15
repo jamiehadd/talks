@@ -35,7 +35,7 @@ layout: false
 
 .column.bg-main1[
 .content[ 
-  ## Graphs and Hypergraphs
+  ## Graphs and Hypergraphs 
  
   <br> 
   A .alert[graph] consists of a set of nodes $\mathcal{N}$ and a set of edges $\mathcal{E}$. Each edge in $\mathcal{E}$ is a set of two nodes. 
@@ -102,7 +102,7 @@ layout: false
 <br> <br> 
 
   - .alert[**Interaction**]: nodes are agents, edges are interaction events (socializing in groups, attending events).
-  - .alert[**Collaboration**]: nodes are collaborators, edges are projects (papers, legislation, etc). 
+  - .alert[**Collaboration**]: nodes are collaborators, edges are projects or teams (scholarly papers, legislation, etc). 
   
 
 ]
@@ -123,7 +123,7 @@ layout: false
 <br> <br> 
 
   - .alert[**Interaction**]: nodes are agents, edges are interaction events (socializing in groups, attending events).
-  - .alert[**Collaboration**]: nodes are collaborators, edges are projects (papers, legislation, etc). 
+  - .alert[**Collaboration**]: nodes are collaborators, edges are projects or teams (scholarly papers, legislation, etc). 
   - .alert[**Co-presence**]: nodes are chemical compounds, edges are drugs formed from those compounds.
 
 ]
@@ -325,6 +325,28 @@ Variations on this work for other graph matrices.
 
 ---
 
+class: split-two middle
+layout: false
+
+.column.bg-main1[
+  # Summing Up
+
+  <br>
+
+  Graphs represent .alert[pairwise] interactions and can be easily represented by .alert[2D] objects like adjacency matrices.
+
+  In a clustered graph, the 2nd eigenvector of the adjacency matrix can reveal cluster structure. 
+
+  So now we'd like to .alert2[generalize] to hypergraphs...
+]
+.column[
+.center[
+  <img src="img/pol-blogs.png" width=70%>
+]
+]
+
+---
+
 layout: true
 class: split-two middle 
  
@@ -360,17 +382,17 @@ layout: false
 
 ### Matrices for Hypergraphs? 
 
-The adjacency matrix $\mathbf{A}$ is .alert[two-dimensional], and is therefore good for capturing .alert[pairwise] relationships. 
+We could transform the hypergraph into a graph.
+- .alert[Problem]: loses "higher-order" information
 
-For hypergraphs, there are options: 
+We could construct a set of adjacency tensors $\mathbf{A}^{(2)}$, $\mathbf{A}^{(3)}$...
 
-- Transform into a graph (loses information)
-- Represent adjacency via "tensors" (hyperarrays):
+$$a^{(3)}_{ijk} = \begin{cases} 1 &\quad (i,j,k)\in \mathcal{E} \\ 0 &\quad \text{otherwise...}\end{cases}$$
 
-$$a_{ijk} = \begin{cases} 1 &\quad (i,j,k)\in \mathcal{E} \\ 0 &\quad \text{otherwise...}\end{cases}$$
+- .alert[Problem]: we know eigenvectors of tensors, but not .alert2[sets] of tensors.
 
+So, uh, what should we do?....
 
-- Other (please specify)
 
 ]
 
@@ -447,8 +469,11 @@ $$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &\quad (e_1, p_1) \righta
 ]]]
 
 .column[
-<br> <br> <br> 
+<br>
 <img src="img/hypergraph-nonbacktracking.png" width=100%>
+
+"I can get to $p_2 \in e_2$ from $e_1$ by passing through $p_1$. I can get to $p_3 \in e_3$ from $e_2$ by passing through $p_2$..."
+
 ]
 
 ---
@@ -461,7 +486,6 @@ layout: false
 ## The Hashimoto Operator
 
 <br> 
-
 Popularized (for graphs) in Hashimoto K. (1990), *Int. J. Math.* 1, 381–396
 
 First formulated for hypergraphs by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
@@ -473,8 +497,10 @@ First formulated for hypergraphs by Storm, C. K. (2006). *The Electronic Journal
 ]
 
 .column[
-<br> <br> <br> 
+<br>
 <img src="img/hypergraph-nonbacktracking.png" width=100%>
+
+"I can get to $p_2 \in e_2$ from $e_1$ by passing through $p_1$. I can get to $p_3 \in e_3$ from $e_2$ by passing through $p_2$..."
 ]
 
 ---
@@ -490,7 +516,9 @@ layout: false
 
 Connected to prime cycles and zeta functions on graphs. 
 
-Same construction works for hypergraphs with edges of different sizes. 
+Can represent edges of all sizes in the same matrix!
+
+
 
 .alert[Second eigenvector] is correlated with communities, if corresponding eigenvalue is real.  
   - Needs to be aggregated to node level
@@ -510,16 +538,16 @@ layout: false
 .column.bg-main1[
 ## Issue \# 1: Computation
 
+<br>
 $\mathbf{B}$ is indexed by edge-node pairs. 
 
 So, $\mathbf{B}$ is of size $m\langle k\rangle \times m\langle k\rangle$, where $m$ is the number of edges and $\langle k \rangle$ is the average edge size. 
 
-The `contact-high-school` data set we'll study soon has $n = 327$ nodes, $m = 7,818$ hyperedges, and $\langle k\rangle = 2.4$. 
+A .alert[*small*] data set might have $n = 300$ nodes, $m = 8,000$ edges, and average edge size $2.5$. 
 
+So, $m\langle k \rangle = 8,000 \times 2.5 = 20,000$, which is already a pretty big matrix. 
 
-So, $m\langle k \rangle = 7,818 \times 2.4 \approx 19,000$, which is already a pretty big matrix. And this is *small* data!
-
- 
+So, here is the story I have told you so far:
 ]
 
 .column[.content.vmiddle[.stretch[
@@ -581,7 +609,7 @@ $$
 $$ 
 
 
-.footnote[Approach based on a proof of the the graph Ihara-Bass formula in: <br> M. C. Kempton (2016). Non-backtracking random walks and a weighted Ihara’s theorem. *Open Journal of Discrete Mathematics*
+.footnote[Approach based on a proof of the the graph Ihara-Bass formula in: <br> M. C. Kempton (2016). Non-backtracking random walks and a weighted Ihara’s theorem. *Open Journal of Discrete Mathematics* 6, 207-226
 ]
 
 
@@ -595,12 +623,16 @@ layout: false
 ## Issue \# 1: Computation
 
 <br> <br> 
-The `contact-high-school` data set we'll study soon has $n = 327$ nodes, $m = 7,818$ hyperedges, and $\langle k\rangle = 2.4$. 
+A .alert[*small*] data set might have $n = 300$ nodes, $m = 8,000$ edges, and average edge size $2.5$. 
 
 <br> 
-By theorem, can compute eigenvectors in $2n\bar{k} \approx 2,000 \color{#FFD046}{\ll} 19,000 \approx m\langle k\rangle$ dimensions instead.
+If $\bar{k} = 3$, then can compute eigenvectors in 
 
+$$2n\bar{k} = 1,800 \color{#FFD046}{\ll} 20,000 = m\langle k\rangle$$ 
 
+dimensions instead.
+
+We can do that 100-1,000x faster! 
 ]
 
 .column[.content.vmiddle[.stretch[
@@ -618,12 +650,12 @@ layout: true
 
   
   2. Compute the second eigenpair $(\lambda_2, \mathbf{v}_2)$ of $\mathbf{B}'$. 
-  3. .alert[If] $\color{#FFD046}{\lambda_2}$ .alert[is] .alert2[real], separate $\mathbf{v}_2 = (\alpha, \beta)$, with $\alpha, \beta \in \mathbb{R}^{n\bar{k}}$. 
+  3. If $\lambda_2$ is .alert[real], separate $\mathbf{v}_2 = (\alpha, \beta)$, with $\alpha, \beta \in \mathbb{R}^{n\bar{k}}$. 
   4. If
      $$u_i = \sum_{k = 1}^{\bar{k}}\alpha_{ik} < 0\;,$$
     assign $i$ to cluster $A$, else assign $i$ to cluster $B$. 
 
-(.alert[If] $\color{#FFD046}{\lambda_2}$ .alert[is] .alert2[complex] then this doesn't work, and the story gets pretty interesting! More later.)
+(If $\lambda_2$ is .alert[complex] then this doesn't work, and community detection turns out to be impossible!)
 ]
 
 .column[.content.vmiddle[.stretch[
@@ -668,7 +700,7 @@ What if edges of different sizes mean different things?
 
 <br> 
 
-Example: small interactions might be very likely to be within a cluster, but larger interactions might be more likely to be *between* clusters. 
+.alert2[Example]: small interactions might be very likely to be within a cluster, but larger interactions might be more likely to be *between* clusters. 
 
 ]
 
@@ -792,12 +824,14 @@ Corresponding eigenvectors give first-order perturbations away from the uninform
 
 ]
 
+--
+
 .column[
   
-  <br> <br> 
 
-  "It turns out that"
+  ### "It turns out that"
 
+<br>
   $$\mathbf{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k + O(n^{-1})\;,$$
 
   where: 
@@ -825,16 +859,13 @@ class: split-two
 $$\mathbf{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k\;.$$
 2. Compute the leading $\ell$ eigenvectors of $\mathbf{J}$, provided they have real eigenvalues. 
 3. For each eigenvector $\mathbf{v} = (\alpha, \beta)$, compute $u_{i\ell} = \mathbb{1}\left(\sum_{k = 1}^{\bar{k}} \alpha_{ik}^{(\ell)} > 0\right)$. 
-4. Use a Euclidean clustering algorithm in the space spanned by the vectors $\{\mathbf{u}\}$. 
+4. Use a Euclidean clustering algorithm (like $k$-means) in the space spanned by the vectors $\{\mathbf{u}\}$. 
 5. Re-estimate $\mathbf{C}_k$ and repeat...
-
-Example: high-school contact hypergraph.
-
 ]
 
 .column[.vmiddle[.center[
 
-<img src="img/PCA.png" width=90%> 
+<img src="img/PCA-synthetic.png" width=90%> 
 
 ]]]
 
@@ -848,15 +879,17 @@ $\mathbf{J}$ is a *really* big matrix.
 
 As before, we can use a smaller one: 
 
-**Theorem (PSC, JH, NE '21)**: Under mild conditions, if $\lambda$ is an "interesting" eigenvalue of $\mathbf{J},$ then $\lambda$ is also an eigenvalue of 
+**Theorem (PSC, JH, NE '21)**: Under mild conditions, if $\lambda$ is an "interesting" eigenvalue of $\mathbf{J},$ then $\lambda$ is also an eigenvalue of the $2n\ell\bar{k}$ matrix
 
 $$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix} 
-\mathbf{0} & \mathbf{I}_\ell \otimes \bar{\mathbf{D}} \\ 
-\mathbf{0} & \mathbf{I}_\ell \otimes \bar{\mathbf{A}}
+\mathbf{0} & \mathbf{I}_\ell \otimes \bar{\mathbb{D}} \\ 
+\mathbf{0} & \mathbf{I}_\ell \otimes \bar{\mathbb{A}}
 \end{matrix}\right] - \bar{\mathbf{G}} \left[\begin{matrix} 
 \mathbf{0} & \mathbf{I}_\ell \otimes \mathbf{I}_{\bar{k}} \\ 
 \mathbf{I}_\ell \otimes (\mathbf{K} - \mathbf{I}_{\bar{k}-1}) & \mathbf{I}_\ell \otimes (\mathbf{K} - 2\mathbf{I}_{\bar{k}-1})
 \end{matrix}\right] \otimes \mathbf{I}_n$$
+
+where $\ell$ is the number of groups and $\mathbf{G}$, $\bar{\mathbf{G}}$ hold statistical parameters. 
 
 **Proof Sketch**: 
 
@@ -903,23 +936,169 @@ layout: false
 
 ---
 
-class: split-two
-layout: false
+class: vmiddle bg-main2
 
-.column.bg-main1[
-  ## Ok, but does it work? 
+<br> <br> <br> <br> <br> 
+## Ok, but what about .alert[real data]?
 
-  Recall that we were having issues with situations in which edges of different sizes carried different kinds of information. 
+---
 
-<br> 
+## High School Social Contacts
 
-  Working with the more complicated matrix $\mathbf{J}$ increases computation time, but also allows us to detect clusters in these situations.  
-]
+<br> <br> 
 
-.column[.vmiddle[.stretch[
-  <img src="img/heatmap-exp-1-with-curve.png" width=100%>   
+  - $n = 327$ students (nodes) in a French high school. 
+  - $m = 7,818$ social contact events (edges) measured by wearable sensors.   
+  - Average number of participants in interaction $\langle k \rangle = 2.3$ 
+  - Clusters are the classes to which students are assigned. 
+
+
+  <div class="footnote">
+    Data originally from: <br>
+    R. Mastrandrea et al. (2015), Contact patterns in a high school: A comparison between data collected using wearable sensors, contact diaries, and friendship surveys. <i>PLoS One</i> 10:9, e0136497
+    <br> <br> 
+    Prepared by 
+    A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. <i>Proceedings of the National Academy of Sciences</i> 10.1073/pnas.1800683115  
+  </div>
+
+---
+background-image: url(img/contact-high-school-classes.png)
+background-size: contain
+
+## High School Social Contacts 
+
+---
+
+  ## Senate Bills
+
+<br> <br> 
+
+  - $n = 293$ U.S. senators (nodes) cosponsoring bills.
+  - $m = 20,006$ bills (edges) in period 1973-2016.
+  - Average number of cosponsors $\langle k \rangle = 7.3$.
+  - Clusters are Democrat/Republican. 
+
+
+<div class="footnote">
+  Data originally from: <br>
+  J. Fowler (2006), Legislative cosponsorship networks in the U.S. House and Senate. <i>Social Networks</i> 28:4, 454--465
+  <br> <br> 
+  Prepared by 
+  A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. <i>Proceedings of the National Academy of Sciences</i> 10.1073/pnas.1800683115  
+</div>
+
+
+---
+background-image: url(img/SN-congress-bills.png)
+background-size: contain
+
+## Senate Bills
+
+---
+class: bg-main2
+
+<br> <br> <br> <br> 
+### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the cluster structure. 
+
+
+---
+
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[  
+.alert[**Graph community detection**] with eigenvectors. 
+  ]]]     
+  .row.bg-main2[.content.vmiddle[.font_medium[
+.alert[**Hashimoto operators**] and eigenvector methods for hypergraphs.  
+  ]]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[ 
+.alert[**Detectability thresholds**] and open questions. 
+  ]]]
+]] 
+
+.column[.center[.stretch[
+  {{content}} 
 ]]]
 
+---
+class: fade-row1-col1 fade-row2-col1
+<br> <br> <br> <br>
+<img src="img/heatmap-exp-1-with-curve.png" width=100%> 
+<br> 
+
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ## Detectability
+
+  Recall that we had this *suspiciously round* region where our algorithm totally failed to learn any cluster information. 
+
+]
+
+.column[.stretch[
+  <br> <br> <br> <br>
+  <img src="img/heatmap-exp-1.png" width=100%>   
+]]
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ## Detectability
+
+  Recall that we had this *suspiciously round* region where our algorithm totally failed to learn any cluster information. 
+
+  This region can actually be estimated!   
+
+  $$
+  (2p_2-1)^2c_2 + 2\left(\frac{4p_3-1}{3} \right)^2c_3 \leq 1
+  $$
+
+  Strategy: make some approximations and ask when $\mathbf{J}$ has an eigenvalue $> 1$. 
+
+  Future work: justify the approximations. 
+
+]
+
+.column[.stretch[
+  <br> <br> <br> <br>
+  <img src="img/heatmap-exp-1-with-curve.png" width=100%>   
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ## Detectability
+
+In graphs, failure of Hashimoto spectral clustering coincides with an .alert[information-theoretic bound] on the clustering problem. 
+  
+- .alert2[No algorithm] can reliably detect communities. 
+
+We conjecture the same thing for hypergraphs: inside that ellipse, the clustering problem is not just practically but *theoretically* impossible. 
+
+Proving this is likely to be a loooooong project...
+
+]
+
+.column[.stretch[
+  <br> <br> <br> <br>
+  <img src="img/heatmap-exp-1-with-curve.png" width=100%>   
+]]
+
 
 ---
 
@@ -931,13 +1110,15 @@ layout: false
 
 # Summing Up
 
-Hypergraphs have a .alert[rich detectability theory] which is still under development. 
+The Hashimoto operator lets us use eigenvector techniques for clustering hypergraphs. 
 
-Hypergraph nonbacktracking operators are likely to play a role in both theory and algorithms. 
+Determinant identities let us speed up computation. 
 
-.alert2[**There's lots left to be done!**]
-- Thresholds with degree heterogeneity, more than 2 communities, etc. 
-- **Conj**: failure of nonbacktracking methods coincides with fundamental .alert2[information-theoretic and computational thresholds].  
+Some hypergraph data sets "need" hypergraph methods, while others don't. 
+
+There are lots of open questions around the fundamental limits of hypergraph clustering. 
+
+
 ]
 
 .column[
@@ -953,17 +1134,18 @@ layout: false
 
 # Summing Up
 
-Hypergraphs have a .alert[rich detectability theory] which is still under development. 
+The Hashimoto operator lets us use eigenvector techniques for clustering hypergraphs. 
 
-Hypergraph nonbacktracking operators are likely to play a role in both theory and algorithms. 
+Determinant identities let us speed up computation. 
 
-.alert2[**There's lots left to be done!**]
-- Thresholds with degree heterogeneity, more than 2 communities, etc. 
-- **Conj**: failure of nonbacktracking methods coincides with fundamental .alert2[information-theoretic and computational thresholds].  
+Some hypergraph data sets "need" hypergraph methods, while others don't. 
+
+There are lots of open questions around the fundamental limits of hypergraph clustering. 
+
 ]
 
-.column[
-# **Thanks!!**
+.column.bg-main2[
+# **Thanks!**
 
 .row[ 
 .split-two[
@@ -986,12 +1168,11 @@ Hypergraph nonbacktracking operators are likely to play a role in both theory an
 
 
 
-- Leonie Neuhäuser 
-- Christopher Blöcker
-- Jürgen Hackl
-- Y'all!! 
+- Heather Zinn Brooks 
+- Maryann Hohn
+- Y'all!
 
-]]]
+]
 
 
 

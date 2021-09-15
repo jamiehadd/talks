@@ -14,38 +14,47 @@
 
 .alert1 { 
 	color: var(--alert-color1);
+	font-weight: bold;
 }
 
 .alert2 { 
 	color: var(--alert-color2);
+	font-weight: bold;
 }
 
 .alert3 { 
 	color: var(--alert-color3);
+	font-weight: bold;
 }
 
 .bg-main1 .alert {
 	color: var(--alert-color3);
+	font-weight: bold;
 }
 
 .bg-main1 .alert2 {
 	color: var(--alert-color1);
+	font-weight: bold;
 }
 
 .bg-main2 .alert {
 	color: var(--alert-color2);
+	font-weight: bold;
 }
 
 .bg-main3 .alert {
 	color: var(--alert-color1);
+	font-weight: bold;
 }
 
 .bg-main4 .alert {
 	color: var(--alert-color1);
+	font-weight: bold;
 }
 
 .bg-main5 .alert {
 	color: var(--alert-color2);
+	font-weight: bold;
 }
 
 
@@ -81,3 +90,7 @@
 	text-align: left;
   }
   
+
+  .remark-slide-number {
+	display: none;
+  }
