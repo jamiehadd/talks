@@ -14,7 +14,7 @@
 class: center, middle, inverse, title-slide
 
 # Eigenvector Methods for Community Detection in Hypergraphs
-## Applied Math Seminar <br> Claremont Center for the Mathematical Sciences
+## Claremont Center for the Mathematical Sciences <br> Applied Math Seminar
 ### Dr. <span class="author-highlight">Phil Chodrow</span> <br> Dept. of Mathematics, UCLA <br> Sept 20th, 2021
 
 ---
@@ -61,7 +61,7 @@ layout: false
 
 .column.bg-main1[
   
-  ## Examples of Hypergraphs
+  ## Hypergraph Data
 
   
 
@@ -79,7 +79,7 @@ layout: false
 
 .column.bg-main1[
   
-  ## Examples of Hypergraphs
+  ## Hypergraph Data
 
 &lt;br&gt; &lt;br&gt; 
 
@@ -99,7 +99,7 @@ layout: false
 
 .column.bg-main1[
   
-  ## Examples of Hypergraphs
+  ## Hypergraph Data
 
 &lt;br&gt; &lt;br&gt; 
 
@@ -120,7 +120,7 @@ layout: false
 
 .column.bg-main1[
   
-  ## Examples of Hypergraphs
+  ## Hypergraph Data
 
 &lt;br&gt; &lt;br&gt; 
 
@@ -145,7 +145,7 @@ class: split-two
 .column.bg-main1[
   ### The Hypergraph Community Detection Problem 
 
-  Given a hypergraph data set, assign each node to a .alert[**community**] (or "cluster") of "related" nodes. 
+  Given some hypergraph data, assign each node to a .alert[**community**] (or "cluster") of "related" nodes. 
   &lt;br&gt; &lt;br&gt;
   "*Related*": often interpreted as "*densely interconnected.*"
 &lt;br&gt; &lt;br&gt;
@@ -153,7 +153,7 @@ class: split-two
 
   
   &lt;div class="footnote"&gt;
-  .alert2[One review]: &lt;br&gt; &lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances&lt;/i&gt;, 7:eabh1303
+  .alert2[One review in]: &lt;br&gt; &lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances&lt;/i&gt;, 7:eabh1303
 &lt;/div&gt;
 
   
@@ -238,7 +238,7 @@ layout: false
 ]
 .column[
 
-  ## ...and the matrix
+  ## ...the adjacency matrix
   
   .center[
   &lt;br&gt; 
@@ -291,7 +291,7 @@ layout: false
   `\(\lambda_2 = \frac{n}{2}(p - q)\)`.
 
 
-  .alert[Results from random matrix theory]: the "interesting" eigenvalues/vectors of `\(\mathbf{A}\)` are very close to the "interesting" eigenvalues/vectors of `\(\mathbf{P}\)` with high probability as `\(n\)` grows large.  
+  .alert[Results from random matrix theory]: the "interesting" eigenvalues/vectors of `\(\mathbf{A}\)` are close to the "interesting" eigenvalues/vectors of `\(\mathbf{P}\)` with high probability as `\(n\)` grows large.  
 ]
 ]
 
@@ -315,7 +315,7 @@ Suppose we don't know the cluster labels. We can estimate them (under the right 
 .alert[Adjacency Spectral Clustering]
 
 1. Compute the second-largest eigenvector `\(\mathbf{v}_2\)` of `\(\mathbf{A}\)`. 
-2. If `\(\mathbf{v}_{2i} &gt; 0\)`, guess that node `\(i\)` is in group `\(a\)`, otherwise in group `\(b\)`. 
+2. If `\(v_{2i} &gt; 0\)`, guess that node `\(i\)` is in group `\(a\)`, otherwise in group `\(b\)`. 
 
 Variations on this work for other graph matrices. 
 ]
@@ -385,9 +385,9 @@ layout: false
 ### Matrices for Hypergraphs? 
 
 We could transform the hypergraph into a graph.
-- .alert[Problem]: loses "higher-order" information
+- .alert[Problem]: loses higher-order information.
 
-We could construct a set of adjacency tensors `\(\mathbf{A}^{(2)}\)`, `\(\mathbf{A}^{(3)}\)`...
+We could construct a set of adjacency tensors `\(\mathbf{A}^{(2)}\)`, `\(\mathbf{A}^{(3)}\)`, `\(\mathbf{A}^{(4)}\)`...
 
 `$$a^{(3)}_{ijk} = \begin{cases} 1 &amp;\quad (i,j,k)\in \mathcal{E} \\ 0 &amp;\quad \text{otherwise...}\end{cases}$$`
 
@@ -427,17 +427,17 @@ layout: false
 .row[ 
 .split-three[
 .column[&lt;br&gt;
-  .font_large[.alert[&lt;nobr&gt;Jamie Haddock&lt;/nobr&gt;]]
+  .font_large[.alert-no-bold[&lt;nobr&gt;Jamie Haddock&lt;/nobr&gt;]]
   &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; Harvey Mudd College      
   .alert2[@jamie_hadd]
-]
+]  
 .column[&lt;br&gt;
-  .font_large[.alert[&lt;nobr&gt;Nicole Eikmeier&lt;/nobr&gt;]]
+  .font_large[.alert-no-bold[&lt;nobr&gt;Nicole Eikmeier&lt;/nobr&gt;]]
    Computer Science &lt;br&gt; Grinnell College      
    .alert2[@NicoleEikmeier]
 ]
 .column[&lt;br&gt;
-  .font_large[.alert[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]]
+  .font_large[.alert-no-bold[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]]
   &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; UCLA
   &lt;br&gt; .alert2[@PhilChodrow] &lt;br&gt;
 ]
@@ -453,7 +453,7 @@ layout: false
 .column.bg-main1[
 ## The Hashimoto Operator
 
-The adjacency matrix is `\(n\times n\)`,  operates on nodes. 
+The adjacency matrix is `\(n\times n\)` and  operates on nodes. 
 
 The .alert[Hashimoto operator] operates on .alert2[edge-node pairs]: 
 
@@ -518,7 +518,7 @@ layout: false
 
 Connected to prime cycles and zeta functions on graphs. 
 
-Can represent edges of all sizes in the same matrix!
+Can represent hyperedges of all sizes in the same matrix!
 
 
 
@@ -549,7 +549,8 @@ A .alert[*small*] data set might have `\(n = 300\)` nodes, `\(m = 8,000\)` edges
 
 So, `\(m\langle k \rangle = 8,000 \times 2.5 = 20,000\)`, which is already a pretty big matrix. 
 
-So, here is the story I have told you so far:
+So...
+
 ]
 
 .column[.content.vmiddle[.stretch[
@@ -604,7 +605,7 @@ class: bg-main2
 $$
 \det(\mathbf{X + \mathbf{Y}\mathbf{Z}}) = \det(\mathbf{X}) \det(\mathbf{I} + \mathbf{Z}\mathbf{X}^{-1}\mathbf{Y})
 $$
-provided all inverses and products are defined. 
+provided all inverses, sums, and products are defined. 
 3. Battle through a .alert1[**LOT**] of algebraic simplifications, obtaining 
 $$
 \det(\lambda \mathbf{I} - \mathbf{B}) = \det(\text{boring part})\det(\lambda\mathbf{I} - \mathbf{B}')\,.
@@ -657,7 +658,6 @@ layout: true
      `$$u_i = \sum_{k = 1}^{\bar{k}}\alpha_{ik} &lt; 0\;,$$`
     assign `\(i\)` to cluster `\(A\)`, else assign `\(i\)` to cluster `\(B\)`. 
 
-(If `\(\lambda_2\)` is .alert[complex] then this doesn't work, and community detection turns out to be impossible!)
 ]
 
 .column[.content.vmiddle[.stretch[
@@ -814,9 +814,9 @@ class: split-two
 
 .column.bg-main1[
 
-### The Factorized Fixed Point
+### The Uninformative Fixed Point
 
-It is "easy to verify" that if all all clusters have the same average degree (number of edges), then `\(\mu_{iR}^{(s)} = \mu_{iR}^{(t)}\)` is a fixed point of the BP dynamics. `\(\implies\)` no information about clusters available. 
+It is "easy to verify" that if all all clusters have the same average degree (number of edges), BP has a fixed point that contains no info about the clusters. 
 
 .alert[Key question]: is this fixed point stable?
 
@@ -859,9 +859,9 @@ class: split-two
 
 1. Start with a guess about `\(\mathbf{C}_k\)` and form 
 `$$\mathbf{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k\;.$$`
-2. Compute the leading `\(\ell\)` eigenvectors of `\(\mathbf{J}\)`, provided they have real eigenvalues. 
+2. Compute the .alert[leading] `\(\color{#FFD046}{\ell}\)` .alert[eigenvectors] of `\(\mathbf{J}\)`, provided they have real eigenvalues. 
 3. For each eigenvector `\(\mathbf{v} = (\alpha, \beta)\)`, compute `\(u_{i\ell} = \mathbb{1}\left(\sum_{k = 1}^{\bar{k}} \alpha_{ik}^{(\ell)} &gt; 0\right)\)`. 
-4. Use a Euclidean clustering algorithm (like `\(k\)`-means) in the space spanned by the vectors `\(\{\mathbf{u}\}\)`. 
+4. Use a .alert2[Euclidean clustering algorithm] (like `\(k\)`-means) in the space spanned by the vectors `\(\{\mathbf{u}\}\)`. 
 5. Re-estimate `\(\mathbf{C}_k\)` and repeat...
 ]
 
@@ -929,7 +929,7 @@ layout: false
 
 &lt;br&gt; 
 
-  Working with the more complicated matrix `\(\mathbf{J}\)` increases computation time, but also allows us to detect clusters in these situations.  
+  Working with the more complicated matrix `\(\mathbf{J}\)` increases computation time, but also allows us to detect communities in more situations. 
 ]
 
 .column[.vmiddle[.stretch[
@@ -941,18 +941,24 @@ layout: false
 class: vmiddle bg-main2
 
 &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; 
-## Ok, but what about .alert[real data]?
+## What about .alert[real data]?
 
 ---
 
 ## High School Social Contacts
 
-&lt;br&gt; &lt;br&gt; 
+&lt;br&gt; 
 
-  - `\(n = 327\)` students (nodes) in a French high school. 
-  - `\(m = 7,818\)` social contact events (edges) measured by wearable sensors.   
-  - Average number of participants in interaction `\(\langle k \rangle = 2.3\)` 
-  - Clusters are the classes to which students are assigned. 
+  `\(n = 327\)` students (nodes) in a French high school. 
+
+  `\(m = 7,818\)` social contact events (edges) measured by wearable 
+  sensors.   
+
+  Average number of participants in interaction `\(\langle k \rangle = 2.3\)` 
+
+  Clusters are the classes to which students are assigned. 
+
+
 
 
   &lt;div class="footnote"&gt;
@@ -971,14 +977,17 @@ background-size: contain
 
 ---
 
-  ## Senate Bills
+  ## On the Other Hand...Senate Bills
 
-&lt;br&gt; &lt;br&gt; 
+&lt;br&gt; 
 
-  - `\(n = 293\)` U.S. senators (nodes) cosponsoring bills.
-  - `\(m = 20,006\)` bills (edges) in period 1973-2016.
-  - Average number of cosponsors `\(\langle k \rangle = 7.3\)`.
-  - Clusters are Democrat/Republican. 
+  `\(n = 293\)` U.S. senators (nodes) cosponsoring bills.
+
+  `\(m = 20,006\)` bills (edges) in period 1973-2016.
+
+  Average number of cosponsors `\(\langle k \rangle = 7.3\)`.
+
+  Clusters are Democrat/Republican. 
 
 
 &lt;div class="footnote"&gt;
@@ -1028,7 +1037,7 @@ class: split-two middle
 ---
 class: fade-row1-col1 fade-row2-col1
 &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
-&lt;img src="img/heatmap-exp-1-with-curve.png" width=100%&gt; 
+&lt;img src="img/heatmap-exp-1.png" width=100%&gt; 
 &lt;br&gt; 
 
 
@@ -1041,7 +1050,7 @@ layout: false
 .column.bg-main1[
   ## Detectability
 
-  Recall that we had this *suspiciously round* region where our algorithm totally failed to learn any cluster information. 
+  Recall the .alert[*suspiciously round*] region where our algorithm totally failed to learn any cluster information. 
 
 ]
 
@@ -1059,7 +1068,7 @@ layout: false
 .column.bg-main1[
   ## Detectability
 
-  Recall that we had this *suspiciously round* region where our algorithm totally failed to learn any cluster information. 
+  Recall the .alert[*suspiciously round*] region where our algorithm totally failed to learn any cluster information. 
 
   This region can actually be estimated!   
 
@@ -1067,9 +1076,9 @@ layout: false
   (2p_2-1)^2c_2 + 2\left(\frac{4p_3-1}{3} \right)^2c_3 \leq 1
   $$
 
-  Strategy: make some approximations and ask when `\(\mathbf{J}\)` has an eigenvalue `\(&gt; 1\)`. 
+  Strategy: ask when `\(\mathbf{J}\)` has an eigenvalue `\(&gt; 1\)`, using approximations analogous to known results for graphs. 
 
-  Future work: justify the approximations. 
+  .alert2[Future work]: justify the approximations. 
 
 ]
 
@@ -1112,13 +1121,13 @@ layout: false
 
 # Summing Up
 
-The Hashimoto operator lets us use eigenvector techniques for clustering hypergraphs. 
+The .alert[Hashimoto operator] lets us use eigenvector techniques for community detection in hypergraphs. 
 
 Determinant identities let us speed up computation. 
 
 Some hypergraph data sets "need" hypergraph methods, while others don't. 
 
-There are lots of open questions around the fundamental limits of hypergraph clustering. 
+There are open questions around the .alert2[fundamental limits] of hypergraph community detection. 
 
 
 ]
@@ -1136,13 +1145,14 @@ layout: false
 
 # Summing Up
 
-The Hashimoto operator lets us use eigenvector techniques for clustering hypergraphs. 
+
+The .alert[Hashimoto operator] lets us use eigenvector techniques for community detection in hypergraphs. 
 
 Determinant identities let us speed up computation. 
 
 Some hypergraph data sets "need" hypergraph methods, while others don't. 
 
-There are lots of open questions around the fundamental limits of hypergraph clustering. 
+There are open questions around the .alert2[fundamental limits] of hypergraph community detection. 
 
 ]
 
@@ -1172,7 +1182,7 @@ There are lots of open questions around the fundamental limits of hypergraph clu
 
 - Heather Zinn Brooks 
 - Maryann Hohn
-- Y'all!
+- Everyone here and online
 
 ]
     </textarea>

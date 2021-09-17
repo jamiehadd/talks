@@ -57,6 +57,13 @@
 	font-weight: bold;
 }
 
+.bg-main1 .alert-no-bold {
+	color: var(--alert-color3);
+}
+
+
+
+
 
 .bg-main2  {
 	color: var(--text-color2);
