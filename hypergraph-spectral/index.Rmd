@@ -486,7 +486,7 @@ layout: false
 ## The Hashimoto Operator
 
 <br> 
-Popularized (for graphs) in Hashimoto K. (1990), *Int. J. Math.* 1, 381–396
+Popularized (for graphs) in Hashimoto K. (1990), *Int. J. Math.* 
 
 First formulated for hypergraphs by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
 
@@ -603,7 +603,7 @@ class: bg-main2
 $$
 \det(\mathbf{X + \mathbf{Y}\mathbf{Z}}) = \det(\mathbf{X}) \det(\mathbf{I} + \mathbf{Z}\mathbf{X}^{-1}\mathbf{Y})
 $$
-provided all inverses, sums, and products are defined. 
+(*provided all inverses, sums, and products are defined*). 
 3. Battle through a .alert1[**LOT**] of algebraic simplifications, obtaining 
 $$
 \det(\lambda \mathbf{I} - \mathbf{B}) = \det(\text{boring part})\det(\lambda\mathbf{I} - \mathbf{B}')\,.
@@ -747,8 +747,8 @@ layout: false
   <br>
 
   ...is the "cavity method" of statistical physics. 
-
-  ...is an approximate method for ~~statistical inference~~ Machine Learning®.
+ 
+  ...is an approximate method for ~~statistical inference~~ Machine Learning.®
 
   
 ]
@@ -765,7 +765,7 @@ layout: false
 
   ...is the "cavity method" of statistical physics. 
 
-  ...is an approximate method for ~~statistical inference~~ Machine Learning®.
+  ...is an approximate method for ~~statistical inference~~ Machine Learning.®
 
   ...is a discrete-time dynamical system.  
 ]
@@ -782,7 +782,7 @@ layout: false
 
   ...is the "cavity method" of statistical physics. 
 
-  ...is an approximate method for ~~statistical inference~~ Machine Learning®.
+  ...is an approximate method for ~~statistical inference~~ Machine Learning.®
 
   ...is a discrete-time dynamical system.  
 ]
@@ -814,11 +814,11 @@ class: split-two
 
 ### The Uninformative Fixed Point
 
-It is "easy to verify" that if all clusters have the same average degree (number of edges), BP has a fixed point that contains no info about the clusters. 
+It is "easy to verify" that if all clusters have the same average degree (number of edges per node), BP has a fixed point that contains no info about the clusters. 
 
 .alert[Key question]: is this fixed point stable?
 
-.alert2[Standard method]: compute Jacobian matrix $\mathbf{J}$ of the dynamics at this fixed point and ask whether any $\lambda \geq 1$ for any eigenvalue $\lambda$ of $\mathbf{J}$. 
+.alert2[Standard method]: compute Jacobian matrix $\mathbf{J}$ of the dynamics at this fixed point and ask whether $\lambda \geq 1$ for any eigenvalue $\lambda$ of $\mathbf{J}$. 
 
 Corresponding eigenvectors give first-order perturbations away from the uninformative fixed point. 
 
@@ -882,8 +882,8 @@ As before, we can use a smaller one:
 **Theorem (PSC, JH, NE '21)**: Under mild conditions, if $\lambda$ is an "interesting" eigenvalue of $\mathbf{J},$ then $\lambda$ is also an eigenvalue of the $2n\ell\bar{k}$ matrix
 
 $$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix} 
-\mathbf{0} & \mathbf{I}_\ell \otimes \bar{\mathbb{D}} \\ 
-\mathbf{0} & \mathbf{I}_\ell \otimes \bar{\mathbb{A}}
+\mathbf{0} & \mathbf{I}_\ell \otimes \mathbb{D} \\ 
+\mathbf{0} & \mathbf{I}_\ell \otimes \mathbb{A}
 \end{matrix}\right] - \bar{\mathbf{G}} \left[\begin{matrix} 
 \mathbf{0} & \mathbf{I}_\ell \otimes \mathbf{I}_{\bar{k}} \\ 
 \mathbf{I}_\ell \otimes (\mathbf{K} - \mathbf{I}_{\bar{k}-1}) & \mathbf{I}_\ell \otimes (\mathbf{K} - 2\mathbf{I}_{\bar{k}-1})
@@ -891,13 +891,11 @@ $$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix}
 
 where $\ell$ is the number of groups and $\mathbf{G}$, $\bar{\mathbf{G}}$ hold statistical parameters. 
 
-**Proof Sketch**: 
-
----
+<!-- ---
 
 class: split-two
 background-image: url("img/scream.jpeg")
-background-size: contain
+background-size: contain -->
 
 
 ---
@@ -1107,7 +1105,7 @@ In graphs, failure of Hashimoto spectral clustering coincides with an .alert[inf
   
 - .alert2[No algorithm] can reliably detect communities. 
 
-We conjecture the same thing for hypergraphs: inside that ellipse, the clustering problem is not just practically but *theoretically* impossible. 
+We conjecture the same thing for hypergraphs: inside that ellipse, the clustering problem is not just difficult but *theoretically* impossible. 
 
 Proving this is likely to be a loooooong project...
 
@@ -1129,9 +1127,9 @@ layout: false
 
 # Summing Up
 
-The .alert[Hashimoto operator] lets us use eigenvector techniques for community detection in hypergraphs. 
+The .alert[Hashimoto operator] enables eigenvector techniques for community detection in hypergraphs. 
 
-Determinant identities let us speed up computation. 
+Determinant identities help us speed up computation. 
 
 Some hypergraph data sets "need" hypergraph methods, while others don't. 
 
@@ -1154,13 +1152,14 @@ layout: false
 # Summing Up
 
 
-The .alert[Hashimoto operator] lets us use eigenvector techniques for community detection in hypergraphs. 
+The .alert[Hashimoto operator] enables eigenvector techniques for community detection in hypergraphs. 
 
-Determinant identities let us speed up computation. 
+Determinant identities help us speed up computation. 
 
 Some hypergraph data sets "need" hypergraph methods, while others don't. 
 
 There are open questions around the .alert2[fundamental limits] of hypergraph community detection. 
+
 
 ]
 
