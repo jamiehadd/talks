@@ -307,7 +307,7 @@ layout: false
 .column.bg-main1[
   ## An Algorithm
 
-Suppose we don't know the cluster labels. We can estimate them (under the right conditions) using $\mathbf{v}_2$. 
+Suppose we don't know the cluster labels. We can estimate them using $\mathbf{v}_2$. 
 
 <br>
 .alert[Adjacency Spectral Clustering]
@@ -633,7 +633,7 @@ $$2n\bar{k} = 1,800 \color{#FFD046}{\ll} 20,000 = m\langle k\rangle$$
 
 dimensions instead.
 
-We can do that 100-1,000x faster! 
+We can do that 100x-1,000x faster! 
 ]
 
 .column[.content.vmiddle[.stretch[
@@ -692,7 +692,7 @@ layout: false
 .column.bg-main1[
 ## Issue \# 2: Edge Sizes
 
-As we've just seen, our first spectral algorithm only works well when edges of different sizes carry .alert[similar types of information] about the clusters. 
+Our first spectral algorithm only works well when edges of different sizes carry .alert[similar types of information] about the clusters. 
 
 <br> 
 
