@@ -117,4 +117,4 @@ plot <- ggplot(data = world) +
 
 plot
 
-ggsave("img-shared/geo-intro.png", width = 6, height = 4, bg = "transparent")
+ggsave("geo-intro.png", width = 6, height = 4, bg = "transparent")

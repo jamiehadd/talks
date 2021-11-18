@@ -12,6 +12,11 @@
 		--text-color3: main-color1;
 }
 
+.alert {
+	color: var(--alert-color1);
+	font-weight: bold;
+}
+
 .alert1 { 
 	color: var(--alert-color1);
 	font-weight: bold;
@@ -38,6 +43,11 @@
 }
 
 .bg-main2 .alert {
+	color: var(--alert-color2);
+	font-weight: bold;
+}
+
+.bg-main2 .alert2 {
 	color: var(--alert-color2);
 	font-weight: bold;
 }

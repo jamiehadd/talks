@@ -32,6 +32,52 @@ options(htmltools.dir.version = FALSE)
 # xaringan::inf_mr("grinnell-2021/index.rmd")
 ```
 
+
+
+---
+
+class: split-two 
+
+.column.bg-main1[.content[
+
+### Hi! I'm Phil Chodrow.
+
+<br>
+I look like this $\rightarrow$
+
+Things I .alert[like]:]
+
+- Computation and theory for complex systems
+  - Network data analysis
+  - Modeling social systems
+  - Machine learning
+- Tea
+- Memes
+- *Star Trek: Deep Space 9*  
+- Traditional martial arts
+]
+
+.column[.content.center[<br><br><br>
+<img src="img/phil.jpg" width=80%>]
+
+
+]
+
+
+
+
+
+---
+
+class: bg-main1 
+background-image: url("../img-shared/geo-intro.png")
+background-size: contain
+ 
+# My Journey
+ 
+
+
+
 ---
 
 class: split-two
@@ -42,10 +88,10 @@ layout: false
   ## Graphs and Hypergraphs 
  
   <br> 
-  A .alert[graph] consists of a set of nodes $\mathcal{N}$ and a set of edges $\mathcal{E}$. Each edge in $\mathcal{E}$ is a set of two nodes. 
+  A .alert[graph] consists of a set of nodes and a set of edges. Each edge is a set of two nodes. 
 
 <br> <br> <br> <br> <br>
-  In .alert[hypergraphs], edges in $\mathcal{E}$ can contain *any number* of nodes.     
+  In .alert[hypergraphs], edges can contain *any number* of nodes.     
 ]
 ]
 
@@ -85,9 +131,9 @@ layout: false
   
 ]
 
-.column.bg-main2[.vmiddle[
+.column.bg-main2[.vmiddle[.stretch[
   <img src="img/social-interaction.jpeg" width=100%></img> 
-]]
+]]]
 
 ---
 
@@ -106,9 +152,9 @@ layout: false
 
 ]
 
-.column.bg-main2[.vmiddle[
+.column.bg-main2[.vmiddle[.stretch[
   <img src="img/teamwork.jpeg" width=100%></img> 
-]]
+]]]
 
 ---
 
@@ -127,9 +173,9 @@ layout: false
 
 ]
 
-.column.bg-main2[.vmiddle[
+.column.bg-main2[.vmiddle[.stretch[
   <img src="img/mccoy.png" width=100%></img> 
-]]
+]]]
 
 ---
 
@@ -137,8 +183,9 @@ layout: false
 class: split-two
 
 .column.bg-main1[
-  ### The Hypergraph Clustering Problem 
+  ### Hypergraph Clustering
 
+  <br>
   Given some hypergraph data, assign each node to a .alert[**cluster**] (or "community") of "related" nodes. 
   <br> <br>
   "*Related*": often interpreted as "*densely interconnected.*"
@@ -156,33 +203,6 @@ class: split-two
   <img src="img/detection-1.png" width=100%>
 ]]]
 
----
-
-layout: false
-class: split-two
-
-.column.bg-main1[
-  ### A Note on Expectations
-  
-  <br>
-
-  Nontrivial clustering problems almost always have multiple, .alert[competing] answers. 
-
-  When a unique optimal answer exists, it is usually .alert[NP-hard] to compute. 
-
-  So, we usually aim for .alert2[heuristics] with interpretable properties. 
-
-  .footnote[
-    Good et al. (2010), "The performance of modularity maximization in practical contexts", *PRE* 81.4:046106
-    <br> <br>
-    Brandes et al. (2007), "On finding graph clusterings with maximum modularity," *WG'07*:121-132 
-  ]
-
-]
-.column[.content.vmiddle[.stretch[
-  <img src="img/detection-1.png" width=100%>
-]]]
-
 
 ---
 
@@ -193,7 +213,7 @@ class: split-two middle
   .split-three[ 
   .row.bg-main1[.content.vmiddle[.font_medium[Generative clustering with .alert[hypergraph blockmodels]].
   ]]    
-  .row.bg-main2[.content.vmiddle[.font_medium[Greedy heuristics for .alert[large hypergraphs].] 
+  .row.bg-main2[.content.vmiddle[.font_medium[Scalable, greedy heuristics for .alert[large hypergraphs].] 
   ]] 
   .row.bg-main3[.content.vmiddle[.font_medium[.alert[Sparse thresholds] and eigenvector methods.] 
   ]]
@@ -227,7 +247,8 @@ class: hide-row4-col1   hide-row5-col1
 
 class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
 
-  <img src="img/contact-clustering-excerpt.png" width=100%>
+  <br>
+  <img src="img/pure-fiction.png" width=100%>
 
 ---
 
@@ -297,7 +318,7 @@ class: split-two middle
   .split-three[ 
   .row.bg-main1[.content.vmiddle[.font_medium[Generative clustering with .alert[hypergraph blockmodels]].
   ]]    
-  .row.bg-main2[.content.vmiddle[.font_medium[Greedy heuristics for .alert[large hypergraphs].] 
+  .row.bg-main2[.content.vmiddle[.font_medium[Scalable, greedy heuristics for .alert[large hypergraphs].] 
   ]] 
   .row.bg-main3[.content.vmiddle[.font_medium[.alert[Sparse thresholds] and eigenvector methods.] 
   ]]
@@ -328,7 +349,7 @@ Suppose we have some hypergraph Big Data® with suspected cluster structure.
 
 ### Question
 
-Can we do .alert[scalable] clustering with .alert2[statistical foundations]?
+Can we do .alert[scalable] clustering with statistical foundations?
 
 
 ]
@@ -387,33 +408,35 @@ layout:
 
 <br> <br>
 
-There's some nice theory one can do with the affinity function, but for today let's focus on the .alert[All-Or-Nothing] affinity. 
+This controls how hyperedges form in response to node labels. 
+
+Let's focus on the .alert[All-Or-Nothing] affinity.
+
+This models the idea that edges form most frequently when nodes have the same labels. 
+
+
+]
+
+.column[
+
+### <br>
+
+<br> <br>
 
 Let $e$ be a hyperedge of size $k$: 
-
 
 $$\Omega(\mathbf{z}_e) = \begin{cases}
   \omega_{k1} &\quad e \text{ has all same labels} \\ 
   \omega_{k0} &\quad \text{otherwise}\;.  
 \end{cases}$$
 
-
-We usually assume $\omega_{k1} > \omega_{k0}$. 
-]
-
-.column[
-
-### Example
-
-<br> <br> <br><br><br><br>
+<br>
 
 $$\Omega(\color{#ff5252}{\bullet} \color{#ff5252}{\bullet} \color{#ff5252}{\bullet}) > \Omega(\color{#ff5252}{\bullet} \color{#ff5252}{\bullet} \color{#FFD046}{\bullet})= \Omega(\color{#ff5252}{\bullet} \color{#FFD046}{\bullet} \color{#6ec0de}{\bullet})\ldots$$ 
 
-
-
 ]
 
----
+<!-- ---
 
 class: split-two
 layout: false
@@ -452,24 +475,24 @@ layout: false
 
 .footnote[Approximations exact when all clusters are same size]
 
-]
+] -->
 
 
 ---
 
 ## Estimating labels $\mathbf{z}$
 
-Objective function can be written, after some algebra:
+With the All-Or-Nothing affinity, we can derive an objective function from a maximum-likelihood problem for our blockmodel: 
 
 $$
-Q \triangleq \sum_k \color{#ff5252}{\beta_k} \left[(\text{# homogeneous }k\text{-edges}) - \color{#21728f}{\gamma_k}\sum_j (\text{# sum of degrees in cluster } j)^k\right]
+Q \triangleq \sum_k \color{#ff5252}{\beta_k} \left[(\text{# homogeneous }k\text{-edges}) - \color{#21728f}{\gamma_k}\sum_j (\text{# of edges in cluster } j)^k\right]
 $$
 
-$\color{#ff5252}{\beta_k} \triangleq \log \omega_{k1} - \log \omega_{k0}$. 
-- .alert[**Size parameters**] control importance of edge sizes. 
-
+$\color{#ff5252}{\beta_k} \triangleq \log \omega_{k1} - \log \omega_{k0}$. <br>
 $\color{#21728f}{\gamma_k} \triangleq \frac{1}{\beta_k}(\omega_{k1} - \omega_{k0})$.
-- **.alert2[Resolution parameters]** control number of clusters
+
+**Maximum-Likelihood Problem**: find cluster labels $\mathbf{z}$ to make $Q$ large. 
+
  
 .footnote[
    
@@ -488,12 +511,12 @@ class: split-two
 <br>
 
 1. All nodes start in their own cluster. 
-2. Greedily agglomerate nodes to maximize modularity function $Q$. 
-3. Then, greedily agglomerate entire .embolden[clusters] of nodes.  
+2. Greedily .alert[merge] nodes to maximize $Q$. 
+3. Then, greedily merge .alert2[entire clusters] of nodes.  
 4. Estimate parameters $\omega$ and $\{\theta_i\}$.
 5. Repeat!
 
-Extends Louvain for graphs.
+Extends Louvain algorithm for graphs.
 
 .footnote[Blondel et al. "Fast unfolding of communities in large networks." *J. Stat. Mech.*, 2008]
 ]
@@ -518,7 +541,7 @@ Hypergraph Louvain is roughly as fast as baseline graph methods.
 
 ---
 
-### Empirical data: .alert[school contact hypergraphs]. 
+### .alert[Empirical data]: school contact hypergraphs. 
 
 <br> 
 .center[<img src="img/sociopatterns.jpg" width=70%>]
@@ -537,10 +560,6 @@ background-image: url(img/contact-clustering.png)
 background-size: contain
 
 
----
-
-background-image: url(img/recovery_experiments.png)
-background-size: contain
 
 ---
 
@@ -552,11 +571,11 @@ class: split-two
 
   <br>
 
-  We can derive scalable algorithms from generative models of clustered hypergraphs. 
+  The generative approach informs .alert[scalable algorithms] for clustering hypergraphs. 
 
-  These algorithms inherit assumptions from their models. 
+  These algorithms .alert[inherit assumptions] from their generative models. 
 
-  These algorithms can outperform classic graph-based methods on data sets in which those assumptions are warranted. 
+  These algorithms can .alert[outperform graph-based methods] on social interaction data sets. 
 
 ]
 
@@ -573,7 +592,7 @@ class: split-two middle
   .split-three[ 
   .row.bg-main1[.content.vmiddle[.font_medium[Generative clustering with .alert[hypergraph blockmodels]].
   ]]    
-  .row.bg-main2[.content.vmiddle[.font_medium[Greedy heuristics for .alert[large hypergraphs].] 
+  .row.bg-main2[.content.vmiddle[.font_medium[Scalable, greedy heuristics for .alert[large hypergraphs].] 
   ]] 
   .row.bg-main3[.content.vmiddle[.font_medium[.alert[Sparse thresholds] and eigenvector methods.] 
   ]]
@@ -596,34 +615,31 @@ class: fade-row1-col1 fade-row2-col1 fade-row4-col1 fade-row5-col1
 layout: false
 class: split-two
 
-.column.bg-main1[
-  ### Last Time 
+.column.bg-main1[ 
+  ### Sparsity
 
-  What if our data is very Big®?
-
-  ### This Time
-
-  What if our data is very .alert[*sparse*]? 
-
-  
+  <br>
   A hypergraph blockmodel is .alert[*sparse*] if $\Omega$ is tuned so that 
 
   $$ \Omega(\mathbf{z}_R) = O(n^{1-\left|{R}\right|})\;. $$
 
-  .alert2[Consequence]: degree of a node doesn't grow with the size of the hypergraph. 
+  **Consequence**: \# edges attached to a node doesn't grow with the size of the hypergraph. 
+
+  .alert[Intuition]: if the world's population doubled, the number of friends that you personally have might not change too much. 
 ]
 
 .column[
   ### Fundamental Limits
 
-  We say that a clustering algorithm .alert[**detects clusters**] in a cluster model if the algorithm **sometimes** returns labels **correlated** with the true ones. 
+  <br>
+  In graphs, it turns out that there are sparse models for which algorithms can't even .alert[sometimes] find clusters that are even .alert2[correlated] with the correct ones.   
 
-
-
-  There are sparse graph models for which detection is provably impossible, even though clusters are present!
-
+  
   <br>
   What about hypergraphs?
+
+  <br>
+  ***Note***: *here we are primarily interested in theoretical limits rather than practical performance.*
 ]
 
 ---
@@ -675,13 +691,13 @@ class:
 
 ---
 
-### Greedy Methods ( $c_2 = c_3 = 5$ )
+### Greedy Methods
 
 <img src="img/detectability-louvain.png" width=100%>
 
-Greedy methods fail in large regions of parameter space! Can we do better?
+Greedy methods (from last time) fail in large regions of our testbed! Can we do better?
 
----
+<!-- ---
 
 class: split-two
 layout: false
@@ -693,7 +709,7 @@ layout: false
 
   ...is the "cavity method" of statistical physics. 
 
-  ...is an approximate method for ~~statistical inference~~ Machine Learning.®
+  ...is an approximate method for learning graphical models. 
 
   ...is a discrete-time dynamical system.  
 
@@ -720,7 +736,7 @@ $Z_{iR}$ is a normalization constant.
 
 $P(a_R|\mathbb{z}_R)$ is our HSBM. 
 ]
-]
+] -->
 
 ---
 
@@ -728,20 +744,17 @@ class: split-two
 
 .column.bg-main1[
 
-### The BP Jacobian
+### The Belief-Propagation Jacobian
 
 
 
-BP has a fixed point that contains no info about the clusters. 
+.alert[Belief-propagation] is a method for learning probabilistic machine learning models, but it's very expensive computationally. 
 
-If this fixed point is .alert[stable], BP can converge to the uninformative solution. 
+<br>
 
-.alert2[Standard method]: compute Jacobian matrix $\mathbf{J}$ of the dynamics at this fixed point and ask whether $\lambda \geq 1$ for any eigenvalue $\lambda$ of $\mathbf{J}$. 
+We can approximate BP by computing eigenvectors of a certain matrix, called the .alert2[Jacobian]. 
 
 ]
-
---
-
 .column[
   
 
@@ -752,8 +765,8 @@ In a sparse HSBM,
 
   $$\mathbf{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k + O(n^{-1})\;,$$
 
-  - $\mathbf{C}_k$ is a matrix of parameters that depends on the statistical model $P$. 
-  - $\mathbf{B}_k$ is a special matrix called the *Hashimoto operator*, restricted to edges of size $k$. 
+  - $\mathbf{C}_k$ is a matrix of parameters that depends on the affinity function $\Omega$. 
+  - $\mathbf{B}_k$ is a matrix called the *Hashimoto matrix* for edges of size $k$. 
   - $\otimes$ is the matrix Kronecker product. 
 
 
@@ -771,7 +784,7 @@ background-size: contain
 
 <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>  Real leading eigenvectors of $\mathbf{J}$ contain cluster information! 
 
----
+<!-- ---
 
 ### Linear algebra for faster computation
 
@@ -796,7 +809,7 @@ $$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix}
 - $\mathbf{K} \in \mathbb{R}^{\kappa \times \kappa }$ lists possible edge sizes. 
 - $\mathbf{I}_{\ell} \in \mathbb{R}^{\ell\times \ell}$ is the matrix identity of size $\ell$. 
 - $\otimes$ is the Kronecker product. 
-]]
+]] -->
 
 ---
 ### *Flashback: Greedy Methods*
@@ -805,7 +818,7 @@ $$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix}
 
 ---
 
-### Spectral Algorithm
+### BP Jacobian Spectral Algorithm
 
 .center[
 <img src="img/heatmap-exp-1-no-curve.png" width=80%>
@@ -813,7 +826,7 @@ $$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix}
 
 ---
 
-### Spectral Algorithm
+### BP Jacobian Spectral Algorithm
 
 .center[
 <img src="img/heatmap-exp-1.png" width=80%>
@@ -826,7 +839,7 @@ class: split-two
 .column.bg-main1[
 ### Detectability Threshold
 
-.alert[**Conjecture**]: In a 2-group blockmodel with edge sizes $k_1,k_2,\ldots$, detection is possible if and only if $(p_{k_1},p_{k_2},\ldots)$ lies within the axis-aligned ellipsoid with centroid $(x_{k_1},x_{k_2},\ldots)$ and radii $(r_{k_1},r_{k_1}\ldots)$, where: 
+.alert[**Conjecture**]: In a 2-group testbed with edge sizes $k_1,k_2,\ldots$ and $c_k$ edges of size $k$ per node, detection is possible outside the ellipsoid with centroid $(x_{k_1},x_{k_2},\ldots)$ and radii $(r_{k_1},r_{k_1}\ldots)$, where: 
 
 $$
 \begin{align}
@@ -846,17 +859,6 @@ $$
 
 ---
 
-class: 
-background-image: url("img/clustering-math.png")
-background-size: contain
-
-
-### Just For Fun: Clustering Math Topics on StackExchange
-
-
-
----
-
 class: split-two
 layout: false
 
@@ -866,12 +868,9 @@ layout: false
 
 <br>
 
-Belief-propagation can give us analytical insights on the limits of clustering in hypergraphs. 
+Belief-propagation spectral clustering can help us form conjectures about when detecting clusters is .alert[even possible].  
 
-Proving these conjectures is likely to require fancy math. 
-
-There are open questions around the .alert2[fundamental limits] of hypergraph community detection. 
-
+Proving these conjectures is likely to require fancy probability theory. 
 
 ]
 
@@ -886,7 +885,7 @@ There are open questions around the .alert2[fundamental limits] of hypergraph co
 
 class: bg-main1
 
-## The Big Message
+## Today's Big Message
 
 The generative approach to hypergraph clustering offers both .alert[scalable heuristics] and .alert2[fundamental theoretical insights]. 
 
@@ -947,3 +946,41 @@ class: split-two
 <br><br><br><br><br><br><br><br><br>
 <b>PSC</b>, N. Eikmeier, J. Haddock, (2021). Nonbacktracking spectral clustering of nonuniform hypergraphs, <i>In preparation</i>
 ]
+
+---
+
+class: bg-main1 middle
+
+# Bonus Content (extra slides)
+
+---
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ### A Note on Expectations
+  
+  <br>
+
+  Nontrivial clustering problems almost always have multiple, .alert[competing] answers. 
+
+  When a unique optimal answer exists, it is usually .alert[NP-hard] to compute. 
+
+  So, we usually aim for .alert2[heuristics] with interpretable properties. 
+
+  .footnote[
+    Good et al. (2010), "The performance of modularity maximization in practical contexts", *PRE* 81.4:046106
+    <br> <br>
+    Brandes et al. (2007), "On finding graph clusterings with maximum modularity," *WG'07*:121-132 
+  ]
+
+]
+.column[.content.vmiddle[.stretch[
+  <img src="img/detection-1.png" width=100%>
+]]]
+
+---
+
+background-image: url(img/recovery_experiments.png)
+background-size: contain
