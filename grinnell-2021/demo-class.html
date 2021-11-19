@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Optimization Algorithms   Analysis, Applications, and Ethics</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Phil Chodrow   UCLA   November 19th, 2021" />
+    <link rel="stylesheet" href="../assets/ninpo.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/ninjutsu.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/shinobi.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/pc_custom.css" type="text/css" />
+    <link rel="stylesheet" href="css/pc_custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Optimization Algorithms <br> Analysis, Applications, and Ethics
+## CSC 301 <br> Grinnell College
+### Dr. <span class="author-highlight">Phil Chodrow</span> <br> UCLA <br> November 19th, 2021
+
+---
+
+exclude: true   
+&lt;style type="text/css"&gt;
+code.r{ 
+  font-size: 16px; 
+}
+pre {
+  font-size: 16px !important;  
+}
+&lt;/style&gt;
+
+
+
+
+
+
+---
+
+class: split-two 
+
+.column.bg-main1[.content[
+
+### Hi! I'm Phil Chodrow.
+
+&lt;br&gt;
+I look like this `\(\rightarrow\)`
+
+Things I .alert[like]:]
+
+- Computation and theory for complex systems
+  - Network data analysis
+  - Modeling social systems
+  - Machine learning
+- Tea
+- Memes
+- *Star Trek: Deep Space 9*  
+- Traditional martial arts
+]
+
+.column[.content.center[.stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="../img-shared/star-wars-trek.png" width=100%&gt;]]
+
+
+]
+
+---
+
+class: bg-main1 
+background-image: url("../img-shared/geo-intro.png")
+background-size: contain
+ 
+# My Journey
+ 
+---
+
+class: split-two
+
+.column.bg-main1[
+## 45 minutes from now...
+
+&lt;br&gt;
+
+...You will be able to conceptually describe the .alert[algorithm] in the phrase "machine learning algorithm."
+
+...You will have proven **correctness** and **convergence** rates for simple optimization examples. 
+
+...You will have analyzed an instance of .alert2[algorithmic bias] from an optimization perspective. 
+
+]
+
+.column[
+## The plan
+
+&lt;br&gt;
+
+1. Intro to optimization algorithms 
+2. .alert[Analysis activity]: bisection search. 
+3. .alert[Analysis activity]: gradient descent. 
+4. Applications to machine learning. 
+5. .alert2[Discussion]: optimization, machine learning, and algorithmic bias. 
+
+]
+
+---
+
+class: split-two
+
+.column.bg-main1[
+## 1D Optimization
+
+Given a function `\(y = f(x)\)`, find the *minimum* `\(x_*\)` where `\(f(x_*)\)` is smallest on some interval. 
+
+Sometimes, we can solve `\(f'(x) = 0\)`. 
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+Most of the time, though, we can't. 
+
+So, we need *algorithms* to find the minimum.  
+
+]
+
+.column[
+
+&lt;img src="img/optimization-intro.png" width=100%&gt; 
+
+] 
+
+---
+
+class: split-two
+
+
+.column[
+## Goal for Optimization Algorithms
+
+It's not guaranteed possible to even represent `\(x_*\)` in machine precision, so we don't expect to find it exactly. 
+
+We have to tolerate some error `\(\epsilon\)`. 
+
+**Convergence Rate** 
+
+*In order to ensure*  `\(|x_t - x_*| &lt; \epsilon\)`, *I need to do  `\(t \in O(g(\epsilon))\)` iterations of my optimization algorithm.*  
+]
+
+.column[
+&lt;br&gt; &lt;br&gt; &lt;br&gt; 
+&lt;img src="img/converging.png" width=100%&gt; 
+
+]
+
+
+---
+
+class: split-two
+
+.column.bg-main1[
+  ## .alert[Analysis Activity 1]
+
+&lt;br&gt;
+Here's a sketch of **bisection search**  for finding the minimum `\(x_*\)` of a differentiable `\(f\)` on an interval `\([a, b]\)`. 
+
+1. Pick a starting window. 
+2. Pick an `\(x_t\)` in the window. 
+3. Determine whether `\(x_*\)` is to the right or left of `\(x_t\)`.  
+3. Update window. 
+4. Repeat. 
+
+Fill in the details, and analyze: how many iterations `\(t\)` must we perform to ensure that `\(\left|x_t - x_*\right| &lt; \epsilon\)`?
+]
+
+.column[
+
+  ## Assumptions
+
+&lt;br&gt;
+You are allowed to evaluate `\(f\)` and its derivative `\(f'\)` at any point. 
+
+The derivative always "points towards" the minimum: 
+
+- `\(x &gt; x_* \Leftrightarrow  f'(x) &lt; 0\)`
+- `\(x &lt; x_* \Leftrightarrow  f'(x) &gt; 0\)`
+
+There is exactly one minimum between points `\(a\)` and `\(b\)`.  
+]
+
+---
+
+
+class: 
+background-image: url("img/bisection-search.gif")
+background-size: contain
+
+### The Problem: Multiple Variables...
+
+---
+
+class: 
+
+## The Idea of Gradient Descent
+
+Use not only the *sign* of `\(f'(x)\)`, but also its *value* in order to make an update. 
+
+`$$x_{t+1} = x_t - \underbrace{s}_{\text{step size}} f'(x_t)$$` 
+
+If `\(f\)` is a function of multiple variables, we can do this:
+
+`$$\left(\begin{matrix}x_{t+1} \\ y_{t+1}\end{matrix}\right) = \left(\begin{matrix}x_{t} \\ y_{t}\end{matrix}\right) - s \left(\begin{matrix}\frac{\partial f(x_t, y_t)}{\partial x} \\ \frac{\partial f(x_t, y_t)}{\partial y}\end{matrix}\right)$$`
+
+That last bit is the *gradient* `\(\nabla f\)` of `\(f\)`, and points in the direction of steepest increase/decrease. 
+
+.alert[Imagine]: you are a hiker going down a mountain by taking small steps in the direction of steepest descent. 
+
+
+---
+
+class: split-two
+
+.column.bg-main1[
+  
+## .alert[Analysis Activity 2]
+
+&lt;br&gt;
+
+Let's use gradient descent to estimate the minimum of `\(f(x) = x^2\)`. 
+
+`$$x_{t+1} = x_t - s f'(x_t)$$`
+
+The gradient (derivative) of `\(f\)` is `\(f'(x) = 2x\)`. Use a starting point `\(x_0\)`. 
+
+1. For what step sizes `\(s\)` will gradient descent correctly converge to `\(x_*\)`? 
+2. How many iterations `\(t\)` must we perform to ensure that `\(x_t\)` satisfies `\(\left|x_t - x_*\right| &lt; \epsilon\)`? 
+]
+
+.column[
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+- For item 2, use the fact that `\(x_* = 0\)`. 
+- This might feel like cheating, but the result you get actually holds for a large class of functions (the *strongly convex* ones) even when we don't know `\(x_*\)`. 
+
+  
+]
+
+
+---
+
+class: 
+background-image: url("img/gradient-descent.gif")
+background-size: contain
+
+---
+
+class: 
+
+## Training a Machine Learning Model
+
+- Predictor data `\(X = (x_1,\ldots,x_n)\)`. 
+- Target data `\(Y = (y_1,\ldots,y_n)\)`.
+
+Want to find a model `\(m\)` such that `\(m(X) \approx Y\)`. 
+
+So, we often minimize a measure of difference, called the *loss function*. 
+
+**Example**: linear regression, `\(m(x_i) = ax_i+b\)`, want to find `\(a\)` and `\(b\)`. 
+
+Common approach: solve the *least-squares* problem
+
+`$$\text{Loss}(a,b) =  \sum_{i = 1}^n (ax_i + b - y_i)^2\;.$$`
+
+We try to solve `\(\min_{a,b} \text{Loss}(a,b)\)`. 
+
+---
+
+class: 
+background-image: url("img/regression.gif")
+background-size: contain
+
+---
+
+class: 
+background-image: url("img/regions.gif")
+background-size: contain
+
+---
+
+
+class: 
+background-image: url("img/final-regions.png")
+background-size: contain
+
+---
+
+class: split-two
+
+.column.bg-main1[
+
+## .alert[Discussion]
+
+&lt;br&gt;
+
+You are going to design a system to determine whether a hospital patient is "high risk." This information will used to inform a recommendation to admit that patient to a personalized care program. 
+
+You have access to complete medical histories and insurance claims.
+
+You are going to solve a machine learning optimization problem: 
+
+`$$\min_m \text{loss}(m(\text{predictor data}), \text{target data})$$`
+
+]
+.column[
+
+## &amp;nbsp;
+
+&lt;br&gt; 
+
+1. What outcome will your algorithm aim to predict? (i.e. your *target data*) 
+2. What kinds of information would you include in your predictor data? 
+3. What kinds of information would you specifically **not** include in your predictor data? 
+
+]
+
+---
+
+class:split-two
+
+.column[
+  &lt;br&gt;
+  &lt;img src="img/medical-bias.png" width=90%&gt; 
+]
+
+.column[
+  &lt;br&gt;
+  &lt;img src="img/dissecting-bias.png" width=100%&gt; 
+]
+
+---
+
+class: bg-main1
+
+# Wrapping Up 
+
+&lt;br&gt; 
+Optimization algorithms lie at the heart of modern machine learning and data science. 
+
+They often admit correctness guarantees and performance analysis. 
+
+Careful reflection on .alert[what exactly to optimize], and what data to include, is one of the primary places in which we can mitigate algorithmic bias. 
+
+--
+
+### Thanks y'all!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:10",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
