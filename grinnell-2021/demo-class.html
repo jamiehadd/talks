@@ -3,7 +3,7 @@
   <head>
     <title>Optimization Algorithms   Analysis, Applications, and Ethics</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Dr. Phil Chodrow   UCLA   November 19th, 2021" />
+    <meta name="author" content="Dr. Phil Chodrow   University of California, Los Angeles   November 19th, 2021" />
     <link rel="stylesheet" href="../assets/ninpo.css" type="text/css" />
     <link rel="stylesheet" href="../assets/ninjutsu.css" type="text/css" />
     <link rel="stylesheet" href="../assets/shinobi.css" type="text/css" />
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 
 # Optimization Algorithms <br> Analysis, Applications, and Ethics
 ## CSC 301 <br> Grinnell College
-### Dr. <span class="author-highlight">Phil Chodrow</span> <br> UCLA <br> November 19th, 2021
+### Dr. <span class="author-highlight">Phil Chodrow</span> <br> University of California, Los Angeles <br> November 19th, 2021
 
 ---
 
@@ -41,7 +41,7 @@ class: split-two
 
 .column.bg-main1[.content[
 
-### Hi! I'm Phil Chodrow.
+### Hi! I'm Dr. Phil Chodrow.
 
 &lt;br&gt;
 I look like this `\(\rightarrow\)`
@@ -81,11 +81,11 @@ class: split-two
 
 &lt;br&gt;
 
-...You will be able to conceptually describe the .alert[algorithm] in the phrase "machine learning algorithm."
+...You will be able to conceptually describe the "algorithm" in the phrase "machine learning algorithm."
 
-...You will have proven **correctness** and **convergence** rates for simple optimization examples. 
+...You will have proven .alert[correctness] and .alert[convergence] rates for simple optimization examples. 
 
-...You will have analyzed an instance of .alert2[algorithmic bias] from an optimization perspective. 
+...You will have discussed an instance of .alert2[algorithmic bias] arising from the formulation of an optimization problem. 
 
 ]
 
@@ -107,17 +107,21 @@ class: split-two
 class: split-two
 
 .column.bg-main1[
-## 1D Optimization
+### 1D Continuous Optimization
 
-Given a function `\(y = f(x)\)`, find the *minimum* `\(x_*\)` where `\(f(x_*)\)` is smallest on some interval. 
+&lt;br&gt;
+
+Given a function differentiable `\(y = f(x)\)`, find the .alert[*minimum*] `\(x_*\)` where `\(f(x_*)\)` is smallest on some interval. 
 
 Sometimes, we can solve `\(f'(x) = 0\)`. 
 
-&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+&lt;br&gt; 
 
 Most of the time, though, we can't. 
 
-So, we need *algorithms* to find the minimum.  
+So, we need iterative algorithms to find the minimum.  
+
+***Ongoing assumption***: *there is only one minimum.*
 
 ]
 
@@ -139,9 +143,9 @@ It's not guaranteed possible to even represent `\(x_*\)` in machine precision, s
 
 We have to tolerate some error `\(\epsilon\)`. 
 
-**Convergence Rate** 
+**Convergence Rate Analysis** 
 
-*In order to ensure*  `\(|x_t - x_*| &lt; \epsilon\)`, *I need to do  `\(t \in O(g(\epsilon))\)` iterations of my optimization algorithm.*  
+*In order to ensure*  `\(|x_t - x_*| &lt; \epsilon\)`, *I need to do  `\(t \in O(g(\epsilon))\)` iterations.*  
 ]
 
 .column[
@@ -149,6 +153,19 @@ We have to tolerate some error `\(\epsilon\)`.
 &lt;img src="img/converging.png" width=100%&gt; 
 
 ]
+
+
+---
+
+class: 
+
+## Groups
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+1. Groups of 2-3. 
+2. Check the *second* letter of your *first* name. 
+3. First person alphabetically is your group's **spokesperson**. 
 
 
 ---
@@ -172,7 +189,7 @@ Fill in the details, and analyze: how many iterations `\(t\)` must we perform to
 
 .column[
 
-  ## Assumptions
+## Assumptions
 
 &lt;br&gt;
 You are allowed to evaluate `\(f\)` and its derivative `\(f'\)` at any point. 
@@ -351,6 +368,20 @@ Careful reflection on .alert[what exactly to optimize], and what data to include
 --
 
 ### Thanks y'all!
+
+---
+
+### Extra: Convergence of Gradient Descent In General
+
+&lt;br&gt;
+
+Suppose that `\(f\)` is convex, differentiable, and satisfies a **Lipschitz criterion**: 
+
+`$$\lVert \nabla f(\mathbf{x}) - \nabla f(\mathbf{y}) \rVert_2 \leq L \lVert \mathbf{x} - \mathbf{y} \rVert_2\;.$$`
+ 
+Then, gradient descent with stepsize `\(s = \frac{1}{L}\)` reaches error tolerance `\(\epsilon\)` after `\(O(\epsilon^{-1})\)` iterations. 
+
+If in addition `\(f\)` is **strongly convex** (roughly, can be sandwiched between parabolas), then we can reach the `\(O(- \log \epsilon)\)` rate from our parabola analysis before.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
