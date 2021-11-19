@@ -1,7 +1,7 @@
 ---
 title: "Generative Hypergraph Clustering: <br> Scalable Heuristics and Sparse Thresholds"                 
 subtitle: "Department of Computer Science <br> Grinnell College"
-author: "Dr. <span class = 'author-highlight'>Phil Chodrow</span> <br> Department of Mathematics, UCLA <br> November 18th, 2021"           
+author: "Dr. <span class = 'author-highlight'>Phil Chodrow</span> <br> University of California, Los Angeles <br> November 18th, 2021"           
 date: ""              
 output:                         
   xaringan::moon_reader:         
@@ -559,7 +559,10 @@ Stehlé et al. (*PLoS ONE*, 2011) and Mastrandrea et al. (*PLoS ONE*, 2015)
 background-image: url(img/contact-clustering.png)
 background-size: contain
 
+---
 
+background-image: url(img/recovery_experiments.png)
+background-size: contain
 
 ---
 
@@ -748,7 +751,7 @@ class: split-two
 
 
 
-.alert[Belief-propagation] is a method for learning probabilistic machine learning models, but it's very expensive computationally. 
+.alert[Belief-propagation] is a method for learning probabilistic machine learning models, but it's very expensive on hypergraphs. 
 
 <br>
 
@@ -980,7 +983,3 @@ class: split-two
   <img src="img/detection-1.png" width=100%>
 ]]]
 
----
-
-background-image: url(img/recovery_experiments.png)
-background-size: contain
