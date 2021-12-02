@@ -261,37 +261,15 @@ Can represent hyperedges of all sizes in the same matrix!
 .alert[Second eigenvector] is correlated with communities, if corresponding eigenvalue is real.  
   - Needs to be aggregated to node level
  
+.alert2[Problem]: $\mathbf{B}$ is indexed by edge-node pairs -- very large. 
+
+
 ]
 
 .column[.content.vmiddle[.stretch[
 <img src="img/eigen-illustration.png" width=100%>   
 ]]]
 
----
-
-class: split-two
-layout: false
-
-
-.column.bg-main1[
-## Issue \# 1: Computation
-
-<br>
-$\mathbf{B}$ is indexed by edge-node pairs. 
-
-So, $\mathbf{B}$ is of size $m\langle k\rangle \times m\langle k\rangle$, where $m$ is the number of edges and $\langle k \rangle$ is the average edge size. 
-
-A .alert[*small*] data set might have $n = 300$ nodes, $m = 8,000$ edges, and average edge size $2.5$. 
-
-So, $m\langle k \rangle = 8,000 \times 2.5 = 20,000$, which is already a pretty big matrix. 
-
-So...
-
-]
-
-.column[.content.vmiddle[.stretch[
-<img src="img/hypergraph-nonbacktracking.png" width=100%>   
-]]]
 
 ---
 
@@ -329,31 +307,6 @@ $$
 - $\otimes$ is the Kronecker product. 
 ]]
 
----
-
-class: split-two
-layout: false
-
-
-.column.bg-main1[
-## Issue \# 1: Computation
-
-<br> <br> 
-A .alert[*small*] data set might have $n = 300$ nodes, $m = 8,000$ edges, and average edge size $2.5$. 
-
-<br> 
-If $\bar{k} = 3$, then can compute eigenvectors in 
-
-$$2n\bar{k} = 1,800 \color{#FFD046}{\ll} 20,000 = m\langle k\rangle$$ 
-
-dimensions instead.
-
-We can do that 100x-1,000x faster! 
-]
-
-.column[.content.vmiddle[.stretch[
-<img src="img/hypergraph-nonbacktracking.png" width=100%>   
-]]]
 
 ---
 
