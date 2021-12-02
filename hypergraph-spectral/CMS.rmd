@@ -392,9 +392,12 @@ layout: true
 
 .column.bg-main1[
 
+
+
   ## First Algorithm
 
-  
+<br>
+
   2. Compute the second eigenpair $(\lambda_2, \mathbf{v}_2)$ of $\mathbf{B}'$. 
   3. If $\lambda_2$ is .alert[real], separate $\mathbf{v}_2 = (\alpha, \beta)$, with $\alpha, \beta \in \mathbb{R}^{n\bar{k}}$. 
   4. If
@@ -433,7 +436,7 @@ Adjusted Rand Index (ARI):
 - $\mathrm{ARI} = 1$: perfect cluster recovery. 
 - $\mathrm{ARI} = 0$: random noise. 
 
----
+<!-- ---
 
 class: split-two
 layout: false
@@ -456,7 +459,7 @@ What if edges of different sizes mean different things?
 
 .column[.content.vmiddle[.stretch[
 <img src="img/different-roles.png" width=100%>   
-]]]
+]]] -->
 
 ---
 
@@ -794,9 +797,9 @@ layout: false
   (2p_2-1)^2c_2 + 2\left(\frac{4p_3-1}{3} \right)^2c_3 \leq 1
   $$
 
-  Strategy: ask when $\mathbf{J}$ has an eigenvalue $> 1$, using approximations analogous to known results for graphs. 
+  Strategy: ask when community-correlated eigenvalue of $\mathbf{J}$ magnitude $> 1$, using approximations analogous to known results for graphs. 
 
-  .alert2[Future work]: justify the approximations. 
+  .alert2[Future work]: justify the approximations (fancy probability theory). 
 
 ]
 
