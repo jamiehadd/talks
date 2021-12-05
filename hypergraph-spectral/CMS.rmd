@@ -307,6 +307,29 @@ $$
 - $\otimes$ is the Kronecker product. 
 ]]
 
+---
+
+class: bg-main2
+  
+
+## Proof Sketch
+
+1. $\mathbf{B}$ can be written as $\mathbf{S}\mathbf{T} - \mathbf{R}$ for suitable operators $\mathbf{S}$, $\mathbf{T}$ and $\mathbf{R}$, which also satisfy handy relations like $\mathbf{T}\mathbf{S} = \mathbb{A}$.  
+2. Consider $\det(\lambda\mathbf{I} - \mathbf{B})$, substitute $\mathbf{B} = \mathbf{S}\mathbf{T} - \mathbf{R}$, and use the *push-through identity*:
+$$
+\det(\mathbf{X + \mathbf{Y}\mathbf{Z}}) = \det(\mathbf{X}) \det(\mathbf{I} + \mathbf{Z}\mathbf{X}^{-1}\mathbf{Y})
+$$
+(*provided all inverses, sums, and products are defined*). 
+3. Battle through a .alert1[**LOT**] of algebraic simplifications, obtaining 
+$$
+\det(\lambda \mathbf{I} - \mathbf{B}) = \det(\text{boring part})\det(\lambda\mathbf{I} - \mathbf{B}')\,.
+$$ 
+
+
+.footnote[Approach based on a proof of the the graph Ihara-Bass formula in: <br> M. C. Kempton (2016). Non-backtracking random walks and a weighted Ihara’s theorem. *Open Journal of Discrete Mathematics* 6, 207-226
+]
+
+
 
 ---
 
@@ -575,7 +598,7 @@ layout: false
 
 .column.bg-main1[
   ## Ok, but does it work? 
-
+<br> 
   Recall that we were having issues with situations in which edges of different sizes carried different kinds of information. 
 ]
 
@@ -590,7 +613,7 @@ layout: false
 
 .column.bg-main1[
   ## Ok, but does it work? 
-
+<br> 
   Recall that we were having issues with situations in which edges of different sizes carried different kinds of information. 
 
 <br> 
@@ -602,81 +625,6 @@ layout: false
   <img src="img/heatmap-exp-1-no-curve.png" width=100%>   
 ]]]
 
----
-
-class: bg-main2
-
-<br> <br> <br> <br> <br> <br>
-
-## What about .alert[real data]?
-
----
-
-## High School Social Contacts
-
-<br> 
-
-  $n = 327$ students (nodes) in a French high school. 
-
-  $m = 7,818$ social contact events (edges) measured by wearable 
-  sensors.   
-
-  Average number of participants in interaction $\langle k \rangle = 2.3$ 
-
-  Clusters are the classes to which students are assigned. 
-
-
-
-
-  <div class="footnote">
-    Data originally from: <br>
-    R. Mastrandrea et al. (2015), Contact patterns in a high school: A comparison between data collected using wearable sensors, contact diaries, and friendship surveys. <i>PLoS One</i> 10:9, e0136497
-    <br> <br> 
-    Prepared by 
-    A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. <i>Proceedings of the National Academy of Sciences</i> 10.1073/pnas.1800683115  
-  </div>
-
----
-background-image: url(img/contact-high-school-classes.png)
-background-size: contain
-
-## High School Social Contacts 
-
----
-
-  ## On the Other Hand...Senate Bills
-
-<br> 
-
-  $n = 293$ U.S. senators (nodes) cosponsoring bills.
-
-  $m = 20,006$ bills (edges) in period 1973-2016.
-
-  Average number of cosponsors $\langle k \rangle = 7.3$.
-
-  Clusters are Democrat/Republican. 
-
-
-<div class="footnote">
-  Data originally from: <br>
-  J. Fowler (2006), Legislative cosponsorship networks in the U.S. House and Senate. <i>Social Networks</i> 28:4, 454--465
-  <br> <br> 
-  Prepared by 
-  A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. <i>Proceedings of the National Academy of Sciences</i> 10.1073/pnas.1800683115  
-</div>
-
-
----
-background-image: url(img/SN-congress-bills.png)
-background-size: contain
-
-## Senate Bills
-
----
-class: bg-main2
-
-<br> <br> <br> <br> 
-### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the cluster structure. 
 
 ---
 
@@ -750,7 +698,7 @@ layout: false
   (2p_2-1)^2c_2 + 2\left(\frac{4p_3-1}{3} \right)^2c_3 \leq 1
   $$
 
-  Strategy: ask when community-correlated eigenvalue of $\mathbf{J}$ magnitude $> 1$, using approximations analogous to known results for graphs. 
+  Strategy: ask when community-correlated eigenvalue of $\mathbf{J}$ has magnitude $> 1$, use approximations analogous to known results for graphs. 
 
   .alert2[Future work]: justify the approximations (fancy probability theory). 
 
@@ -859,8 +807,81 @@ There are open questions around the .alert2[fundamental limits] of hypergraph co
 - Fellow speakers
 - You! 
 
-
 ]
 
+---
 
+class: bg-main2
+
+<br> <br> <br> <br> <br> <br>
+
+## Supplementary: Experiments on .alert[real data]
+
+---
+
+## High School Social Contacts
+
+<br> 
+
+  $n = 327$ students (nodes) in a French high school. 
+
+  $m = 7,818$ social contact events (edges) measured by wearable 
+  sensors.   
+
+  Average number of participants in interaction $\langle k \rangle = 2.3$ 
+
+  Clusters are the classes to which students are assigned. 
+
+
+
+
+  <div class="footnote">
+    Data originally from: <br>
+    R. Mastrandrea et al. (2015), Contact patterns in a high school: A comparison between data collected using wearable sensors, contact diaries, and friendship surveys. <i>PLoS One</i> 10:9, e0136497
+    <br> <br> 
+    Prepared by 
+    A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. <i>Proceedings of the National Academy of Sciences</i> 10.1073/pnas.1800683115  
+  </div>
+
+---
+background-image: url(img/contact-high-school-classes.png)
+background-size: contain
+
+## High School Social Contacts 
+
+---
+
+  ## On the Other Hand...Senate Bills
+
+<br> 
+
+  $n = 293$ U.S. senators (nodes) cosponsoring bills.
+
+  $m = 20,006$ bills (edges) in period 1973-2016.
+
+  Average number of cosponsors $\langle k \rangle = 7.3$.
+
+  Clusters are Democrat/Republican. 
+
+
+<div class="footnote">
+  Data originally from: <br>
+  J. Fowler (2006), Legislative cosponsorship networks in the U.S. House and Senate. <i>Social Networks</i> 28:4, 454--465
+  <br> <br> 
+  Prepared by 
+  A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. <i>Proceedings of the National Academy of Sciences</i> 10.1073/pnas.1800683115  
+</div>
+
+
+---
+background-image: url(img/SN-congress-bills.png)
+background-size: contain
+
+## Senate Bills
+
+---
+class: bg-main2
+
+<br> <br> <br> <br> 
+### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the cluster structure. 
 
