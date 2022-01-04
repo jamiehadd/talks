@@ -7,7 +7,6 @@ library(maps)
 library(ggtext)
 library(gganimate)
 
-
 theme_set(theme_void())
 
 world_map <- maps::map("state", fill = TRUE)
@@ -15,8 +14,8 @@ world_map <- maps::map("state", fill = TRUE)
 world <- sf::st_as_sf(world_map)
 
 coords <- tibble(
-	city = c("", "Staunton", "Philadelphia", "Oslo", "Boston", "Los Angeles"),
-	years = c(0, 17, 4, 1, 7, 1),
+	city = c("", "Staunton", "Swarthmore", "Oslo", "Boston", "Los Angeles"),
+	years = c("0", "17 years", "4 years", "1 year", "7 years", "1 year"),
 	state = c("", "VA", "PA", "Norway", "MA", "CA"),
 	lat  = c(0, 38.1496, 39.9526, 50, 42.3601, 34.0522),
 	lon  = c(0, -79.0717, -75.1652, -65, -71.0589, -118.2437),
@@ -24,14 +23,14 @@ coords <- tibble(
 	label_lon = c(0, -79.3717, -75.1652, -65, -59, -118.2437),
 	description = c("",
 									"Grew up!<br>Chess<br>Taekwondo",
-									"College (philosophy + math)<br>Met wife<br>General tomfoolery",
-									"More study (philosophy)<br>Smoked fish<br>Adventures",
-									"Married!<br>Worked @ nonprofit<br>PhD",
-									"Teaching<br>Avocados<br>No celeb sightings (yet)")
+									"College (math + philosophy)<br>Met wife<br>General tomfoolery",
+									"Fulbright scholarship<br>Smoked fish<br>Adventures",
+									"Married!<br>Work (nonprofit)<br>PhD<br>Aikido",
+									"Teaching<br>Avocados<br>Pandemic =(")
 )
 
 coords <- coords %>%
-	mutate(label = glue::glue("**{city}, {state}** ({years} yrs)<br>*{description}*"))
+	mutate(label = glue::glue("**{city}, {state}** ({years})<br>*{description}*"))
 
 coord_cxns <- coords %>%
 	mutate(
