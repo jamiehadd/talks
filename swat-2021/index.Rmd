@@ -186,7 +186,7 @@ layout: false
 ]
 
 .column.bg-main2[.vmiddle[
-  <img src="img/mccoy.png" width=100%></img> 
+  <img src="img/mccoy.png" width=100%></img>  
 ]]
 
 ---
@@ -1183,7 +1183,7 @@ $$
 
 .column[.stretch[
   <br> <br> <br> <br>
-  <img src="img/4-heatmaps.png" width=100%>
+  <img src="img/4-heatmaps-2.png" width=100%>
 ]]
 
 ---
@@ -1206,7 +1206,7 @@ We conjecture the same thing for hypergraphs: inside that ellipse, the clusterin
 
 .column[.stretch[
   <br> <br> <br> <br>
-  <img src="img/4-heatmaps.png" width=100%>
+  <img src="img/4-heatmaps-2.png" width=100%>
 ]]
 
 
