@@ -44,21 +44,20 @@ class: split-two
 ### Hi! I'm Phil Chodrow.
 
 &lt;br&gt;
-I look like this `\(\rightarrow\)`
 
 Things I .alert[like]:]
 
 - Computation and theory for complex systems
   - Network data analysis
-  - Modeling social systems
+  - Models social systems
   - Machine learning
+- Data science and social justice
 - Tea
-- Memes
 - *Star Trek: Deep Space 9*  
 - Traditional martial arts
 ]
 
-.column[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.column[.content.center[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt; 
 &lt;img src="img/phil.jpg" width=80%&gt;]
 
 
@@ -517,7 +516,7 @@ class: split-two
 4. Estimate parameters `\(\omega\)` and `\(\{\theta_i\}\)`.
 5. Repeat!
 
-Extends Louvain algorithm for graphs.
+(Extends Louvain algorithm for graphs.)
 
 .footnote[Blondel et al. "Fast unfolding of communities in large networks." *J. Stat. Mech.*, 2008]
 ]
@@ -538,7 +537,7 @@ background-size: contain
 
 &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; 
 
-Hypergraph Louvain is roughly as fast as baseline graph methods. 
+Hypergraph Louvain is roughly as fast as baseline methods based on graph projections. 
 
 ---
 
@@ -636,14 +635,18 @@ class: split-two
   ### Fundamental Limits
 
   &lt;br&gt;
-  In graphs, it turns out that there are sparse models for which algorithms can't even .alert[sometimes] find clusters that are even .alert2[correlated] with the correct ones.   
+  In graphs, it turns out that there are sparse blockmodels for which algorithms can't even .alert[sometimes] find clusters that are even .alert2[correlated] with the correct ones.   
 
   
   &lt;br&gt;
   What about hypergraphs?
 
-  &lt;br&gt;
-  ***Note***: *here we are primarily interested in theoretical limits rather than practical performance.*
+  .footnote[
+    Decelle et al. (2011) Inference and phase transitions in the detection of modules in sparse networks, *Phys. Rev. Let.* 107.6: 065701
+    &lt;br&gt; &lt;br&gt;
+    Mossel et al. (2018) A proof of the blockmodel threshold conjecture, *Combinatorica*.  
+  ]
+  
 ]
 
 ---
@@ -751,12 +754,14 @@ class: split-two
 ### The Belief-Propagation Jacobian
 
 
-
+&lt;br&gt; 
 .alert[Belief-propagation] is a method for learning probabilistic machine learning models, but it's very expensive on hypergraphs. 
 
 &lt;br&gt;
 
-We can approximate BP by computing eigenvectors of a certain matrix, called the .alert2[Jacobian]. 
+We can approximate BP by computing eigenvectors of the .alert[Jacobian matrix], evaluated at an uninformative fixed point.  
+
+Eigenvectors of the Jacobian (sometimes) give useful cluster information. 
 
 ]
 .column[
@@ -764,10 +769,10 @@ We can approximate BP by computing eigenvectors of a certain matrix, called the 
 
 ### &amp;nbsp; 
 
+&lt;br&gt; 
+**Theorem (PSC, JH, NE '22)**: In a sparse HSBM, 
 
-In a sparse HSBM, 
-
-  `$$\mathbf{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k + O(n^{-1})\;,$$`
+  `$$\mathcal{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k + O(n^{-1})\;,$$`
 
   - `\(\mathbf{C}_k\)` is a matrix of parameters that depends on the affinity function `\(\Omega\)`. 
   - `\(\mathbf{B}_k\)` is a matrix called the *Hashimoto matrix* for edges of size `\(k\)`. 
@@ -778,6 +783,121 @@ In a sparse HSBM,
   .alert2[Shown for graphs by]: &lt;br&gt; Krzakala et al. (2013)  Spectral redemption in clustering sparse networks, &lt;i&gt;PNAS&lt;/i&gt; 110 (52) 20935-20940
 ]
 ]
+
+---
+layout: false
+class: split-two
+
+.column.bg-main1[
+## The Hashimoto Operator
+
+&lt;br&gt;
+The .alert[Hashimoto operator] `\(\color{#FFD046}{\mathbf{B}_k}\)` is a matrix that operates on *edge-node pairs*. 
+
+Define `\((e_1, p_1) \rightarrow_k (e_2, p_2)\)` as: 
+
+- `\(p_1 \in e_1\)` and `\(p_2 \in e_2\)`
+- `\(p_1 \in e_2 \setminus p_2\)`
+- `\(e_1 \neq e_2\)`
+- `\(\lvert p_2\rvert = k\)`. 
+
+Then, 
+
+.font_smaller[ .font_smaller[
+`$$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &amp;\quad (e_1, p_1) \rightarrow_k (e_2, p_2) \\ 
+0 &amp;\quad \text{otherwise.}\end{cases}$$`
+]]]
+
+.column[
+&lt;br&gt;
+&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;
+
+"I can get to `\(p_2 \in e_2\)` from `\(e_1\)` by passing through `\(p_1\)`. I can get to `\(p_3 \in e_3\)` from `\(e_2\)` by passing through `\(p_2\)`..."
+
+]
+
+---
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## The Hashimoto Operator
+
+&lt;br&gt; 
+Popularized (for graphs) by Hashimoto, K. (1990), *Int. J. Math.* 
+
+Important theorem for computation by Bass, H. (1992), *Int. J. Math.* 
+
+Formulated for hypergraphs by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
+
+"Rediscovered" for hypergraphs by Angelini, M. C. et al. (2015), *Allerton Conference*.
+
+]
+
+.column[
+&lt;br&gt;
+&lt;img src="img/hypergraph-nonbacktracking.png" width=100%&gt;
+
+"I can get to `\(p_2 \in e_2\)` from `\(e_1\)` by passing through `\(p_1\)`. I can get to `\(p_3 \in e_3\)` from `\(e_2\)` by passing through `\(p_2\)`..."
+]
+
+---
+
+class: split-two
+
+## Ihara-Bass for the BP Jacobian
+
+`\(\mathbf{J} = \sum_k \mathbf{C}_k\otimes\mathbf{B}_k \approx \mathcal{J}\)` can be a very large matrix `\(\implies\)` slow eigenvalue computations. 
+
+**Theorem (PSC, JH, NE '21)**: Under mild conditions, if `\(\lambda\)` is an "interesting" eigenvalue of `\(\mathbf{J},\)` then `\(\lambda\)` is also an eigenvalue of the `\(2n\ell\bar{k} \times 2n\ell\bar{k}\)` matrix
+
+.font_smaller[
+`$$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix} 
+\mathbf{0} &amp; \mathbf{I}_\ell \otimes \mathbb{D} \\ 
+\mathbf{0} &amp; \mathbf{I}_\ell \otimes \mathbb{A}
+\end{matrix}\right] - \bar{\mathbf{G}} \left[\begin{matrix} 
+\mathbf{0} &amp; \mathbf{I}_\ell \otimes \mathbf{I}_{\bar{k}} \\ 
+\mathbf{I}_\ell \otimes (\mathbf{K} - \mathbf{I}_{\bar{k}-1}) &amp; \mathbf{I}_\ell \otimes (\mathbf{K} - 2\mathbf{I}_{\bar{k}-1})
+\end{matrix}\right] \otimes \mathbf{I}_n$$`
+]
+
+- `\(\ell\)` is the number of communities
+- `\(\mathbf{G}\)`, `\(\bar{\mathbf{G}}\)` hold statistical parameters
+- `\(\mathbb{D}\)` is a degree operator,  `\(\mathbb{A}\)` is an adjacency operator,  and `\(\mathbf{K}\)` is a diagonal matrix containing the possible edge sizes.   
+
+---
+
+
+
+class: split-two
+
+.column.bg-main1[
+
+### Second Algorithm
+
+&lt;br&gt; 
+
+1. Start with a guess about `\(\mathbf{C}_k\)` and form `\(\mathbf{J}'\)`. 
+2. Compute the .alert[leading eigenvectors] of `\(\mathbf{J}'\)` with real eigenvalues. 
+3. For each eigenvector `\(\mathbf{v} = (\alpha, \beta)\)`, compute `\(u_{i\ell} = \mathbb{1}\left(\sum_{k = 1}^{\bar{k}} \alpha_{ik}^{(\ell)} &gt; 0\right)\)`. 
+4. Use a .alert2[Euclidean clustering algorithm] (like `\(k\)`-means) in the space spanned by the vectors `\(\{\mathbf{u}\}\)`. 
+5. Re-estimate `\(\mathbf{C}_k\)` and repeat...
+
+]
+
+
+
+.column[.vmiddle[.center[
+
+&lt;img src="img/PCA-synthetic.png" width=90%&gt; 
+
+]]]
+
+
+
+
+
 
 ---
 
@@ -841,9 +961,11 @@ background-size: contain
 class: split-two
 
 .column.bg-main1[
-### Detectability Threshold
+### Detectability (Algorithmic)
 
-.alert[**Conjecture**]: In a 2-group testbed with edge sizes `\(k_1,k_2,\ldots\)` and `\(c_k\)` edges of size `\(k\)` per node, detection is possible outside the ellipsoid with centroid `\((x_{k_1},x_{k_2},\ldots)\)` and radii `\((r_{k_1},r_{k_1}\ldots)\)`, where: 
+.font_smaller[
+**Conjecture**: In a 2-group blockmodel with edge sizes `\(k_1,k_2,\ldots\)` and `\(c_k\)` edges of size `\(k\)` per node, .alert[spectral clustering] fails to detect clusters in the ellipsoid with centroid `\((x_{k_1},x_{k_2},\ldots)\)` and radii `\((r_{k_1},r_{k_1}\ldots)\)`, where: 
+
 
 $$
 `\begin{align}
@@ -852,14 +974,56 @@ r_k &amp;= \frac{\sqrt{(k-1)c_k}}{2-a_k} \\
 a_k &amp;= \frac{1-2^{2-k}}{1-2^{1-k}}\;.
 \end{align}`
 $$
+]
+
+.footnote[Proof requires controlling spectrum of Hashimoto operator, possibly generalizing approach used in: 
+
+Bordenave et al. (2018): Non-backtracking spectrum of random graphs: community detection and non-regular Ramanujan graphs. *Annals of Probability*.
+]
 
 ]
+
 .column[.stretch[
 .center[ &lt;br&gt; &lt;br&gt; &lt;br&gt;
 &lt;img src="img/4-heatmaps.png" width=100%&gt;
 ]
 ]
 ]
+
+---
+
+class: split-two
+
+.column.bg-main1[
+### Detectability (Fundamental)
+
+.font_smaller[
+**Conjecture**: In a 2-group blockmodel with edge sizes `\(k_1,k_2,\ldots\)` and `\(c_k\)` edges of size `\(k\)` per node, .alert[any algorithm] fails to detect clusters in the ellipsoid with centroid `\((x_{k_1},x_{k_2},\ldots)\)` and radii `\((r_{k_1},r_{k_1}\ldots)\)`, where: 
+
+
+$$
+`\begin{align}
+x_k &amp;= \frac{1-a_k}{2-a_k} d \\ 
+r_k &amp;= \frac{\sqrt{(k-1)c_k}}{2-a_k} \\
+a_k &amp;= \frac{1-2^{2-k}}{1-2^{1-k}}\;.
+\end{align}`
+$$
+]
+
+.footnote[Generalizes recent theorem for graph blockmodels: 
+
+Mossel et al. (2018) A proof of the blockmodel threshold conjecture, *Combinatorica*.  
+]
+
+]
+
+.column[.stretch[
+.center[ &lt;br&gt; &lt;br&gt; &lt;br&gt;
+&lt;img src="img/4-heatmaps.png" width=100%&gt;
+]
+]
+]
+
 
 ---
 
@@ -874,7 +1038,7 @@ layout: false
 
 Belief-propagation spectral clustering can help us form conjectures about when detecting clusters is .alert[even possible].  
 
-Proving these conjectures is likely to require fancy probability theory (future work). 
+Proving these conjectures is likely to require some powerful machinery from random matrix theory and discrete probability. 
 
 ]
 
