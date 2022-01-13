@@ -182,7 +182,7 @@ layout: false
 class: split-two
 
 .column.bg-main1[
-  ### Hypergraph Clustering
+  ### The Hypergraph Clustering Task
 
   <br>
   Given some hypergraph data, assign each node to a .alert[**cluster**] (or "community") of "related" nodes. 
@@ -286,7 +286,8 @@ Here, $\Omega$ is an *affinity function* that encodes which combinations of grou
 ]
 
 .footnote[
-Bernoulli variant proposed by Ke et al (2019), *arXiv:*:1909.06503
+Bernoulli variant proposed by Ke et al (2019), 	
+Community detection for hypergraph networks via regularized tensor power iteration, *arXiv:*:1909.06503
 ]
 ]
 
@@ -405,9 +406,11 @@ layout:
 .column.bg-main1[
 ### The Affinity Function $\Omega$
 
-<br> <br>
+<br> 
 
-This controls how hyperedges form in response to node labels. 
+$$a_R \sim \mathrm{Poisson}\left(\Omega(\mathbf{z}_R)\prod_{i \in R}\theta_i\right)$$
+
+$\Omega$ controls how hyperedges form in response to node labels. 
 
 Let's focus on the .alert[All-Or-Nothing] affinity.
 
@@ -515,7 +518,10 @@ class: split-two
 4. Estimate parameters $\omega$ and $\{\theta_i\}$.
 5. Repeat!
 
-(Extends Louvain algorithm for graphs.)
+- Extends Louvain algorithm for graphs.
+- Lots of small tricks to make this fast. 
+
+
 
 .footnote[Blondel et al. "Fast unfolding of communities in large networks." *J. Stat. Mech.*, 2008]
 ]
@@ -774,7 +780,7 @@ Eigenvectors of the Jacobian (sometimes) give useful cluster information.
   $$\mathcal{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k + O(n^{-1})\;,$$
 
   - $\mathbf{C}_k$ is a matrix of parameters that depends on the affinity function $\Omega$. 
-  - $\mathbf{B}_k$ is a matrix called the *Hashimoto matrix* for edges of size $k$. 
+  - $\mathbf{B}_k$ is a matrix called the *Hashimoto operator* for edges of size $k$. 
   - $\otimes$ is the matrix Kronecker product. 
 
 
@@ -793,12 +799,12 @@ class: split-two
 <br>
 The .alert[Hashimoto operator] $\color{#FFD046}{\mathbf{B}_k}$ is a matrix that operates on *edge-node pairs*. 
 
-Define $(e_1, p_1) \rightarrow_k (e_2, p_2)$ as: 
+Define $(e_1, p_1) \rightarrow_k (e_2, p_2)$: 
 
 - $p_1 \in e_1$ and $p_2 \in e_2$
 - $p_1 \in e_2 \setminus p_2$
 - $e_1 \neq e_2$
-- $\lvert p_2\rvert = k$. 
+- $\lvert e_2\rvert = k$. 
 
 Then, 
 
@@ -845,7 +851,7 @@ Formulated for hypergraphs by Storm, C. K. (2006). *The Electronic Journal of Co
 
 class: split-two
 
-## Ihara-Bass for the BP Jacobian
+## An Ihara-Bass Theorem for the BP Jacobian
 
 $\mathbf{J} = \sum_k \mathbf{C}_k\otimes\mathbf{B}_k \approx \mathcal{J}$ can be a very large matrix $\implies$ slow eigenvalue computations. 
 
@@ -861,9 +867,13 @@ $$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix}
 \end{matrix}\right] \otimes \mathbf{I}_n$$
 ]
 
-- $\ell$ is the number of communities
+- $\ell$ is the number of clusters and $\bar{k}$ the number of distinct edge sizes. 
 - $\mathbf{G}$, $\bar{\mathbf{G}}$ hold statistical parameters
 - $\mathbb{D}$ is a degree operator,  $\mathbb{A}$ is an adjacency operator,  and $\mathbf{K}$ is a diagonal matrix containing the possible edge sizes.   
+
+.footnote[
+  Similar in spirit to a famous result by Bass (1992, *Int. J. Math*).  
+]
 
 ---
 
@@ -873,7 +883,7 @@ class: split-two
 
 .column.bg-main1[
 
-### Second Algorithm
+### Belief-Propagation Spectral Clustering
 
 <br> 
 
@@ -905,7 +915,7 @@ background-size: contain
 
 ### Belief-Propagation Spectral Clustering
 
-<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>  Real leading eigenvectors of $\mathbf{J}$ contain cluster information! 
+
 
 <!-- ---
 
