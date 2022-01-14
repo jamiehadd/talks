@@ -1,6 +1,6 @@
 ---
 title: "Generative Hypergraph Clustering: <br> Scalable Heuristics and Sparse Thresholds"                 
-subtitle: "Department of Mathematics and Computer Science <br> Wesleyan University<br> January 13th, 2021"
+subtitle: "Department of Mathematics and Computer Science <br> Wesleyan University<br> January 13th, 2022"
 author: "Dr. <span class = 'author-highlight'>Phil Chodrow</span> <br> Department of Mathematics <br> University of California, Los Angeles "           
 date: ""              
 output:                         
