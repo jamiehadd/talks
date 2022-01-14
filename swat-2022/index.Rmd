@@ -1,6 +1,6 @@
 ---
 title: "Eigenvector Methods for Community Detection in Hypergraphs"                 
-subtitle: "Department of Mathematics and Statistics, Swarthmore College<br>January 24th, 2021"
+subtitle: "Department of Mathematics and Statistics, Swarthmore College<br>January 24th, 2022"
 author: "Dr. <span class = 'author-highlight'>Phil Chodrow</span> <br> Department of Mathematics, UCLA "           
 date: ""              
 output:                         
