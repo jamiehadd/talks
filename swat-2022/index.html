@@ -52,6 +52,7 @@ class: split-two
   - Dynamics of social systems
   - Machine learning
   - Data science for social good
+- Effective pedagogy
 - Tea
 - Cooking
 - *Star Trek: Deep Space 9*  
@@ -67,7 +68,7 @@ class: split-two
 ---
 
 class: bg-main1 
-background-image: url("img/geo-intro.png")
+background-image: url("../img-shared/geo-intro.png")
 background-size: contain
  
 # My Journey
@@ -84,7 +85,7 @@ class: split-two
 
 .column[
 # &lt;font color="white"&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Uh...sorry? &lt;/font&gt;
-]
+] 
 
 ---
 
@@ -353,7 +354,7 @@ Reminder: `\(\mathbf{P}\mathbf{v} = \lambda \mathbf{v}\)`.
 
 .font_smaller[
 &lt;br&gt; 
-.alert[**Fact**]: Top two eigenpairs of `\(\mathbf{A}\)` are close to these with high probability as `\(n\)` grows large.  
+.alert[**Fact**] (from random matrix theory): Eigenpairs of `\(\mathbf{A}\)` are close to these with high probability as `\(n\)` grows large.  
 ]
 
 .footnote[
@@ -675,7 +676,7 @@ $$
 \det(\mathbf{X + \mathbf{Y}\mathbf{Z}}) = \det(\mathbf{X}) \det(\mathbf{I} + \mathbf{Z}\mathbf{X}^{-1}\mathbf{Y})
 $$
 (*provided all inverses, sums, and products are defined*). 
-3. Battle through a .alert1[**LOT**] of algebraic simplifications, obtaining 
+3. Simplify, obtaining
 $$
 \det(\lambda \mathbf{I} - \mathbf{B}) = \det(\text{boring part})\det(\lambda\mathbf{I} - \mathbf{B}')\,.
 $$ 
@@ -745,7 +746,7 @@ class: split-two
 class: split-two
 
 
-&lt;img src="img/detectability-setup.png" width=100%&gt;   
+&lt;img src="img/testbed-narrow.png" width=100%&gt;   
 
 ---
 
@@ -914,13 +915,13 @@ Then:
 
 &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; 
 
-- `\(\mathbf{C}_k\)` is a matrix of parameters that depends on the statistical model `\(\mathbb{P}\)`. 
+- `\(\mathbf{C}_k\)` is a matrix of parameters that depends on the stochastic blockmodel `\(\mathbb{P}\)`. 
 - `\(\mathbf{B}_k\)` is our friend the Hashimoto operator, restricted to edges of size `\(k\)`. 
 - `\(\otimes\)` is the Kronecker product. 
 
 
 .footnote[
-  Result argued heuristically by &lt;br&gt;
+  Result argued heuristically for graphs in: &lt;br&gt;
   &lt;br&gt; Krzakala et al. (2013)  Spectral redemption in clustering sparse networks, &lt;i&gt;PNAS&lt;/i&gt; 110 (52) 20935-20940
 ]
 ] 
@@ -1075,7 +1076,7 @@ background-size: contain
 ---
 class: bg-main2
 
-&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; 
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;  
 ### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the cluster structure. 
 
 ---
