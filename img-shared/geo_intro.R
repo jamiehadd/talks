@@ -21,6 +21,8 @@ coords <- tibble(
 	lon  = c(0, -79.0717, -75.1652, -65, -71.0589, -118.2437),
 	label_lat = c(0, 37.3, 43.9526, 54, 40.7601, 37.5522),
 	label_lon = c(0, -79.3717, -75.1652, -65, -59, -118.2437),
+	arrow_offset_lat = c(0, 0, 0, .2, -.4, .1),
+	arrow_offset_lon = c(0, -1, -1, .85, .8, .1),
 	description = c("",
 									"Grew up!<br>Chess<br>Taekwondo",
 									"College (math + philosophy)<br>Met wife<br>General tomfoolery",
@@ -64,7 +66,7 @@ coord_cxns <- coord_cxns %>%
 		# last (7th) row irrelevant ----
 	slice(1:6) %>%
 		# keep what we neeed ----
-	dplyr::select(city_order, lat, lon, label_lat, label_lon, lat_next, lon_next, label_lat_next, label_lon_next, label_next) %>%
+	dplyr::select(city_order, lat, lon, label_lat, label_lon, lat_next, lon_next, label_lat_next, label_lon_next, label_next, arrow_offset_lat, arrow_offset_lon) %>%
 	mutate(fact = row_number())
 
 
@@ -74,12 +76,12 @@ plot <- ggplot(data = world) +
 	geom_curve(data = coord_cxns %>% slice(-1),
 						 aes(y = lat,
 						 		x = lon,
-						 		yend = lat_next,
-						 		xend = lon_next,
+						 		yend = lat_next + arrow_offset_lat,
+						 		xend = lon_next + arrow_offset_lon,
 						 		group = seq_along(city_order)),
 						 color = "white",
 						 curvature = -0.5,
-						 # arrow = arrow(type = "closed", length = unit(0.02, "npc")),
+						 arrow = arrow(type = "closed", length = unit(0.02, "npc")),
 						 size  = 0.5) +
 	geom_point(data = coords,
 						 aes(x = lon, y = lat, fill = city),
