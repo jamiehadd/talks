@@ -178,6 +178,11 @@ a { color: var(--link-color); text-decoration: none; }
 	margin: 0;
 }
 
+.split-three img {
+	padding-top: 25px;
+}
+
+
 
 
 ul, ol{

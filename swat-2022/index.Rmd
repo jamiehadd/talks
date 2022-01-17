@@ -1,7 +1,7 @@
 ---
 title: "Eigenvector Methods for Community Detection in Hypergraphs"                 
-subtitle: "Department of Mathematics and Statistics, Swarthmore College<br>January 24th, 2022"
-author: "Dr. <span class = 'author-highlight'>Phil Chodrow</span> <br> Department of Mathematics, UCLA "           
+subtitle: "Department of Mathematics and Statistics<br> Swarthmore College<br>January 24th, 2022"
+author: "Dr. <span class = 'author-highlight'>Phil Chodrow</span> <br> Department of Mathematics <br> University of California, Los Angeles  "           
 date: ""              
 output:                         
   xaringan::moon_reader:         
@@ -34,35 +34,6 @@ options(htmltools.dir.version = FALSE)
 
 
 
----
-
-class: split-two 
-
-
-.column.bg-main1[.content[
-
-## Hi! I'm Phil Chodrow.
-
-<br> 
-**Things I .alert[like]:]**
-
-- Math + data science for complex systems
-  - Network models and algorithms
-  - Dynamics of social systems
-  - Machine learning
-  - Data science for social good
-- Effective pedagogy
-- Tea
-- Cooking
-- *Star Trek: Deep Space 9*  
-- Traditional martial arts
-]
-
-.column[.content.center[<br><br><br>
-<img src="img/phil.jpg" width=100%>]
-
-
-]
 
 ---
 
@@ -85,6 +56,79 @@ class: split-two
 .column[
 # <font color="white"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Uh...sorry? </font>
 ] 
+
+---
+
+class: split-40
+
+.column.bg-main1[
+### Math for Network Data Science
+
+<br>
+
+What .alert[models] accurately reflect features of network data? 
+
+What .alert[algorithms] can we use to learn these models? 
+
+What can we .alert[prove] about these models and algorithms?
+
+]
+
+.column[.split-four[
+  .row.bg-main3[.split-20[.column[ 
+  <div class="thumbnail"> 
+  <img src="img/heatmap-thumbnail.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a href="https://link.springer.com/article/10.1007/s41109-020-0252-y">Nonbacktracking specral clustering of nonuniform hypergraphs </a> <br>
+  <b>PSC</b>, Nicole Eikmeier, and Jamie Haddock<br>
+  <i>In preparation</i> (2022)
+  </div>       
+  ]] 
+]
+  .row[.split-20[.column[
+    <div class="thumbnail"> 
+    <img src="img/contact-clustering-excerpt.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a href="https://advances.sciencemag.org/content/7/28/eabh1303">Generative hypergraph clustering: from blockmodels to modularity </a> <br>
+    <b>PSC</b>, Nate Veldt, and Austin Benson <br>
+    <i>Science Advances</i> (2021)
+    </div>       
+    ]]
+  ]
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+    <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" width=120px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a href="https://epubs.siam.org/doi/abs/10.1137/19M1288772">Moments of uniformly random multigraphs with fixed degree sequences </a> <br>
+    <b>PSC</b><br>
+    <i>SIAM J. Mathematics of Data Science</i> (2020)
+    </div>       
+    ]] 
+  ]
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" width=120px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a href="https://academic.oup.com/comnet/article-abstract/8/3/cnaa018/5879929">Configuration models of random hypergraphs </a> <br>
+  <b>PSC</b> <br>
+  <i>J. Complex Networks</i> (2020)
+  </div>       
+  ]]
+]
+]
+]
 
 ---
 
@@ -123,7 +167,7 @@ layout: false
 
 ]
 
-.column.bg-main2[.vmiddle[
+.column.bg-main4[.vmiddle[
   <br>
 ]]
 
@@ -144,7 +188,7 @@ layout: false
 
 ]
 
-.column.bg-main2[.vmiddle[
+.column.bg-main4[.vmiddle[
   <img src="img/social-interaction.jpeg" width=100%></img> 
 ]]
 
@@ -165,7 +209,7 @@ layout: false
 
 ]
 
-.column.bg-main2[.vmiddle[
+.column.bg-main4[.vmiddle[
   <img src="img/teamwork.jpeg" width=100%></img> 
 ]]
 
@@ -186,7 +230,7 @@ layout: false
 
 ]
 
-.column.bg-main2[.vmiddle[
+.column.bg-main4[.vmiddle[
   <img src="img/mccoy.png" width=100%></img>  
 ]]
 
@@ -289,8 +333,11 @@ layout: false
   ## The graph...
 
 .center[
-  <img src="img/pol-blogs.png" width=58%>
+  <img src="img/pol-blogs.png" width=55%>
 ]
+.footnote[
+  Image from <a href="http://allthingsgraphed.com/2014/10/09/visualizing-political-polarization/"> All Things Graphed </a> 
+  ]
 ]
 .column[
 
@@ -298,7 +345,7 @@ layout: false
   
   .center[
   <br> 
-  <img src="img/sample-matrix.png" width=100%>
+  <img src="img/sample-matrix.png" width=95%>
   ]
 
 ]
@@ -416,7 +463,10 @@ layout: false
 ]
 .column[
 .center[
-  <img src="img/pol-blogs.png" width=70%>
+  <img src="img/pol-blogs.png" width=65%>
+  .footnote[
+  Image from <a href="http://allthingsgraphed.com/2014/10/09/visualizing-political-polarization/"> All Things Graphed </a> 
+  ]
 ]
 ]
 
@@ -453,7 +503,7 @@ class: fade-row1-col1 fade-row3-col1
 class: split-two
 layout: false
 
-.column.bg-main1[
+.column.bg-main2[
 
 ### Matrices for Hypergraphs? 
 
@@ -472,7 +522,7 @@ So, what should we do?....
 ]
 
 .column[
-  <br>
+  <br> <br>
   <img src="img/graph-hypergraph.png" width=100%>
 ]
 
@@ -480,7 +530,7 @@ So, what should we do?....
 
 
 ---
-class: split-50 bg-main1 
+class: split-50 bg-main2 
 layout: false 
  
 .row[ 
@@ -523,23 +573,23 @@ class: split-two
 layout: false
 
 
-.column.bg-main1[
+.column.bg-main2[
 ## The Hashimoto Operator
 
 The adjacency matrix is $n\times n$ and  operates on nodes. 
 
-The .alert[Hashimoto operator] $\color{#FFD046}{\mathbf{B}}$ is a matrix that operates on *edge-node pairs*. 
+The .alert[Hashimoto operator] $\mathbf{B}$ is a matrix that operates on *edge-node pairs*. 
 
-Define $(e_1, p_1) \rightarrow (e_2, p_2)$ as: 
+Define $(e_1, v_1) \rightarrow (e_2, v_2)$ as: 
 
-- $p_1 \in e_1$ and $p_2 \in e_2$
-- $p_1 \in e_2 \setminus p_2$
+- $v_1 \in e_1$ and $v_2 \in e_2$
+- $v_1 \in e_2 \setminus v_2$
 - $e_1 \neq e_2$
 
 Then, 
 
 .font_smaller[ .font_smaller[
-$$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &\quad (e_1, p_1) \rightarrow (e_2, p_2) \\ 
+$$\mathbf{B}[(e_1, v_1), (e_2, v_2)] = \begin{cases} 1 &\quad (e_1, v_1) \rightarrow (e_2, v_2) \\ 
 0 &\quad \text{otherwise.}\end{cases}$$
 ]]]
 
@@ -547,7 +597,7 @@ $$\mathbf{B}[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &\quad (e_1, p_1) \righta
 <br>
 <img src="img/hypergraph-nonbacktracking.png" width=100%>
 
-"I can get to $p_2 \in e_2$ from $e_1$ by passing through $p_1$. I can get to $p_3 \in e_3$ from $e_2$ by passing through $p_2$..."
+"I can get to $v_2 \in e_2$ from $e_1$ by passing through $v_1$. I can get to $v_3 \in e_3$ from $e_2$ by passing through $v_2$..."
 
 ]
 
@@ -557,7 +607,7 @@ class: split-two
 layout: false
 
 
-.column.bg-main1[
+.column.bg-main2[
 ## The Hashimoto Operator
 
 <br> 
@@ -575,7 +625,7 @@ Formulated for hypergraphs by Storm, C. K. (2006). *The Electronic Journal of Co
 <br>
 <img src="img/hypergraph-nonbacktracking.png" width=100%>
 
-"I can get to $p_2 \in e_2$ from $e_1$ by passing through $p_1$. I can get to $p_3 \in e_3$ from $e_2$ by passing through $p_2$..."
+"I can get to $v_2 \in e_2$ from $e_1$ by passing through $v_1$. I can get to $v_3 \in e_3$ from $e_2$ by passing through $v_2$..."
 ]
 
 ---
@@ -584,7 +634,7 @@ class: split-two
 layout: false
 
 
-.column.bg-main1[
+.column.bg-main2[
 ## The Hashimoto Operator
 
 <br> 
@@ -593,7 +643,7 @@ Cool topological connections: prime cycles and zeta functions.
 
 Can represent hyperedges of all sizes in the same matrix!
 
-In our stochastic blockmodel from before, $\mathbf{v}_2$ is correlated with communities if $\lambda_2$ is real. 
+In our stochastic blockmodel from before, eigenvector $\mathbf{v}_2$ is correlated with communities if $\lambda_2$ is real. 
 
 .footnote[
   Precise control over community-correlated eigenvalues in the graph case: 
@@ -614,7 +664,7 @@ class: split-two
 layout: false
 
 
-.column.bg-main1[
+.column.bg-main2[
 ## Issue \# 1: Computation
 
 <br>
@@ -636,12 +686,12 @@ Eigenpair computations get expensive fast...
 
 ---
 
-class: bg-main2
+class: bg-main4
 layout: false
 
 ## A Generalized Bass Theorem
 
-**Theorem (PSC, JH, NE '21)**: Under mild conditions, if $\lambda$ is an eigenvalue of $\mathbf{B},$ then either: 
+**Theorem (PSC, JH, NE '22)**: Under mild conditions, if $\lambda$ is an eigenvalue of $\mathbf{B},$ then either: 
 
 1. $\lambda \in \{1, -1, -2, \ldots, 1-\bar{k}\}$ and carries no structural information about the hypergraph, or
 2. $\lambda$ is an eigenvalue of the matrix 
@@ -664,7 +714,7 @@ $$
 
 ---
 
-class: bg-main2
+class: bg-main4
   
 
 ## Proof Sketch
@@ -691,7 +741,7 @@ class: split-two
 layout: false
 
 
-.column.bg-main1[
+.column.bg-main2[
 ## Issue \# 1: Computation
 
 <br> <br> 
@@ -700,7 +750,7 @@ A .alert[*small*] data set might have $n = 300$ nodes, $m = 8,000$ edges, and av
 <br> 
 If $\bar{k} = 3$, then we can compute eigenvectors in 
 
-$$2n\bar{k} = 1,800 \color{#FFD046}{\ll} 20,000 = m\langle k\rangle$$ 
+$$2n\bar{k} = 1,800 \ll 20,000 = m\langle k\rangle$$ 
 
 dimensions instead.
 
@@ -716,7 +766,7 @@ We can do that 100x-1,000x faster!
 class: split-two
 layout: true
 
-.column.bg-main1[
+.column.bg-main2[
 
   ## First Algorithm
 
@@ -765,7 +815,7 @@ class: split-two
 layout: false
 
 
-.column.bg-main1[
+.column.bg-main2[
 ## Issue \# 2: Edge Sizes
 
 Our first eigenvector algorithm only works well when edges of different sizes carry .alert[similar types of information] about the clusters. 
@@ -789,7 +839,7 @@ What if edges of different sizes mean different things?
 class: split-two
 layout: false
 
-.column.bg-main1[
+.column.bg-main2[
   ## Belief Propagation...
 
   <br>
@@ -802,7 +852,7 @@ layout: false
 class: split-two
 layout: false
 
-.column.bg-main1[
+.column.bg-main2[
   ## Belief Propagation...
 
   <br>
@@ -817,7 +867,7 @@ layout: false
 class: split-two
 layout: false
 
-.column.bg-main1[
+.column.bg-main2[
   ## Belief Propagation...
 
   <br>
@@ -834,7 +884,7 @@ layout: false
 class: split-two
 layout: false
 
-.column.bg-main1[
+.column.bg-main2[
   ## Belief Propagation...
 
   <br>
@@ -851,7 +901,7 @@ layout: false
 class: split-two
 layout: false
 
-.column.bg-main1[
+.column.bg-main2[
   ## Belief Propagation...
 
   <br>
@@ -886,12 +936,12 @@ $\mathbb{P}(a_R|\mathbb{z}_R)$ is our stochastic blockmodel: specifies how likel
 
 class: split-two
 
-.column.bg-main1[
+.column.bg-main2[
 
 ### A Linear Approximation
 
 .font_smaller[
-**Theorem (PSC, NE, JH '21):** Consider a stochastic blockmodel in which: 
+**Theorem (PSC, NE, JH '22):** Consider a stochastic blockmodel in which: 
 
 - Every node has the same expected number of attached edges. 
 - The expected number of attached edges does not depend on the number of nodes $n$. 
@@ -939,7 +989,7 @@ background-size: contain
 
 ---
 
-class: split-two
+class: split-two bg-main4
 
 # A Cheat
 
@@ -947,7 +997,7 @@ $\mathbf{J}$ can be a *very* large big matrix.
 
 As before, we can use a smaller one: 
 
-**Theorem (PSC, JH, NE '21)**: Under mild conditions, if $\lambda$ is an "interesting" eigenvalue of $\mathbf{J},$ then $\lambda$ is also an eigenvalue of the $2n\ell\bar{k}$ matrix
+**Theorem (PSC, JH, NE '22)**: Under mild conditions, if $\lambda$ is an "interesting" eigenvalue of $\mathbf{J},$ then $\lambda$ is also an eigenvalue of the $2n\ell\bar{k}$ matrix
 
 $$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix} 
 \mathbf{0} & \mathbf{I}_\ell \otimes \mathbb{D} \\ 
@@ -973,7 +1023,7 @@ background-size: contain -->
 class: split-two
 layout: false
 
-.column.bg-main1[
+.column.bg-main2[
   ## Ok, but does it work? 
 
   Recall that we were having issues with parameter combinations in which edges of different sizes carried different kinds of information. 
@@ -988,7 +1038,7 @@ layout: false
 class: split-two
 layout: false
 
-.column.bg-main1[
+.column.bg-main2[
   ## Ok, but does it work? 
 
   Recall that we were having issues with parameter combinations in which edges of different sizes carried different kinds of information. 
@@ -1002,13 +1052,508 @@ layout: false
   <img src="img/heatmap-exp-1-no-curve.png" width=100%>   
 ]]]
 
+
 ---
 
-class: bg-main2
+background-image: url(img/clustering-math.png)
+background-size: contain
 
-<br> <br> <br> <br> <br> <br>
 
-## What about .alert[real data]?
+#### Example Data: Mapping Math with StackExchange Tags
+
+---
+
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[  
+.alert[**Graph community detection**] with eigenvectors. 
+  ]]]     
+  .row.bg-main2[.content.vmiddle[.font_medium[
+The .alert[**Hashimoto operator**] and eigenvector methods for hypergraphs.  
+  ]]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[ 
+.alert[**Detectability thresholds**] and open questions. 
+  ]]]
+]] 
+
+.column[.center[.stretch[
+  {{content}} 
+]]]
+
+---
+class: fade-row1-col1 fade-row2-col1
+<br> <br> <br> <br>
+<img src="img/heatmap-exp-1-no-curve.png" width=100%> 
+<br> 
+
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main3[
+  ## Algorithmic Thresholds
+
+<br> 
+  Recall the .alert[*suspiciously round*] region where our algorithm totally failed to learn any cluster information. 
+
+]
+
+.column[.stretch[
+  <br> <br> <br> <br>
+  <img src="img/heatmap-exp-1-no-curve.png" width=100%>   
+]]
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main3[
+  ## Algorithmic Thresholds
+
+<br> 
+  Recall the .alert[*suspiciously round*] region where our algorithm totally failed to learn any cluster information. 
+
+  This region can actually be estimated!   
+
+
+  Strategy: ask when $\mathbf{J}$ has an eigenvalue $> 1$, using approximations analogous to known results for graphs. 
+
+
+]
+
+.column[.stretch[
+  <br> <br> <br> <br>
+  <img src="img/heatmap-exp-1.png" width=100%>   
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main3[
+  ## Algorithmic Thresholds
+
+.alert[**Conjecture**]: In a 2-group testbed with edge sizes $k_1,k_2,\ldots$ and $c_k$ edges of size $k$ per node, detection is possible outside the ellipsoid with centroid $(x_{k_1},x_{k_2},\ldots)$ and radii $(r_{k_1},r_{k_1}\ldots)$, where: 
+
+$$
+\begin{align}
+x_k &= \frac{1-a_k}{2-a_k} d \\ 
+r_k &= \frac{\sqrt{(k-1)c_k}}{2-a_k} \\
+a_k &= \frac{1-2^{2-k}}{1-2^{1-k}}\;.
+\end{align}
+$$
+
+*Proof will involve some tricky random matrix theory (future work).* 
+
+
+]
+
+.column[.stretch[
+  <br> <br> <br> <br>
+  <img src="img/4-heatmaps-2.png" width=100%>
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main3[
+  ## Detectability Thresholds
+
+<br> 
+In graphs, failure of Hashimoto spectral clustering coincides with an .alert[information-theoretic bound] on the clustering problem. 
+  
+- .alert2[No algorithm] can reliably detect communities. 
+
+We conjecture the same thing for hypergraphs: inside that ellipse, the clustering problem is not just difficult but *theoretically* impossible. 
+
+.footnote[
+  Recent proof for graphs: <br> 
+  Mossel et al. (2018) A proof of the blockmodel threshold conjecture, *Combinatorica*.  
+  ]
+
+]
+
+.column[.stretch[
+  <br> <br> <br> <br>
+  <img src="img/4-heatmaps-2.png" width=100%>
+]]
+
+
+---
+
+
+class: split-two
+layout: false
+
+.column.bg-main3[
+
+## Summing Up
+
+The .alert[Hashimoto operator] enables eigenvector techniques for community detection in hypergraphs. 
+
+Determinant identities help us speed up computation. 
+
+Some hypergraph data sets "need" hypergraph methods, while others don't. 
+
+There are open questions around the .alert2[fundamental limits] of hypergraph community detection. 
+
+
+]
+
+.column.bg-main4[
+
+
+.row[ 
+.split-two[
+.column[.lil-stretch[<br><br>
+  <img src="img/jamie_portrait.jpeg" width=80%> 
+  ]]
+.column[.lil-stretch[<br><br>
+  <img src="img/eikmeier-3.png" width=80%> 
+]]]]
+.row[ 
+.split-two[
+.column[.lil-stretch[<br><br><br><br><br><br><br><br>
+  .alert[Jamie Haddock] <br> Harvey Mudd @jamie_hadd
+  ]]
+.column[.lil-stretch[<br><br><br><br><br><br><br><br>
+  .alert[Nicole Eikmeier] <br> Grinnell @NicoleEikmeier
+]]]]
+
+<br><br><br><br><br><br><br><br><br><br><br> <br> 
+
+**PSC**, Nicole Eikmeier, and Jamie Haddock (2022). Nonbacktracking spectral clustering of nonuniform hypergraphs. *In preparation*.
+
+]
+ 
+---
+
+class: bg-main2 middle
+
+# Future Directions
+
+
+---
+
+class: split-40
+
+.column.bg-main1[
+### Math for Network Data Science
+
+<br>
+
+What .alert[models] accurately reflect features of network data? 
+
+What .alert[algorithms] can we use to learn these models? 
+
+What .alert[mathematical challenges] arise from these questions? 
+
+]
+
+.column[.split-four[
+  .row.bg-main3[.split-20[.column[ 
+  <div class="thumbnail"> 
+  <img src="img/heatmap-thumbnail.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a href="https://link.springer.com/article/10.1007/s41109-020-0252-y">Nonbacktracking specral clustering of nonuniform hypergraphs </a> <br>
+  <b>PSC</b>, Nicole Eikmeier, and Jamie Haddock<br>
+  <i>In preparation</i> (2022)
+  </div>       
+  ]] 
+]
+  .row[.split-20[.column[
+    <div class="thumbnail"> 
+    <img src="img/contact-clustering-excerpt.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a href="https://advances.sciencemag.org/content/7/28/eabh1303">Generative hypergraph clustering: from blockmodels to modularity </a> <br>
+    <b>PSC</b>, Nate Veldt, and Austin Benson <br>
+    <i>Science Advances</i> (2021)
+    </div>       
+    ]]
+  ]
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+    <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" width=120px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a href="https://epubs.siam.org/doi/abs/10.1137/19M1288772">Moments of uniformly random multigraphs with fixed degree sequences </a> <br>
+    <b>PSC</b><br>
+    <i>SIAM J. Mathematics of Data Science</i> (2020)
+    </div>       
+    ]] 
+  ]
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" width=120px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a href="https://academic.oup.com/comnet/article-abstract/8/3/cnaa018/5879929">Configuration models of random hypergraphs </a> <br>
+  <b>PSC</b> <br>
+  <i>J. Complex Networks</i> (2020)
+  </div>       
+  ]]
+]
+]
+]
+
+
+---
+
+class: split-40
+
+.column.bg-main2[ 
+### Models of Biosocial Systems
+
+<br>
+
+How can .alert[individual decisions] lead to large-scale 
+social division or hierarchy? 
+
+What .alert[mechanisms] do math models need to capture these phenomena? 
+
+What can we .alert[prove] or .alert[approximate] about the behavior of these models?
+
+]
+
+.column[.split-four[
+  .row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="img/karate-graph.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a>Smoothly nonlinear opinion dynamics </a> <br>
+  Heather Zinn Brooks, <b>PSC</b>, and Mason A. Porter <br>
+  <i>In preparation</i> (2022)
+  </div>       
+  ]]
+]
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="img/mxhierarchy-flows.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a>Model-based approaches to layer aggregation in animal dominance networks </a> <br>
+  <b>PSC</b>, Kelly Finn, and and Mason A. Porter <br>
+  <i>In preparation</i> (2022)
+  </div>       
+  ]]
+]
+  .row[.split-20[.column[
+    <div class="thumbnail"> 
+    <img src="img/dynamics-thumbnail.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a href="https://advances.sciencemag.org/content/7/28/eabh1303">Emergence of hierarchy in networked endorsement dynamics </a> <br>
+    Mari Kawakatsu, <b>PSC</b>, Nicole Eikmeier, and Dan Larremore <br>
+    <i>Proc. National Academy of Sciences</i> (2021) 
+    </div>       
+    ]]
+  ]  
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+    <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a href="https://epubs.siam.org/doi/pdf/10.1137/18M1232346?casa_token=st1ib1C3dRUAAAAA:u69ZSyBJVU-keaUQ6eO6wVKcM42DNeUReNMDWhVVT5pUDozAHYx8NnGz7iKZ4gX1gtMxGYMCucA">Local symmetry and global structure in adaptive voter models </a> <br>
+    <b>PSC</b> and Peter Mucha<br>
+    <i>SIAM J. Applied Math</i> (2020)
+    </div>       
+    ]] 
+  ]
+]
+] 
+
+---
+
+class: split-40
+
+.column.bg-main3[ 
+### Data Science and Social Responsibility
+
+<br>
+
+How can mathematics .alert[unify and support] methods in quantitative sociology? 
+
+How can we acquire and analyze data sets on .alert[equity] and .alert[justice]? 
+
+How can we model the history (and future?) of .alert[representation] in our discipline? 
+]
+
+.column[.split-four[
+  .row[.split-20[.column[
+    <div class="thumbnail"> 
+    <img src="img/sentencing-processing-thumbnail.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a> Impact of race on sentencing in a state court</a> <br>
+    Hinal Jajal (undergraduate mentee), <b>PSC</b><br>
+    <i>Ongoing work</i> (2021) 
+    </div>       
+    ]]
+]  
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+    <img src="img/mgp-thumbnail.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a>Dynamics of gender representation in mathematical subfields </a> <br>
+    Ben Brill (undergraduate mentee) et al. <br>
+    <i>Ongoing work</i> (2020)
+    </div>       
+    ]] 
+  ]
+  .row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="img/no2-thumbnail.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2021GL094333">Space-based observational constraints on NO₂ air pollution inequality from diesel traffic in major U.S. cities </a> <br>
+  Demetillo et al. 
+  <i>Geophysics Review Letters</i> (2021)
+  </div>       
+  ]]
+]
+  .row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a href="https://www.pnas.org/content/pnas/114/44/11591.full.pdf">Structure and information in spatial segregation </a> <br>
+  <b>PSC</b><br>
+  <i>Proc. National Academy of Sciences</i> (2017)
+  </div>       
+  ]]
+]
+]
+] 
+
+---
+
+class: split-20
+layout: true
+
+.row.bg-main4[
+  ## Future Work (With Students!)
+  ]
+.row[.split-three[
+.column.bg-main1[
+  
+  .content[
+  #### Math for Network Data Science
+
+  .font_smaller[.font_smaller[
+  "With high probability as the number of nodes grows large, the .alert[eigenvalues] of $\mathbf{B}$ are..." 
+
+  <br> 
+  Models of .alert[edge-correlations] in hypergraphs. 
+
+  <br> 
+  .alert[Dynamics and algorithms]: random walks, stability functions, ranking, clustering. 
+  ]
+
+  ]]
+]
+  .column.bg-main2[
+
+.content[
+#### Models of Biosocial Systems <br><br>
+  .font_smaller[.font_smaller[
+Comparing network ranking functions with actual, .alert[human-attributed ranks] 
+- Ongoing collab with social anthropologists.
+
+Statistical problems with .alert[inference of social hierarchies] (focal sampling, behavior categories).
+  ]
+]
+]
+  ]
+  .column.bg-main3[
+.content[
+    #### Data Science and Social Responsibility
+
+.font_smaller[.font_smaller[
+
+Dynamical models of .alert[migration] and racial segregation. 
+
+<br> 
+
+.alert[Racial disparities] in U.S. criminal sentencing: further data acquisition + analysis.  
+
+<br> 
+
+New collaborations! 
+]
+]]
+  ]
+  ]]
+
+---
+
+class: hide-col1 hide-col2 hide-col3
+
+---
+
+class:  hide-col2 hide-col3
+
+---
+
+class:  fade-col1 hide-col3
+
+---
+
+class:  fade-col1 fade-col2
+
+
+---
+class: middle bg-main1 
+layout: false
+# Thanks everyone! 
+
+## Questions?
+
+
+---
+
+class: middle bg-main4  
+
+# Extra slides
+
 
 ---
 
@@ -1077,216 +1622,4 @@ class: bg-main2
 
 <br> <br> <br> <br>  
 ### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the cluster structure. 
-
----
-
-background-image: url(img/clustering-math.png)
-background-size: contain
-
-
-#### Just for Fun: Mapping Math with StackExchange Tags
-
----
-
-layout: true
-class: split-two middle 
- 
-.column[
-  .split-three[ 
-  .row.bg-main1[.content.vmiddle[.font_medium[  
-.alert[**Graph community detection**] with eigenvectors. 
-  ]]]     
-  .row.bg-main2[.content.vmiddle[.font_medium[
-The .alert[**Hashimoto operator**] and eigenvector methods for hypergraphs.  
-  ]]] 
-  .row.bg-main3[.content.vmiddle[.font_medium[ 
-.alert[**Detectability thresholds**] and open questions. 
-  ]]]
-]] 
-
-.column[.center[.stretch[
-  {{content}} 
-]]]
-
----
-class: fade-row1-col1 fade-row2-col1
-<br> <br> <br> <br>
-<img src="img/heatmap-exp-1-no-curve.png" width=100%> 
-<br> 
-
-
-
----
-
-class: split-two
-layout: false
-
-.column.bg-main1[
-  ## Algorithmic Thresholds
-
-<br> 
-  Recall the .alert[*suspiciously round*] region where our algorithm totally failed to learn any cluster information. 
-
-]
-
-.column[.stretch[
-  <br> <br> <br> <br>
-  <img src="img/heatmap-exp-1-no-curve.png" width=100%>   
-]]
-
-
----
-
-class: split-two
-layout: false
-
-.column.bg-main1[
-  ## Algorithmic Thresholds
-
-<br> 
-  Recall the .alert[*suspiciously round*] region where our algorithm totally failed to learn any cluster information. 
-
-  This region can actually be estimated!   
-
-
-  Strategy: ask when $\mathbf{J}$ has an eigenvalue $> 1$, using approximations analogous to known results for graphs. 
-
-
-]
-
-.column[.stretch[
-  <br> <br> <br> <br>
-  <img src="img/heatmap-exp-1.png" width=100%>   
-]]
-
----
-
-class: split-two
-layout: false
-
-.column.bg-main1[
-  ## Algorithmic Thresholds
-
-.alert[**Conjecture**]: In a 2-group testbed with edge sizes $k_1,k_2,\ldots$ and $c_k$ edges of size $k$ per node, detection is possible outside the ellipsoid with centroid $(x_{k_1},x_{k_2},\ldots)$ and radii $(r_{k_1},r_{k_1}\ldots)$, where: 
-
-$$
-\begin{align}
-x_k &= \frac{1-a_k}{2-a_k} d \\ 
-r_k &= \frac{\sqrt{(k-1)c_k}}{2-a_k} \\
-a_k &= \frac{1-2^{2-k}}{1-2^{1-k}}\;.
-\end{align}
-$$
-
-*Proof will involve some tricky random matrix theory (future work).* 
-
-
-]
-
-.column[.stretch[
-  <br> <br> <br> <br>
-  <img src="img/4-heatmaps-2.png" width=100%>
-]]
-
----
-
-class: split-two
-layout: false
-
-.column.bg-main1[
-  ## Detectability Thresholds
-
-<br> 
-In graphs, failure of Hashimoto spectral clustering coincides with an .alert[information-theoretic bound] on the clustering problem. 
-  
-- .alert2[No algorithm] can reliably detect communities. 
-
-We conjecture the same thing for hypergraphs: inside that ellipse, the clustering problem is not just difficult but *theoretically* impossible. 
-
-.footnote[
-  Recent proof for graphs: <br> 
-  Mossel et al. (2018) A proof of the blockmodel threshold conjecture, *Combinatorica*.  
-  ]
-
-]
-
-.column[.stretch[
-  <br> <br> <br> <br>
-  <img src="img/4-heatmaps-2.png" width=100%>
-]]
-
-
----
-
-
-class: split-two
-layout: false
-
-.column.bg-main1[
-
-## Summing Up
-
-The .alert[Hashimoto operator] enables eigenvector techniques for community detection in hypergraphs. 
-
-Determinant identities help us speed up computation. 
-
-Some hypergraph data sets "need" hypergraph methods, while others don't. 
-
-There are open questions around the .alert2[fundamental limits] of hypergraph community detection. 
-
-
-]
-
-.column[
-
-]
-
----
-
-class: split-two
-layout: false
-
-.column.bg-main1[
-
-## Summing Up
-
-
-The .alert[Hashimoto operator] enables eigenvector techniques for community detection in hypergraphs. 
-
-Determinant identities help us speed up computation. 
-
-Some hypergraph data sets "need" hypergraph methods, while others don't. 
-
-There are open questions around the .alert2[fundamental limits] of hypergraph community detection. 
-
-
-]
-
-.column.bg-main2[
-## **Thanks!**
-
-.row[ 
-.split-two[
-.column[.lil-stretch[<br><br><br><br> 
-  <img src="img/jamie_portrait.jpeg" width=80%> 
-  ]]
-.column[.lil-stretch[<br><br><br><br>
-  <img src="img/eikmeier-3.png" width=80%> 
-]]]]
-.row[ 
-.split-two[
-.column[.lil-stretch[<br><br><br><br><br><br><br><br><br><br>
-  .alert[Jamie Haddock] <br> Harvey Mudd @jamie_hadd
-  ]]
-.column[.lil-stretch[<br><br><br><br><br><br><br><br><br><br>
-  .alert[Nicole Eikmeier] <br> Grinnell @NicoleEikmeier
-]]]]
-
-<br><br><br><br><br><br><br><br><br><br><br> 
-
-
-
-- Swarthmore Department of Mathematics and Statistics
-- You! 
-
-]
 

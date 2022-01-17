@@ -1,6 +1,6 @@
 :root {
 		--main-color1: #384d54;
-		--main-color2: #fffdfa;
+		--main-color2: #fff0d9;
 		--main-color3: #f5f7fa;
 		--main-color4: #FFFCF2;
 		--main-color5: #6CAE75;
@@ -58,7 +58,7 @@
 }
 
 .bg-main4 .alert {
-	color: var(--alert-color1);
+	color: var(--alert-color2);
 	font-weight: bold;
 }
 
@@ -70,6 +70,8 @@
 .bg-main1 .alert-no-bold {
 	color: var(--alert-color3);
 }
+
+h4 { padding-left: .7em; padding-right: .7em }
 
 
 
@@ -160,3 +162,24 @@
 				left: 0 !important;
 			}
 		}
+
+.compress {
+	padding: 0;
+	padding-left: 20px;
+	padding-top: 20px;
+	/* display:inline-block; */
+	width: 80%;
+	font-size: .8em;
+	vertical-align: middle;
+}
+
+.thumbnail {
+	padding: 0;
+	padding-left: 15px;
+	padding-top: 40px;
+	/* display:inline-block; */
+	width: 100%;
+	font-size: .8em;
+	vertical-align: middle;
+}
+		  
