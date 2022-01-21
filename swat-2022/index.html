@@ -15,7 +15,7 @@
 class: center, middle, inverse, title-slide
 
 # Eigenvector Methods for Community Detection in Hypergraphs
-## Department of Mathematics and Statistics<br> Swarthmore College<br>January 24th, 2022
+## Department of Mathematics and Statistics<br> Swarthmore College<br>January 25th, 2022
 ### Dr. <span class="author-highlight">Phil Chodrow</span> <br> Department of Mathematics <br> University of California, Los Angeles
 
 ---
@@ -60,7 +60,58 @@ class: split-two
 
 ---
 
+class: middle 
+
+# My Research
+
+
+---
+
+class: split-three
+layout: true
+
+.row[
+  .split-40[.column.bg-main1[
+      ### Math for Network Data Science
+    ].column[
+      &lt;img src="img/heatmap-thumbnail.png" height=170px&gt; 
+      &lt;img src="img/contact-clustering-excerpt.png" height=190px&gt; 
+      &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px&gt;  --&gt;
+      &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px&gt; 
+    ]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;img src="img/karate-graph.png" height=160px&gt;
+    &lt;img src="img/mxhierarchy-flows.png" height=170px&gt; 
+    &lt;img src="img/dynamics-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px&gt;  --&gt;
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    &lt;img src="img/sentencing-processing-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="img/mgp-thumbnail.png" height=170px&gt;  --&gt;
+    &lt;img src="img/no2-thumbnail.png" height=170px&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=180px&gt; 
+  ]]
+]
+]
+
+---
+
+class:
+
+---
+
 class: split-40
+layout: true
 
 .column.bg-main1[
 ### Math for Network Data Science
@@ -76,7 +127,7 @@ What can we .alert[prove] about these models and algorithms?
 ]
 
 .column[.split-four[
-  .row.bg-main3[.split-20[.column[ 
+  .row[.content[.split-20[.column[ 
   &lt;div class="thumbnail"&gt; 
   &lt;img src="img/heatmap-thumbnail.png" width=130px&gt; 
   &lt;/div&gt;
@@ -87,9 +138,9 @@ What can we .alert[prove] about these models and algorithms?
   &lt;b&gt;PSC&lt;/b&gt;, Nicole Eikmeier, and Jamie Haddock&lt;br&gt;
   &lt;i&gt;In preparation&lt;/i&gt; (2022)
   &lt;/div&gt;       
-  ]] 
+  ]]] 
 ]
-  .row[.split-20[.column[
+  .row[.content[.split-20[.column[
     &lt;div class="thumbnail"&gt; 
     &lt;img src="img/contact-clustering-excerpt.png" width=110px&gt; 
     &lt;/div&gt;
@@ -101,8 +152,8 @@ What can we .alert[prove] about these models and algorithms?
     &lt;i&gt;Science Advances&lt;/i&gt; (2021)
     &lt;/div&gt;       
     ]]
-  ]
-.row[.split-20[.column[
+  ]]
+.row[.content[.split-20[.column[
   &lt;div class="thumbnail"&gt; 
     &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" width=120px&gt; 
     &lt;/div&gt;
@@ -113,23 +164,29 @@ What can we .alert[prove] about these models and algorithms?
     &lt;b&gt;PSC&lt;/b&gt;&lt;br&gt;
     &lt;i&gt;SIAM J. Mathematics of Data Science&lt;/i&gt; (2020)
     &lt;/div&gt;       
-    ]] 
+    ]]]
   ]
-.row[.split-20[.column[
+.row[.content[.split-20[.column[.content[
   &lt;div class="thumbnail"&gt; 
   &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" width=120px&gt; 
   &lt;/div&gt;
-  ].column[
+  ]].column[.content[
   &lt;div class="compress"&gt;
   &lt;br&gt;
   &lt;a href="https://academic.oup.com/comnet/article-abstract/8/3/cnaa018/5879929"&gt;Configuration models of random hypergraphs &lt;/a&gt; &lt;br&gt;
   &lt;b&gt;PSC&lt;/b&gt; &lt;br&gt;
   &lt;i&gt;J. Complex Networks&lt;/i&gt; (2020)
   &lt;/div&gt;       
-  ]]
+  ]]]]
 ]
 ]
 ]
+
+---
+
+---
+
+class: fade-row2-col2 fade-row3-col2 fade-row4-col2
 
 ---
 
@@ -271,7 +328,7 @@ class: split-two middle
 .column[
   .split-three[ 
   .row.bg-main1[.content.vmiddle[.font_medium[  
-.alert[**Graph community detection**] with eigenvectors.
+Eigenvectors and .alert[graph community detection].
   ]]]     
   .row.bg-main2[.content.vmiddle[.font_medium[
 The .alert[**Hashimoto operator**] and eigenvector methods for hypergraphs.  
@@ -320,6 +377,20 @@ class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
   &lt;/div&gt;
 ---
 
+class: bg-main1
+layout: false
+# Reminder 
+
+&lt;br&gt; &lt;br&gt; 
+.font_larger[
+Vector `\(\mathbf{v} \in \mathbb{R}^n\)` is an .alert[eigenvector] of matrix `\(\mathbf{A} \in \mathbb{R}^n\)` with .alert[eigenvalue] `\(\lambda \in \mathbb{R}\)` iff 
+
+.font_larger[.font_larger[
+$$ \mathbf{A}\mathbf{v} = \lambda \mathbf{v}\;. $$ 
+]]]
+
+---
+
 class: bg-main2
 layout: false
 background-image: url(img/opportunity.jpeg)
@@ -327,27 +398,38 @@ background-size: contain
 
 ---
 
-class: split-two
+class: split-two bg-main2
 layout: false
 
 .column[
   ## The graph...
 
+&lt;br&gt; 
 .center[
-  &lt;img src="img/pol-blogs.png" width=55%&gt;
+  &lt;img src="img/basic-graph.png" width=80%&gt;
 ]
-.footnote[
-  Image from &lt;a href="http://allthingsgraphed.com/2014/10/09/visualizing-political-polarization/"&gt; All Things Graphed &lt;/a&gt; 
-  ]
+
 ]
 .column[
 
   ## ...the adjacency matrix
   
-  .center[
-  &lt;br&gt; 
-  &lt;img src="img/sample-matrix.png" width=95%&gt;
-  ]
+  &lt;br&gt; &lt;br&gt; 
+  $$\mathbf{A} = \left[\begin{matrix}
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0  \\  --&gt;
+    &lt;!-- \mathbf{1}     &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; \mathbf{1}  \\ --&gt;
+    &lt;!-- 0 &amp; \mathbf{1} &amp; 0 &amp; \mathbf{1} &amp; \mathbf{1}  \\ --&gt;
+    &lt;!-- 0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0  \\ --&gt;
+    &lt;!-- 0 &amp; \mathbf{1} &amp; \mathbf{1} &amp; 0 &amp; 0  \\  --&gt;
+    \end{matrix}\right] 
+    $$
+
+  We have 
+  $$a_{ij} = \begin{cases}
+  &lt;!-- 1 &amp;\quad (i,j) \in \mathcal{E} \\  --&gt;
+  0 &amp;\quad \text{otherwise.}
+  \end{cases}$$`
+  
 
 ]
 
@@ -365,9 +447,7 @@ layout: false
 
   `$$p_{ij} = \begin{cases} p &amp;\quad i,j \text{ are in the same group} \\ q &amp;\quad i,j \text{ are in different groups} \end{cases}$$`
 
-  We can represent the result as an adjacency matrix `\(\mathbf{A}\)`, where 
-
-  `$$a_{ij} = \begin{cases} 1 &amp;\quad (i,j) \in \mathcal{E} \\ 0 &amp;\quad  \text{otherwise} \end{cases}$$`
+  This gives us an adjacency matrix `\(\mathbf{A}\)` with .alert[noisy block structure].
 
   This is called a .alert[stochastic blockmodel (SBM)]. 
 ]
@@ -386,10 +466,10 @@ layout: false
 .column.bg-main1[
 ### Clusters from Eigenvectors
 
+&lt;br&gt; 
+
 .font_smaller[
 Leading eigenpairs of `\(\mathbf{P}\)`. 
-
-Reminder: `\(\mathbf{P}\mathbf{v} = \lambda \mathbf{v}\)`. 
 
 .font_smaller[
 `$$\begin{align}
@@ -479,7 +559,7 @@ class: split-two middle
 .column[
   .split-three[ 
   .row.bg-main1[.content.vmiddle[.font_medium[  
-.alert[**Graph community detection**] with eigenvectors. 
+Eigenvectors and .alert[graph community detection]. 
   ]]]     
   .row.bg-main2[.content.vmiddle[.font_medium[
 The .alert[**Hashimoto operator**] and eigenvector methods for hypergraphs.  
@@ -772,6 +852,8 @@ layout: true
   ## First Algorithm
 
   
+&lt;br&gt;
+
   2. Compute the second eigenpair `\((\lambda_2, \mathbf{v}_2)\)` of `\(\mathbf{B}'\)`. 
   3. If `\(\lambda_2\)` is real, separate `\(\mathbf{v}_2 = (\alpha, \beta)\)`, with `\(\alpha, \beta \in \mathbb{R}^{n\bar{k}}\)`. 
   4. If
@@ -1070,7 +1152,7 @@ class: split-two middle
 .column[
   .split-three[ 
   .row.bg-main1[.content.vmiddle[.font_medium[  
-.alert[**Graph community detection**] with eigenvectors. 
+Eigenvectors and .alert[graph community detection]. 
   ]]]     
   .row.bg-main2[.content.vmiddle[.font_medium[
 The .alert[**Hashimoto operator**] and eigenvector methods for hypergraphs.  
@@ -1153,7 +1235,7 @@ a_k &amp;= \frac{1-2^{2-k}}{1-2^{1-k}}\;.
 \end{align}`
 $$
 
-*Proof will involve some tricky random matrix theory (future work).* 
+*Proof will involve some random matrix theory (future work).* 
 
 
 ]
@@ -1244,6 +1326,248 @@ class: bg-main2 middle
 
 # Future Directions
 
+---
+
+class: split-three
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[
+      ### Math for Network Data Science
+    ].column[
+      &lt;img src="img/heatmap-thumbnail.png" height=170px&gt; 
+      &lt;img src="img/contact-clustering-excerpt.png" height=170px&gt; 
+      &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px&gt;  --&gt;
+      &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px&gt; 
+    ]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;img src="img/karate-graph.png" height=160px&gt;
+    &lt;img src="img/mxhierarchy-flows.png" height=170px&gt; 
+    &lt;img src="img/dynamics-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px&gt;  --&gt;
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    &lt;img src="img/sentencing-processing-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="img/mgp-thumbnail.png" height=170px&gt;  --&gt;
+    &lt;img src="img/no2-thumbnail.png" height=170px&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px&gt; 
+  ]]
+]
+]
+
+---
+
+class: split-three fade-row2-col1 fade-row2-col2 fade-row3-col1 fade-row3-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[
+      ### Math for Network Data Science
+    ].column[
+- "With high probability as the number of nodes grows large, the .alert[eigenvalues] of `\(\mathbf{B}\)` are..." 
+- Models of .alert[edge-correlations] in hypergraphs. 
+- .alert[Dynamics and algorithms]: random walks, stability functions, ranking, clustering. 
+    ]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;img src="img/karate-graph.png" height=160px&gt;
+    &lt;img src="img/mxhierarchy-flows.png" height=170px&gt; 
+    &lt;img src="img/dynamics-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px&gt;  --&gt;
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    &lt;img src="img/sentencing-processing-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="img/mgp-thumbnail.png" height=170px&gt;  --&gt;
+    &lt;img src="img/no2-thumbnail.png" height=170px&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px&gt; 
+  ]]
+]
+]
+
+---
+
+class: split-three fade-row1-col1 fade-row1-col2 fade-row3-col1 fade-row3-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[.content[
+      ### Math for Network Data Science
+    ]].column[.content[
+      &lt;img src="img/heatmap-thumbnail.png" height=170px&gt; 
+      &lt;img src="img/contact-clustering-excerpt.png" height=170px&gt; 
+      &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px&gt;  --&gt;
+      &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px&gt; 
+    ]]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+- Comparing network ranking functions with actual, .alert[human-attributed ranks] 
+  - Ongoing collab with social anthropologists.
+- Statistical problems with .alert[inference of social hierarchies] (focal sampling, behavior categories).
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    &lt;img src="img/sentencing-processing-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="img/mgp-thumbnail.png" height=170px&gt;  --&gt;
+    &lt;img src="img/no2-thumbnail.png" height=170px&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px&gt; 
+  ]]
+]
+]
+
+
+---
+
+class: split-three fade-row1-col1 fade-row1-col2 fade-row2-col1 fade-row2-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[.content[
+      ### Math for Network Data Science
+    ]].column[.content[
+      &lt;img src="img/heatmap-thumbnail.png" height=170px&gt; 
+      &lt;img src="img/contact-clustering-excerpt.png" height=170px&gt; 
+      &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px&gt;  --&gt;
+      &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px&gt; 
+    ]]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;img src="img/karate-graph.png" height=160px&gt;
+    &lt;img src="img/mxhierarchy-flows.png" height=170px&gt; 
+    &lt;img src="img/dynamics-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px&gt;  --&gt;
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+- Dynamical models of .alert[migration] and racial segregation. 
+- .alert[Racial disparities] in U.S. criminal sentencing: further data acquisition + analysis.  
+- New collaborations! 
+  ]]
+]
+]
+
+---
+class: middle bg-main1 
+layout: false
+# Thanks everyone! 
+
+## Questions?
+
+
+---
+
+class: middle bg-main4  
+
+# Extra slides
+
+
+---
+
+## High School Social Contacts
+
+&lt;br&gt; 
+
+  `\(n = 327\)` students (nodes) in a French high school. 
+
+  `\(m = 7,818\)` social contact events (edges) measured by wearable 
+  sensors.   
+
+  Average number of participants in interaction `\(\langle k \rangle = 2.3\)` 
+
+  Clusters are the classes to which students are assigned. 
+
+
+
+
+  &lt;div class="footnote"&gt;
+    Data originally from: &lt;br&gt;
+    R. Mastrandrea et al. (2015), Contact patterns in a high school: A comparison between data collected using wearable sensors, contact diaries, and friendship surveys. &lt;i&gt;PLoS One&lt;/i&gt; 10:9, e0136497
+    &lt;br&gt; &lt;br&gt; 
+    Prepared by 
+    A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. &lt;i&gt;Proceedings of the National Academy of Sciences&lt;/i&gt; 10.1073/pnas.1800683115  
+  &lt;/div&gt;
+
+---
+background-image: url(img/contact-high-school-classes.png)
+background-size: contain
+
+## High School Social Contacts 
+
+---
+
+  ## On the Other Hand...Senate Bills
+
+&lt;br&gt; 
+
+  `\(n = 293\)` U.S. senators (nodes) cosponsoring bills.
+
+  `\(m = 20,006\)` bills (edges) in period 1973-2016.
+
+  Average number of cosponsors `\(\langle k \rangle = 7.3\)`.
+
+  Clusters are Democrat/Republican. 
+
+
+&lt;div class="footnote"&gt;
+  Data originally from: &lt;br&gt;
+  J. Fowler (2006), Legislative cosponsorship networks in the U.S. House and Senate. &lt;i&gt;Social Networks&lt;/i&gt; 28:4, 454--465
+  &lt;br&gt; &lt;br&gt; 
+  Prepared by 
+  A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. &lt;i&gt;Proceedings of the National Academy of Sciences&lt;/i&gt; 10.1073/pnas.1800683115  
+&lt;/div&gt;
+
+
+---
+background-image: url(img/SN-congress-bills.png)
+background-size: contain
+
+## Senate Bills
+
+---
+class: bg-main2
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;  
+### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the cluster structure. 
+
+---
+
+class: middle 
+
+# My Papers
 
 ---
 
@@ -1263,7 +1587,7 @@ What .alert[mathematical challenges] arise from these questions?
 ]
 
 .column[.split-four[
-  .row.bg-main3[.split-20[.column[ 
+  .row[.split-20[.column[ 
   &lt;div class="thumbnail"&gt; 
   &lt;img src="img/heatmap-thumbnail.png" width=130px&gt; 
   &lt;/div&gt;
@@ -1419,7 +1743,7 @@ How can we model the history (and future?) of .alert[representation] in our disc
     &lt;br&gt;
     &lt;a&gt; Impact of race on sentencing in a state court&lt;/a&gt; &lt;br&gt;
     Hinal Jajal (undergraduate mentee), &lt;b&gt;PSC&lt;/b&gt;&lt;br&gt;
-    &lt;i&gt;Ongoing work&lt;/i&gt; (2021) 
+    &lt;i&gt;Ongoing work&lt;/i&gt; (2022) 
     &lt;/div&gt;       
     ]]
 ]  
@@ -1432,7 +1756,7 @@ How can we model the history (and future?) of .alert[representation] in our disc
     &lt;br&gt;
     &lt;a&gt;Dynamics of gender representation in mathematical subfields &lt;/a&gt; &lt;br&gt;
     Ben Brill (undergraduate mentee) et al. &lt;br&gt;
-    &lt;i&gt;Ongoing work&lt;/i&gt; (2020)
+    &lt;i&gt;Ongoing work&lt;/i&gt; (2022)
     &lt;/div&gt;       
     ]] 
   ]
@@ -1463,166 +1787,7 @@ How can we model the history (and future?) of .alert[representation] in our disc
   ]]
 ]
 ]
-] 
-
----
-
-class: split-20
-layout: true
-
-.row.bg-main4[
-  ## Future Work (With Students!)
-  ]
-.row[.split-three[
-.column.bg-main1[
-  
-  .content[
-  #### Math for Network Data Science
-
-  .font_smaller[.font_smaller[
-  "With high probability as the number of nodes grows large, the .alert[eigenvalues] of `\(\mathbf{B}\)` are..." 
-
-  &lt;br&gt; 
-  Models of .alert[edge-correlations] in hypergraphs. 
-
-  &lt;br&gt; 
-  .alert[Dynamics and algorithms]: random walks, stability functions, ranking, clustering. 
-  ]
-
-  ]]
 ]
-  .column.bg-main2[
-
-.content[
-#### Models of Biosocial Systems &lt;br&gt;&lt;br&gt;
-  .font_smaller[.font_smaller[
-Comparing network ranking functions with actual, .alert[human-attributed ranks] 
-- Ongoing collab with social anthropologists.
-
-Statistical problems with .alert[inference of social hierarchies] (focal sampling, behavior categories).
-  ]
-]
-]
-  ]
-  .column.bg-main3[
-.content[
-    #### Data Science and Social Responsibility
-
-.font_smaller[.font_smaller[
-
-Dynamical models of .alert[migration] and racial segregation. 
-
-&lt;br&gt; 
-
-.alert[Racial disparities] in U.S. criminal sentencing: further data acquisition + analysis.  
-
-&lt;br&gt; 
-
-New collaborations! 
-]
-]]
-  ]
-  ]]
-
----
-
-class: hide-col1 hide-col2 hide-col3
-
----
-
-class:  hide-col2 hide-col3
-
----
-
-class:  fade-col1 hide-col3
-
----
-
-class:  fade-col1 fade-col2
-
-
----
-class: middle bg-main1 
-layout: false
-# Thanks everyone! 
-
-## Questions?
-
-
----
-
-class: middle bg-main4  
-
-# Extra slides
-
-
----
-
-## High School Social Contacts
-
-&lt;br&gt; 
-
-  `\(n = 327\)` students (nodes) in a French high school. 
-
-  `\(m = 7,818\)` social contact events (edges) measured by wearable 
-  sensors.   
-
-  Average number of participants in interaction `\(\langle k \rangle = 2.3\)` 
-
-  Clusters are the classes to which students are assigned. 
-
-
-
-
-  &lt;div class="footnote"&gt;
-    Data originally from: &lt;br&gt;
-    R. Mastrandrea et al. (2015), Contact patterns in a high school: A comparison between data collected using wearable sensors, contact diaries, and friendship surveys. &lt;i&gt;PLoS One&lt;/i&gt; 10:9, e0136497
-    &lt;br&gt; &lt;br&gt; 
-    Prepared by 
-    A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. &lt;i&gt;Proceedings of the National Academy of Sciences&lt;/i&gt; 10.1073/pnas.1800683115  
-  &lt;/div&gt;
-
----
-background-image: url(img/contact-high-school-classes.png)
-background-size: contain
-
-## High School Social Contacts 
-
----
-
-  ## On the Other Hand...Senate Bills
-
-&lt;br&gt; 
-
-  `\(n = 293\)` U.S. senators (nodes) cosponsoring bills.
-
-  `\(m = 20,006\)` bills (edges) in period 1973-2016.
-
-  Average number of cosponsors `\(\langle k \rangle = 7.3\)`.
-
-  Clusters are Democrat/Republican. 
-
-
-&lt;div class="footnote"&gt;
-  Data originally from: &lt;br&gt;
-  J. Fowler (2006), Legislative cosponsorship networks in the U.S. House and Senate. &lt;i&gt;Social Networks&lt;/i&gt; 28:4, 454--465
-  &lt;br&gt; &lt;br&gt; 
-  Prepared by 
-  A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. &lt;i&gt;Proceedings of the National Academy of Sciences&lt;/i&gt; 10.1073/pnas.1800683115  
-&lt;/div&gt;
-
-
----
-background-image: url(img/SN-congress-bills.png)
-background-size: contain
-
-## Senate Bills
-
----
-class: bg-main2
-
-&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;  
-### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the cluster structure.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
