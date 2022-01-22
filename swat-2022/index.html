@@ -439,7 +439,7 @@ class: split-two
 layout: false
 
 .column.bg-main1[
-  ### Modeling Clustered Graphs
+  ### Modeling Graphs with Communities
 
   Take `\(n\)` nodes and divide them into two groups `\(a\)` and `\(b\)`. 
 
@@ -464,7 +464,7 @@ class: split-two
 layout: false
 
 .column.bg-main1[
-### Clusters from Eigenvectors
+### Communities and Eigenvectors
 
 &lt;br&gt; 
 
@@ -1058,14 +1058,14 @@ Then:
 ]
 ] 
 
----
+&lt;!-- ---
 
 background-image: url(img/algorithm-demo.png)
 background-size: contain
 
 ### Belief-Propagation Spectral Clustering
 
-&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;  Real leading eigenvectors of `\(\mathbf{J}\)` contain cluster information! 
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;  Real leading eigenvectors of `\(\mathbf{J}\)` contain cluster information!  --&gt;
 
 
 
@@ -1225,11 +1225,11 @@ layout: false
 .column.bg-main3[
   ## Algorithmic Thresholds
 
-.alert[**Conjecture**]: In a 2-group testbed with edge sizes `\(k_1,k_2,\ldots\)` and `\(c_k\)` edges of size `\(k\)` per node, detection is possible outside the ellipsoid with centroid `\((x_{k_1},x_{k_2},\ldots)\)` and radii `\((r_{k_1},r_{k_1}\ldots)\)`, where: 
+.alert[**Conjecture**]: In a 2-group testbed with edge sizes `\(k_1,k_2,\ldots\)` and `\(c_k\)` edges of size `\(k\)` per node, detection is possible outside the ellipsoid with centroid `\((x_{k_1},x_{k_2},\ldots)\)` and radii `\((r_{k_1},r_{k_2}\ldots)\)`, where: 
 
 $$
 `\begin{align}
-x_k &amp;= \frac{1-a_k}{2-a_k} d \\ 
+x_k &amp;= \frac{1-a_k}{2-a_k} \\ 
 r_k &amp;= \frac{\sqrt{(k-1)c_k}}{2-a_k} \\
 a_k &amp;= \frac{1-2^{2-k}}{1-2^{1-k}}\;.
 \end{align}`
@@ -1279,7 +1279,7 @@ We conjecture the same thing for hypergraphs: inside that ellipse, the clusterin
 class: split-two
 layout: false
 
-.column.bg-main3[
+.column.bg-main1[
 
 ## Summing Up
 
@@ -1324,7 +1324,7 @@ There are open questions around the .alert2[fundamental limits] of hypergraph co
 
 class: bg-main2 middle
 
-# Future Directions
+# Future Directions (With Students!)
 
 ---
 
@@ -1508,7 +1508,7 @@ class: middle bg-main4
 
   Average number of participants in interaction `\(\langle k \rangle = 2.3\)` 
 
-  Clusters are the classes to which students are assigned. 
+  Cluster labels are the classes to which students are assigned. 
 
 
 
@@ -1539,7 +1539,7 @@ background-size: contain
 
   Average number of cosponsors `\(\langle k \rangle = 7.3\)`.
 
-  Clusters are Democrat/Republican. 
+  Community labels are Democrat/Republican. 
 
 
 &lt;div class="footnote"&gt;
@@ -1561,7 +1561,7 @@ background-size: contain
 class: bg-main2
 
 &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;  
-### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the cluster structure. 
+### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the community structure. 
 
 ---
 
