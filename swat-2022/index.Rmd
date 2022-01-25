@@ -308,6 +308,11 @@ What can we .alert[prove] about these models and algorithms?
 ]
 ]
 
+???
+
+That said, I want to focus on a specific story on the foundations of network data science. This story has some nice mathematical features; I feel that it represents my style well; and it highlights the interplay between data science, computation, and dynamics that animates a lot of my work. 
+
+
 ---
 
 
