@@ -40,9 +40,13 @@ options(htmltools.dir.version = FALSE)
 class: bg-main1 
 background-image: url("../img-shared/geo-intro.png")
 background-size: contain
- 
+
 # My Journey
- 
+
+???
+
+Speaking of shenanigans, I'd like to do something I'm guessing you're not going to see in any other job talks... 
+
 ---
 
 background-image: url("img/ninjagram.jpeg")
@@ -56,6 +60,10 @@ class: split-two
 .column[
 # <font color="white"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Uh...sorry? 😬 </font>
 ] 
+
+???
+
+...which is to begin with an apology to several members of the audience. 
 
 ---
 
@@ -344,7 +352,15 @@ High ARI means approximate success in a synthetic trial (details later).
 ]]
 
 
+???
 
+This project had a pretty specific motivation. Last year, I published with two wonderful collaborators a paper in which we proposed a **new set of algorithms** for hypergraph community detection. 
+
+We got great results on data, but when we tried it on a certain experiment involving *synthetic* data, we got some results which were, to use the scientific term, **pretty weird-looking.** 
+
+... 
+
+So, my story for you today is a story about **filling in the gaps**.
 
 
 ---
@@ -462,11 +478,11 @@ layout: false
 .column.bg-main1[
   ### Modeling Graphs with Communities
 
-  Take $n$ nodes and divide them into two groups $a$ and $b$. 
+  Take $n$ nodes and divide them into two group $a$ and $b$. 
 
   For each pair of nodes $i$ and $j$, draw an edge with probability 
 
-  $$p_{ij} = \begin{cases} p &\quad i,j \text{ are in the same group} \\ q &\quad i,j \text{ are in different groups} \end{cases}$$
+  $$p_{ij} = \begin{cases} p &\quad i,j \text{ are in the same group} \\ q &\quad i,j \text{ are in different group} \end{cases}$$
 
   This gives us an adjacency matrix $\mathbf{A}$ with .alert[noisy block structure].
 
@@ -490,7 +506,7 @@ layout: false
 <br> 
 
 .font_smaller[
-Leading eigenpairs of $\mathbf{P}$. 
+Leading eigenpairs of $\mathbf{P}$: 
 
 .font_smaller[
 $$\begin{align}
@@ -591,9 +607,9 @@ The .alert[**Hashimoto operator**] and eigenvector methods for hypergraphs.
   ]]]
 ]] 
 
-.column[.center[
+.column[.center[.stretch[
   {{content}} 
-]]
+]]]
 
 ---
 class: fade-row1-col1 fade-row3-col1
@@ -703,6 +719,13 @@ $$\mathbf{B}[(e_1, v_1), (e_2, v_2)] = \begin{cases} 1 &\quad (e_1, v_1) \righta
 "I can get to $v_2 \in e_2$ from $e_1$ by passing through $v_1$. I can get to $v_3 \in e_3$ from $e_2$ by passing through $v_2$..."
 
 ]
+
+???
+
+The important intuition here is: 
+
+- We can imagine a walk stepping from a node to a hyperedge and on to a new node, and on to a new hyperedge, and so on. 
+- The conditions ensure that we never hit the *same* node or the *same* hyperedge in consecutive steps. 
 
 ---
 
@@ -927,12 +950,20 @@ layout: true
 <br>
 <img src="img/louvain-detection.png" width=90%>   
 
+???
+
+Recall that we wanted to *fill in the gaps*. 
+
 ---
 
 ## Eigenvector Algorithm
 
 <br>
 <img src="img/vanilla-heatmap.png" width=90%>   
+
+???
+
+Oops! Uh, new gaps. Time to take a detour for some more advanced machinery. 
 
 <!-- ---
 
@@ -1180,6 +1211,10 @@ layout: false
 .column[.vmiddle[.stretch[
   <img src="img/heatmap-exp-1-no-curve.png" width=100%>   
 ]]]
+
+???
+
+We actually have some reason to believe that this is the best that can possibly be done in this synthetic testbed; more on that later. 
 
 
 ---
