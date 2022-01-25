@@ -25,7 +25,7 @@ coords <- tibble(
 	arrow_offset_lon = c(0, -1, -1, .85, .8, .1),
 	description = c("",
 									"Grew up!<br>Chess<br>Taekwondo",
-									"College (math + philosophy)<br>Met wife<br>General tomfoolery",
+									"College (math + philosophy)<br>Met wife<br>Shenanigans",
 									"Fulbright scholarship<br>Smoked fish<br>Adventures",
 									"Married!<br>Work (nonprofit)<br>PhD<br>Aikido",
 									"Teaching<br>Avocados<br>Pandemic =(")
