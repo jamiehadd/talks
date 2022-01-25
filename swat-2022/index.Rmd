@@ -915,7 +915,7 @@ layout: false
 
 
 .column.bg-main2[
-## Issue \# 1: Computation
+## Issue: Computation
 
 <br>
 $\mathbf{B}$ is indexed by edge-node pairs. 
@@ -992,7 +992,7 @@ layout: false
 
 
 .column.bg-main2[
-## Issue \# 1: Computation
+## Issue: Computation
 
 <br> <br> 
 A .alert[*small*] data set might have $n = 300$ nodes, $m = 8,000$ edges, and average edge size $2.5$. 
