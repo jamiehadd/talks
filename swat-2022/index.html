@@ -55,14 +55,18 @@ class: split-two
 ]
 
 .column[
-# &lt;font color="white"&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Uh...sorry? &lt;/font&gt;
+# &lt;font color="white"&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Uh...sorry? 😬 &lt;/font&gt;
 ] 
 
 ---
 
-class: middle 
+background-image: url("img/karate-graph-fade.png")
+class:  
 
-# My Research
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+# My Research 
+
+### Math and Computation for Complex, Connected Systems
 
 
 ---
@@ -72,7 +76,7 @@ layout: true
 
 .row[
   .split-40[.column.bg-main1[
-      ### Math for Network Data Science
+      ### Foundations of Network Data Science
     ].column[
       &lt;img src="img/heatmap-thumbnail.png" height=170px&gt; 
       &lt;img src="img/contact-clustering-excerpt.png" height=190px&gt; 
@@ -114,7 +118,7 @@ class: split-40
 layout: true
 
 .column.bg-main1[
-### Math for Network Data Science
+### Foundations of Network Data Science
 
 &lt;br&gt;
 
@@ -322,6 +326,30 @@ class: split-two
 
 ---
 
+class: split-two
+
+.column[
+### Motivation: **Weird Gaps** in a Computational Experiment
+
+.stretch[
+&lt;img src="img/louvain-detection.png" width=100%&gt;
+]
+
+High ARI means approximate success in a synthetic trial (details later). 
+
+
+
+]
+.column[.stretch[ 
+  &lt;img src="img/hmod-paper.png" width=100%&gt;   
+]]
+
+
+
+
+
+---
+
 layout: true
 class: split-two middle 
  
@@ -389,20 +417,14 @@ Vector `\(\mathbf{v} \in \mathbb{R}^n\)` is an .alert[eigenvector] of matrix `\(
 $$ \mathbf{A}\mathbf{v} = \lambda \mathbf{v}\;. $$ 
 ]]]
 
----
-
-class: bg-main2
-layout: false
-background-image: url(img/opportunity.jpeg)
-background-size: contain
 
 ---
 
-class: split-two bg-main2
+class: split-two bg-main4
 layout: false
 
 .column[
-  ## The graph...
+  ## The graph... 
 
 &lt;br&gt; 
 .center[
@@ -507,7 +529,8 @@ layout: false
 
 
 .font_smaller[
-Suppose we don't know the cluster labels. We can estimate them using `\(\mathbf{v}_2\)`. 
+
+&lt;br&gt;
 
 1. Compute the second-largest eigenvector `\(\mathbf{v}_2\)` of `\(\mathbf{A}\)`. 
 2. If `\(v_{2i} &gt; 0\)`, guess that node `\(i\)` is in group `\(a\)`, otherwise in group `\(b\)`. 
@@ -526,7 +549,7 @@ Works well if `\(p-q\)` is sufficiently large, variations work for other graph m
 &lt;img src="img/sbm-clustering.png" width=75%&gt;
 ]]
 
----
+&lt;!-- ---
 
 class: split-two middle
 layout: false
@@ -549,7 +572,7 @@ layout: false
   Image from &lt;a href="http://allthingsgraphed.com/2014/10/09/visualizing-political-polarization/"&gt; All Things Graphed &lt;/a&gt; 
   ]
 ]
-]
+] --&gt;
 
 ---
 
@@ -610,7 +633,7 @@ So, what should we do?....
 
 
 
----
+&lt;!-- ---
 class: split-50 bg-main2 
 layout: false 
  
@@ -646,7 +669,7 @@ layout: false
   &lt;br&gt; .alert2[@PhilChodrow] &lt;br&gt;
 ]
 ]
-]
+] --&gt;
 
 ---
 
@@ -661,7 +684,7 @@ The adjacency matrix is `\(n\times n\)` and  operates on nodes.
 
 The .alert[Hashimoto operator] `\(\mathbf{B}\)` is a matrix that operates on *edge-node pairs*. 
 
-Define `\((e_1, v_1) \rightarrow (e_2, v_2)\)` as: 
+Define relation `\((e_1, v_1) \rightarrow (e_2, v_2)\)`: 
 
 - `\(v_1 \in e_1\)` and `\(v_2 \in e_2\)`
 - `\(v_1 \in e_2 \setminus v_2\)`
@@ -770,7 +793,7 @@ Eigenpair computations get expensive fast...
 class: bg-main4
 layout: false
 
-## A Generalized Bass Theorem
+## A Generalized Ihara-Bass Theorem
 
 **Theorem (PSC, JH, NE '22)**: Under mild conditions, if `\(\lambda\)` is an eigenvalue of `\(\mathbf{B},\)` then either: 
 
@@ -808,7 +831,7 @@ $$
 (*provided all inverses, sums, and products are defined*). 
 3. Simplify, obtaining
 $$
-\det(\lambda \mathbf{I} - \mathbf{B}) = \det(\text{boring part})\det(\lambda\mathbf{I} - \mathbf{B}')\,.
+\det(\lambda \mathbf{I} - \mathbf{B}) = \det(\lambda\mathbf{I} - \mathbf{B}')\det(\text{uninformative part})\,.
 $$ 
 
 
@@ -876,23 +899,43 @@ class: split-two
 ---
 
 class: split-two
+layout: true
 
+.column[
 
+## Synthetic Testbed
+
+&lt;br&gt; &lt;br&gt;
 &lt;img src="img/testbed-narrow.png" width=100%&gt;   
-
----
-
-class: split-two
+]
+.column[
 
 
-&lt;img src="img/vanilla-heatmap.png" width=100%&gt;   
+  {{content}}
 
-Adjusted Rand Index (ARI): 
+  Adjusted Rand Index (ARI): 
 
 - `\(\mathrm{ARI} = 1\)`: perfect cluster recovery. 
 - `\(\mathrm{ARI} = 0\)`: random noise. 
 
+
+]
+
 ---
+
+## From the Prequel
+
+&lt;br&gt;
+&lt;img src="img/louvain-detection.png" width=90%&gt;   
+
+---
+
+## Eigenvector Algorithm
+
+&lt;br&gt;
+&lt;img src="img/vanilla-heatmap.png" width=90%&gt;   
+
+&lt;!-- ---
 
 class: split-two
 layout: false
@@ -915,7 +958,7 @@ What if edges of different sizes mean different things?
 
 .column[.content.vmiddle[.stretch[
 &lt;img src="img/different-roles.png" width=100%&gt;   
-]]]
+]]] --&gt;
 
 ---
 
@@ -1031,7 +1074,7 @@ class: split-two
 
 Then: 
 
-- BP has a fixed point `\(\bar{\mathbf{x}}\)` that contains no cluster information. 
+- BP has an approximate fixed point `\(\bar{\mathbf{x}}\)` that contains no cluster information. 
 - The Jacobian derivative `\(\mathcal{J}(\bar{\mathbf{x}})\)` of the BP dynamics around `\(\bar{\mathbf{x}}\)` has `\(O(n^{-1})\)` entries, except for a block of the form 
 
 `$$\mathbf{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k + O(n^{-1})\;.$$`
@@ -1076,7 +1119,7 @@ class: split-two bg-main4
 
 # A Cheat
 
-`\(\mathbf{J}\)` can be a *very* large big matrix. 
+`\(\mathbf{J}\)` can be a *very* large matrix. 
 
 As before, we can use a smaller one: 
 
@@ -1109,6 +1152,8 @@ layout: false
 .column.bg-main2[
   ## Ok, but does it work? 
 
+ &lt;br&gt; 
+
   Recall that we were having issues with parameter combinations in which edges of different sizes carried different kinds of information. 
 ]
 
@@ -1123,6 +1168,8 @@ layout: false
 
 .column.bg-main2[
   ## Ok, but does it work? 
+
+&lt;br&gt;
 
   Recall that we were having issues with parameter combinations in which edges of different sizes carried different kinds of information. 
 
@@ -1204,10 +1251,10 @@ layout: false
 &lt;br&gt; 
   Recall the .alert[*suspiciously round*] region where our algorithm totally failed to learn any cluster information. 
 
-  This region can actually be estimated!   
-
+  This region can be estimated!     
 
   Strategy: ask when `\(\mathbf{J}\)` has an eigenvalue `\(&gt; 1\)`, using approximations analogous to known results for graphs. 
+
 
 
 ]
@@ -1283,13 +1330,12 @@ layout: false
 
 ## Summing Up
 
+&lt;br&gt;
 The .alert[Hashimoto operator] enables eigenvector techniques for community detection in hypergraphs. 
 
 Determinant identities help us speed up computation. 
 
-Some hypergraph data sets "need" hypergraph methods, while others don't. 
-
-There are open questions around the .alert2[fundamental limits] of hypergraph community detection. 
+There are open questions around the .alert[fundamental limits] of hypergraph community detection. 
 
 
 ]
@@ -1324,7 +1370,7 @@ There are open questions around the .alert2[fundamental limits] of hypergraph co
 
 class: bg-main2 middle
 
-# Future Directions (With Students!)
+# Future Directions
 
 ---
 
@@ -1333,7 +1379,7 @@ layout:
 
 .row[
   .split-40[.column.bg-main1[
-      ### Math for Network Data Science
+      ### Foundations of Network Data Science
     ].column[
       &lt;img src="img/heatmap-thumbnail.png" height=170px&gt; 
       &lt;img src="img/contact-clustering-excerpt.png" height=170px&gt; 
@@ -1372,10 +1418,9 @@ layout:
 
 .row[
   .split-40[.column.bg-main1[
-      ### Math for Network Data Science
+      ### Foundations of Network Data Science
     ].column[
-- "With high probability as the number of nodes grows large, the .alert[eigenvalues] of `\(\mathbf{B}\)` are..." 
-- Models of .alert[edge-correlations] in hypergraphs. 
+- "With high probability as the number of nodes grows large, the .alert[eigenvalues] of `\(\mathbf{B}\)` are..."  
 - .alert[Dynamics and algorithms]: random walks, stability functions, ranking, clustering. 
     ]
   ]  
@@ -1410,7 +1455,7 @@ layout:
 
 .row[
   .split-40[.column.bg-main1[.content[
-      ### Math for Network Data Science
+      ### Foundations of Network Data Science
     ]].column[.content[
       &lt;img src="img/heatmap-thumbnail.png" height=170px&gt; 
       &lt;img src="img/contact-clustering-excerpt.png" height=170px&gt; 
@@ -1424,8 +1469,8 @@ layout:
     ### Models of Biosocial Systems
   ]].column[.content[
 - Comparing network ranking functions with actual, .alert[human-attributed ranks] 
-  - Ongoing collab with social anthropologists.
-- Statistical problems with .alert[inference of social hierarchies] (focal sampling, behavior categories).
+  - Ongoing collaboration with social anthropologists.
+- Statistical problems with .alert[inference of biosocial hierarchies] (focal sampling, behavior categories).
   ]]
 ]
 ]
@@ -1449,7 +1494,7 @@ layout:
 
 .row[
   .split-40[.column.bg-main1[.content[
-      ### Math for Network Data Science
+      ### Foundations of Network Data Science
     ]].column[.content[
       &lt;img src="img/heatmap-thumbnail.png" height=170px&gt; 
       &lt;img src="img/contact-clustering-excerpt.png" height=170px&gt; 
@@ -1475,7 +1520,6 @@ layout:
   ]].column[.content[
 - Dynamical models of .alert[migration] and racial segregation. 
 - .alert[Racial disparities] in U.S. criminal sentencing: further data acquisition + analysis.  
-- New collaborations! 
   ]]
 ]
 ]
@@ -1574,7 +1618,7 @@ class: middle
 class: split-40
 
 .column.bg-main1[
-### Math for Network Data Science
+### Foundations of Network Data Science
 
 &lt;br&gt;
 
