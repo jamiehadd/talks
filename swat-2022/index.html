@@ -451,38 +451,6 @@ class: split-two
 
 ---
 
-class: split-two
-
-.column[
-### Motivation: **Weird Gaps** in a Computational Experiment
-
-.stretch[
-&lt;img src="img/louvain-detection.png" width=100%&gt;
-]
-
-High ARI means approximate success in a synthetic trial (details later). 
-
-
-
-]
-.column[.stretch[ 
-  &lt;img src="img/hmod-paper.png" width=100%&gt;   
-]]
-
-
-???
-
-This project had a pretty specific motivation. Last year, I published with two wonderful collaborators a paper in which we proposed a **new set of algorithms** for hypergraph community detection. 
-
-We got great results on data, but when we tried it on a certain experiment involving *synthetic* data, we got some results which were, to use the scientific term, **pretty weird-looking.** 
-
-... 
-
-So, my story for you today is a story about **filling in the gaps**.
-
-
----
-
 layout: true
 class: split-two middle 
  
@@ -1055,18 +1023,32 @@ layout: true
 &lt;br&gt; &lt;br&gt;
 &lt;img src="img/testbed-narrow.png" width=100%&gt;   
 ]
-.column[
 
-
+.column[.stretch[ 
   {{content}}
-
-  Adjusted Rand Index (ARI): 
-
-- `\(\mathrm{ARI} = 1\)`: perfect cluster recovery. 
-- `\(\mathrm{ARI} = 0\)`: random noise. 
+]]
 
 
-]
+
+
+???
+
+This project had a pretty specific motivation. Last year, I published with two wonderful collaborators a paper in which we proposed a **new set of algorithms** for hypergraph community detection. 
+
+We got great results on data, but when we tried it on a certain experiment involving *synthetic* data, we got some results which were, to use the scientific term, **pretty weird-looking.** 
+
+... 
+
+So, my story for you today is a story about **filling in the gaps**.
+
+
+
+
+
+---
+
+
+&lt;img src="img/hmod-paper.png" width=100%&gt;   
 
 ---
 
@@ -1074,6 +1056,11 @@ layout: true
 
 &lt;br&gt;
 &lt;img src="img/louvain-detection.png" width=90%&gt;   
+
+Adjusted Rand Index (ARI): 
+
+- ARI = 1: perfect community detection. 
+- ARI = 0: random noise.
 
 ???
 
@@ -1085,6 +1072,11 @@ Recall that we wanted to *fill in the gaps*.
 
 &lt;br&gt;
 &lt;img src="img/vanilla-heatmap.png" width=90%&gt;   
+
+Adjusted Rand Index (ARI): 
+
+- ARI = 1: perfect community detection. 
+- ARI = 0: random noise.
 
 ???
 
