@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Generative Hypergraph Clustering:   Scalable Heuristics and Sparse Thresholds</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Phil Chodrow   Department of Mathematics   University of California, Los Angeles" />
+    <link rel="stylesheet" href="../assets/ninpo.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/ninjutsu.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/shinobi.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/pc_custom.css" type="text/css" />
+    <link rel="stylesheet" href="css/pc_custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Generative Hypergraph Clustering: <br> Scalable Heuristics and Sparse Thresholds
+## Department of Computer Science <br> Colgate University<br> February 4th, 2022
+### Dr. <span class="author-highlight">Phil Chodrow</span> <br> Department of Mathematics <br> University of California, Los Angeles
+
+---
+
+exclude: true   
+&lt;style type="text/css"&gt;
+code.r{ 
+  font-size: 16px; 
+}
+pre {
+  font-size: 16px !important;  
+}
+&lt;/style&gt;
+
+
+
+
+
+
+---
+
+class: bg-main1 
+background-image: url("../img-shared/geo-intro.png")
+background-size: contain
+
+# My Journey
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class: split-three
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[
+      ### Foundations of Network Data Science
+    ].column[
+      &lt;img src="../img-shared/heatmap-thumbnail.png" height=170px&gt; 
+      &lt;img src="../img-shared/contact-clustering-excerpt.png" height=170px&gt; 
+      &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px&gt;  --&gt;
+      &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px&gt; 
+    ]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;img src="../img-shared/karate-graph.png" height=160px&gt;
+    &lt;img src="../img-shared/mxhierarchy-flows.png" height=170px&gt; 
+    &lt;img src="../img-shared/dynamics-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px&gt;  --&gt;
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    &lt;img src="../img-shared/sentencing-processing-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="../img-shared/mgp-thumbnail.png" height=170px&gt;  --&gt;
+    &lt;img src="../img-shared/no2-thumbnail.png" height=170px&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px&gt; 
+  ]]
+]
+]
+
+---
+
+class: split-three fade-row2-col1 fade-row2-col2 fade-row3-col1 fade-row3-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[
+      ### Foundations of Network Data Science
+    ].column[
+      &lt;br&gt;
+- What .alert[models] accurately reflect features of network data? 
+- What .alert[algorithms] can we use to learn these models? 
+    ]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;img src="../img-shared/karate-graph.png" height=160px&gt;
+    &lt;img src="../img-shared/mxhierarchy-flows.png" height=170px&gt; 
+    &lt;img src="../img-shared/dynamics-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px&gt;  --&gt;
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    &lt;img src="../img-shared/sentencing-processing-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="../img-shared/mgp-thumbnail.png" height=170px&gt;  --&gt;
+    &lt;img src="../img-shared/no2-thumbnail.png" height=170px&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px&gt; 
+  ]]
+]
+]
+
+---
+
+class: split-three fade-row1-col1 fade-row1-col2 fade-row3-col1 fade-row3-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[.content[
+      ### Foundations of Network Data Science
+    ]].column[.content[
+      &lt;img src="../img-shared/heatmap-thumbnail.png" height=170px&gt; 
+      &lt;img src="../img-shared/contact-clustering-excerpt.png" height=170px&gt; 
+      &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px&gt;  --&gt;
+      &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px&gt; 
+    ]]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;br&gt;
+- How do .alert[hierarchies] and .alert[echo chambers] form and sustain themselves?
+- What machinery do we need in order to connect these models to .alert[actual data]?
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    &lt;img src="../img-shared/sentencing-processing-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="../img-shared/mgp-thumbnail.png" height=170px&gt;  --&gt;
+    &lt;img src="../img-shared/no2-thumbnail.png" height=170px&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px&gt; 
+  ]]
+]
+]
+
+
+---
+
+class: split-three fade-row1-col1 fade-row1-col2 fade-row2-col1 fade-row2-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[.content[
+      ### Foundations of Network Data Science
+    ]].column[.content[
+      &lt;img src="../img-shared/heatmap-thumbnail.png" height=170px&gt; 
+      &lt;img src="../img-shared/contact-clustering-excerpt.png" height=170px&gt; 
+      &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px&gt;  --&gt;
+      &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px&gt; 
+    ]]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;img src="../img-shared/karate-graph.png" height=160px&gt;
+    &lt;img src="../img-shared/mxhierarchy-flows.png" height=170px&gt; 
+    &lt;img src="../img-shared/dynamics-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px&gt;  --&gt;
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[&lt;br&gt;
+- How can data science serve the study of .alert[inequality], .alert[segregation], and .alert[injustice]? 
+- How can we actively use our quantitative powers for .alert[social change]? 
+  ]]
+]
+]
+
+???
+
+That said, I want to focus on a specific story on the foundations of network data science. This story has some nice mathematical features; I feel that it represents my style well; and it highlights the interplay between data science, computation, and dynamics that animates a lot of my work. 
+
+---
+
+class: split-40
+layout: true
+
+.column.bg-main1[
+### Foundations of Network Data Science
+
+&lt;br&gt;
+
+What .alert[models] accurately reflect features of network data? 
+
+What .alert[algorithms] can we use to learn these models? 
+
+What can we learn about the .alert[properties] about these models and algorithms?
+
+]
+
+.column[.split-four[
+  .row[.content[.split-20[.column[ 
+  &lt;div class="thumbnail"&gt; 
+  &lt;img src="../img-shared/heatmap-thumbnail.png" width=130px&gt; 
+  &lt;/div&gt;
+  ].column[
+  &lt;div class="compress"&gt;
+  &lt;br&gt;
+  &lt;a href="https://link.springer.com/article/10.1007/s41109-020-0252-y"&gt;Nonbacktracking specral clustering of nonuniform hypergraphs &lt;/a&gt; &lt;br&gt;
+  &lt;b&gt;PSC&lt;/b&gt;, Nicole Eikmeier, and Jamie Haddock&lt;br&gt;
+  &lt;i&gt;In preparation&lt;/i&gt; (2022)
+  &lt;/div&gt;       
+  ]]] 
+]
+  .row[.content[.split-20[.column[
+    &lt;div class="thumbnail"&gt; 
+    &lt;img src="../img-shared/contact-clustering-excerpt.png" width=110px&gt; 
+    &lt;/div&gt;
+    ].column[
+    &lt;div class="compress"&gt;
+    &lt;br&gt;
+    &lt;a href="https://advances.sciencemag.org/content/7/28/eabh1303"&gt;Generative hypergraph clustering: from blockmodels to modularity &lt;/a&gt; &lt;br&gt;
+    &lt;b&gt;PSC&lt;/b&gt;, Nate Veldt, and Austin Benson &lt;br&gt;
+    &lt;i&gt;Science Advances&lt;/i&gt; (2021)
+    &lt;/div&gt;       
+    ]]
+  ]]
+.row[.content[.split-20[.column[
+  &lt;div class="thumbnail"&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" width=120px&gt; 
+    &lt;/div&gt;
+    ].column[
+    &lt;div class="compress"&gt;
+    &lt;br&gt;
+    &lt;a href="https://epubs.siam.org/doi/abs/10.1137/19M1288772"&gt;Moments of uniformly random multigraphs with fixed degree sequences &lt;/a&gt; &lt;br&gt;
+    &lt;b&gt;PSC&lt;/b&gt;&lt;br&gt;
+    &lt;i&gt;SIAM J. Mathematics of Data Science&lt;/i&gt; (2020)
+    &lt;/div&gt;       
+    ]]]
+  ]
+.row[.content[.split-20[.column[.content[
+  &lt;div class="thumbnail"&gt; 
+  &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" width=120px&gt; 
+  &lt;/div&gt;
+  ]].column[.content[
+  &lt;div class="compress"&gt;
+  &lt;br&gt;
+  &lt;a href="https://academic.oup.com/comnet/article-abstract/8/3/cnaa018/5879929"&gt;Configuration models of random hypergraphs &lt;/a&gt; &lt;br&gt;
+  &lt;b&gt;PSC&lt;/b&gt; &lt;br&gt;
+  &lt;i&gt;J. Complex Networks&lt;/i&gt; (2020)
+  &lt;/div&gt;       
+  ]]]]
+]
+]
+]
+
+???
+
+That said, I want to focus on a specific story on the foundations of network data science. This story has some nice mathematical features; I feel that it represents my style well; and it highlights the interplay between data science, computation, and dynamics that animates a lot of my work. 
+
+---
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+.content[ 
+  ## Graphs and Hypergraphs 
+ 
+  &lt;br&gt; 
+  A .alert[graph] consists of a set of nodes `\(\mathcal{N}\)` and a set of edges `\(\mathcal{E}\)`. Each edge in `\(\mathcal{E}\)` is a set of two nodes. 
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  In .alert[hypergraphs], edges in `\(\mathcal{E}\)` can contain *any number* of nodes.     
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="../img-shared/graph-hypergraph.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Hypergraph Data
+
+  
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;br&gt;
+]]
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Hypergraph Data
+
+&lt;br&gt; &lt;br&gt; 
+
+  - .alert[**Interaction**]: nodes are agents, edges are interaction events (socializing in groups, attending events).
+  
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;img src="../img-shared/social-interaction.jpeg" width=100%&gt;&lt;/img&gt; 
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Hypergraph Data
+
+&lt;br&gt; &lt;br&gt; 
+
+  - .alert[**Interaction**]: nodes are agents, edges are interaction events (socializing in groups, attending events).
+  - .alert[**Collaboration**]: nodes are collaborators, edges are projects or teams (scholarly papers, legislation, etc). 
+  
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;img src="../img-shared/teamwork.jpeg" width=100%&gt;&lt;/img&gt; 
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Hypergraph Data
+
+&lt;br&gt; &lt;br&gt; 
+
+  - .alert[**Interaction**]: nodes are agents, edges are interaction events (socializing in groups, attending events).
+  - .alert[**Collaboration**]: nodes are collaborators, edges are projects or teams (scholarly papers, legislation, etc). 
+  - .alert[**Co-presence**]: nodes are chemical compounds, edges are drugs formed from those compounds.
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;img src="../img-shared/mccoy.png" width=100%&gt;&lt;/img&gt;  
+]]
+
+---
+
+
+
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ### The Hypergraph Community Detection Problem 
+
+  Given some hypergraph data, assign each node to a .alert[*community*] (or *cluster*) of "related" nodes. 
+  &lt;br&gt; &lt;br&gt;
+  "*Related*": often interpreted as "*densely interconnected.*"
+&lt;br&gt; &lt;br&gt;
+  Applications in social network analysis, drug discovery, image processing, data visualization...
+
+  
+  .footnote[
+  One review in: &lt;br&gt; &lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances&lt;/i&gt;, 7:eabh1303
+]
+
+  
+]
+.column[.content.vmiddle[.stretch[
+  &lt;img src="../img-shared/detection-1.png" width=100%&gt;
+]]]
+
+
+---
+
+
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[Generative clustering with .alert[hypergraph blockmodels]].
+  ]]    
+  .row.bg-main2[.content.vmiddle[.font_medium[Scalable, greedy heuristics for .alert[large hypergraphs].] 
+  ]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[.alert[Sparse thresholds] and eigenvector methods.] 
+  ]]
+]
+] 
+
+.column[.center[.stretch[
+  {{content}} 
+]]]
+
+---
+class: hide-row2-col1 hide-row3-col1 hide-row4-col1 hide-row5-col1 
+
+&lt;br&gt;
+&lt;img src="../img-shared/pure-fiction.png" width=100%&gt;
+
+---
+class: hide-row3-col1 hide-row4-col1 hide-row5-col1
+
+
+&lt;img src="../img-shared/contact-clustering-excerpt.png" width=100%&gt;
+
+  
+---
+class: hide-row4-col1   hide-row5-col1 
+
+&lt;img src="../img-shared/spectrum.png" width=75%&gt; 
+&lt;img src="../img-shared/heatmap-exp-1.png" width=85%&gt; 
+
+---
+
+class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+
+  &lt;br&gt;
+  &lt;img src="../img-shared/pure-fiction.png" width=100%&gt;
+
+---
+
+layout: false
+background-image: url(../img-shared/task.png)
+background-size: contain
+
+---
+
+layout: false
+background-image: url(../img-shared/fiction.png)
+background-size: contain
+
+
+---
+
+class: split-two
+layout: false
+
+.column[ 
+  ### Hypergraph Stochastic Blockmodel
+  &lt;img src="../img-shared/pure-fiction.png" width=90%&gt;
+]
+
+.column.bg-main1[
+
+
+.font_smaller[
+
+### &amp;nbsp; &lt;br&gt;  &amp;nbsp;  
+1. Give each node `\(i\)` a cluster label `\(z_i\)` and a degree-weight `\(\theta_i\)` (higher weight `\(\implies\)` more hyperedges involving that node).
+2. For each tuple `\(R\)` of nodes, sample a random number of edges:
+`$$a_R \sim \mathrm{Poisson}\left(\Omega(\mathbf{z}_R)\prod_{i \in R}\theta_i\right)$$`
+
+Here, `\(\Omega\)` is an *affinity function* that encodes which combinations of groups are likely to form hyperedges. 
+]
+
+.footnote[
+Bernoulli variant proposed by Ke et al (2019), 	
+Community detection for hypergraph networks via regularized tensor power iteration, *arXiv:*:1909.06503
+]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column[ 
+  ### Hypergraph Stochastic Blockmodel
+  &lt;img src="../img-shared/pure-fiction.png" width=90%&gt;
+]
+
+.column.bg-main1[
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; 
+## Today's Big Message
+
+The generative approach to hypergraph clustering offers both .alert[scalable heuristics] and .alert2[fundamental theoretical insights]. 
+]
+
+---
+
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[Generative clustering with .alert[hypergraph blockmodels]].
+  ]]    
+  .row.bg-main2[.content.vmiddle[.font_medium[Scalable, greedy heuristics for .alert[large hypergraphs].] 
+  ]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[.alert[Sparse thresholds] and eigenvector methods.] 
+  ]]
+]
+] 
+
+.column[.center[.stretch[
+  {{content}} 
+]]]
+
+---
+
+class: fade-row1-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+
+  &lt;img src="../img-shared/contact-clustering-excerpt.png" width=100%&gt;
+
+---
+
+class: split-two 
+layout: false
+
+.column.bg-main1[
+
+&lt;br&gt; &lt;br&gt;
+### Motivation 
+
+Suppose we have some hypergraph Big Data® with suspected cluster structure.   
+
+### Question
+
+Can we do .alert[scalable] clustering with statistical foundations?
+
+
+]
+
+.column[.stretch[ 
+  &lt;img src="../img-shared/hmod-paper.png" width=100%&gt;   
+]]
+
+---
+class: split-50 bg-main1 
+layout: false 
+ 
+.row[ 
+.split-three[
+.column[&lt;br&gt;&lt;br&gt;
+  &lt;img src="../img-shared/nate_portrait.jpeg" width=90%&gt; 
+  ]
+.column[&lt;br&gt;&lt;br&gt;
+  &lt;img src="../img-shared/austin.jpg" width=90%&gt; 
+]
+.column[&lt;br&gt;&lt;br&gt;
+  &lt;img src="../img-shared/phil_portrait.jpeg" width=90%&gt;   
+] 
+
+]
+]
+.row[ 
+.split-three[
+.column[&lt;br&gt;
+  .font_large[.alert-no-bold[&lt;nobr&gt;Nate Veldt&lt;/nobr&gt;]]
+  &lt;nobr&gt;Computer Science&lt;/nobr&gt; &lt;br&gt; Texas A&amp;M      
+  .alert2[@n_veldt]
+]  
+.column[&lt;br&gt;
+  .font_large[.alert-no-bold[&lt;nobr&gt;Austin Benson&lt;/nobr&gt;]]
+   Computer Science &lt;br&gt; Cornell      
+   .alert2[@austinbenson]
+]
+.column[&lt;br&gt;
+  .font_large[.alert-no-bold[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]]
+  &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; UCLA
+  &lt;br&gt; .alert2[@PhilChodrow] &lt;br&gt;
+]
+]
+]
+
+
+
+---
+
+class: split-two
+layout: 
+
+.column.bg-main1[
+### The Affinity Function `\(\Omega\)`
+
+&lt;br&gt; 
+
+`$$a_R \sim \mathrm{Poisson}\left(\Omega(\mathbf{z}_R)\prod_{i \in R}\theta_i\right)$$`
+
+`\(\Omega\)` controls how hyperedges form in response to node labels. 
+
+Let's focus on the .alert[All-Or-Nothing] affinity.
+
+This models the idea that edges form most frequently when nodes have the same labels. 
+
+
+]
+
+.column[
+
+### &lt;br&gt;
+
+&lt;br&gt; &lt;br&gt;
+
+Let `\(e\)` be a hyperedge of size `\(k\)`: 
+
+`$$\Omega(\mathbf{z}_e) = \begin{cases}
+  \omega_{k1} &amp;\quad e \text{ has all same labels} \\ 
+  \omega_{k0} &amp;\quad \text{otherwise}\;.  
+\end{cases}$$`
+
+&lt;br&gt;
+
+`$$\Omega(\color{#ff5252}{\bullet} \color{#ff5252}{\bullet} \color{#ff5252}{\bullet}) &gt; \Omega(\color{#ff5252}{\bullet} \color{#ff5252}{\bullet} \color{#FFD046}{\bullet})= \Omega(\color{#ff5252}{\bullet} \color{#FFD046}{\bullet} \color{#6ec0de}{\bullet})\ldots$$` 
+
+]
+
+&lt;!-- ---
+
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+  ## Maximum-Likelihood Inference
+
+  &lt;br&gt;
+
+  We only observe `\(H\)`. How do we learn the clusters `\(\mathbf{z}\)`?
+
+  Let `\(P(H; \theta, \mathbf{z}, \omega)\)` be the probability of realizing a hypergraph `\(H\)` with parameters `\((\theta, \mathbf{z}, \omega)\)`. 
+
+  .alert[Maximum-Likelihood Inference]: 
+
+  `$$(\hat{\theta}, \hat{\mathbf{z}}, \hat{\omega}) = \text{argmax}_{\theta, \mathbf{z}, \omega} \log P(H; \theta, \mathbf{z}, \omega).$$` 
+]
+
+.column[
+  
+  &lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+  Some estimates can be approximated quickly:
+
+&lt;br&gt; 
+  **Degree Weights**
+
+  `$$\hat{\theta}_i \approx\text{degree of node }i \equiv d_i$$`
+
+  **Affinity Values** (requires estimate of `\(\mathbf{z}\)`)
+
+.font_smaller[
+  `$$\omega_{k1} \approx \frac{\text{# homogeneous hyperedges }}{\prod_{j} (\text{sum of degrees in cluster } j)}\;.$$`
+]
+
+.footnote[Approximations exact when all clusters are same size]
+
+] --&gt;
+
+
+---
+
+## Estimating labels `\(\mathbf{z}\)`
+
+With the All-Or-Nothing affinity, we can derive an objective function from a maximum-likelihood problem for our blockmodel: 
+
+$$
+Q \triangleq \sum_k \color{#ff5252}{\beta_k} \left[(\text{# homogeneous }k\text{-edges}) - \color{#21728f}{\gamma_k}\sum_j (\text{# of edges in cluster } j)^k\right]
+$$
+
+`\(\color{#ff5252}{\beta_k} \triangleq \log \omega_{k1} - \log \omega_{k0}\)`. &lt;br&gt;
+`\(\color{#21728f}{\gamma_k} \triangleq \frac{1}{\beta_k}(\omega_{k1} - \omega_{k0})\)`.
+
+**Maximum-Likelihood Problem**: find cluster labels `\(\mathbf{z}\)` to make `\(Q\)` large. 
+
+ 
+.footnote[
+   
+Derivation follows Newman, "Equivalence between modularity optimization and maximum likelihood methods for community detection." *PRE*, 2016
+  
+Generalizes Kamiński et al., "Clustering via hypergraph modularity." *PLoS ONE*, 2019] 
+
+---
+
+class: split-two
+
+.column.bg-main1[
+
+### Hypergraph Maximum-Likelihood Louvain Algorithm
+
+&lt;br&gt;
+
+1. All nodes start in their own cluster. 
+2. Greedily .alert[merge] nodes to maximize `\(Q\)`. 
+3. Then, greedily merge .alert2[entire clusters] of nodes.  
+4. Estimate parameters `\(\omega\)` and `\(\{\theta_i\}\)`.
+5. Repeat!
+
+- Extends Louvain algorithm for graphs.
+- Lots of small tricks to make this fast. 
+
+
+
+.footnote[Blondel et al. "Fast unfolding of communities in large networks." *J. Stat. Mech.*, 2008]
+]
+
+.column[ 
+  
+  &lt;br&gt;
+  &lt;img src="../img-shared/louvain.png" width=100%&gt;
+  
+  .footnote[Image from Traag et al., "From Louvain to Leiden: guaranteeing well-connected communities," *Scientific Reports*, 2019]
+]
+
+---
+background-image: url(../img-shared/performance.png)
+background-size: contain
+
+#### We can retrieve correlated partitions on synthetic hypergraphs of .alert[1M nodes].
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; 
+
+Hypergraph Louvain is roughly as fast as baseline methods based on graph projections. 
+
+---
+
+### .alert[Empirical data]: school contact hypergraphs. 
+
+&lt;br&gt; 
+.center[&lt;img src="../img-shared/sociopatterns.jpg" width=70%&gt;]
+
+Cluster labels are classes in a primary school and a high school (in France). 
+
+
+.footnote[
+Stehlé et al. (*PLoS ONE*, 2011) and Mastrandrea et al. (*PLoS ONE*, 2015)
+]
+
+---
+
+
+background-image: url(../img-shared/contact-clustering.png)
+background-size: contain
+
+---
+
+background-image: url(../img-shared/recovery_experiments.png)
+background-size: contain
+
+---
+
+class: split-two
+
+.column.bg-main1[
+  
+  ## Summing Up
+
+  &lt;br&gt;
+
+  The generative approach informs .alert[scalable algorithms] for clustering hypergraphs. 
+
+  These algorithms .alert[inherit assumptions] from their generative models. 
+
+  These algorithms can .alert[outperform graph-based methods] on social interaction data sets. 
+
+]
+
+.column[.stretch[ 
+  &lt;img src="../img-shared/hmod-paper.png" width=100%&gt;   
+]]
+
+---
+
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[Generative clustering with .alert[hypergraph blockmodels]].
+  ]]    
+  .row.bg-main2[.content.vmiddle[.font_medium[Scalable, greedy heuristics for .alert[large hypergraphs].] 
+  ]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[.alert[Sparse thresholds] and eigenvector methods.] 
+  ]]
+]
+] 
+
+.column[.center[.stretch[
+  {{content}} 
+]]]
+
+---
+
+class: fade-row1-col1 fade-row2-col1 fade-row4-col1 fade-row5-col1
+
+&lt;img src="../img-shared/spectrum.png" width=75%&gt; 
+&lt;img src="../img-shared/heatmap-exp-1.png" width=85%&gt; 
+
+---
+
+layout: false
+class: split-two
+
+.column.bg-main1[ 
+  ### Sparsity
+
+  &lt;br&gt;
+  A hypergraph blockmodel is .alert[*sparse*] if `\(\Omega\)` is tuned so that 
+
+  $$ \Omega(\mathbf{z}_R) = O(n^{1-\left|{R}\right|})\;. $$
+
+  **Consequence**: \# edges attached to a node doesn't grow with the size of the hypergraph. 
+
+  .alert[Intuition]: if the world's population doubled, the number of friends that you personally have might not change too much. 
+]
+
+.column[
+  ### Fundamental Limits
+
+  &lt;br&gt;
+  In graphs, there are sparse blockmodels for which algorithms can't even .alert[sometimes] find clusters that are even .alert2[correlated] with the correct ones.   
+
+  
+  &lt;br&gt;
+  What about hypergraphs?
+
+  .footnote[
+    Decelle et al. (2011) Inference and phase transitions in the detection of modules in sparse networks, *Phys. Rev. Let.* 107.6: 065701
+    &lt;br&gt; &lt;br&gt;
+    Mossel et al. (2018) A proof of the blockmodel threshold conjecture, *Combinatorica*.  
+  ]
+  
+]
+
+---
+class: split-50 bg-main1 
+layout: false 
+ 
+.row[ 
+.split-three[
+.column[&lt;br&gt;&lt;br&gt;
+  &lt;img src="../img-shared/eikmeier-3.png" width=90%&gt; 
+]
+.column[&lt;br&gt;&lt;br&gt;
+  &lt;img src="../img-shared/jamie_portrait.jpeg" width=90%&gt; 
+  ]
+.column[&lt;br&gt;&lt;br&gt;
+  &lt;img src="../img-shared/phil_portrait.jpeg" width=90%&gt;   
+] 
+
+]
+]
+.row[ 
+.split-three[
+.column[&lt;br&gt;
+  .font_large[.alert-no-bold[&lt;nobr&gt;Nicole Eikmeier&lt;/nobr&gt;]]
+   Computer Science &lt;br&gt; Grinnell College      
+   .alert2[@NicoleEikmeier]
+]
+.column[&lt;br&gt;
+  .font_large[.alert-no-bold[&lt;nobr&gt;Jamie Haddock&lt;/nobr&gt;]]
+  &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; Harvey Mudd College      
+  .alert2[@jamie_hadd]
+]  
+.column[&lt;br&gt;
+  .font_large[.alert-no-bold[&lt;nobr&gt;Phil Chodrow&lt;/nobr&gt;]]
+  &lt;nobr&gt;Mathematics&lt;/nobr&gt; &lt;br&gt; UCLA
+  &lt;br&gt; .alert2[@PhilChodrow] &lt;br&gt;
+]
+]
+]
+
+---
+
+class: 
+
+### A Testbed for Sparse Hypergraph Clustering
+
+&lt;img src="../img-shared/testbed-narrow.png" width=100%&gt;
+
+
+---
+
+class: split-two
+layout: true
+
+.column[
+
+## Synthetic Testbed
+
+&lt;br&gt; &lt;br&gt;
+&lt;img src="../img-shared/testbed-narrow.png" width=100%&gt;   
+]
+
+.column[.stretch[ 
+  {{content}}
+]]
+
+
+---
+
+&lt;img src="../img-shared/hmod-paper.png" width=100%&gt;   
+
+---
+
+## From the Prequel
+
+&lt;br&gt;
+&lt;img src="../img-shared/louvain-detection.png" width=80%&gt;   
+
+Adjusted Rand Index (ARI): 
+
+- ARI = 1: perfect community detection. 
+- ARI = 0: random noise.
+
+---
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+
+### The Belief-Propagation Jacobian
+
+&lt;br&gt; 
+.alert[Belief-propagation] is a method for learning probabilistic machine learning models, but it's very expensive on hypergraphs. 
+
+&lt;br&gt;
+
+We can approximate BP by computing eigenvectors of the .alert[Jacobian matrix], evaluated at an uninformative fixed point.  
+
+Eigenvectors of the Jacobian (sometimes) give useful cluster information. 
+
+]
+.column[
+  
+
+### &amp;nbsp; 
+
+&lt;br&gt; 
+**Theorem (PSC, JH, NE '22)**: In a sparse HSBM, 
+
+  `$$\mathcal{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k + O(n^{-1})\;,$$`
+
+  - `\(\mathbf{C}_k\)` is a matrix of parameters that depends on the affinity function `\(\Omega\)`. 
+  - `\(\mathbf{B}_k\)` is a matrix called the *Hashimoto operator* for edges of size `\(k\)`. 
+  - `\(\otimes\)` is the matrix Kronecker product. 
+
+
+.footnote[
+  .alert2[Shown for graphs by]: &lt;br&gt; Krzakala et al. (2013)  Spectral redemption in clustering sparse networks, &lt;i&gt;PNAS&lt;/i&gt; 110 (52) 20935-20940
+]
+]
+
+---
+layout: false
+class: split-two
+
+.column.bg-main1[
+## The Hashimoto Operator
+
+&lt;br&gt;
+The .alert[Hashimoto operator] `\(\color{#FFD046}{\mathbf{B}_k}\)` is a matrix that operates on *edge-node pairs*. 
+
+Define `\((e_1, p_1) \rightarrow_k (e_2, p_2)\)`: 
+
+- `\(p_1 \in e_1\)` and `\(p_2 \in e_2\)`
+- `\(p_1 \in e_2 \setminus p_2\)`
+- `\(e_1 \neq e_2\)`
+- `\(\lvert e_2\rvert = k\)`. 
+
+Then, 
+
+.font_smaller[ .font_smaller[
+`$$\mathbf{B}_k[(e_1, p_1), (e_2, p_2)] = \begin{cases} 1 &amp;\quad (e_1, p_1) \rightarrow_k (e_2, p_2) \\ 
+0 &amp;\quad \text{otherwise.}\end{cases}$$`
+]]]
+
+.column[
+&lt;br&gt;
+&lt;img src="../img-shared/hypergraph-nonbacktracking.png" width=100%&gt;
+
+"I can get to `\(p_2 \in e_2\)` from `\(e_1\)` by passing through `\(p_1\)`. I can get to `\(p_3 \in e_3\)` from `\(e_2\)` by passing through `\(p_2\)`..."
+
+]
+
+---
+class: split-two
+layout: false
+
+
+.column.bg-main1[
+## The Hashimoto Operator
+
+&lt;br&gt; 
+Popularized (for graphs) by Hashimoto, K. (1990), *Int. J. Math.* 
+
+Important theorem for computation by Bass, H. (1992), *Int. J. Math.* 
+
+Formulated for hypergraphs by Storm, C. K. (2006). *The Electronic Journal of Combinatorics*.
+
+"Rediscovered" for hypergraphs by Angelini, M. C. et al. (2015), *Allerton Conference*.
+
+]
+
+.column[
+&lt;br&gt;
+&lt;img src="../img-shared/hypergraph-nonbacktracking.png" width=100%&gt;
+
+"I can get to `\(p_2 \in e_2\)` from `\(e_1\)` by passing through `\(p_1\)`. I can get to `\(p_3 \in e_3\)` from `\(e_2\)` by passing through `\(p_2\)`..."
+]
+
+---
+
+class: split-two
+
+## An Ihara-Bass Theorem for the BP Jacobian
+
+`\(\mathbf{J} = \sum_k \mathbf{C}_k\otimes\mathbf{B}_k \approx \mathcal{J}\)` can be a very large matrix `\(\implies\)` slow eigenvalue computations. 
+
+**Theorem (PSC, JH, NE '22)**: Under mild conditions, if `\(\lambda\)` is an "interesting" eigenvalue of `\(\mathbf{J},\)` then `\(\lambda\)` is also an eigenvalue of the `\(2n\ell\bar{k} \times 2n\ell\bar{k}\)` matrix
+
+.font_smaller[
+`$$\mathbf{J}' = (\mathbf{G}\otimes \mathbf{I}_n) \left[\begin{matrix} 
+\mathbf{0} &amp; \mathbf{I}_\ell \otimes \mathbb{D} \\ 
+\mathbf{0} &amp; \mathbf{I}_\ell \otimes \mathbb{A}
+\end{matrix}\right] - \bar{\mathbf{G}} \left[\begin{matrix} 
+\mathbf{0} &amp; \mathbf{I}_\ell \otimes \mathbf{I}_{\bar{k}} \\ 
+\mathbf{I}_\ell \otimes (\mathbf{K} - \mathbf{I}_{\bar{k}-1}) &amp; \mathbf{I}_\ell \otimes (\mathbf{K} - 2\mathbf{I}_{\bar{k}-1})
+\end{matrix}\right] \otimes \mathbf{I}_n$$`
+]
+
+- `\(\ell\)` is the number of clusters and `\(\bar{k}\)` the number of distinct edge sizes. 
+- `\(\mathbf{G}\)`, `\(\bar{\mathbf{G}}\)` hold statistical parameters
+- `\(\mathbb{D}\)` is a degree operator,  `\(\mathbb{A}\)` is an adjacency operator,  and `\(\mathbf{K}\)` is a diagonal matrix containing the possible edge sizes.   
+
+.footnote[
+  Similar in spirit to a famous result by Bass (1992, *Int. J. Math*).  
+]
+
+&lt;!-- ---
+
+
+
+class: split-two
+
+.column.bg-main1[
+
+### Belief-Propagation Spectral Clustering
+
+&lt;br&gt; 
+
+1. Start with a guess about `\(\mathbf{C}_k\)` and form `\(\mathbf{J}'\)`. 
+2. Compute the .alert[leading eigenvectors] of `\(\mathbf{J}'\)` with real eigenvalues. 
+3. For each eigenvector `\(\mathbf{v} = (\alpha, \beta)\)`, compute `\(u_{i\ell} = \mathbb{1}\left(\sum_{k = 1}^{\bar{k}} \alpha_{ik}^{(\ell)} &gt; 0\right)\)`. 
+4. Use a .alert2[Euclidean clustering algorithm] (like `\(k\)`-means) in the space spanned by the vectors `\(\{\mathbf{u}\}\)`. 
+5. Re-estimate `\(\mathbf{C}_k\)` and repeat...
+
+]
+
+
+
+.column[.vmiddle[.center[
+
+&lt;img src="../img-shared/PCA-synthetic.png" width=90%&gt; 
+
+]]]
+
+
+
+ --&gt;
+
+
+---
+
+background-image: url(../img-shared/algorithm-demo.png)
+background-size: contain
+
+### Belief-Propagation Spectral Clustering
+
+---
+
+class: split-two
+layout: true
+
+.column[
+
+## Synthetic Testbed
+
+&lt;br&gt; &lt;br&gt;
+&lt;img src="../img-shared/testbed-narrow.png" width=100%&gt;   
+]
+
+.column[.stretch[ 
+  {{content}}
+]]
+
+---
+
+class: 
+
+## From the Prequel
+
+&lt;br&gt;
+&lt;img src="../img-shared/louvain-detection.png" width=80%&gt;   
+
+Adjusted Rand Index (ARI): 
+
+- ARI = 1: perfect community detection. 
+- ARI = 0: random noise.
+
+???
+
+Recall that we wanted to *fill in the gaps*. 
+
+---
+
+class: 
+
+## Eigenvector Algorithm
+
+&lt;br&gt;
+&lt;img src="../img-shared/heatmap-exp-1-no-curve.png" width=80%&gt;
+
+Adjusted Rand Index (ARI): 
+
+- ARI = 1: perfect community detection. 
+- ARI = 0: random noise.
+
+???
+
+Oops! Uh, new gaps. Time to take a detour for some more advanced machinery. 
+
+---
+
+class: 
+
+## Eigenvector Algorithm
+
+
+&lt;br&gt;
+&lt;img src="../img-shared/heatmap-exp-1.png" width=80%&gt;
+
+Adjusted Rand Index (ARI): 
+
+- ARI = 1: perfect community detection. 
+- ARI = 0: random noise.
+
+
+---
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+### Detectability (Algorithmic)
+
+.font_smaller[
+**Conjecture**: In a 2-group blockmodel with edge sizes `\(k_1,k_2,\ldots\)` and `\(c_k\)` edges of size `\(k\)` per node, .alert[spectral clustering] fails to detect clusters in the ellipsoid with centroid `\((x_{k_1},x_{k_2},\ldots)\)` and radii `\((r_{k_1},r_{k_1}\ldots)\)`, where: 
+
+
+$$
+`\begin{align}
+x_k &amp;= \frac{1-a_k}{2-a_k} d \\ 
+r_k &amp;= \frac{\sqrt{(k-1)c_k}}{2-a_k} \\
+a_k &amp;= \frac{1-2^{2-k}}{1-2^{1-k}}\;.
+\end{align}`
+$$
+]
+
+.footnote[Proof requires controlling spectrum of Hashimoto operator, possibly generalizing approach used in: 
+
+Bordenave et al. (2018): Non-backtracking spectrum of random graphs: community detection and non-regular Ramanujan graphs. *Annals of Probability*.
+]
+
+]
+
+.column[.stretch[
+.center[ &lt;br&gt; &lt;br&gt; &lt;br&gt;
+&lt;img src="../img-shared/4-heatmaps-2.png" width=100%&gt;
+]
+]
+]
+
+---
+
+class: split-two
+
+.column.bg-main1[
+### Detectability (Fundamental)
+
+.font_smaller[
+**Conjecture**: In a 2-group blockmodel with edge sizes `\(k_1,k_2,\ldots\)` and `\(c_k\)` edges of size `\(k\)` per node, .alert[any algorithm] fails to detect clusters in the ellipsoid with centroid `\((x_{k_1},x_{k_2},\ldots)\)` and radii `\((r_{k_1},r_{k_1}\ldots)\)`, where: 
+
+
+$$
+`\begin{align}
+x_k &amp;= \frac{1-a_k}{2-a_k} d \\ 
+r_k &amp;= \frac{\sqrt{(k-1)c_k}}{2-a_k} \\
+a_k &amp;= \frac{1-2^{2-k}}{1-2^{1-k}}\;.
+\end{align}`
+$$
+]
+
+.footnote[Generalizes recent theorem for graph blockmodels: 
+
+Mossel et al. (2018) A proof of the blockmodel threshold conjecture, *Combinatorica*.  
+]
+
+]
+
+.column[.stretch[
+.center[ &lt;br&gt; &lt;br&gt; &lt;br&gt;
+&lt;img src="../img-shared/4-heatmaps-2.png" width=100%&gt;
+]
+]
+]
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+## Summing Up
+
+&lt;br&gt;
+
+Belief-propagation spectral clustering can help us form conjectures about when detecting clusters is .alert[even possible].  
+
+Proving these conjectures is likely to require some powerful machinery from random matrix theory and discrete probability. 
+
+]
+
+.column[.stretch[
+.center[ &lt;br&gt; &lt;br&gt; &lt;br&gt;
+&lt;img src="../img-shared/4-heatmaps-2.png" width=100%&gt;
+]
+]
+]
+
+---
+
+class: bg-main1
+
+# Today's Big Message
+
+&lt;br&gt; &lt;br&gt;
+
+.font_large[
+The generative approach to hypergraph clustering offers both .alert[scalable heuristics] and .alert2[fundamental theoretical insights]. ]
+
+---
+
+
+class: bg-main2 middle
+
+# Future Directions
+
+---
+
+class: split-three
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[
+      ### Foundations of Network Data Science
+    ].column[
+      &lt;img src="../img-shared/heatmap-thumbnail.png" height=170px&gt; 
+      &lt;img src="../img-shared/contact-clustering-excerpt.png" height=170px&gt; 
+      &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px&gt;  --&gt;
+      &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px&gt; 
+    ]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;img src="../img-shared/karate-graph.png" height=160px&gt;
+    &lt;img src="../img-shared/mxhierarchy-flows.png" height=170px&gt; 
+    &lt;img src="../img-shared/dynamics-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px&gt;  --&gt;
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    &lt;img src="../img-shared/sentencing-processing-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="../img-shared/mgp-thumbnail.png" height=170px&gt;  --&gt;
+    &lt;img src="../img-shared/no2-thumbnail.png" height=170px&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px&gt; 
+  ]]
+]
+]
+
+---
+
+class: split-three fade-row2-col1 fade-row2-col2 fade-row3-col1 fade-row3-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[
+      ### Foundations of Network Data Science
+    ].column[&lt;br&gt;
+- Scalable heuristics for more .alert[general affinity functions] `\(\Omega\)`. 
+- .alert[Prove] those detectability conjectures. 
+- Lots more to do!
+    ]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;img src="../img-shared/karate-graph.png" height=160px&gt;
+    &lt;img src="../img-shared/mxhierarchy-flows.png" height=170px&gt; 
+    &lt;img src="../img-shared/dynamics-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px&gt;  --&gt;
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    &lt;img src="../img-shared/sentencing-processing-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="../img-shared/mgp-thumbnail.png" height=170px&gt;  --&gt;
+    &lt;img src="../img-shared/no2-thumbnail.png" height=170px&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px&gt; 
+  ]]
+]
+]
+
+---
+
+class: split-three fade-row1-col1 fade-row1-col2 fade-row3-col1 fade-row3-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[.content[
+      ### Foundations of Network Data Science
+    ]].column[.content[
+      &lt;img src="../img-shared/heatmap-thumbnail.png" height=170px&gt; 
+      &lt;img src="../img-shared/contact-clustering-excerpt.png" height=170px&gt; 
+      &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px&gt;  --&gt;
+      &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px&gt; 
+    ]]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+- Comparing network ranking functions with actual, .alert[human-attributed ranks] 
+  - Ongoing collaboration with social anthropologists.
+- Statistical problems with .alert[inference of biosocial hierarchies] (focal sampling, behavior categories).
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    &lt;img src="../img-shared/sentencing-processing-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="../img-shared/mgp-thumbnail.png" height=170px&gt;  --&gt;
+    &lt;img src="../img-shared/no2-thumbnail.png" height=170px&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px&gt; 
+  ]]
+]
+]
+
+
+---
+
+class: split-three fade-row1-col1 fade-row1-col2 fade-row2-col1 fade-row2-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[.content[
+      ### Foundations of Network Data Science
+    ]].column[.content[
+      &lt;img src="../img-shared/heatmap-thumbnail.png" height=170px&gt; 
+      &lt;img src="../img-shared/contact-clustering-excerpt.png" height=170px&gt; 
+      &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px&gt;  --&gt;
+      &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px&gt; 
+    ]]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    &lt;img src="../img-shared/karate-graph.png" height=160px&gt;
+    &lt;img src="../img-shared/mxhierarchy-flows.png" height=170px&gt; 
+    &lt;img src="../img-shared/dynamics-thumbnail.png" height=170px&gt; 
+    &lt;!-- &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px&gt;  --&gt;
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[&lt;br&gt;
+- Models of .alert[migration] and racial segregation. 
+- .alert[Racial disparities] in U.S. criminal sentencing: further data acquisition + analysis.  
+  ]]
+]
+]
+
+
+---
+
+class: split-two
+
+.column.bg-main1[
+# **Thanks!**
+
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt; 
+  &lt;img src="../img-shared/nate.jpg" width=80%&gt; 
+  .alert[Nate Veldt] &lt;br&gt; Texas A&amp;M 
+  ]
+  ]
+.column[
+  .lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="../img-shared/austin.jpg" width=80%&gt; 
+  .alert[Austin Benson] &lt;br&gt; Cornell 
+  ]
+]]]
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+&lt;b&gt;PSC&lt;/b&gt;, N. Veldt, A. R. Benson, (2021). Generative hypergraph clustering: from blockmodels to modularity, &lt;i&gt;Science Advances&lt;/i&gt;, 7:eabh1303
+]
+
+.column[ 
+# &amp;nbsp;   
+
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt; 
+  &lt;img src="../img-shared/eikmeier-3.png" width=80%&gt; 
+  .alert[**Nicole Eikmeier**] &lt;br&gt; Grinnell 
+  ]
+  ]
+.column[
+  .lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  &lt;img src="../img-shared/jamie_portrait.jpeg" width=80%&gt; 
+  .alert[**Jamie Haddock**] &lt;br&gt; Harvey Mudd 
+  ]
+]]]
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;b&gt;PSC&lt;/b&gt;, N. Eikmeier, J. Haddock, (2022). Nonbacktracking spectral clustering of nonuniform hypergraphs, &lt;i&gt;In preparation&lt;/i&gt;
+]
+
+---
+
+class: middle bg-main4  
+
+# Extra slides
+
+
+---
+
+## High School Social Contacts
+
+&lt;br&gt; 
+
+  `\(n = 327\)` students (nodes) in a French high school. 
+
+  `\(m = 7,818\)` social contact events (edges) measured by wearable 
+  sensors.   
+
+  Average number of participants in interaction `\(\langle k \rangle = 2.3\)` 
+
+  Cluster labels are the classes to which students are assigned. 
+
+
+
+
+  &lt;div class="footnote"&gt;
+    Data originally from: &lt;br&gt;
+    R. Mastrandrea et al. (2015), Contact patterns in a high school: A comparison between data collected using wearable sensors, contact diaries, and friendship surveys. &lt;i&gt;PLoS One&lt;/i&gt; 10:9, e0136497
+    &lt;br&gt; &lt;br&gt; 
+    Prepared by 
+    A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. &lt;i&gt;Proceedings of the National Academy of Sciences&lt;/i&gt; 10.1073/pnas.1800683115  
+  &lt;/div&gt;
+
+---
+background-image: url(../img-shared/contact-high-school-classes.png)
+background-size: contain
+
+## High School Social Contacts 
+
+---
+
+  ## On the Other Hand...Senate Bills
+
+&lt;br&gt; 
+
+  `\(n = 293\)` U.S. senators (nodes) cosponsoring bills.
+
+  `\(m = 20,006\)` bills (edges) in period 1973-2016.
+
+  Average number of cosponsors `\(\langle k \rangle = 7.3\)`.
+
+  Community labels are Democrat/Republican. 
+
+
+&lt;div class="footnote"&gt;
+  Data originally from: &lt;br&gt;
+  J. Fowler (2006), Legislative cosponsorship networks in the U.S. House and Senate. &lt;i&gt;Social Networks&lt;/i&gt; 28:4, 454--465
+  &lt;br&gt; &lt;br&gt; 
+  Prepared by 
+  A. R. Benson et al. (2018), Simplicial closure and higher-order link prediction. &lt;i&gt;Proceedings of the National Academy of Sciences&lt;/i&gt; 10.1073/pnas.1800683115  
+&lt;/div&gt;
+
+
+---
+background-image: url(../img-shared/SN-congress-bills.png)
+background-size: contain
+
+## Senate Bills
+
+---
+class: bg-main2
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;  
+### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the community structure. 
+
+---
+
+class: middle 
+
+# My Papers
+
+---
+
+
+class: split-40
+
+.column.bg-main1[
+### Foundations of Network Data Science
+
+&lt;br&gt;
+
+What .alert[models] accurately reflect features of network data? 
+
+What .alert[algorithms] can we use to learn these models? 
+
+What .alert[mathematical challenges] arise from these questions? 
+
+]
+
+.column[.split-four[
+  .row[.split-20[.column[ 
+  &lt;div class="thumbnail"&gt; 
+  &lt;img src="../img-shared/heatmap-thumbnail.png" width=130px&gt; 
+  &lt;/div&gt;
+  ].column[
+  &lt;div class="compress"&gt;
+  &lt;br&gt;
+  &lt;a href="https://link.springer.com/article/10.1007/s41109-020-0252-y"&gt;Nonbacktracking specral clustering of nonuniform hypergraphs &lt;/a&gt; &lt;br&gt;
+  &lt;b&gt;PSC&lt;/b&gt;, Nicole Eikmeier, and Jamie Haddock&lt;br&gt;
+  &lt;i&gt;In preparation&lt;/i&gt; (2022)
+  &lt;/div&gt;       
+  ]] 
+]
+  .row[.split-20[.column[
+    &lt;div class="thumbnail"&gt; 
+    &lt;img src="../img-shared/contact-clustering-excerpt.png" width=110px&gt; 
+    &lt;/div&gt;
+    ].column[
+    &lt;div class="compress"&gt;
+    &lt;br&gt;
+    &lt;a href="https://advances.sciencemag.org/content/7/28/eabh1303"&gt;Generative hypergraph clustering: from blockmodels to modularity &lt;/a&gt; &lt;br&gt;
+    &lt;b&gt;PSC&lt;/b&gt;, Nate Veldt, and Austin Benson &lt;br&gt;
+    &lt;i&gt;Science Advances&lt;/i&gt; (2021)
+    &lt;/div&gt;       
+    ]]
+  ]
+.row[.split-20[.column[
+  &lt;div class="thumbnail"&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" width=120px&gt; 
+    &lt;/div&gt;
+    ].column[
+    &lt;div class="compress"&gt;
+    &lt;br&gt;
+    &lt;a href="https://epubs.siam.org/doi/abs/10.1137/19M1288772"&gt;Moments of uniformly random multigraphs with fixed degree sequences &lt;/a&gt; &lt;br&gt;
+    &lt;b&gt;PSC&lt;/b&gt;&lt;br&gt;
+    &lt;i&gt;SIAM J. Mathematics of Data Science&lt;/i&gt; (2020)
+    &lt;/div&gt;       
+    ]] 
+  ]
+.row[.split-20[.column[
+  &lt;div class="thumbnail"&gt; 
+  &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" width=120px&gt; 
+  &lt;/div&gt;
+  ].column[
+  &lt;div class="compress"&gt;
+  &lt;br&gt;
+  &lt;a href="https://academic.oup.com/comnet/article-abstract/8/3/cnaa018/5879929"&gt;Configuration models of random hypergraphs &lt;/a&gt; &lt;br&gt;
+  &lt;b&gt;PSC&lt;/b&gt; &lt;br&gt;
+  &lt;i&gt;J. Complex Networks&lt;/i&gt; (2020)
+  &lt;/div&gt;       
+  ]]
+]
+]
+]
+
+
+---
+
+class: split-40
+
+.column.bg-main2[ 
+### Models of Biosocial Systems
+
+&lt;br&gt;
+
+How can .alert[individual decisions] lead to large-scale 
+social division or hierarchy? 
+
+What .alert[mechanisms] do models need to capture these phenomena? 
+
+What can we .alert[prove] or .alert[approximate] about the behavior of these models?
+
+]
+
+.column[.split-four[
+  .row[.split-20[.column[
+  &lt;div class="thumbnail"&gt; 
+  &lt;img src="../img-shared/karate-graph.png" width=130px&gt; 
+  &lt;/div&gt;
+  ].column[
+  &lt;div class="compress"&gt;
+  &lt;br&gt;
+  &lt;a&gt;Smoothly nonlinear opinion dynamics &lt;/a&gt; &lt;br&gt;
+  Heather Zinn Brooks, &lt;b&gt;PSC&lt;/b&gt;, and Mason A. Porter &lt;br&gt;
+  &lt;i&gt;In preparation&lt;/i&gt; (2022)
+  &lt;/div&gt;       
+  ]]
+]
+.row[.split-20[.column[
+  &lt;div class="thumbnail"&gt; 
+  &lt;img src="../img-shared/mxhierarchy-flows.png" width=130px&gt; 
+  &lt;/div&gt;
+  ].column[
+  &lt;div class="compress"&gt;
+  &lt;br&gt;
+  &lt;a&gt;Model-based approaches to layer aggregation in animal dominance networks &lt;/a&gt; &lt;br&gt;
+  &lt;b&gt;PSC&lt;/b&gt;, Kelly Finn, and and Mason A. Porter &lt;br&gt;
+  &lt;i&gt;In preparation&lt;/i&gt; (2022)
+  &lt;/div&gt;       
+  ]]
+]
+  .row[.split-20[.column[
+    &lt;div class="thumbnail"&gt; 
+    &lt;img src="../img-shared/dynamics-thumbnail.png" width=110px&gt; 
+    &lt;/div&gt;
+    ].column[
+    &lt;div class="compress"&gt;
+    &lt;br&gt;
+    &lt;a href="https://advances.sciencemag.org/content/7/28/eabh1303"&gt;Emergence of hierarchy in networked endorsement dynamics &lt;/a&gt; &lt;br&gt;
+    Mari Kawakatsu, &lt;b&gt;PSC&lt;/b&gt;, Nicole Eikmeier, and Dan Larremore &lt;br&gt;
+    &lt;i&gt;Proc. National Academy of Sciences&lt;/i&gt; (2021) 
+    &lt;/div&gt;       
+    ]]
+  ]  
+.row[.split-20[.column[
+  &lt;div class="thumbnail"&gt; 
+    &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" width=110px&gt; 
+    &lt;/div&gt;
+    ].column[
+    &lt;div class="compress"&gt;
+    &lt;br&gt;
+    &lt;a href="https://epubs.siam.org/doi/pdf/10.1137/18M1232346?casa_token=st1ib1C3dRUAAAAA:u69ZSyBJVU-keaUQ6eO6wVKcM42DNeUReNMDWhVVT5pUDozAHYx8NnGz7iKZ4gX1gtMxGYMCucA"&gt;Local symmetry and global structure in adaptive voter models &lt;/a&gt; &lt;br&gt;
+    &lt;b&gt;PSC&lt;/b&gt; and Peter Mucha&lt;br&gt;
+    &lt;i&gt;SIAM J. Applied Math&lt;/i&gt; (2020)
+    &lt;/div&gt;       
+    ]] 
+  ]
+]
+] 
+
+---
+
+class: split-40
+
+.column.bg-main3[ 
+### Data Science and Social Responsibility
+
+&lt;br&gt;
+
+How can we .alert[unify and support] methods in quantitative sociology? 
+
+How can we acquire and analyze data sets on .alert[equity] and .alert[justice]? 
+
+How can we model the history (and future?) of .alert[representation] in academia? 
+]
+
+.column[.split-four[
+  .row[.split-20[.column[
+    &lt;div class="thumbnail"&gt; 
+    &lt;img src="../img-shared/sentencing-processing-thumbnail.png" width=110px&gt; 
+    &lt;/div&gt;
+    ].column[
+    &lt;div class="compress"&gt;
+    &lt;br&gt;
+    &lt;a&gt; Impact of race on sentencing in a state court&lt;/a&gt; &lt;br&gt;
+    Hinal Jajal (undergraduate mentee), &lt;b&gt;PSC&lt;/b&gt;&lt;br&gt;
+    &lt;i&gt;Ongoing work&lt;/i&gt; (2022) 
+    &lt;/div&gt;       
+    ]]
+]  
+.row[.split-20[.column[
+  &lt;div class="thumbnail"&gt; 
+    &lt;img src="../img-shared/mgp-thumbnail.png" width=110px&gt; 
+    &lt;/div&gt;
+    ].column[
+    &lt;div class="compress"&gt;
+    &lt;br&gt;
+    &lt;a&gt;Dynamics of gender representation in mathematical subfields &lt;/a&gt; &lt;br&gt;
+    Ben Brill (undergraduate mentee) et al. &lt;br&gt;
+    &lt;i&gt;Ongoing work&lt;/i&gt; (2022)
+    &lt;/div&gt;       
+    ]] 
+  ]
+  .row[.split-20[.column[
+  &lt;div class="thumbnail"&gt; 
+  &lt;img src="../img-shared/no2-thumbnail.png" width=130px&gt; 
+  &lt;/div&gt;
+  ].column[
+  &lt;div class="compress"&gt;
+  &lt;br&gt;
+  &lt;a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2021GL094333"&gt;Space-based observational constraints on NO₂ air pollution inequality from diesel traffic in major U.S. cities &lt;/a&gt; &lt;br&gt;
+  Demetillo et al. 
+  &lt;i&gt;Geophysics Review Letters&lt;/i&gt; (2021)
+  &lt;/div&gt;       
+  ]]
+]
+  .row[.split-20[.column[
+  &lt;div class="thumbnail"&gt; 
+  &lt;img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" width=130px&gt; 
+  &lt;/div&gt;
+  ].column[
+  &lt;div class="compress"&gt;
+  &lt;br&gt;
+  &lt;a href="https://www.pnas.org/content/pnas/114/44/11591.full.pdf"&gt;Structure and information in spatial segregation &lt;/a&gt; &lt;br&gt;
+  &lt;b&gt;PSC&lt;/b&gt;&lt;br&gt;
+  &lt;i&gt;Proc. National Academy of Sciences&lt;/i&gt; (2017)
+  &lt;/div&gt;       
+  ]]
+]
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:10",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

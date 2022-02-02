@@ -3,5 +3,20 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"cSpell.ignorePaths": [
+			"package-lock.json",
+			"node_modules",
+			"vscode-extension",
+			".git/objects",
+			".vscode",
+			".vscode-insiders",
+			".utf8.md"
+		],
+		"files.exclude": {
+			"**.knit.md": true,
+			"**.utf8.md": true
+		}
+	}
 }

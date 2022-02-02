@@ -1,0 +1,7 @@
+---
+
+class: bg-main1 
+background-image: url("../img-shared/geo-intro.png")
+background-size: contain
+
+# My Journey

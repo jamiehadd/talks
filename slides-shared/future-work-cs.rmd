@@ -1,0 +1,157 @@
+class: bg-main2 middle
+
+# Future Directions
+
+---
+
+class: split-three
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[
+      ### Foundations of Network Data Science
+    ].column[
+      <img src="../img-shared/heatmap-thumbnail.png" height=170px> 
+      <img src="../img-shared/contact-clustering-excerpt.png" height=170px> 
+      <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px>  -->
+      <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px> 
+    ]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    <img src="../img-shared/karate-graph.png" height=160px>
+    <img src="../img-shared/mxhierarchy-flows.png" height=170px> 
+    <img src="../img-shared/dynamics-thumbnail.png" height=170px> 
+    <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px>  -->
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    <img src="../img-shared/sentencing-processing-thumbnail.png" height=170px> 
+    <!-- <img src="../img-shared/mgp-thumbnail.png" height=170px>  -->
+    <img src="../img-shared/no2-thumbnail.png" height=170px> 
+    <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px> 
+  ]]
+]
+]
+
+---
+
+class: split-three fade-row2-col1 fade-row2-col2 fade-row3-col1 fade-row3-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[
+      ### Foundations of Network Data Science
+    ].column[<br>
+- Scalable heuristics for more .alert[general affinity functions] $\Omega$. 
+- .alert[Prove] those detectability conjectures. 
+- Lots more to do!
+    ]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    <img src="../img-shared/karate-graph.png" height=160px>
+    <img src="../img-shared/mxhierarchy-flows.png" height=170px> 
+    <img src="../img-shared/dynamics-thumbnail.png" height=170px> 
+    <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px>  -->
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    <img src="../img-shared/sentencing-processing-thumbnail.png" height=170px> 
+    <!-- <img src="../img-shared/mgp-thumbnail.png" height=170px>  -->
+    <img src="../img-shared/no2-thumbnail.png" height=170px> 
+    <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px> 
+  ]]
+]
+]
+
+---
+
+class: split-three fade-row1-col1 fade-row1-col2 fade-row3-col1 fade-row3-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[.content[
+      ### Foundations of Network Data Science
+    ]].column[.content[
+      <img src="../img-shared/heatmap-thumbnail.png" height=170px> 
+      <img src="../img-shared/contact-clustering-excerpt.png" height=170px> 
+      <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px>  -->
+      <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px> 
+    ]]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+- Comparing network ranking functions with actual, .alert[human-attributed ranks] 
+  - Ongoing collaboration with social anthropologists.
+- Statistical problems with .alert[inference of biosocial hierarchies] (focal sampling, behavior categories).
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[
+    <img src="../img-shared/sentencing-processing-thumbnail.png" height=170px> 
+    <!-- <img src="../img-shared/mgp-thumbnail.png" height=170px>  -->
+    <img src="../img-shared/no2-thumbnail.png" height=170px> 
+    <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px> 
+  ]]
+]
+]
+
+
+---
+
+class: split-three fade-row1-col1 fade-row1-col2 fade-row2-col1 fade-row2-col2
+layout: 
+
+.row[
+  .split-40[.column.bg-main1[.content[
+      ### Foundations of Network Data Science
+    ]].column[.content[
+      <img src="../img-shared/heatmap-thumbnail.png" height=170px> 
+      <img src="../img-shared/contact-clustering-excerpt.png" height=170px> 
+      <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px>  -->
+      <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px> 
+    ]]
+  ]  
+]
+.row[
+  .split-40[.column.bg-main2[.content[
+    ### Models of Biosocial Systems
+  ]].column[.content[
+    <img src="../img-shared/karate-graph.png" height=160px>
+    <img src="../img-shared/mxhierarchy-flows.png" height=170px> 
+    <img src="../img-shared/dynamics-thumbnail.png" height=170px> 
+    <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px>  -->
+  ]]
+]
+]
+.row[
+  .split-40[.column.bg-main3[.content[
+    ### Data Science and Social Responsibility
+  ]].column[.content[<br>
+- Models of .alert[migration] and racial segregation. 
+- .alert[Racial disparities] in U.S. criminal sentencing: further data acquisition + analysis.  
+  ]]
+]
+]
+

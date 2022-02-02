@@ -1,0 +1,217 @@
+class: split-40
+
+.column.bg-main1[
+### Foundations of Network Data Science
+
+<br>
+
+What .alert[models] accurately reflect features of network data? 
+
+What .alert[algorithms] can we use to learn these models? 
+
+What .alert[mathematical challenges] arise from these questions? 
+
+]
+
+.column[.split-four[
+  .row[.split-20[.column[ 
+  <div class="thumbnail"> 
+  <img src="../img-shared/heatmap-thumbnail.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a href="https://link.springer.com/article/10.1007/s41109-020-0252-y">Nonbacktracking specral clustering of nonuniform hypergraphs </a> <br>
+  <b>PSC</b>, Nicole Eikmeier, and Jamie Haddock<br>
+  <i>In preparation</i> (2022)
+  </div>       
+  ]] 
+]
+  .row[.split-20[.column[
+    <div class="thumbnail"> 
+    <img src="../img-shared/contact-clustering-excerpt.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a href="https://advances.sciencemag.org/content/7/28/eabh1303">Generative hypergraph clustering: from blockmodels to modularity </a> <br>
+    <b>PSC</b>, Nate Veldt, and Austin Benson <br>
+    <i>Science Advances</i> (2021)
+    </div>       
+    ]]
+  ]
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+    <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" width=120px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a href="https://epubs.siam.org/doi/abs/10.1137/19M1288772">Moments of uniformly random multigraphs with fixed degree sequences </a> <br>
+    <b>PSC</b><br>
+    <i>SIAM J. Mathematics of Data Science</i> (2020)
+    </div>       
+    ]] 
+  ]
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" width=120px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a href="https://academic.oup.com/comnet/article-abstract/8/3/cnaa018/5879929">Configuration models of random hypergraphs </a> <br>
+  <b>PSC</b> <br>
+  <i>J. Complex Networks</i> (2020)
+  </div>       
+  ]]
+]
+]
+]
+
+
+---
+
+class: split-40
+
+.column.bg-main2[ 
+### Models of Biosocial Systems
+
+<br>
+
+How can .alert[individual decisions] lead to large-scale 
+social division or hierarchy? 
+
+What .alert[mechanisms] do models need to capture these phenomena? 
+
+What can we .alert[prove] or .alert[approximate] about the behavior of these models?
+
+]
+
+.column[.split-four[
+  .row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="../img-shared/karate-graph.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a>Smoothly nonlinear opinion dynamics </a> <br>
+  Heather Zinn Brooks, <b>PSC</b>, and Mason A. Porter <br>
+  <i>In preparation</i> (2022)
+  </div>       
+  ]]
+]
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="../img-shared/mxhierarchy-flows.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a>Model-based approaches to layer aggregation in animal dominance networks </a> <br>
+  <b>PSC</b>, Kelly Finn, and and Mason A. Porter <br>
+  <i>In preparation</i> (2022)
+  </div>       
+  ]]
+]
+  .row[.split-20[.column[
+    <div class="thumbnail"> 
+    <img src="../img-shared/dynamics-thumbnail.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a href="https://advances.sciencemag.org/content/7/28/eabh1303">Emergence of hierarchy in networked endorsement dynamics </a> <br>
+    Mari Kawakatsu, <b>PSC</b>, Nicole Eikmeier, and Dan Larremore <br>
+    <i>Proc. National Academy of Sciences</i> (2021) 
+    </div>       
+    ]]
+  ]  
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+    <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a href="https://epubs.siam.org/doi/pdf/10.1137/18M1232346?casa_token=st1ib1C3dRUAAAAA:u69ZSyBJVU-keaUQ6eO6wVKcM42DNeUReNMDWhVVT5pUDozAHYx8NnGz7iKZ4gX1gtMxGYMCucA">Local symmetry and global structure in adaptive voter models </a> <br>
+    <b>PSC</b> and Peter Mucha<br>
+    <i>SIAM J. Applied Math</i> (2020)
+    </div>       
+    ]] 
+  ]
+]
+] 
+
+---
+
+class: split-40
+
+.column.bg-main3[ 
+### Data Science and Social Responsibility
+
+<br>
+
+How can we .alert[unify and support] methods in quantitative sociology? 
+
+How can we acquire and analyze data sets on .alert[equity] and .alert[justice]? 
+
+How can we model the history (and future?) of .alert[representation] in academia? 
+]
+
+.column[.split-four[
+  .row[.split-20[.column[
+    <div class="thumbnail"> 
+    <img src="../img-shared/sentencing-processing-thumbnail.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a> Impact of race on sentencing in a state court</a> <br>
+    Hinal Jajal (undergraduate mentee), <b>PSC</b><br>
+    <i>Ongoing work</i> (2022) 
+    </div>       
+    ]]
+]  
+.row[.split-20[.column[
+  <div class="thumbnail"> 
+    <img src="../img-shared/mgp-thumbnail.png" width=110px> 
+    </div>
+    ].column[
+    <div class="compress">
+    <br>
+    <a>Dynamics of gender representation in mathematical subfields </a> <br>
+    Ben Brill (undergraduate mentee) et al. <br>
+    <i>Ongoing work</i> (2022)
+    </div>       
+    ]] 
+  ]
+  .row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="../img-shared/no2-thumbnail.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2021GL094333">Space-based observational constraints on NO₂ air pollution inequality from diesel traffic in major U.S. cities </a> <br>
+  Demetillo et al. 
+  <i>Geophysics Review Letters</i> (2021)
+  </div>       
+  ]]
+]
+  .row[.split-20[.column[
+  <div class="thumbnail"> 
+  <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" width=130px> 
+  </div>
+  ].column[
+  <div class="compress">
+  <br>
+  <a href="https://www.pnas.org/content/pnas/114/44/11591.full.pdf">Structure and information in spatial segregation </a> <br>
+  <b>PSC</b><br>
+  <i>Proc. National Academy of Sciences</i> (2017)
+  </div>       
+  ]]
+]
+]
+] 
