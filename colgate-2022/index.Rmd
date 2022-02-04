@@ -826,7 +826,7 @@ Eigenvectors of the Jacobian (sometimes) give useful cluster information.
 ]
 ]
 
----
+<!-- ---
 layout: false
 class: split-two
 
@@ -882,7 +882,7 @@ Formulated for hypergraphs by Storm, C. K. (2006). *The Electronic Journal of Co
 <img src="../img-shared/hypergraph-nonbacktracking.png" width=100%>
 
 "I can get to $p_2 \in e_2$ from $e_1$ by passing through $p_1$. I can get to $p_3 \in e_3$ from $e_2$ by passing through $p_2$..."
-]
+] -->
 
 ---
 
