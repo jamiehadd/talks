@@ -54,8 +54,6 @@ What .alert[models] accurately reflect features of network data?
 
 What .alert[algorithms] can we use to learn these models? 
 
-What can we learn about the .alert[properties] about these models and algorithms?
-
 ]
 
 .column[.split-four[
@@ -234,9 +232,9 @@ layout: false
 class: split-two
 
 .column.bg-main1[
-  ### The Hypergraph Community Detection Problem 
+  ### The Hypergraph Clustering Problem 
 
-  Given some hypergraph data, assign each node to a .alert[*community*] (or *cluster*) of "related" nodes. 
+  Given some hypergraph data, assign each node to a .alert[*cluster*] of "related" nodes. 
   <br> <br>
   "*Related*": often interpreted as "*densely interconnected.*"
 <br> <br>
@@ -784,7 +782,7 @@ layout: true
 
 Adjusted Rand Index (ARI): 
 
-- ARI = 1: perfect community detection. 
+- ARI = 1: perfect clustering. 
 - ARI = 0: random noise.
 
 ---
@@ -980,7 +978,7 @@ class:
 
 Adjusted Rand Index (ARI): 
 
-- ARI = 1: perfect community detection. 
+- ARI = 1: perfect clustering. 
 - ARI = 0: random noise.
 
 ???
@@ -998,7 +996,7 @@ class:
 
 Adjusted Rand Index (ARI): 
 
-- ARI = 1: perfect community detection. 
+- ARI = 1: perfect clustering. 
 - ARI = 0: random noise.
 
 ???
@@ -1017,7 +1015,7 @@ class:
 
 Adjusted Rand Index (ARI): 
 
-- ARI = 1: perfect community detection. 
+- ARI = 1: perfect clustering. 
 - ARI = 0: random noise.
 
 
@@ -1228,7 +1226,7 @@ background-size: contain
 
   Average number of cosponsors $\langle k \rangle = 7.3$.
 
-  Community labels are Democrat/Republican. 
+  Cluster labels are Democrat/Republican. 
 
 
 <div class="footnote">
@@ -1250,7 +1248,7 @@ background-size: contain
 class: bg-main2
 
 <br> <br> <br> <br>  
-### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the community structure. 
+### .alert[Big Picture]: you want hypergraph methods when edges of different sizes give you different information about the cluster structure. 
 
 ---
 
