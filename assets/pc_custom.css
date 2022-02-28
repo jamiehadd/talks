@@ -1,12 +1,12 @@
 :root {
 		--main-color1: #384d54;
-		--main-color2: #fff0d9;
-		--main-color3: #f5f7fa;
-		--main-color4: #FFFCF2;
-		--main-color5: #6CAE75;
-		--alert-color1: #f0542d;
-		--alert-color2: #155870;
-		--alert-color3: #FFD046;
+		--main-color2: #ffd9fc;
+		--main-color3: #f9f5fa;
+		--main-color4: #fdf2ff;
+		--main-color5: #986cae;
+		--alert-color1: #b079c9;
+		--alert-color2: #331570;
+		--alert-color3: #b079c9;
 		--text-color1: #fffefc;
 		--text-color2: main-color1;
 		--text-color3: main-color1;

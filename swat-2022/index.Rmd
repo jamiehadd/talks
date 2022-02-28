@@ -1,14 +1,14 @@
 ---
-title: "Eigenvector Methods for Community Detection in Hypergraphs"                 
-subtitle: "Department of Mathematics and Statistics<br> Swarthmore College<br>January 25th, 2022"
-author: "Dr. <span class = 'author-highlight'>Phil Chodrow</span> <br> Department of Mathematics <br> University of California, Los Angeles  "           
+title: "Nonbacktracking Eigenvector Method for Hypergraph Community Detection"                 
+subtitle: "Graphs and More Complex Structures for Learning and Reasoning<br> AAAI 2022 Workshop<br>February 28th, 2022"
+author: "Dr. <span class = 'author-highlight'>Jamie Haddock</span> <br> Department of Mathematics <br> Harvey Mudd College  "           
 date: ""              
 output:                         
-  xaringan::moon_reader:         
-    lib_dir: libs             
+  xaringan::moon_reader: 
+    lib_dir: libs 
     css: ["../assets/ninpo.css",  "../assets/ninjutsu.css",   "../assets/shinobi.css", "../assets/pc_custom.css", "css/pc_custom.css"]    
     seal: true   
-    self_contained: false  
+    self_contained: false 
     nature: 
       ratio: "16:10"
       highlightStyle: github     
@@ -35,287 +35,108 @@ options(htmltools.dir.version = FALSE)
 
 
 
----
 
-class: bg-main1 
-background-image: url("../img-shared/geo-intro.png")
-background-size: contain
 
-# My Journey
 
-???
 
-Speaking of shenanigans, I'd like to do something I'm guessing you're not going to see in any other job talks... 
+
+
 
 ---
-
-background-image: url("img/ninjagram.jpeg")
-background-size: cover 
-class: split-two
-
+layout: false
+class: split-two middle 
+ 
 .column[
-  <br>
-]
-
-.column[
-# <font color="white"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Uh...sorry? 😬 </font>
-] 
-
-???
-
-...which is to begin with an apology to several members of the audience. 
-
----
-
-background-image: url("img/karate-graph-fade.png")
-class:  
-
-<br><br><br><br>
-# My Research 
-
-### Math and Computation for Complex, Connected Systems
-
-
----
-
-class: split-three
-layout: 
-
-.row[
-  .split-40[.column.bg-main1[
-      ### Foundations of Network Data Science
-    ].column[
-      <img src="img/heatmap-thumbnail.png" height=170px> 
-      <img src="img/contact-clustering-excerpt.png" height=170px> 
-      <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px>  -->
-      <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px> 
-    ]
-  ]  
-]
-.row[
-  .split-40[.column.bg-main2[.content[
-    ### Models of Biosocial Systems
-  ]].column[.content[
-    <img src="img/karate-graph.png" height=160px>
-    <img src="img/mxhierarchy-flows.png" height=170px> 
-    <img src="img/dynamics-thumbnail.png" height=170px> 
-    <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px>  -->
-  ]]
-]
-]
-.row[
-  .split-40[.column.bg-main3[.content[
-    ### Data Science and Social Responsibility
-  ]].column[.content[
-    <img src="img/sentencing-processing-thumbnail.png" height=170px> 
-    <!-- <img src="img/mgp-thumbnail.png" height=170px>  -->
-    <img src="img/no2-thumbnail.png" height=170px> 
-    <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px> 
-  ]]
-]
-]
-
----
-
-class: split-three fade-row2-col1 fade-row2-col2 fade-row3-col1 fade-row3-col2
-layout: 
-
-.row[
-  .split-40[.column.bg-main1[
-      ### Foundations of Network Data Science
-    ].column[
-- What .alert[models] accurately reflect features of network data? 
-- What .alert[algorithms] can we use to learn these models? 
-- What can we .alert[prove] about these models and algorithms?
-    ]
-  ]  
-]
-.row[
-  .split-40[.column.bg-main2[.content[
-    ### Models of Biosocial Systems
-  ]].column[.content[
-    <img src="img/karate-graph.png" height=160px>
-    <img src="img/mxhierarchy-flows.png" height=170px> 
-    <img src="img/dynamics-thumbnail.png" height=170px> 
-    <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px>  -->
-  ]]
-]
-]
-.row[
-  .split-40[.column.bg-main3[.content[
-    ### Data Science and Social Responsibility
-  ]].column[.content[
-    <img src="img/sentencing-processing-thumbnail.png" height=170px> 
-    <!-- <img src="img/mgp-thumbnail.png" height=170px>  -->
-    <img src="img/no2-thumbnail.png" height=170px> 
-    <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px> 
-  ]]
-]
-]
-
----
-
-class: split-three fade-row1-col1 fade-row1-col2 fade-row3-col1 fade-row3-col2
-layout: 
-
-.row[
-  .split-40[.column.bg-main1[.content[
-      ### Foundations of Network Data Science
-    ]].column[.content[
-      <img src="img/heatmap-thumbnail.png" height=170px> 
-      <img src="img/contact-clustering-excerpt.png" height=170px> 
-      <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px>  -->
-      <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px> 
-    ]]
-  ]  
-]
-.row[
-  .split-40[.column.bg-main2[.content[
-    ### Models of Biosocial Systems
-  ]].column[.content[
-- How do .alert[hierarchies] and .alert[echo chambers] form and sustain themselves?
-- What can we .alert[prove] about models of these phenomena? 
-- What additional machinery do we need in order to connect these models to .alert[actual data]?
-  ]]
-]
-]
-.row[
-  .split-40[.column.bg-main3[.content[
-    ### Data Science and Social Responsibility
-  ]].column[.content[
-    <img src="img/sentencing-processing-thumbnail.png" height=170px> 
-    <!-- <img src="img/mgp-thumbnail.png" height=170px>  -->
-    <img src="img/no2-thumbnail.png" height=170px> 
-    <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px> 
-  ]]
-]
-]
-
-
----
-
-class: split-three fade-row1-col1 fade-row1-col2 fade-row2-col1 fade-row2-col2
-layout: 
-
-.row[
-  .split-40[.column.bg-main1[.content[
-      ### Foundations of Network Data Science
-    ]].column[.content[
-      <img src="img/heatmap-thumbnail.png" height=170px> 
-      <img src="img/contact-clustering-excerpt.png" height=170px> 
-      <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px>  -->
-      <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px> 
-    ]]
-  ]  
-]
-.row[
-  .split-40[.column.bg-main2[.content[
-    ### Models of Biosocial Systems
-  ]].column[.content[
-    <img src="img/karate-graph.png" height=160px>
-    <img src="img/mxhierarchy-flows.png" height=170px> 
-    <img src="img/dynamics-thumbnail.png" height=170px> 
-    <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px>  -->
-  ]]
-]
-]
-.row[
-  .split-40[.column.bg-main3[.content[
-    ### Data Science and Social Responsibility
-  ]].column[.content[
-- How can math serve the study of .alert[inequality], .alert[segregation], and .alert[injustice]? 
-- How can we actively use our quantitative powers for .alert[social change]? 
-  ]]
-]
-]
-
-???
-
-That said, I want to focus on a specific story on the foundations of network data science. This story has some nice mathematical features; I feel that it represents my style well; and it highlights the interplay between data science, computation, and dynamics that animates a lot of my work. 
-
-
----
-
-class: split-40
-layout: true
-
-.column.bg-main1[
-### Foundations of Network Data Science
-
-<br>
-
-What .alert[models] accurately reflect features of network data? 
-
-What .alert[algorithms] can we use to learn these models? 
-
-What can we .alert[prove] about these models and algorithms?
-
-]
-
-.column[.split-four[
-  .row[.content[.split-20[.column[ 
-  <div class="thumbnail"> 
-  <img src="img/heatmap-thumbnail.png" width=130px> 
-  </div>
-  ].column[
-  <div class="compress">
-  <br>
-  <a href="https://link.springer.com/article/10.1007/s41109-020-0252-y">Nonbacktracking specral clustering of nonuniform hypergraphs </a> <br>
-  <b>PSC</b>, Nicole Eikmeier, and Jamie Haddock<br>
-  <i>In preparation</i> (2022)
-  </div>       
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[  
+Background and .alert[graph community detection].
+  ]]]     
+  .row.bg-main2[.content.vmiddle[.font_medium[
+The .alert[**nonbacktracking operator**] and eigenvector methods for hypergraphs.  
   ]]] 
-]
-  .row[.content[.split-20[.column[
-    <div class="thumbnail"> 
-    <img src="img/contact-clustering-excerpt.png" width=110px> 
-    </div>
-    ].column[
-    <div class="compress">
-    <br>
-    <a href="https://advances.sciencemag.org/content/7/28/eabh1303">Generative hypergraph clustering: from blockmodels to modularity </a> <br>
-    <b>PSC</b>, Nate Veldt, and Austin Benson <br>
-    <i>Science Advances</i> (2021)
-    </div>       
-    ]]
+  .row.bg-main3[.content.vmiddle[.font_medium[ 
+.alert[**Detectability thresholds**] and open questions. 
+  ]]]
+]] 
+
+.column[.center[.stretch[
+.row[ 
+.split-two[
+.column[.lil-stretch[<br><br>
+  <img src="img/avatar.jpg" width=80%> 
   ]]
-.row[.content[.split-20[.column[
-  <div class="thumbnail"> 
-    <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" width=120px> 
-    </div>
-    ].column[
-    <div class="compress">
-    <br>
-    <a href="https://epubs.siam.org/doi/abs/10.1137/19M1288772">Moments of uniformly random multigraphs with fixed degree sequences </a> <br>
-    <b>PSC</b><br>
-    <i>SIAM J. Mathematics of Data Science</i> (2020)
-    </div>       
-    ]]]
-  ]
-.row[.content[.split-20[.column[.content[
-  <div class="thumbnail"> 
-  <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" width=120px> 
+.column[.lil-stretch[<br><br>
+  <img src="img/eikmeier-3.png" width=80%> 
+]]]]
+.row[ 
+.split-two[
+.column[.lil-stretch[<br><br><br><br><br><br><br><br>
+  .alert[Phil Chodrow] <br> UCLA @PhilChodrow
+  ]]
+.column[.lil-stretch[<br><br><br><br><br><br><br><br>
+  .alert[Nicole Eikmeier] <br> Grinnell @NicoleEikmeier
+]]]]
+
+<br><br><br><br><br><br><br><br><br><br><br> <br> 
+
+Philip S. Chodrow, Nicole Eikmeier, and **JH** (2022). Nonbacktracking spectral clustering of nonuniform hypergraphs. *In preparation*.
+
+]]]
+---
+
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[  
+Background and .alert[graph community detection].
+  ]]]     
+  .row.bg-main2[.content.vmiddle[.font_medium[
+The .alert[**nonbacktracking operator**] and eigenvector methods for hypergraphs.  
+  ]]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[ 
+.alert[**Detectability thresholds**] and open questions. 
+  ]]]
+]] 
+
+.column[.center[.stretch[
+  {{content}} 
+]]]
+---
+class: hide-row2-col1 hide-row3-col1 hide-row4-col1 hide-row5-col1
+
+
+  <img src="img/pol-blogs.png" width=60%>
+
+  <div class="footnote">
+  Image from <a href="http://allthingsgraphed.com/2014/10/09/visualizing-political-polarization/"> All Things Graphed </a> 
   </div>
-  ]].column[.content[
-  <div class="compress">
-  <br>
-  <a href="https://academic.oup.com/comnet/article-abstract/8/3/cnaa018/5879929">Configuration models of random hypergraphs </a> <br>
-  <b>PSC</b> <br>
-  <i>J. Complex Networks</i> (2020)
-  </div>       
-  ]]]]
-]
-]
-]
 
-???
 
-That said, I want to focus on a specific story on the foundations of network data science. This story has some nice mathematical features; I feel that it represents my style well; and it highlights the interplay between data science, computation, and dynamics that animates a lot of my work. 
 
 
 ---
+class: hide-row3-col1 hide-row4-col1   hide-row5-col1 
+<br> <br> <br> 
+<img src="img/hypergraph-nonbacktracking.png" width=100%>
+<br> 
 
+---
+class: hide-row4-col1 hide-row5-col1 
+<br> <br> <br> <br>
+<img src="img/heatmap-exp-1.png" width=100%> 
 
+---
+
+class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+
+  <img src="img/pol-blogs.png" width=60%>
+
+  <div class="footnote">
+    Image from <a href="http://allthingsgraphed.com/2014/10/09/visualizing-political-polarization/"> All Things Graphed </a> 
+  </div>
+ 
 ---
 
 class: split-two
@@ -375,7 +196,7 @@ layout: false
 ]
 
 .column.bg-main4[.vmiddle[
-  <img src="img/social-interaction.jpeg" width=100%></img> 
+  <img src="img/office_party.jpeg" width=100%></img> 
 ]]
 
 ---
@@ -396,7 +217,7 @@ layout: false
 ]
 
 .column.bg-main4[.vmiddle[
-  <img src="img/teamwork.jpeg" width=100%></img> 
+  <img src="img/office_basketball.png" width=100%></img> 
 ]]
 
 ---
@@ -412,12 +233,12 @@ layout: false
 
   - .alert[**Interaction**]: nodes are agents, edges are interaction events (socializing in groups, attending events).
   - .alert[**Collaboration**]: nodes are collaborators, edges are projects or teams (scholarly papers, legislation, etc). 
-  - .alert[**Co-presence**]: nodes are chemical compounds, edges are drugs formed from those compounds.
+  - .alert[**Co-presence**]: nodes are ingredients, edges are recipes formed from those ingredients.
 
 ]
 
 .column.bg-main4[.vmiddle[
-  <img src="img/mccoy.png" width=100%></img>  
+  <img src="img/office_chili.jpeg" width=100%></img>  
 ]]
 
 ---
@@ -439,7 +260,7 @@ class: split-two
 
   
   .footnote[
-  One review in: <br> <b>PSC</b>, N. Veldt, A. R. Benson (2021). Generative hypergraph clustering: from blockmodels to modularity, <i>Science Advances</i>, 7:eabh1303
+  One review in: <br> P. S. Chodrow, N. Veldt, A. R. Benson (2021). Generative hypergraph clustering: from blockmodels to modularity, <i>Science Advances</i>, 7:eabh1303
 ]
 
   
@@ -448,61 +269,7 @@ class: split-two
   <img src="img/detection-1.png" width=100%>
 ]]]
 
----
 
-layout: true
-class: split-two middle 
- 
-.column[
-  .split-three[ 
-  .row.bg-main1[.content.vmiddle[.font_medium[  
-Eigenvectors and .alert[graph community detection].
-  ]]]     
-  .row.bg-main2[.content.vmiddle[.font_medium[
-The .alert[**Hashimoto operator**] and eigenvector methods for hypergraphs.  
-  ]]] 
-  .row.bg-main3[.content.vmiddle[.font_medium[ 
-.alert[**Detectability thresholds**] and open questions. 
-  ]]]
-]] 
-
-.column[.center[.stretch[
-  {{content}} 
-]]]
- 
----
-class: hide-row2-col1 hide-row3-col1 hide-row4-col1 hide-row5-col1
-
-
-  <img src="img/pol-blogs.png" width=60%>
-
-  <div class="footnote">
-  Image from <a href="http://allthingsgraphed.com/2014/10/09/visualizing-political-polarization/"> All Things Graphed </a> 
-  </div>
-
-
-
-
----
-class: hide-row3-col1 hide-row4-col1   hide-row5-col1 
-<br> <br> <br> 
-<img src="img/hypergraph-nonbacktracking.png" width=100%>
-<br> 
-
----
-class: hide-row4-col1 hide-row5-col1 
-<br> <br> <br> <br>
-<img src="img/heatmap-exp-1.png" width=100%> 
-
----
-
-class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
-
-  <img src="img/pol-blogs.png" width=60%>
-
-  <div class="footnote">
-    Image from <a href="http://allthingsgraphed.com/2014/10/09/visualizing-political-polarization/"> All Things Graphed </a> 
-  </div>
 ---
 
 class: bg-main1
@@ -511,7 +278,7 @@ layout: false
 
 <br> <br> 
 .font_larger[
-Vector $\mathbf{v} \in \mathbb{R}^n$ is an .alert[eigenvector] of matrix $\mathbf{A} \in \mathbb{R}^n$ with .alert[eigenvalue] $\lambda \in \mathbb{R}$ iff 
+Vector $\mathbf{v} \in \mathbb{R}^n$ is an .alert[eigenvector] of matrix $\mathbf{A} \in \mathbb{R}^{n \times n}$ with .alert[eigenvalue] $\lambda \in \mathbb{R}$ iff 
 
 .font_larger[.font_larger[
 $$ \mathbf{A}\mathbf{v} = \lambda \mathbf{v}\;. $$ 
@@ -685,10 +452,10 @@ class: split-two middle
 .column[
   .split-three[ 
   .row.bg-main1[.content.vmiddle[.font_medium[  
-Eigenvectors and .alert[graph community detection]. 
+Background and .alert[graph community detection]. 
   ]]]     
   .row.bg-main2[.content.vmiddle[.font_medium[
-The .alert[**Hashimoto operator**] and eigenvector methods for hypergraphs.  
+The .alert[**nonbacktracking operator**] and eigenvector methods for hypergraphs.  
   ]]] 
   .row.bg-main3[.content.vmiddle[.font_medium[ 
 .alert[**Detectability thresholds**] and open questions. 
@@ -785,11 +552,11 @@ layout: false
 
 
 .column.bg-main2[
-## The Hashimoto Operator
+### The Nonbacktracking Operator
 
 The adjacency matrix is $n\times n$ and  operates on nodes. 
 
-The .alert[Hashimoto operator] $\mathbf{B}$ is a matrix that operates on *edge-node pairs*. 
+The .alert[nonbacktracking operator] $\mathbf{B}$ is a matrix that operates on *edge-node pairs*. It is often referred to as the .alert[Hashimoto operator].
 
 Define relation $(e_1, v_1) \rightarrow (e_2, v_2)$: 
 
@@ -826,7 +593,7 @@ layout: false
 
 
 .column.bg-main2[
-## The Hashimoto Operator
+### The Nonbacktracking Operator
 
 <br> 
 Popularized (for graphs) by Hashimoto, K. (1990), *Int. J. Math.* 
@@ -853,7 +620,7 @@ layout: false
 
 
 .column.bg-main2[
-## The Hashimoto Operator
+### The Nonbacktracking Operator
 
 <br> 
 
@@ -1044,26 +811,6 @@ So, my story for you today is a story about **filling in the gaps**.
 
 
 
----
-
-
-<img src="img/hmod-paper.png" width=100%>   
-
----
-
-## From the Prequel
-
-<br>
-<img src="img/louvain-detection.png" width=90%>   
-
-Adjusted Rand Index (ARI): 
-
-- ARI = 1: perfect community detection. 
-- ARI = 0: random noise.
-
-???
-
-Recall that we wanted to *fill in the gaps*. 
 
 ---
 
@@ -1146,7 +893,7 @@ layout: false
 
   ...is the "cavity method" of statistical physics. 
  
-  ...is an approximate method for ~~statistical inference~~ Machine Learning.®
+  ...is an approximate method for statistical inference.
 
   
 ]
@@ -1163,7 +910,7 @@ layout: false
 
   ...is the "cavity method" of statistical physics. 
 
-  ...is an approximate method for ~~statistical inference~~ Machine Learning.®
+  ...is an approximate method for statistical inference.
 
   ...is a discrete-time dynamical system.  
 ]
@@ -1180,7 +927,7 @@ layout: false
 
   ...is the "cavity method" of statistical physics. 
 
-  ...is an approximate method for ~~statistical inference~~ Machine Learning.®
+  ...is an approximate method for statistical inference.
 
   ...is a discrete-time dynamical system.  
 ]
@@ -1237,7 +984,7 @@ $$\mathbf{J} = \sum_{k = 1}^{\bar{k}} \mathbf{C}_k \otimes \mathbf{B}_k + O(n^{-
 <br> <br> <br> <br> 
 
 - $\mathbf{C}_k$ is a matrix of parameters that depends on the stochastic blockmodel $\mathbb{P}$. 
-- $\mathbf{B}_k$ is our friend the Hashimoto operator, restricted to edges of size $k$. 
+- $\mathbf{B}_k$ is our friend the nonbacktracking operator, restricted to edges of size $k$. 
 - $\otimes$ is the Kronecker product. 
 
 
@@ -1360,10 +1107,10 @@ class: split-two middle
 .column[
   .split-three[ 
   .row.bg-main1[.content.vmiddle[.font_medium[  
-Eigenvectors and .alert[graph community detection]. 
+Background and .alert[graph community detection]. 
   ]]]     
   .row.bg-main2[.content.vmiddle[.font_medium[
-The .alert[**Hashimoto operator**] and eigenvector methods for hypergraphs.  
+The .alert[**nonbacktracking operator**] and eigenvector methods for hypergraphs.  
   ]]] 
   .row.bg-main3[.content.vmiddle[.font_medium[ 
 .alert[**Detectability thresholds**] and open questions. 
@@ -1462,7 +1209,7 @@ layout: false
   ## Detectability Thresholds
 
 <br> 
-In graphs, failure of Hashimoto spectral clustering coincides with an .alert[information-theoretic bound] on the clustering problem. 
+In graphs, failure of nonbacktracking spectral clustering coincides with an .alert[information-theoretic bound] on the clustering problem. 
   
 - .alert2[No algorithm] can reliably detect communities. 
 
@@ -1484,15 +1231,101 @@ We conjecture the same thing for hypergraphs: inside that ellipse, the clusterin
 ---
 
 
+class: bg-main2 middle
+
+# Wrapping Up
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Future Directions
+
+  
+
+]
+
+.column.bg-main4[.vmiddle[
+  <br>
+]]
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Future Directions
+
+<br> <br> 
+
+  - Prove the conjectured detectability threshold.
+  
+
+]
+
+.column.bg-main4[.vmiddle[
+  <img src="img/4-heatmaps-2.png" width=100%>
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Future Directions
+
+<br> <br> 
+
+  - Prove the conjectured detectability threshold.
+  - Develop tensor-based hypergraph community detection methods.
+  
+
+]
+
+.column.bg-main4[.vmiddle[
+  <img src="img/ssncpd.png" width=100%></img> 
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ## Future Directions
+
+<br> <br> 
+
+  - Prove the conjectured detectability threshold.
+  - Develop tensor-based hypergraph community detection methods.
+  - Consider other hypergraph block models.
+
+]
+
+.column.bg-main4[.vmiddle[
+  <img src="img/sample-matrix.png" width=100%></img>  
+]]
+---
+
+
 class: split-two
 layout: false
 
 .column.bg-main1[
 
-## Summing Up
+## Summary
 
 <br>
-The .alert[Hashimoto operator] enables eigenvector techniques for community detection in hypergraphs. 
+The .alert[nonbacktracking operator] enables eigenvector techniques for community detection in hypergraphs. 
 
 Determinant identities help us speed up computation. 
 
@@ -1507,7 +1340,7 @@ There are open questions around the .alert[fundamental limits] of hypergraph com
 .row[ 
 .split-two[
 .column[.lil-stretch[<br><br>
-  <img src="img/jamie_portrait.jpeg" width=80%> 
+  <img src="img/avatar.jpg" width=80%> 
   ]]
 .column[.lil-stretch[<br><br>
   <img src="img/eikmeier-3.png" width=80%> 
@@ -1515,7 +1348,7 @@ There are open questions around the .alert[fundamental limits] of hypergraph com
 .row[ 
 .split-two[
 .column[.lil-stretch[<br><br><br><br><br><br><br><br>
-  .alert[Jamie Haddock] <br> Harvey Mudd @jamie_hadd
+  .alert[Phil Chodrow] <br> UCLA @PhilChodrow
   ]]
 .column[.lil-stretch[<br><br><br><br><br><br><br><br>
   .alert[Nicole Eikmeier] <br> Grinnell @NicoleEikmeier
@@ -1523,168 +1356,9 @@ There are open questions around the .alert[fundamental limits] of hypergraph com
 
 <br><br><br><br><br><br><br><br><br><br><br> <br> 
 
-**PSC**, Nicole Eikmeier, and Jamie Haddock (2022). Nonbacktracking spectral clustering of nonuniform hypergraphs. *In preparation*.
+Philip S. Chodrow, Nicole Eikmeier, and **JH** (2022). Nonbacktracking spectral clustering of nonuniform hypergraphs. *In preparation*.
 
 ]
- 
----
-
-class: bg-main2 middle
-
-# Future Directions
-
----
-
-class: split-three
-layout: 
-
-.row[
-  .split-40[.column.bg-main1[
-      ### Foundations of Network Data Science
-    ].column[
-      <img src="img/heatmap-thumbnail.png" height=170px> 
-      <img src="img/contact-clustering-excerpt.png" height=170px> 
-      <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px>  -->
-      <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px> 
-    ]
-  ]  
-]
-.row[
-  .split-40[.column.bg-main2[.content[
-    ### Models of Biosocial Systems
-  ]].column[.content[
-    <img src="img/karate-graph.png" height=160px>
-    <img src="img/mxhierarchy-flows.png" height=170px> 
-    <img src="img/dynamics-thumbnail.png" height=170px> 
-    <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px>  -->
-  ]]
-]
-]
-.row[
-  .split-40[.column.bg-main3[.content[
-    ### Data Science and Social Responsibility
-  ]].column[.content[
-    <img src="img/sentencing-processing-thumbnail.png" height=170px> 
-    <!-- <img src="img/mgp-thumbnail.png" height=170px>  -->
-    <img src="img/no2-thumbnail.png" height=170px> 
-    <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px> 
-  ]]
-]
-]
-
----
-
-class: split-three fade-row2-col1 fade-row2-col2 fade-row3-col1 fade-row3-col2
-layout: 
-
-.row[
-  .split-40[.column.bg-main1[
-      ### Foundations of Network Data Science
-    ].column[
-- "With high probability as the number of nodes grows large, the .alert[eigenvalues] of $\mathbf{B}$ are..."  
-- .alert[Dynamics and algorithms]: random walks, stability functions, ranking, clustering. 
-    ]
-  ]  
-]
-.row[
-  .split-40[.column.bg-main2[.content[
-    ### Models of Biosocial Systems
-  ]].column[.content[
-    <img src="img/karate-graph.png" height=160px>
-    <img src="img/mxhierarchy-flows.png" height=170px> 
-    <img src="img/dynamics-thumbnail.png" height=170px> 
-    <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px>  -->
-  ]]
-]
-]
-.row[
-  .split-40[.column.bg-main3[.content[
-    ### Data Science and Social Responsibility
-  ]].column[.content[
-    <img src="img/sentencing-processing-thumbnail.png" height=170px> 
-    <!-- <img src="img/mgp-thumbnail.png" height=170px>  -->
-    <img src="img/no2-thumbnail.png" height=170px> 
-    <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px> 
-  ]]
-]
-]
-
----
-
-class: split-three fade-row1-col1 fade-row1-col2 fade-row3-col1 fade-row3-col2
-layout: 
-
-.row[
-  .split-40[.column.bg-main1[.content[
-      ### Foundations of Network Data Science
-    ]].column[.content[
-      <img src="img/heatmap-thumbnail.png" height=170px> 
-      <img src="img/contact-clustering-excerpt.png" height=170px> 
-      <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px>  -->
-      <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px> 
-    ]]
-  ]  
-]
-.row[
-  .split-40[.column.bg-main2[.content[
-    ### Models of Biosocial Systems
-  ]].column[.content[
-- Comparing network ranking functions with actual, .alert[human-attributed ranks] 
-  - Ongoing collaboration with social anthropologists.
-- Statistical problems with .alert[inference of biosocial hierarchies] (focal sampling, behavior categories).
-  ]]
-]
-]
-.row[
-  .split-40[.column.bg-main3[.content[
-    ### Data Science and Social Responsibility
-  ]].column[.content[
-    <img src="img/sentencing-processing-thumbnail.png" height=170px> 
-    <!-- <img src="img/mgp-thumbnail.png" height=170px>  -->
-    <img src="img/no2-thumbnail.png" height=170px> 
-    <img src="https://www.philchodrow.com/assets/img/thumbnails/structure-and-information.png" height=170px> 
-  ]]
-]
-]
-
-
----
-
-class: split-three fade-row1-col1 fade-row1-col2 fade-row2-col1 fade-row2-col2
-layout: 
-
-.row[
-  .split-40[.column.bg-main1[.content[
-      ### Foundations of Network Data Science
-    ]].column[.content[
-      <img src="img/heatmap-thumbnail.png" height=170px> 
-      <img src="img/contact-clustering-excerpt.png" height=170px> 
-      <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/error_matrices.png" height=170px>  -->
-      <img src="https://www.philchodrow.com/assets/img/thumbnails/configuration-hypergraphs.png" height=170px> 
-    ]]
-  ]  
-]
-.row[
-  .split-40[.column.bg-main2[.content[
-    ### Models of Biosocial Systems
-  ]].column[.content[
-    <img src="img/karate-graph.png" height=160px>
-    <img src="img/mxhierarchy-flows.png" height=170px> 
-    <img src="img/dynamics-thumbnail.png" height=170px> 
-    <!-- <img src="https://www.philchodrow.com/assets/img/thumbnails/avm.png" height=150px>  -->
-  ]]
-]
-]
-.row[
-  .split-40[.column.bg-main3[.content[
-    ### Data Science and Social Responsibility
-  ]].column[.content[
-- Dynamical models of .alert[migration] and racial segregation. 
-- .alert[Racial disparities] in U.S. criminal sentencing: further data acquisition + analysis.  
-  ]]
-]
-]
-
 ---
 class: middle bg-main1 
 layout: false
