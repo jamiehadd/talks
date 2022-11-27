@@ -1,0 +1,2487 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Connections between Iterative Methods for Linear Systems and Consensus Dynamics on Networks</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr. Jamie Haddock   Department of Mathematics   Harvey Mudd College" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="../assets/ninpo.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/ninjutsu.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/shinobi.css" type="text/css" />
+    <link rel="stylesheet" href="../assets/pc_custom.css" type="text/css" />
+    <link rel="stylesheet" href="css/pc_custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Connections between Iterative Methods for Linear Systems and Consensus Dynamics on Networks
+## NCSU Applied Mathematics Seminar<br>September 13, 2022
+### Dr. <span class="author-highlight">Jamie Haddock</span> <br> Department of Mathematics <br> Harvey Mudd College
+
+---
+
+exclude: true   
+&lt;style type="text/css"&gt;
+code.r{ 
+  font-size: 16px; 
+}
+pre {
+  font-size: 16px !important;  
+}
+&lt;/style&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+layout: false
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[  
+  .alert[Consensus dynamics] on networks (e.g., average consensus).  ]]]     
+  .row.bg-main2[.content.vmiddle[.font_medium[
+  .alert[Iterative methods] for linear systems (e.g., Kaczmarz methods).  
+  ]]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[ 
+A .alert[bridge] between consensus dynamics on networks and numerical linear algebra. 
+  ]]]
+]] 
+
+.column[.center[.stretch[
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/ben.jpg" width=70%&gt; 
+  ]]
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/temp.jpeg" width=70%&gt; 
+]]]]
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  .alert[Benjamin Jarman] &lt;br&gt; UCLA 
+  ]]
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  .alert[Chen Yap] &lt;br&gt; Planet Labs Inc. 
+]]]]
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+**JH**, Benjamin Jarman, and Chen Yap (2022). Paving the Way for Consensus: Convergence of Block Gossip Algorithms. *IEEE Transactions on Information Theory, to appear, 2022*.
+
+.row[ 
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/Hector.jpg" width=30%&gt; 
+  ]]
+]]
+.row[ 
+.column[.lil-stretch[
+  .alert[Hector Tierno] &lt;br&gt; HMC 
+  ]
+]]]
+
+]]]
+---
+
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[  
+.alert[Consensus dynamics] on networks (e.g., average consensus).
+  ]]]     
+  .row.bg-main2[.content.vmiddle[.font_medium[
+.alert[Iterative methods] for linear systems (e.g., Kaczmarz methods).   
+  ]]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[ 
+A .alert[bridge] between consensus dynamics on networks and numerical linear algebra.  
+  ]]]
+]] 
+
+.column[.center[.stretch[
+  {{content}} 
+]]]
+---
+class: hide-row2-col1 hide-row3-col1 hide-row4-col1 hide-row5-col1
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/drawing.png" width=90%&gt;
+&lt;br&gt;
+
+
+
+
+---
+class: hide-row3-col1 hide-row4-col1   hide-row5-col1 
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+&lt;img src="img/blockkacz.png" width=100%&gt;
+&lt;br&gt; 
+
+---
+class: hide-row4-col1 hide-row5-col1 
+&lt;br&gt; &lt;br&gt; &lt;br&gt; 
+&lt;img src="img/ranking.png" width=100%&gt; 
+
+---
+
+class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/drawing.png" width=90%&gt;
+&lt;br&gt;
+
+  
+ 
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+.content[ 
+  ## Consensus Dynamics 
+ 
+  &lt;br&gt; 
+  Let `\(\mathcal{G} = (\mathcal{N},\mathcal{E})\)` be a graph with nodes `\(\mathcal{N}\)` and edges `\(\mathcal{E}\)`.  
+  
+  &lt;br&gt; 
+  &lt;span style="color:gray"&gt;Let `\(c_k(i)\)` be a real scalar assigned to node `\(i\)` at time `\(k\)`.&lt;/span&gt;
+
+&lt;br&gt;
+  &lt;span style="color:gray"&gt;Consensus dynamical systems are ones in which nodes values `\(c_k(i)\)`  evolve
+over time, i.e., they change their internal states according to some local interaction-rule, which
+is applied in every time step.&lt;/span&gt;
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+.content[ 
+  ## Consensus Dynamics 
+ 
+  &lt;br&gt; 
+  Let `\(\mathcal{G} = (\mathcal{N},\mathcal{E})\)` be a graph with nodes `\(\mathcal{N}\)` and edges `\(\mathcal{E}\)`.  
+  
+  &lt;br&gt; 
+  Let `\(c_k(i)\)` be a real scalar assigned to node `\(i\)` at time `\(k\)`.
+
+&lt;br&gt;
+  &lt;span style="color:gray"&gt;Consensus dynamical systems are ones in which nodes values `\(c_k(i)\)`  evolve
+over time, i.e., they change their internal states according to some local interaction-rule, which
+is applied in every time step.&lt;/span&gt;
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+.content[ 
+  ## Consensus Dynamics 
+ 
+  &lt;br&gt; 
+  Let `\(\mathcal{G} = (\mathcal{N},\mathcal{E})\)` be a graph with nodes `\(\mathcal{N}\)` and edges `\(\mathcal{E}\)`.  
+  
+  &lt;br&gt; 
+  Let `\(c_k(i)\)` be a real scalar assigned to node `\(i\)` at time `\(k\)`.
+
+&lt;br&gt;
+  Consensus dynamical systems are ones in which nodes values `\(c_k(i)\)`  evolve
+over time, i.e., they change their internal states according to some local interaction-rule, which
+is applied in every time step.
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+.content[ 
+  ## Consensus Dynamics: Applications 
+  
+  - opinion dynamics
+  
+  
+  
+
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+.content[ 
+  ## Consensus Dynamics: Applications 
+  
+  - opinion dynamics
+  
+  
+  - voting and ranking models
+  
+ 
+  
+
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+.content[ 
+  ## Consensus Dynamics: Applications 
+  
+  - opinion dynamics
+  
+  
+  - voting and ranking models
+  
+ 
+  - interacting particle systems
+  
+  
+  
+
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+.content[ 
+  ## Consensus Dynamics: Applications 
+  
+  - opinion dynamics
+  
+  
+  - voting and ranking models
+  
+ 
+  - interacting particle systems
+  
+  
+  - combinatorial matrix theory
+  
+  
+  
+
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+.content[ 
+  ## Consensus Dynamics: Applications 
+  
+  - opinion dynamics
+  
+  
+  - voting and ranking models
+  
+ 
+  - interacting particle systems
+  
+  
+  - combinatorial matrix theory
+  
+  
+  - systems biology
+  
+  
+  
+
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+.content[ 
+  ## Consensus Dynamics: Applications 
+  
+  - opinion dynamics
+  
+  
+  - voting and ranking models
+  
+ 
+  - interacting particle systems
+  
+  
+  - combinatorial matrix theory
+  
+  
+  - systems biology
+  
+  
+  - Markov chains
+  
+  
+  
+
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+.content[ 
+  ## Consensus Dynamics: Applications 
+  
+  - opinion dynamics
+  
+  
+  - voting and ranking models
+  
+ 
+  - interacting particle systems
+  
+  
+  - combinatorial matrix theory
+  
+  
+  - systems biology
+  
+  
+  - Markov chains
+  
+  
+  - distributed computing
+  
+  
+  
+
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+.content[ 
+  ## Consensus Dynamics: Applications 
+  
+  - opinion dynamics
+  
+  
+  - voting and ranking models
+  
+ 
+  - interacting particle systems
+  
+  
+  - combinatorial matrix theory
+  
+  
+  - systems biology
+  
+  
+  - Markov chains
+  
+  
+  - distributed computing
+  
+  
+  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;⋮
+
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main4[
+.content[ 
+  ## Consensus Dynamics: Model Types
+  
+  &lt;br&gt;
+  - discrete state majority models
+  
+
+  
+  
+  .footnote[Becchetti, L., Clementi, A., &amp; Natale, E. (2020). Consensus dynamics: An overview. ACM SIGACT News, 51(1), 58-104.]
+  
+  
+]
+
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main4[
+.content[ 
+  ## Consensus Dynamics: Model Types
+  
+  &lt;br&gt;
+  - discrete state majority models
+  
+  
+  - discrete state voting models
+  
+
+
+  
+  
+  .footnote[Becchetti, L., Clementi, A., &amp; Natale, E. (2020). Consensus dynamics: An overview. ACM SIGACT News, 51(1), 58-104.]
+  
+  
+]
+
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main4[
+.content[ 
+  ## Consensus Dynamics: Model Types
+  
+  &lt;br&gt;
+  - discrete state majority models
+  
+  
+  - discrete state voting models
+  
+  
+  - discrete state median models
+  
+
+  
+  
+  .footnote[Becchetti, L., Clementi, A., &amp; Natale, E. (2020). Consensus dynamics: An overview. ACM SIGACT News, 51(1), 58-104.]
+  
+  
+]
+
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main4[
+.content[ 
+  ## Consensus Dynamics: Model Types
+  
+  &lt;br&gt;
+  - discrete state majority models
+  
+  
+  - discrete state voting models
+  
+  
+  - discrete state median models
+  
+  
+  - .alert[averaging models]
+  
+  
+  .footnote[Becchetti, L., Clementi, A., &amp; Natale, E. (2020). Consensus dynamics: An overview. ACM SIGACT News, 51(1), 58-104.]
+  
+  
+]
+
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+.content[ 
+  ### Example: Average Consensus 
+ 
+  &lt;br&gt; 
+  Let `\(\mathcal{G} = (\mathcal{N},\mathcal{E})\)` be an undirected connected graph with nodes `\(\mathcal{N}\)` and edges `\(\mathcal{E}\)`.  
+  
+  &lt;br&gt; 
+  &lt;span style="color:gray"&gt;Let `\(c_k(i)\)` be a real scalar assigned to node `\(i\)` at time `\(k\)`.&lt;/span&gt;
+
+&lt;br&gt;
+  &lt;span style="color:gray"&gt;The average consensus problem is to compute (iteratively) the average value `\(c^* := \sum_{i \in \mathcal{N}} c_0(i)/|\mathcal{N}|\)` at every node, allowing only local communication on the graph.&lt;/span&gt;
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+.content[ 
+  ### Example: Average Consensus
+ 
+  &lt;br&gt; 
+  Let `\(\mathcal{G} = (\mathcal{N},\mathcal{E})\)` be an undirected connected graph with nodes `\(\mathcal{N}\)` and edges `\(\mathcal{E}\)`.  
+  
+  &lt;br&gt; 
+  Let `\(c_k(i)\)` be a real scalar assigned to node `\(i\)` at time `\(k\)`.
+
+&lt;br&gt;
+  &lt;span style="color:gray"&gt;The average consensus problem is to compute (iteratively) the average value `\(c^* := \sum_{i \in \mathcal{N}} c_0(i)/|\mathcal{N}|\)` at every node, allowing only local communication on the graph.&lt;/span&gt;
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+.content[ 
+  ### Example: Average Consensus 
+ 
+  &lt;br&gt; 
+  Let `\(\mathcal{G} = (\mathcal{N},\mathcal{E})\)` be an undirected connected graph with nodes `\(\mathcal{N}\)` and edges `\(\mathcal{E}\)`.  
+  
+  &lt;br&gt; 
+  Let `\(c_k(i)\)` be a real scalar assigned to node `\(i\)` at time `\(k\)`.
+
+&lt;br&gt;
+  The .alert[average consensus problem] is to compute (iteratively) the average value `\(c^*: = \sum_{i \in \mathcal{N}} c_0(i)/|\mathcal{N}|\)` at every node, allowing only local communication on the graph. 
+]
+
+]
+
+.column[
+  .vmiddle[
+  &lt;img src="img/drawing.png" width=100%&gt;&lt;/img&gt;
+  ] 
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ### Average Consensus Applications
+
+  
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;br&gt;
+]]
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ### Average Consensus Applications
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+  - .alert[**load balancing in parallel computing**]
+  
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;img src="img/LoadBalancing.png" width=100%&gt;&lt;/img&gt; 
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ### Average Consensus Applications
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+  - .alert[**load balancing in parallel computing**]
+  - .alert[**network clock synchronization**]
+  
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;img src="img/clock_synchronization.jpeg" width=100%&gt;&lt;/img&gt; 
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ### Average Consensus Applications
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+  - .alert[**load balancing in parallel computing**]
+  &lt;br&gt;
+  - .alert[**network clock synchronization**]
+  &lt;br&gt;
+  - .alert[**coordination of mobile autonomous agents**]
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;img src="img/autonomous_driving.jpeg" width=100%&gt;&lt;/img&gt;  
+]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ### Average Consensus Applications
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+  - .alert[**load balancing in parallel computing**]
+  &lt;br&gt;
+  - .alert[**network clock synchronization**]
+  &lt;br&gt;
+  - .alert[**coordination of mobile autonomous agents**]
+  &lt;br&gt;
+  - .alert[**distributed data fusion**]
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;img src="img/data_fusion.png" width=100%&gt;&lt;/img&gt;  
+]]
+
+---
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ### Average Consensus Applications
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+  - .alert[**load balancing in parallel computing**]
+  &lt;br&gt;
+  - .alert[**network clock synchronization**]
+  &lt;br&gt;
+  - .alert[**coordination of mobile autonomous agents**]
+  &lt;br&gt;
+  - .alert[**distributed data fusion**]
+  &lt;br&gt;
+  - .alert[**PageRank**]
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;img src="img/pagerank.png" width=100%&gt;&lt;/img&gt;  
+]]
+
+---
+class: split-two
+layout: false
+
+.column.bg-main1[
+  
+  ### Average Consensus Applications
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+
+  - .alert[**load balancing in parallel computing**]
+  &lt;br&gt;
+  - .alert[**network clock synchronization**]
+  &lt;br&gt;
+  - .alert[**coordination of mobile autonomous agents**]
+  &lt;br&gt;
+  - .alert[**distributed data fusion**]
+  &lt;br&gt;
+  - .alert[**PageRank**]
+  &lt;br&gt;
+  - .alert[**decentralized optimization**]
+
+]
+
+.column.bg-main4[.vmiddle[
+  &lt;img src="img/decentralized_optimization.png" width=100%&gt;&lt;/img&gt;  
+]]
+
+---
+
+
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ## Block Gossip Method
+
+  Given graph `\(\mathcal{G}\)`, initial values `\(\mathbf{c}_0\)`, and edge subsets `\(T = \{\tau_1, \cdots, \tau_d\}\)`, for `\(k = 1, 2, \cdots\)`:
+   - &lt;span style="color:gray"&gt;Choose edge subset `\(\tau\)` uniformly at random from `\(T\)`.&lt;/span&gt;
+&lt;br&gt; 
+   - &lt;span style="color:gray"&gt;Form `\(\mathcal{G}_\tau\)`, the edge-induced subgraph of `\(\mathcal{G}\)` defined by edges in `\(\tau\)`.&lt;/span&gt;
+   - &lt;span style="color:gray"&gt;Nodes in each connected component of `\(\mathcal{G}_\tau\)` average their values and nodes outside of `\(\mathcal{G}_\tau\)` do not update; this produces new secret values `\(\mathbf{c}_k\)`.&lt;/span&gt;
+   
+
+.footnote[Related to the .alert[unbounded Deffuant–Weisbuch model]. &lt;br&gt;Deffuant, G., Neau, D., Amblard, F., &amp; Weisbuch, G. (2001). Mixing beliefs among interacting agents. Advances in Complex Systems, (3), 11. ]
+  
+  
+
+  
+]
+.column[.content.vmiddle[.stretch[
+  .center[&lt;img src="img/drawing.png" width=60%&gt;]
+  &lt;br&gt;&lt;br&gt;
+  .center[&lt;img src="img/drawing3.png" width=60% style="opacity:0.2"&gt;]
+]]]
+
+
+---
+
+
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ## Block Gossip Method
+
+  Given graph `\(\mathcal{G}\)`, initial values `\(\mathbf{c}_0\)`, and edge subsets `\(T = \{\tau_1, \cdots, \tau_d\}\)`, for `\(k = 1, 2, \cdots\)`:
+   - Choose edge subset `\(\tau\)` uniformly at random from `\(T\)`.
+&lt;br&gt; 
+   - &lt;span style="color:gray"&gt;Form `\(\mathcal{G}_\tau\)`, the edge-induced subgraph of `\(\mathcal{G}\)` defined by edges in `\(\tau\)`.&lt;/span&gt;
+   - &lt;span style="color:gray"&gt;Nodes in each connected component of `\(\mathcal{G}_\tau\)` average their values and nodes outside of `\(\mathcal{G}_\tau\)` do not update; this produces new secret values `\(\mathbf{c}_k\)`.&lt;/span&gt;
+
+  
+  .footnote[Related to the .alert[unbounded Deffuant–Weisbuch model]. &lt;br&gt;Deffuant, G., Neau, D., Amblard, F., &amp; Weisbuch, G. (2001). Mixing beliefs among interacting agents. Advances in Complex Systems, (3), 11. ]
+
+  
+]
+.column[.content.vmiddle[.stretch[
+  .center[&lt;img src="img/drawing.png" width=60%&gt;]
+  &lt;br&gt;&lt;br&gt;
+  .center[&lt;img src="img/drawing3.png" width=60% style="opacity:0.2"&gt;]
+]]]
+
+
+---
+
+
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ## Block Gossip Method
+
+  Given graph `\(\mathcal{G}\)`, initial values `\(\mathbf{c}_0\)`, and edge subsets `\(T = \{\tau_1, \cdots, \tau_d\}\)`, for `\(k = 1, 2, \cdots\)`:
+   - Choose edge subset `\(\tau\)` uniformly at random from `\(T\)`.
+&lt;br&gt; 
+   - Form `\(\mathcal{G}_\tau\)`, the edge-induced subgraph of `\(\mathcal{G}\)` defined by edges in `\(\tau\)`.
+   - &lt;span style="color:gray"&gt;Nodes in each connected component of `\(\mathcal{G}_\tau\)` average their values and nodes outside of `\(\mathcal{G}_\tau\)` do not update; this produces new secret values `\(\mathbf{c}_k\)`.&lt;/span&gt;
+
+ 
+  .footnote[Related to the .alert[unbounded Deffuant–Weisbuch model]. &lt;br&gt;Deffuant, G., Neau, D., Amblard, F., &amp; Weisbuch, G. (2001). Mixing beliefs among interacting agents. Advances in Complex Systems, (3), 11. ]
+
+  
+]
+.column[.content.vmiddle[.stretch[
+  .center[&lt;img src="img/drawing.png" width=60%&gt;]
+  &lt;br&gt;&lt;br&gt;
+  .center[&lt;img src="img/drawing3.png" width=60% style="opacity:0.2"&gt;]
+]]]
+
+
+---
+
+
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ## Block Gossip Method
+
+  Given graph `\(\mathcal{G}\)`, initial values `\(\mathbf{c}_0\)`, and edge subsets `\(T = \{\tau_1, \cdots, \tau_d\}\)`, for `\(k = 1, 2, \cdots\)`:
+   - Choose edge subset `\(\tau\)` uniformly at random from `\(T\)`.
+&lt;br&gt; 
+   - Form `\(\mathcal{G}_\tau\)`, the edge-induced subgraph of `\(\mathcal{G}\)` defined by edges in `\(\tau\)`.
+   - Nodes in each connected component of `\(\mathcal{G}_\tau\)` average their values and nodes outside of `\(\mathcal{G}_\tau\)` do not update; this produces new secret values `\(\mathbf{c}_k\)`.
+
+  
+  .footnote[Related to the .alert[unbounded Deffuant–Weisbuch model]. &lt;br&gt;Deffuant, G., Neau, D., Amblard, F., &amp; Weisbuch, G. (2001). Mixing beliefs among interacting agents. Advances in Complex Systems, (3), 11. ]
+
+  
+]
+.column[.content.vmiddle[.stretch[
+  .center[&lt;img src="img/drawing.png" width=60%&gt;]
+  &lt;br&gt;&lt;br&gt;
+  .center[&lt;img src="img/drawing3.png" width=60% style="opacity:0.2"&gt;]
+]]]
+
+
+---
+
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ## Block Gossip Method
+
+  Given graph `\(\mathcal{G}\)`, initial values `\(\mathbf{c}_0\)`, and edge subsets `\(T = \{\tau_1, \cdots, \tau_d\}\)`, for `\(k = 1, 2, \cdots\)`:
+   - Choose edge subset `\(\tau\)` uniformly at random from `\(T\)`.
+&lt;br&gt; 
+   - Form `\(\mathcal{G}_\tau\)`, the edge-induced subgraph of `\(\mathcal{G}\)` defined by edges in `\(\tau\)`.
+   - Nodes in each connected component of `\(\mathcal{G}_\tau\)` average their values and nodes outside of `\(\mathcal{G}_\tau\)` do not update; this produces new secret values `\(\mathbf{c}_k\)`.
+
+  
+  .footnote[Related to the .alert[unbounded Deffuant–Weisbuch model]. &lt;br&gt;Deffuant, G., Neau, D., Amblard, F., &amp; Weisbuch, G. (2001). Mixing beliefs among interacting agents. Advances in Complex Systems, (3), 11. ]
+
+  
+]
+.column[.content.vmiddle[.stretch[
+  .center[&lt;img src="img/drawing.png" width=60% style="opacity:0.2"&gt;]
+  &lt;br&gt;&lt;br&gt;
+  .center[&lt;img src="img/drawing3.png" width=60%&gt;]
+]]]
+
+
+---
+
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ## Block Gossip Methods
+
+   - .alert[path gossiping]: F. Benezit, A. G. Dimakis, P. Thiran, and M. Vetterli. Order-optimal consensus through randomized path averaging. IEEE T. Inform. Theory, 56(10):5150–5167, 2010.
+   - &lt;span style="color:gray"&gt;clique gossiping: Y. Liu, B. Li, B. O. Anderson, and G. Shi. Clique gossiping. IEEE/ACM Transactions on Networking, 27(06):2418–2431, nov 2019.&lt;/span&gt;
+   - &lt;span style="color:gray"&gt;edge-independent set gossiping: S. P. Boyd, A. Ghosh, B. Prabhakar, and D. Shah. Randomized gossip algorithms. IEEE T. Inform. Theory, 52:2508–2530, 2006.&lt;/span&gt;
+
+
+  
+]
+.column[.content.vmiddle[.stretch[
+  .center[&lt;img src="img/drawing.png" width=60% style="opacity:0.2"&gt;]
+  &lt;br&gt;&lt;br&gt;
+  .center[&lt;img src="img/drawing3.png" width=60%&gt;]
+]]]
+
+
+---
+
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ## Block Gossip Methods
+
+   - .alert[path gossiping]: F. Benezit, A. G. Dimakis, P. Thiran, and M. Vetterli. Order-optimal consensus through randomized path averaging. IEEE T. Inform. Theory, 56(10):5150–5167, 2010.
+   - .alert[clique gossiping]: Y. Liu, B. Li, B. O. Anderson, and G. Shi. Clique gossiping. IEEE/ACM Transactions on Networking, 27(06):2418–2431, nov 2019.
+   - &lt;span style="color:gray"&gt;edge-independent set gossiping: S. P. Boyd, A. Ghosh, B. Prabhakar, and D. Shah. Randomized gossip algorithms. IEEE T. Inform. Theory, 52:2508–2530, 2006.&lt;/span&gt;
+
+
+  
+]
+.column[.content.vmiddle[.stretch[
+  .center[&lt;img src="img/drawing.png" width=60% style="opacity:0.2"&gt;]
+  &lt;br&gt;&lt;br&gt;
+  .center[&lt;img src="img/drawing2.png" width=60%&gt;]
+]]]
+
+
+---
+
+
+layout: false
+class: split-two
+
+.column.bg-main1[
+  ## Block Gossip Methods
+
+   - .alert[path gossiping]: F. Benezit, A. G. Dimakis, P. Thiran, and M. Vetterli. Order-optimal consensus through randomized path averaging. IEEE T. Inform. Theory, 56(10):5150–5167, 2010.
+   - .alert[clique gossiping]: Y. Liu, B. Li, B. O. Anderson, and G. Shi. Clique gossiping. IEEE/ACM Transactions on Networking, 27(06):2418–2431, nov 2019.
+   - .alert[edge-independent set gossiping]: S. P. Boyd, A. Ghosh, B. Prabhakar, and D. Shah. Randomized gossip algorithms. IEEE T. Inform. Theory, 52:2508–2530, 2006.
+
+
+  
+]
+.column[.content.vmiddle[.stretch[
+  .center[&lt;img src="img/drawing.png" width=60% style="opacity:0.2"&gt;]
+  &lt;br&gt;&lt;br&gt;
+  .center[&lt;img src="img/drawing4.png" width=60%&gt;]
+]]]
+
+
+---
+
+
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[  
+.alert[Consensus dynamics] on networks (e.g., average consensus).
+  ]]]     
+  .row.bg-main2[.content.vmiddle[.font_medium[
+.alert[Iterative methods] for linear systems (e.g., Kaczmarz methods).   
+  ]]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[ 
+A .alert[bridge] between consensus dynamics on networks and numerical linear algebra.  
+  ]]]
+]] 
+
+.column[.center[.stretch[
+  {{content}} 
+]]]
+---
+
+
+class: fade-row2-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/drawing.png" width=90%&gt;
+&lt;br&gt;
+
+  
+ 
+---
+
+
+class: fade-row1-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/blockkacz.png" width=90%&gt;
+&lt;br&gt;
+
+  
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+
+## Iterative Methods for Linear Systems
+
+Many classical numerical linear algebraic iterative methods for solving linear systems operate with row or column subset information, and/or entry-wise on iterates.
+
+
+
+]
+
+.column[
+  &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/blockkacz.png" width=100%&gt;
+]
+
+ 
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+
+## Iterative Methods for Linear Systems
+
+Many classical numerical linear algebraic iterative methods for solving linear systems operate with row or column subset information, and/or entry-wise on iterates.
+
+- Kaczmarz methods
+
+
+
+]
+
+.column[
+  &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/blockkacz.png" width=100%&gt;
+]
+
+ 
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+
+## Iterative Methods for Linear Systems
+
+Many classical numerical linear algebraic iterative methods for solving linear systems operate with row or column subset information, and/or entry-wise on iterates.
+
+- Kaczmarz methods
+
+
+- Jacobi methods
+
+
+
+]
+
+.column[
+  &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/blockkacz.png" width=100%&gt;
+]
+
+ 
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+
+## Iterative Methods for Linear Systems
+
+Many classical numerical linear algebraic iterative methods for solving linear systems operate with row or column subset information, and/or entry-wise on iterates.
+
+- Kaczmarz methods
+
+
+- Jacobi methods
+
+
+- Gauss-Seidel methods
+
+
+
+]
+
+.column[
+  &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/blockkacz.png" width=100%&gt;
+]
+
+ 
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+
+## Iterative Methods for Linear Systems
+
+Many classical numerical linear algebraic iterative methods for solving linear systems operate with row or column subset information, and/or entry-wise on iterates.
+
+- Kaczmarz methods
+
+
+- Jacobi methods
+
+
+- Gauss-Seidel methods
+
+
+- coordinate descent methods
+
+]
+
+.column[
+  &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/blockkacz.png" width=100%&gt;
+]
+
+ 
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+
+### Example: Block Kaczmarz Method
+
+&lt;br&gt; 
+Given linear system measurement matrix `\(A\)` and measurement vector `\(\mathbf{b}\)`, initial iterate `\(\mathbf{x}_0\)`, and sets of row indices `\(T = \{\tau_1, \cdots, \tau_d\}\)`, for `\(k = 1, 2, \cdots\)`:
+&lt;br&gt; &lt;br&gt;
+   - &lt;span style="color:gray"&gt;Choose row block `\(\tau\)` uniformly at random from `\(T\)`.&lt;/span&gt;
+&lt;br&gt; 
+   - &lt;span style="color:gray"&gt; `\(\mathbf{x}_k = \mathbf{x}_{k-1} + A_\tau^\dagger(\mathbf{b}_\tau - A_\tau \mathbf{x}_{k-1})\)` &lt;/span&gt;
+   
+   
+   .footnote[Needell, D., &amp; Tropp, J. A. (2014). Paved with good intentions: analysis of a randomized block Kaczmarz method. Linear Algebra and its Applications, 441, 199-221.]
+
+]
+
+.column[
+  &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/blockkacz.png" width=100%&gt;
+]
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+
+### Example: Block Kaczmarz Method
+
+&lt;br&gt; 
+Given linear system measurement matrix `\(A\)` and measurement vector `\(\mathbf{b}\)`, initial iterate `\(\mathbf{x}_0\)`, and sets of row indices `\(T = \{\tau_1, \cdots, \tau_d\}\)`, for `\(k = 1, 2, \cdots\)`:
+&lt;br&gt; &lt;br&gt;
+   - Choose row block `\(\tau\)` uniformly at random from `\(T\)`.
+&lt;br&gt; 
+   - &lt;span style="color:gray"&gt; `\(\mathbf{x}_k = \mathbf{x}_{k-1} + A_\tau^\dagger(\mathbf{b}_\tau - A_\tau \mathbf{x}_{k-1})\)` &lt;/span&gt;
+   
+   
+   .footnote[Needell, D., &amp; Tropp, J. A. (2014). Paved with good intentions: analysis of a randomized block Kaczmarz method. Linear Algebra and its Applications, 441, 199-221.]
+
+]
+
+.column[
+  &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/blockkacz.png" width=100%&gt;
+]
+
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main2[
+
+### Example: Block Kaczmarz Method
+
+&lt;br&gt; 
+Given linear system measurement matrix `\(A\)` and measurement vector `\(\mathbf{b}\)`, initial iterate `\(\mathbf{x}_0\)`, and sets of row indices `\(T = \{\tau_1, \cdots, \tau_d\}\)`, for `\(k = 1, 2, \cdots\)`:
+&lt;br&gt; &lt;br&gt;
+   - Choose row block `\(\tau\)` uniformly at random from `\(T\)`.
+&lt;br&gt; 
+   - `\(\mathbf{x}_k = \mathbf{x}_{k-1} + A_\tau^\dagger(\mathbf{b}_\tau - A_\tau \mathbf{x}_{k-1})\)`
+   
+   
+   .footnote[Needell, D., &amp; Tropp, J. A. (2014). Paved with good intentions: analysis of a randomized block Kaczmarz method. Linear Algebra and its Applications, 441, 199-221.]
+
+]
+
+.column[
+  &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/blockkacz.png" width=100%&gt;
+]
+
+
+---
+
+class: bg-main4
+  
+
+## How to choose the subset of rows, `\(T\)`?
+
+&lt;br&gt;
+**Definition:** A `\((d, \alpha, \beta)\)` .alert[**row paving**] of a matrix `\(\mathbf{A}\)` is a partition `\(T = \{\tau_1,\tau_2, \cdots, \tau_d\}\)` of the row indices that satisfies `$$\alpha \le \lambda_{\min}(\mathbf{A}_\tau \mathbf{A}_\tau^\top) \text{ and } \lambda_{\max}(\mathbf{A}_\tau \mathbf{A}_\tau^\top) \le \beta \text{ for each } \tau \in T.^{\;1}$$`
+
+.footnote[ `\(^1\)` As defined in: &lt;br&gt; D. Needell and J. Tropp (2014). Paved with good intentions: Analysis of a randomized block Kaczmarz method. *Linear Algebra and Applications* 441, 199-221.
+]
+
+
+---
+
+class: bg-main4
+  
+
+## How to choose the subset of rows, `\(T\)`?
+
+&lt;br&gt;
+**Definition:** A `\((d, \alpha, \beta, r, R)\)` .alert[**row covering**] of a matrix `\(\mathbf{A}\)` is a collection of subsets `\(T = \{\tau_1,\tau_2, \cdots, \tau_d\}\)` of the row indices, `\(\tau_i \subset [m]\)` for all `\(i = 1, \cdots, d\)`, that covers the row indices, for each `\(i \in [m]\)` we have `\(i \in \tau_l\)` for some `\(l = 1, \cdots, d\)`, and that satisfies `$$\alpha \le \lambda_{\min +}(\mathbf{A}_\tau \mathbf{A}_\tau^\top) \text{ and } \lambda_{\max}(\mathbf{A}_\tau \mathbf{A}_\tau^\top) \le \beta \text{ for each } \tau \in T,$$` where `\(r\)` and `\(R\)` are the minimum and maximum, respectively, number of blocks in which a single row appears, i.e., `\(r = \min_{i \in [m]} |\{\tau_l \in T: i \in \tau_l\}|\)` and `\(R = \max_{i \in [m]} |\{\tau_l \in T: i \in \tau_l\}|\)`.
+
+
+
+---
+
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[  
+.alert[Consensus dynamics] on networks (e.g., average consensus).
+  ]]]     
+  .row.bg-main2[.content.vmiddle[.font_medium[
+.alert[Iterative methods] for linear systems (e.g., Kaczmarz methods).   
+  ]]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[ 
+A .alert[bridge] between consensus dynamics on networks and numerical linear algebra.  
+  ]]]
+]] 
+
+.column[.center[.stretch[
+  {{content}} 
+]]]
+
+---
+
+class: fade-row1-col1 fade-row3-col1 fade-row4-col1 fade-row5-col1
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/blockkacz.png" width=90%&gt;
+&lt;br&gt;
+
+  
+ 
+---
+
+class: fade-row1-col1 fade-row2-col1 fade-row4-col1 fade-row5-col1
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/ranking.png" width=90%&gt;
+&lt;br&gt;
+
+  
+ 
+---
+
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ### The .alert[Bridge]
+  &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/drawing_numbered.png" width=90%&gt;
+]
+
+.column[
+  &lt;br&gt; 
+  - formulate averaging consensus as a .alert[homogenous linear system] (e.g., Laplacian system, incidence system)
+  
+
+  
+  
+  .footnote[Loizou, N., &amp; Richtárik, P. (2021). Revisiting randomized gossip algorithms: General framework, convergence rates and novel block and accelerated protocols. IEEE Transactions on Information Theory, 67(12), 8300-8324.]
+
+]
+
+---
+
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ### The .alert[Bridge]
+  &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/drawing_numbered.png" width=90%&gt;
+]
+
+.column[
+  &lt;br&gt; 
+  - formulate averaging consensus as a .alert[homogenous linear system] (e.g., Laplacian system, incidence system)
+  
+  
+  - describe the iterative local update as an .alert[iteration of a NLA method]
+  
+
+  
+  
+  .footnote[Loizou, N., &amp; Richtárik, P. (2021). Revisiting randomized gossip algorithms: General framework, convergence rates and novel block and accelerated protocols. IEEE Transactions on Information Theory, 67(12), 8300-8324.]
+
+]
+
+---
+
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ### The .alert[Bridge]
+  &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/drawing_numbered.png" width=90%&gt;
+]
+
+.column[
+  &lt;br&gt; 
+  - formulate averaging consensus as a .alert[homogenous linear system] (e.g., Laplacian system, incidence system)
+  
+  
+  - describe the iterative local update as an .alert[iteration of a NLA method]
+  
+  
+  - .alert[apply theory from NLA] and algebraic graph theory to consensus dynamics model (e.g., convergence rate, limiting state, etc.)
+  
+  
+  .footnote[Loizou, N., &amp; Richtárik, P. (2021). Revisiting randomized gossip algorithms: General framework, convergence rates and novel block and accelerated protocols. IEEE Transactions on Information Theory, 67(12), 8300-8324.]
+
+]
+
+---
+
+
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ### The graph...
+  &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/drawing_numbered.png" width=90%&gt;
+]
+
+.column[
+  
+  .center[&lt;br&gt; &lt;br&gt;
+
+]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ### The graph...
+  &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/drawing_numbered.png" width=90%&gt;
+]
+
+.column[
+  ### ...the incidence matrix 
+  .center[&lt;br&gt; &lt;br&gt;
+`$$\mathbf{Q} = \left[\begin{matrix}
+    &lt;!-- \mathbf{1} &amp; \mathbf{-1} &amp; 0 &amp; 0 &amp; 0 &amp; 0  \\  --&gt;
+    &lt;!--  \mathbf{1} &amp; 0 &amp; \mathbf{-1} &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!--  \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{-1} \\ --&gt;
+    &lt;!--  0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{-1} \\ --&gt;
+    &lt;!--  0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; \mathbf{-1} \\  --&gt;
+    &lt;!--  0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; \mathbf{-1} &amp; 0 \\  --&gt;
+    &lt;!--  0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; \mathbf{-1} \\  --&gt;
+    \end{matrix}\right] 
+    $$
+]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+  ### The .alert[bridge application]...
+  &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  The block gossip method with blocks `\(T\)` produces the same iterates as the block Kaczmarz method performed with `\(\mathbf{A} = \mathbf{Q}\)`, `\(\mathbf{b} = \mathbf{0}\)`, and `\(\mathbf{x}_0 = \mathbf{c}_0\)` with row blocks corresponding to the same edge sets as `\(T\)`.
+]
+
+.column[
+  ### ...the incidence matrix 
+  .center[&lt;br&gt; &lt;br&gt;
+`$$\mathbf{Q} = \left[\begin{matrix}
+    &lt;!-- \mathbf{1} &amp; \mathbf{-1} &amp; 0 &amp; 0 &amp; 0 &amp; 0  \\  --&gt;
+    &lt;!--  \mathbf{1} &amp; 0 &amp; \mathbf{-1} &amp; 0 &amp; 0 &amp; 0 \\ --&gt;
+    &lt;!--  \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{-1} \\ --&gt;
+    &lt;!--  0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{-1} \\ --&gt;
+    &lt;!--  0 &amp; 0 &amp; \mathbf{1} &amp; 0 &amp; 0 &amp; \mathbf{-1} \\  --&gt;
+    &lt;!--  0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; \mathbf{-1} &amp; 0 \\  --&gt;
+    &lt;!--  0 &amp; 0 &amp; 0 &amp; 0 &amp; \mathbf{1} &amp; \mathbf{-1} \\  --&gt;
+    \end{matrix}\right] 
+    $$
+]
+]
+
+---
+
+class: split-two bg-main4
+layout: false
+
+### Application to Average Consensus and Block Gossip
+
+.column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+The Block Gossip method is a special case of the Block Kaczmarz method for a .alert[linear algebraic formulation of the average consensus problem].
+
+
+
+]
+.column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="img/drawing.png" width=90%&gt;
+ 
+]
+
+
+---
+
+
+class: split-two bg-main1
+layout: false
+
+## Block Kaczmarz Convergence
+
+**Theorem:** Consider the least-squares problem `\(\min \|\mathbf{A}\mathbf{x} - \mathbf{b}\|_2^2\)` where `\(\mathbf{A} \in \mathbb{R}^{m \times n}\)` is not necessarily full-rank and `\(\mathbf{b} \in \mathbb{R}^m\)`. &lt;span style="color:gray"&gt; Let `\(T = \{\tau_1, \cdots, \tau_d\}\)` be a `\((d, \alpha, \beta, r, R)\)` covering (not necessarily a paving) of the rows of `\(\mathbf{A}\)`. Let `\(\mathbf{x}_j\)` denote the `\(j\)`th iterate produced by Block RK on the system defined by `\(\mathbf{A}\)` and `\(\mathbf{b}\)` with initial iterate `\(\mathbf{x}_0\)`, let `\(\mathbf{x}^\ast := \text{argmin}_{\mathbf{x}} \|\mathbf{A}\mathbf{x} - \mathbf{b}\|_2^2,\)` and let `\(\mathbf{e} := \mathbf{A}\mathbf{x}^\ast - \mathbf{b}\)`.
+Then we have `$$\mathbb{E}\left(\|\mathbf{x}_{j} - \mathbf{x}^\ast\|_2^2\right) \leq \left(1 - \frac{r\sigma_{\min +}^2(\mathbf{A})}{\beta d}\right)^{j} \|\mathbf{x}_0 - \mathbf{x}^\ast\|_2^2 + \frac{\beta R}{\alpha r \sigma_{\min +}^2(\mathbf{A})} \|\mathbf{e}\|_2^2,$$`
+where `\(\sigma_{\min +}(\mathbf{A})\)` is the smallest nonzero singular value of `\(\mathbf{A}\)`. &lt;/span&gt; 
+
+---
+
+class: split-two bg-main1
+layout: false
+
+## Block Kaczmarz Convergence
+
+**Theorem:** Consider the least-squares problem `\(\min \|\mathbf{A}\mathbf{x} - \mathbf{b}\|_2^2\)` where `\(\mathbf{A} \in \mathbb{R}^{m \times n}\)` is not necessarily full-rank and `\(\mathbf{b} \in \mathbb{R}^m\)`. Let `\(T = \{\tau_1, \cdots, \tau_d\}\)` be a `\((d, \alpha, \beta, r, R)\)` covering (not necessarily a paving) of the rows of `\(\mathbf{A}\)`. &lt;span style="color:gray"&gt; Let `\(\mathbf{x}_j\)` denote the `\(j\)`th iterate produced by Block RK on the system defined by `\(\mathbf{A}\)` and `\(\mathbf{b}\)` with initial iterate `\(\mathbf{x}_0\)`, let `\(\mathbf{x}^\ast := \text{argmin}_{\mathbf{x}} \|\mathbf{A}\mathbf{x} - \mathbf{b}\|_2^2,\)` and let `\(\mathbf{e} := \mathbf{A}\mathbf{x}^\ast - \mathbf{b}\)`.
+Then we have `$$\mathbb{E}\left(\|\mathbf{x}_{j} - \mathbf{x}^\ast\|_2^2\right) \leq \left(1 - \frac{r\sigma_{\min +}^2(\mathbf{A})}{\beta d}\right)^{j} \|\mathbf{x}_0 - \mathbf{x}^\ast\|_2^2 + \frac{\beta R}{\alpha r \sigma_{\min +}^2(\mathbf{A})} \|\mathbf{e}\|_2^2,$$`
+where `\(\sigma_{\min +}(\mathbf{A})\)` is the smallest nonzero singular value of `\(\mathbf{A}\)`. &lt;/span&gt; 
+
+---
+
+class: split-two bg-main1
+layout: false
+
+## Block Kaczmarz Convergence
+
+**Theorem:** Consider the least-squares problem `\(\min \|\mathbf{A}\mathbf{x} - \mathbf{b}\|_2^2\)` where `\(\mathbf{A} \in \mathbb{R}^{m \times n}\)` is not necessarily full-rank and `\(\mathbf{b} \in \mathbb{R}^m\)`.  Let `\(T = \{\tau_1, \cdots, \tau_d\}\)` be a `\((d, \alpha, \beta, r, R)\)` covering (not necessarily a paving) of the rows of `\(\mathbf{A}\)`. Let `\(\mathbf{x}_j\)` denote the `\(j\)`th iterate produced by Block RK on the system defined by `\(\mathbf{A}\)` and `\(\mathbf{b}\)` with initial iterate `\(\mathbf{x}_0\)`, let `\(\mathbf{x}^\ast := \text{argmin}_{\mathbf{x}} \|\mathbf{A}\mathbf{x} - \mathbf{b}\|_2^2,\)` and let `\(\mathbf{e} := \mathbf{A}\mathbf{x}^\ast - \mathbf{b}\)`.
+&lt;span style="color:gray"&gt;Then we have `$$\mathbb{E}\left(\|\mathbf{x}_{j} - \mathbf{x}^\ast\|_2^2\right) \leq \left(1 - \frac{r\sigma_{\min +}^2(\mathbf{A})}{\beta d}\right)^{j} \|\mathbf{x}_0 - \mathbf{x}^\ast\|_2^2 + \frac{\beta R}{\alpha r \sigma_{\min +}^2(\mathbf{A})} \|\mathbf{e}\|_2^2,$$`
+where `\(\sigma_{\min +}(\mathbf{A})\)` is the smallest nonzero singular value of `\(\mathbf{A}\)`. &lt;/span&gt; 
+
+---
+
+class: split-two bg-main1
+layout: false
+
+## Block Kaczmarz Convergence
+
+**Theorem:** Consider the least-squares problem `\(\min \|\mathbf{A}\mathbf{x} - \mathbf{b}\|_2^2\)` where `\(\mathbf{A} \in \mathbb{R}^{m \times n}\)` is not necessarily full-rank and `\(\mathbf{b} \in \mathbb{R}^m\)`. Let `\(T = \{\tau_1, \cdots, \tau_d\}\)` be a `\((d, \alpha, \beta, r, R)\)` covering (not necessarily a paving) of the rows of `\(\mathbf{A}\)`. Let `\(\mathbf{x}_j\)` denote the `\(j\)`th iterate produced by Block RK on the system defined by `\(\mathbf{A}\)` and `\(\mathbf{b}\)` with initial iterate `\(\mathbf{x}_0\)`, let `\(\mathbf{x}^\ast := \text{argmin}_{\mathbf{x}} \|\mathbf{A}\mathbf{x} - \mathbf{b}\|_2^2,\)` and let `\(\mathbf{e} := \mathbf{A}\mathbf{x}^\ast - \mathbf{b}\)`.
+Then we have `$$\mathbb{E}\left(\|\mathbf{x}_{j} - \mathbf{x}^\ast\|_2^2\right) \leq \left(1 - \frac{r\sigma_{\min +}^2(\mathbf{A})}{\beta d}\right)^{j} \|\mathbf{x}_0 - \mathbf{x}^\ast\|_2^2 + \frac{\beta R}{\alpha r \sigma_{\min +}^2(\mathbf{A})} \|\mathbf{e}\|_2^2,$$`
+where `\(\sigma_{\min +}(\mathbf{A})\)` is the smallest nonzero singular value of `\(\mathbf{A}\)`.
+
+---
+
+class: split-two bg-main2
+layout: false
+
+## Block Kaczmarz Convergence
+
+&lt;br&gt;
+Generalizes the block Kaczmarz convergence result of [Needell, Tropp '14] in several ways:
+
+
+
+---
+
+class: split-two bg-main2
+layout: false
+
+## Block Kaczmarz Convergence
+
+&lt;br&gt;
+Generalizes the block Kaczmarz convergence result of [Needell, Tropp '14] in several ways:
+
+- Generalizes to the case when the least-squares problem is .alert[rank-deficient].
+
+---
+
+class: split-two bg-main2
+layout: false
+
+## Block Kaczmarz Convergence
+
+&lt;br&gt;
+Generalizes the block Kaczmarz convergence result of [Needell, Tropp '14] in several ways:
+
+- Generalizes to the case when the least-squares problem is .alert[rank-deficient].
+- Relaxes the requirement that the row blocks be sampled from a .alert[matrix paving].
+
+---
+
+class: split-two bg-main2
+layout: false
+
+## Block Kaczmarz Convergence
+
+&lt;br&gt;
+Generalizes the block Kaczmarz convergence result of [Needell, Tropp '14] in several ways:
+
+- Generalizes to the case when the least-squares problem is .alert[rank-deficient].
+- Relaxes the requirement that the row blocks be sampled from a .alert[matrix paving].
+- Demonstrates that the convergence horizon depends upon the .alert[minimum *nonzero* singular value] of the blocks `\(\mathbf{A}_\tau\)` rather the absolute minimum singular value (often 0).
+
+---
+
+class: split-two bg-main2
+layout: false
+
+## Block Kaczmarz Convergence
+
+&lt;br&gt;
+Generalizes the block Kaczmarz convergence result of [Needell, Tropp '14] in several ways:
+
+- Generalizes to the case when the least-squares problem is .alert[rank-deficient].
+- Relaxes the requirement that the row blocks be sampled from a .alert[matrix paving].
+- Demonstrates that the convergence horizon depends upon the .alert[minimum *nonzero* singular value] of the blocks `\(\mathbf{A}_\tau\)` rather the absolute minimum singular value (often 0).
+
+These generalizations are important for application to average consensus and block gossip methods, but are likely of interest in other applications.
+
+---
+
+class: split-two bg-main4
+layout: false
+
+### Application to Average Consensus and Block Gossip
+
+.column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+The Block Gossip method is a special case of the Block Kaczmarz method for a .alert[linear algebraic formulation of the average consensus problem].
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+The Block Kaczmarz convergence result yields as a corollary a .alert[convergence result for the block gossip method].
+
+]
+.column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="img/drawing.png" width=90%&gt;
+ 
+]
+
+
+---
+
+class: split-two bg-main2
+layout: false
+
+### Block Gossip Convergence 
+
+&lt;br&gt;&lt;br&gt;
+**Corollary:** Suppose graph `\(\mathcal{G} = (\mathcal{V},\mathcal{E})\)` is connected, `\(\mathbf{Q} \in \mathbb{R}^{|\mathcal{E}| \times |\mathcal{V}|}\)` is the incidence matrix for `\(\mathcal{G}\)`, and `\(T = \{\tau_1, \cdots,\tau_d\}\)` is a `\((d,\alpha,\beta,r,R)\)` row covering for `\(\mathbf{Q}\)` with `\(M = \max_{i \in [d]}|\tau_i|\)`.  &lt;span style="color:lightgray"&gt; Then the block gossip method with blocks determined by `\(T\)` converges at least linearly in expectation with the guarantee `$$\mathbb{E}\|\mathbf{c}_k - \mathbf{c}^*\|_2^2 \le \left(1 - \frac{r\alpha(\mathcal{G})}{\beta d}\right)^k \|\mathbf{c}_0 - \mathbf{c}^*\|_2^2,$$` where `\(\alpha(\mathcal{G})\)` is the algebraic connectivity of graph `\(\mathcal{G}\)`. Here `\(\mathbf{c}^*\)` is the constant vector with all entries equal to the average of the entries of `\(\mathbf{c}_0\)`.&lt;/span&gt;
+
+---
+
+class: split-two bg-main2
+layout: false
+
+### Block Gossip Convergence 
+
+&lt;br&gt;&lt;br&gt;
+**Corollary:** Suppose graph `\(\mathcal{G} = (\mathcal{V},\mathcal{E})\)` is connected, `\(\mathbf{Q} \in \mathbb{R}^{|\mathcal{E}| \times |\mathcal{V}|}\)` is the incidence matrix for `\(\mathcal{G}\)`, and `\(T = \{\tau_1, \cdots,\tau_d\}\)` is a `\((d,\alpha,\beta,r,R)\)` row covering for `\(\mathbf{Q}\)` with `\(M = \max_{i \in [d]}|\tau_i|\)`.  Then the block gossip method with blocks determined by `\(T\)` converges at least linearly in expectation with the guarantee `$$\mathbb{E}\|\mathbf{c}_k - \mathbf{c}^*\|_2^2 \le \left(1 - \frac{r\alpha(\mathcal{G})}{\beta d}\right)^k \|\mathbf{c}_0 - \mathbf{c}^*\|_2^2,$$` where `\(\alpha(\mathcal{G})\)` is the algebraic connectivity of graph `\(\mathcal{G}\)`. Here `\(\mathbf{c}^*\)` is the constant vector with all entries equal to the average of the entries of `\(\mathbf{c}_0\)`.
+
+---
+
+class: split-two bg-main4
+layout: false
+
+### Block Gossip Convergence 
+
+&lt;br&gt;
+`$$\mathbb{E}\|\mathbf{c}_k - \mathbf{c}^*\|_2^2 \le \left(1 - \frac{r\alpha(\mathcal{G})}{\beta d}\right)^k \|\mathbf{c}_0 - \mathbf{c}^*\|_2^2$$`
+&lt;br&gt;
+- &lt;span style="color:lightgray"&gt;If `\(T\)` consists of independent edge sets, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(\mathcal{G})}{2d}\right).\)`&lt;/span&gt;
+- &lt;span style="color:lightgray"&gt;If `\(T\)` consists of clique or path subgraphs, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(G)}{(2 - 2\cos\frac{M\pi}{M+1})d}\right) \le \left(1 - \frac{r\alpha(\mathcal{G})}{4d}\right).\)`&lt;/span&gt;
+- &lt;span style="color:lightgray"&gt;If `\(T\)` consists of arbitrary connected subgraphs, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(\mathcal{G})}{Md}\right).\)`&lt;/span&gt;
+
+---
+
+class: split-two bg-main4
+layout: false
+
+### Block Gossip Convergence 
+
+&lt;br&gt;
+`$$\mathbb{E}\|\mathbf{c}_k - \mathbf{c}^*\|_2^2 \le \left(1 - \frac{r\alpha(\mathcal{G})}{\beta d}\right)^k \|\mathbf{c}_0 - \mathbf{c}^*\|_2^2$$`
+&lt;br&gt;
+- If `\(T\)` consists of independent edge sets, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(\mathcal{G})}{2d}\right).\)`
+- &lt;span style="color:lightgray"&gt;If `\(T\)` consists of clique or path subgraphs, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(G)}{(2 - 2\cos\frac{M\pi}{M+1})d}\right) \le \left(1 - \frac{r\alpha(\mathcal{G})}{4d}\right).\)`&lt;/span&gt;
+- &lt;span style="color:lightgray"&gt;If `\(T\)` consists of arbitrary connected subgraphs, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(\mathcal{G})}{Md}\right).\)`&lt;/span&gt;
+
+---
+
+class: split-two bg-main4
+layout: false
+
+### Block Gossip Convergence 
+
+&lt;br&gt;
+`$$\mathbb{E}\|\mathbf{c}_k - \mathbf{c}^*\|_2^2 \le \left(1 - \frac{r\alpha(\mathcal{G})}{\beta d}\right)^k \|\mathbf{c}_0 - \mathbf{c}^*\|_2^2$$`
+&lt;br&gt;
+- If `\(T\)` consists of independent edge sets, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(\mathcal{G})}{2d}\right).\)`
+- If `\(T\)` consists of clique or path subgraphs, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(G)}{(2 - 2\cos\frac{M\pi}{M+1})d}\right) \le \left(1 - \frac{r\alpha(\mathcal{G})}{4d}\right).\)`
+- &lt;span style="color:lightgray"&gt;If `\(T\)` consists of arbitrary connected subgraphs, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(\mathcal{G})}{Md}\right).\)`&lt;/span&gt;
+
+---
+
+class: split-two bg-main4
+layout: false
+
+### Block Gossip Convergence 
+
+&lt;br&gt;
+`$$\mathbb{E}\|\mathbf{c}_k - \mathbf{c}^*\|_2^2 \le \left(1 - \frac{r\alpha(\mathcal{G})}{\beta d}\right)^k \|\mathbf{c}_0 - \mathbf{c}^*\|_2^2$$`
+&lt;br&gt;
+- If `\(T\)` consists of independent edge sets, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(\mathcal{G})}{2d}\right).\)`
+- If `\(T\)` consists of clique or path subgraphs, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(G)}{(2 - 2\cos\frac{M\pi}{M+1})d}\right) \le \left(1 - \frac{r\alpha(\mathcal{G})}{4d}\right).\)`
+- If `\(T\)` consists of arbitrary connected subgraphs, the rate constant can be bounded by `\(\left(1 - \frac{r\alpha(\mathcal{G})}{Md}\right).\)`
+
+---
+
+layout: true
+class: split-two middle 
+ 
+.column[
+  .split-three[ 
+  .row.bg-main1[.content.vmiddle[.font_medium[  
+.alert[Consensus dynamics] on networks (e.g., average consensus).
+  ]]]     
+  .row.bg-main2[.content.vmiddle[.font_medium[
+.alert[Iterative methods] for linear systems (e.g., Kaczmarz methods).   
+  ]]] 
+  .row.bg-main3[.content.vmiddle[.font_medium[ 
+A .alert[bridge] between consensus dynamics on networks and numerical linear algebra.  
+  ]]]
+]] 
+
+.column[.center[.stretch[
+  {{content}} 
+]]]
+
+---
+
+class: fade-row1-col1 fade-row2-col1 fade-row4-col1 fade-row5-col1
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/ranking.png" width=90%&gt;
+&lt;br&gt;
+
+  
+ 
+---
+
+class: fade-row4-col1 fade-row5-col1
+
+&lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt;
+  &lt;img src="img/ranking.png" width=90%&gt;
+&lt;br&gt;
+
+  
+ 
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Building a Robust Bridge
+
+
+There is a natural bridge between many problems regarding consensus dynamics on networks and classical iterative methods from numerical linear algebra.
+
+
+
+
+]
+
+
+.column[.vmiddle[.center[
+
+&lt;img src="img/ranking.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Building a Robust Bridge
+
+
+There is a natural bridge between many problems regarding consensus dynamics on networks and classical iterative methods from numerical linear algebra.
+
+- distributed consensus
+
+
+
+]
+
+
+.column[.vmiddle[.center[
+
+&lt;img src="img/ranking.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Building a Robust Bridge
+
+
+There is a natural bridge between many problems regarding consensus dynamics on networks and classical iterative methods from numerical linear algebra.
+
+- distributed consensus
+- opinion dynamics
+
+
+
+]
+
+
+.column[.vmiddle[.center[
+
+&lt;img src="img/ranking.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Building a Robust Bridge
+
+
+There is a natural bridge between many problems regarding consensus dynamics on networks and classical iterative methods from numerical linear algebra.
+
+- distributed consensus
+- opinion dynamics
+- ranking models
+
+
+
+]
+
+
+.column[.vmiddle[.center[
+
+&lt;img src="img/ranking.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Building a Robust Bridge
+
+
+There is a natural bridge between many problems regarding consensus dynamics on networks and classical iterative methods from numerical linear algebra.
+
+- distributed consensus
+- opinion dynamics
+- ranking models
+- Laplacian-system based solvers
+
+
+
+
+
+]
+
+
+.column[.vmiddle[.center[
+
+&lt;img src="img/ranking.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Building a Robust Bridge
+
+
+There is a natural bridge between many problems regarding consensus dynamics on networks and classical iterative methods from numerical linear algebra.
+
+- distributed consensus
+- opinion dynamics
+- ranking models
+- Laplacian-system based solvers
+
+To tackle more complex models (e.g., bounded confidence, imperfect communication, etc.) we can look to the ever-growing body of NLA literature on variants of iterative methods.
+
+
+
+]
+
+
+.column[.vmiddle[.center[
+
+&lt;img src="img/ranking.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Current Work
+
+Show that the unbounded .alert[Hegselmann-Krause (HK) model] can be analyzed under the .alert[Jacobi and Gauss-Seidel method] framework.
+
+
+&lt;br&gt;
+  &lt;img src="img/Hector.jpg" width=35%&gt; 
+&lt;br&gt; .alert[Hector Tierno] &lt;br&gt; HMC
+
+.footnote[Hegselmann, R., &amp; Krause, U. (2002). Opinion dynamics and bounded confidence models, analysis, and simulation. Journal of artificial societies and social simulation, 5(3).]
+
+]
+
+
+
+
+.column[
+
+.vmiddle[.center[
+
+&lt;img src="img/drawing.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Current Work
+
+Show that the unbounded .alert[Hegselmann-Krause (HK) model] can be analyzed under the .alert[Jacobi and Gauss-Seidel method] framework.
+
+
+&lt;br&gt;
+  &lt;img src="img/Hector.jpg" width=35%&gt; 
+&lt;br&gt; .alert[Hector Tierno] &lt;br&gt; HMC
+
+.footnote[Hegselmann, R., &amp; Krause, U. (2002). Opinion dynamics and bounded confidence models, analysis, and simulation. Journal of artificial societies and social simulation, 5(3).]
+
+]
+
+
+
+
+.column[
+
+.vmiddle[.center[
+
+&lt;img src="img/HK_update.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Future Work
+
+Analyze .alert[bounded] models through the framework of residual-constrained iterative methods.  
+
+
+
+]
+
+
+
+
+.column[
+
+.vmiddle[.center[
+
+&lt;img src="img/ranking.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Future Work
+
+Analyze .alert[bounded] models through the framework of residual-constrained iterative methods.  
+
+Understand limit of consensus models via NLA and algebraic graph theory literature.
+
+
+
+.footnote[Meng, X. F., Van Gorder, R. A., &amp; Porter, M. A. (2018). Opinion formation and distribution in a bounded-confidence model on various networks. Physical Review E, 97(2), 022312.]
+
+]
+
+
+
+
+.column[
+
+.vmiddle[.center[
+
+&lt;img src="img/ranking.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+### Future Work
+
+Analyze .alert[bounded] models through the framework of residual-constrained iterative methods.  
+
+Understand limit of consensus models via NLA and algebraic graph theory literature.
+
+Extend work to models on .alert[hypergraphs].
+
+.footnote[Hickok, A., Kureh, Y., Brooks, H. Z., Feng, M., &amp; Porter, M. A. (2022). A bounded-confidence model of opinion dynamics on hypergraphs. SIAM Journal on Applied Dynamical Systems, 21(1), 1-32.&lt;br&gt;&lt;br&gt;Meng, X. F., Van Gorder, R. A., &amp; Porter, M. A. (2018). Opinion formation and distribution in a bounded-confidence model on various networks. Physical Review E, 97(2), 022312.]
+
+]
+
+
+
+
+.column[
+
+.vmiddle[.center[
+
+&lt;img src="img/ranking.png" width=100%&gt;
+]]
+]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+## Summary
+
+&lt;br&gt;
+The .alert[average consensus problem] may be formulated as a least-squares problem. 
+
+
+
+
+]
+
+.column[.center[.stretch[
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/ben.jpg" width=70%&gt; 
+  ]]
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/temp.jpeg" width=70%&gt; 
+]]]]
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  .alert[Benjamin Jarman] &lt;br&gt; UCLA 
+  ]]
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  .alert[Chen Yap] &lt;br&gt; Planet Labs Inc. 
+]]]]
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+**JH**, Benjamin Jarman, and Chen Yap (2022). Paving the Way for Consensus: Convergence of Block Gossip Algorithms. *Submitted*.
+
+.row[ 
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/Hector.jpg" width=35%&gt; 
+  ]]
+]]
+.row[ 
+.column[.lil-stretch[
+  .alert[Hector Tierno] &lt;br&gt; HMC 
+  ]
+]]]
+
+]]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+## Summary
+
+&lt;br&gt;
+The .alert[average consensus problem] may be formulated as a least-squares problem. 
+
+Popular .alert[gossip methods] may be viewed as special cases of Kaczmarz methods.
+
+
+
+
+]
+
+.column[.center[.stretch[
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/ben.jpg" width=70%&gt; 
+  ]]
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/temp.jpeg" width=70%&gt; 
+]]]]
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  .alert[Benjamin Jarman] &lt;br&gt; UCLA 
+  ]]
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  .alert[Chen Yap] &lt;br&gt; Planet Labs Inc. 
+]]]]
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+**JH**, Benjamin Jarman, and Chen Yap (2022). Paving the Way for Consensus: Convergence of Block Gossip Algorithms. *Submitted*.
+
+.row[ 
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/Hector.jpg" width=35%&gt; 
+  ]]
+]]
+.row[ 
+.column[.lil-stretch[
+  .alert[Hector Tierno] &lt;br&gt; HMC 
+  ]
+]]]
+
+]]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+## Summary
+
+&lt;br&gt;
+The .alert[average consensus problem] may be formulated as a least-squares problem. 
+
+Popular .alert[gossip methods] may be viewed as special cases of Kaczmarz methods.
+
+Convergence results for Kaczmarz methods provide as corollaries .alert[convergence results for the gossip methods].
+
+
+
+
+]
+
+.column[.center[.stretch[
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/ben.jpg" width=70%&gt; 
+  ]]
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/temp.jpeg" width=70%&gt; 
+]]]]
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  .alert[Benjamin Jarman] &lt;br&gt; UCLA 
+  ]]
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  .alert[Chen Yap] &lt;br&gt; Planet Labs Inc. 
+]]]]
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+**JH**, Benjamin Jarman, and Chen Yap (2022). Paving the Way for Consensus: Convergence of Block Gossip Algorithms. *Submitted*.
+
+.row[ 
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/Hector.jpg" width=35%&gt; 
+  ]]
+]]
+.row[ 
+.column[.lil-stretch[
+  .alert[Hector Tierno] &lt;br&gt; HMC 
+  ]
+]]]
+
+]]]
+
+---
+
+class: split-two
+layout: false
+
+.column.bg-main1[
+
+## Summary
+
+&lt;br&gt;
+The .alert[average consensus problem] may be formulated as a least-squares problem. 
+
+Popular .alert[gossip methods] may be viewed as special cases of Kaczmarz methods.
+
+Convergence results for Kaczmarz methods provide as corollaries .alert[convergence results for the gossip methods].
+
+This technique may be exploited for .alert[other models of consensus dynamics on networks].
+
+
+]
+
+.column[.center[.stretch[
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/ben.jpg" width=70%&gt; 
+  ]]
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/temp.jpeg" width=70%&gt; 
+]]]]
+.row[ 
+.split-two[
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  .alert[Benjamin Jarman] &lt;br&gt; UCLA 
+  ]]
+.column[.lil-stretch[&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+  .alert[Chen Yap] &lt;br&gt; Planet Labs Inc. 
+]]]]
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+**JH**, Benjamin Jarman, and Chen Yap (2022). Paving the Way for Consensus: Convergence of Block Gossip Algorithms. *Submitted*.
+
+.row[ 
+.column[.lil-stretch[&lt;br&gt;
+  &lt;img src="img/Hector.jpg" width=35%&gt; 
+  ]]
+]]
+.row[ 
+.column[.lil-stretch[
+  .alert[Hector Tierno] &lt;br&gt; HMC 
+  ]
+]]]
+
+]]]
+
+---
+class: middle bg-main1 
+layout: false
+# Thanks everyone! 
+
+## Questions?
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:10",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
